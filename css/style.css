@@ -7,12 +7,15 @@
 @font-face {
   font-family: 'Biohazard Game Font';
   src: url('../assets/fonts/REBiohazard.otf') format('opentype');
+  /* solo los glifos que de verdad tiene dibujados: el resto (ñ, tildes, ¿ ¡) cae a Virgula Vulgaris */
+  unicode-range: U+0022-0026,U+0029,U+002E-0039,U+003D,U+0040-005A,U+005E,U+0061-007B,U+00A7,U+00B2,U+00E4,U+00F6,U+00FC,U+2013,U+2212, U+0020;
   font-weight: 400;
   font-display: swap;
 }
 @font-face {
   font-family: 'RE4 Remake';
   src: url('../assets/fonts/RE4Remake.ttf') format('truetype');
+  unicode-range: U+0021-005D,U+005F-007E,U+00A3-00A9,U+00AB-00B1,U+00B4,U+00B6-00B8,U+00BB,U+00D7,U+00F7,U+0131,U+2013-2014,U+2018-201A,U+201C-201E,U+2020-2022,U+2026,U+2039-203A,U+2044,U+20AC, U+0020;
   font-weight: 400;
   font-display: swap;
 }
@@ -39,10 +42,10 @@
 
   /* Biohazard: títulos grandes con textura. RE4 Remake: todo lo demás (legible).
      Virgula: acentos sueltos. Las 3 son de fan / gratis. */
-  --font-display: 'Biohazard Game Font', 'RE4 Remake', 'Times New Roman', serif;
-  --font-title: 'RE4 Remake', 'Segoe UI', system-ui, sans-serif;
+  --font-display: 'Biohazard Game Font', 'Virgula Vulgaris', 'RE4 Remake', 'Times New Roman', serif;
+  --font-title: 'RE4 Remake', 'Virgula Vulgaris', 'Segoe UI', system-ui, sans-serif;
   --font-grunge: 'Virgula Vulgaris', 'RE4 Remake', cursive;
-  --font-body: 'RE4 Remake', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'RE4 Remake', 'Virgula Vulgaris', 'Segoe UI', system-ui, sans-serif;
   /* Fuente sin fallas con tildes/acentos (las del juego rompen la ñ, á, etc.) */
   --font-safe: 'Segoe UI', 'Helvetica Neue', system-ui, -apple-system, Roboto, Arial, sans-serif;
 }
