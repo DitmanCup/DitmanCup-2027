@@ -1550,3 +1550,12 @@ body { font-size: 1.15rem; }
   .nav-group { flex-direction: column; }
   .nav-sub { display: flex; position: static; border: none; box-shadow: none; background: none; padding: 0 0 0 1.2rem; }
 }
+
+/* Live: cada tarjeta del roster es tan ancha como haga falta (nombre + estado sin superponerse) */
+.live-roster { display: flex; flex-wrap: wrap; gap: .7rem; }
+.live-roster .live-card.is-off {
+  flex: 1 1 auto; gap: 1.4rem; max-width: 100%;
+  white-space: nowrap;
+}
+.live-roster .live-name { min-width: 0; }
+.live-roster .live-status { margin-left: auto; }
