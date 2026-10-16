@@ -7,7 +7,7 @@
 <title>Ditman Cup 2027</title>
 <meta name="description" content="Ditman Cup 2027 — community Resident Evil 4 speedrunning tournament. / Torneo comunitario de speedrunning de RE4.">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/7.2.3/css/flag-icons.min.css">
-<link rel="stylesheet" href="css/style.css?v=20261016b">
+<link rel="stylesheet" href="css/style.css?v=20261016d">
 </head>
 <body data-tab="inicio">
 
@@ -34,7 +34,7 @@
 
     <nav class="tabs" id="tabs" aria-label="Sections">
       <button class="tab-btn active" data-tab="inicio" data-i18n="nav.inicio">Home</button>
-      <button class="tab-btn" data-tab="sorteo" data-i18n="nav.sorteo">Draw</button>
+      <button class="tab-btn" data-tab="sorteo" data-i18n="nav.sorteo">Draw &amp; Schedule</button>
       <button class="tab-btn" data-tab="grupos" data-i18n="nav.grupos">Groups</button>
       <button class="tab-btn" data-tab="brackets" data-i18n="nav.brackets">Bracket</button>
       <button class="tab-btn" data-tab="simulations" data-i18n="nav.simulations">Simulations</button>
@@ -103,7 +103,15 @@
   </section>
 
   <section id="sorteo" class="tab-panel" tabindex="-1">
-    <h2 data-i18n="sorteo.title">Draw</h2>
+    <h2 data-i18n="sorteo.title">Draw &amp; Schedule</h2>
+
+    <div class="sim-intro">
+      <div class="sim-rule"><span class="sim-rule-label" data-i18n="sorteo.r1.l">What is drawn</span><span class="sim-rule-text" data-i18n="sorteo.r1.t">Not the groups: the matchups. Your group comes from the qualifier ranking and the draw decides who you face inside it.</span></div>
+      <div class="sim-rule"><span class="sim-rule-label" data-i18n="sorteo.r2.l">When</span><span class="sim-rule-text" data-i18n="sorteo.r2.t">A new live draw before each matchday, once the previous results have moved runners between groups.</span></div>
+      <div class="sim-rule"><span class="sim-rule-label" data-i18n="sorteo.r3.l">Where</span><span class="sim-rule-text" data-i18n="sorteo.r3.t">Live on twitch.tv/ditmancup. Matchups appear below with day and time.</span></div>
+      <div class="sim-rule"><span class="sim-rule-label" data-i18n="sorteo.r4.l">Top 8</span><span class="sim-rule-text" data-i18n="sorteo.r4.t">Straight to the Round of 16: they skip the groups, so they are not drawn.</span></div>
+    </div>
+
     <div class="vod-wrapper">
       <div class="vod-placeholder">
         <span data-i18n="sorteo.vod">Draw will begin January 16th</span>
@@ -112,7 +120,9 @@
       <!-- Cuando esté el video, reemplazar el div de arriba por:
       <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe> -->
     </div>
-    <p class="section-note" data-i18n="sorteo.note">Draw results are reflected automatically in the Groups tab.</p>
+
+    <h3 class="sched-title" data-i18n="sched.title">Schedule</h3>
+    <div id="schedule-container" class="schedule"></div>
   </section>
 
   <section id="grupos" class="tab-panel" tabindex="-1">
@@ -348,6 +358,6 @@
   </div>
 </div>
 
-<script src="js/script.js?v=20261016b"></script>
+<script src="js/script.js?v=20261016d"></script>
 </body>
 </html>

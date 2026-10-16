@@ -7,6 +7,7 @@ const TOURNAMENT_CONFIG = {
   numGroups: 3,
   groupSize: 8,
   groupQualifiers: 8,     // los mejores 8 de la fase de grupos completan el cuadro (16 en Octavos)
+  matchdays: 4,           // fechas de la fase de grupos
 
   // Apertura de las clasificatorias ("qualys"). Formato ISO con offset.
   // Qualifier window opens. ISO format with UTC offset.
@@ -29,6 +30,7 @@ const sheetCsv = gid => `https://docs.google.com/spreadsheets/d/${SHEET_ID}/expo
 
 const SHEET_URLS = {
   groups: '',                      // gid de la hoja de grupos — pendiente
+  schedule: '',                    // hoja del calendario/sorteo (Fecha, Grupo, Corredor 1, Corredor 2, Horario) — pendiente
   standings: sheetCsv('1240403995'), // hoja "Qualifiers" de la sheet principal
 };
 
@@ -246,7 +248,7 @@ const YOUTUBE_LIVE_CHANNELS = [
 const I18N = {
   es: {
     'nav.inicio': 'Inicio',
-    'nav.sorteo': 'Sorteo',
+    'nav.sorteo': 'Sorteo y calendario',
     'nav.grupos': 'Grupos',
     'nav.brackets': 'Brackets',
     'nav.simulations': 'Simulaciones',
@@ -275,10 +277,24 @@ const I18N = {
 
     'intro.p': 'Bienvenidos a la Ditman Cup 2027. Aca vas a encontrar el sorteo, los grupos, el cuadro de eliminacion y todo lo necesario para seguir el torneo de punta a punta.',
 
-    'sorteo.title': 'Sorteo',
+    'sorteo.title': 'Sorteo y calendario',
     'sorteo.vod': 'El sorteo arranca el 16 de enero',
     'sorteo.live': 'En vivo por twitch.tv/ditmancup',
-    'sorteo.note': 'Los resultados del sorteo se reflejan automaticamente en la pestaña Grupos.',
+    'sorteo.r1.l': 'Que se sortea',
+    'sorteo.r1.t': 'No los grupos: los cruces. Tu grupo sale del ranking de clasificatorias y el sorteo define contra quien jugas dentro de el.',
+    'sorteo.r2.l': 'Cuando',
+    'sorteo.r2.t': 'Un sorteo nuevo en vivo antes de cada fecha, cuando los resultados anteriores ya movieron a los corredores entre grupos.',
+    'sorteo.r3.l': 'Donde',
+    'sorteo.r3.t': 'En vivo por twitch.tv/ditmancup. Los cruces aparecen abajo con dia y hora.',
+    'sorteo.r4.l': 'Top 8',
+    'sorteo.r4.t': 'Van directo a Octavos de Final: no juegan grupos, asi que no se sortean.',
+    'sched.title': 'Calendario',
+    'sched.matchday': 'Fecha {n}',
+    'sched.dateTbd': 'Fecha a confirmar',
+    'sched.note1': 'Los grupos salen del ranking de clasificatorias.',
+    'sched.noteN': 'Los grupos se arman con los resultados de la fecha anterior.',
+    'sched.vs': 'vs',
+    'sched.tzNote': 'Horarios en tu zona horaria ({tz}).',
 
     'grupos.title': 'Fase de grupos',
     'grupos.loading': 'Cargando grupos…',
@@ -432,7 +448,7 @@ const I18N = {
   },
   en: {
     'nav.inicio': 'Home',
-    'nav.sorteo': 'Draw',
+    'nav.sorteo': 'Draw & Schedule',
     'nav.grupos': 'Groups',
     'nav.brackets': 'Bracket',
     'nav.simulations': 'Simulations',
@@ -461,10 +477,24 @@ const I18N = {
 
     'intro.p': "Welcome to the Ditman Cup 2027. Here you'll find the draw, the groups, the knockout bracket and everything you need to follow the tournament end to end.",
 
-    'sorteo.title': 'Draw',
+    'sorteo.title': 'Draw & Schedule',
     'sorteo.vod': 'Draw will begin January 16th',
     'sorteo.live': 'Live on twitch.tv/ditmancup',
-    'sorteo.note': 'Draw results are reflected automatically in the Groups tab.',
+    'sorteo.r1.l': 'What is drawn',
+    'sorteo.r1.t': 'Not the groups: the matchups. Your group comes from the qualifier ranking and the draw decides who you face inside it.',
+    'sorteo.r2.l': 'When',
+    'sorteo.r2.t': 'A new live draw before each matchday, once the previous results have moved runners between groups.',
+    'sorteo.r3.l': 'Where',
+    'sorteo.r3.t': 'Live on twitch.tv/ditmancup. Matchups appear below with day and time.',
+    'sorteo.r4.l': 'Top 8',
+    'sorteo.r4.t': 'Straight to the Round of 16: they skip the groups, so they are not drawn.',
+    'sched.title': 'Schedule',
+    'sched.matchday': 'Matchday {n}',
+    'sched.dateTbd': 'Date TBD',
+    'sched.note1': 'Groups come from the qualifier ranking.',
+    'sched.noteN': 'Groups are set from the previous matchday results.',
+    'sched.vs': 'vs',
+    'sched.tzNote': 'Times shown in your local time zone ({tz}).',
 
     'grupos.title': 'Group stage',
     'grupos.loading': 'Loading groups…',
@@ -709,6 +739,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (isMock()) showTestBanner();
   loadGroups();
   loadStandings();
+  loadSchedule();
   renderBracket();
   renderChampions();
   renderClips();
@@ -763,6 +794,7 @@ function applyLang(lang) {
   else document.getElementById('groups-grid').innerHTML = placeholderGroups();
   if (lastStandingsRows) renderStandings(lastStandingsRows, document.getElementById('standings-table'));
   renderBracket();
+  renderSchedule();
   renderChampions();
   renderClips();
   renderLive();
@@ -990,6 +1022,112 @@ function groupRows(rows) {
     groups[g].push(name);
   });
   return groups;
+}
+
+// ======= SORTEO Y CALENDARIO / DRAW & SCHEDULE =======
+// Lo que se sortea son los CRUCES dentro de cada grupo (no los grupos): antes
+// de cada fecha hay un sorteo en vivo y de ahi sale quien juega contra quien y
+// a que hora. Hoja esperada (una fila por partida):
+//   Fecha | Grupo | Corredor 1 | Corredor 2 | Horario
+// Fecha = 1..4, Grupo = 1..3, Horario = "2027-01-23 18:00" (hora Argentina) o
+// ISO con zona horaria. Se muestra en la zona horaria de quien mira la pagina.
+let lastScheduleRows = null;
+const SCHEDULE_TZ_OFFSET = '-03:00'; // Argentina, sin horario de verano
+
+function pickVal(row, names) {
+  for (const n of names) if (row[n] != null && String(row[n]).trim() !== '') return String(row[n]).trim();
+  return '';
+}
+
+function parseScheduleTime(str) {
+  let s = String(str || '').trim().replace(' ', 'T');
+  if (!s) return null;
+  if (/^\d{4}-\d\d-\d\d$/.test(s)) s += 'T00:00';
+  if (!/(Z|[+-]\d\d:?\d\d)$/i.test(s)) s += SCHEDULE_TZ_OFFSET;
+  const d = new Date(s);
+  return isNaN(d) ? null : d;
+}
+
+// { fecha: { grupo: [{a, b, when}] } }
+function scheduleFromRows(rows) {
+  const out = {};
+  (rows || []).forEach(r => {
+    const md = parseInt(pickVal(r, ['Fecha', 'Matchday', 'Jornada']), 10);
+    const g = parseInt(pickVal(r, ['Grupo', 'Group']), 10);
+    const a = pickVal(r, ['Corredor 1', 'Runner 1', 'Corredor A']);
+    const b = pickVal(r, ['Corredor 2', 'Runner 2', 'Corredor B']);
+    if (!md || !g || (!a && !b)) return;
+    if (!out[md]) out[md] = {};
+    if (!out[md][g]) out[md][g] = [];
+    out[md][g].push({ a, b, when: parseScheduleTime(pickVal(r, ['Horario', 'Hora', 'Time', 'Date'])) });
+  });
+  return out;
+}
+
+async function loadSchedule() {
+  if (isMock()) lastScheduleRows = mockScheduleRows();
+  else if (SHEET_URLS.schedule) {
+    try {
+      lastScheduleRows = await fetchCSV(SHEET_URLS.schedule);
+      indexFlags(lastScheduleRows);
+    } catch (err) { console.error('Error cargando calendario:', err); }
+  }
+  renderSchedule();
+}
+
+function renderSchedule() {
+  const host = document.getElementById('schedule-container');
+  if (!host) return;
+  const data = scheduleFromRows(lastScheduleRows);
+  const loc = currentLang === 'es' ? 'es-AR' : 'en-US';
+  const fmtDay = new Intl.DateTimeFormat(loc, { weekday: 'long', day: 'numeric', month: 'long' });
+  const fmtTime = new Intl.DateTimeFormat(loc, { hour: '2-digit', minute: '2-digit', hour12: false });
+  const tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || '').replace(/_/g, ' ');
+  const tbd = `<span class="is-tbd">${esc(t('group.tbd'))}</span>`;
+  const runner = n => n ? nameWithFlag(n) : tbd;
+
+  let html = '';
+  for (let md = 1; md <= TOURNAMENT_CONFIG.matchdays; md++) {
+    const groups = data[md] || {};
+    const times = Object.values(groups).flat().map(m => m.when).filter(Boolean).sort((x, y) => x - y);
+    const dateLabel = times.length ? fmtDay.format(times[0]) : t('sched.dateTbd');
+    let cols = '';
+    for (let g = 1; g <= TOURNAMENT_CONFIG.numGroups; g++) {
+      const ms = (groups[g] || []).slice().sort((x, y) => (x.when || 0) - (y.when || 0));
+      const rows = ms.length ? ms : Array.from({ length: TOURNAMENT_CONFIG.groupSize / 2 }, () => ({ a: '', b: '', when: null }));
+      cols += `<div class="sched-group"><h4>${esc(t('group.word'))} ${g}</h4><ul>${rows.map(m => `
+        <li class="sched-match">
+          <span class="sched-time">${m.when ? fmtTime.format(m.when) : '--:--'}</span>
+          <span class="sched-pair">${runner(m.a)}<span class="sched-vs">${esc(t('sched.vs'))}</span>${runner(m.b)}</span>
+        </li>`).join('')}</ul></div>`;
+    }
+    html += `<article class="sched-day${times.length ? '' : ' is-tbd'}">
+      <header class="sched-day-head">
+        <span class="sched-day-n">${esc(t('sched.matchday', { n: md }))}</span>
+        <span class="sched-day-date">${esc(dateLabel)}</span>
+      </header>
+      <p class="sched-day-note">${esc(t(md === 1 ? 'sched.note1' : 'sched.noteN'))}</p>
+      <div class="sched-groups">${cols}</div>
+    </article>`;
+  }
+  html += `<p class="section-note sched-tz">${esc(t('sched.tzNote', { tz }))}</p>`;
+  host.innerHTML = html;
+}
+
+function mockScheduleRows() {
+  const rows = [];
+  for (let md = 1; md <= TOURNAMENT_CONFIG.matchdays; md++) {
+    const day = new Date(Date.UTC(2027, 0, 23 + 7 * (md - 1))).toISOString().slice(0, 10);
+    for (let g = 1; g <= TOURNAMENT_CONFIG.numGroups; g++) {
+      for (let i = 0; i < TOURNAMENT_CONFIG.groupSize / 2; i++) {
+        const base = ((md - 1) * 5 + (g - 1) * 8 + i * 2) % MOCK_NAMES.length;
+        const mins = 14 * 60 + (g - 1) * 120 + i * 30;
+        const hh = String(Math.floor(mins / 60)).padStart(2, '0'), mm = String(mins % 60).padStart(2, '0');
+        rows.push({ Fecha: String(md), Grupo: String(g), 'Corredor 1': MOCK_NAMES[base], 'Corredor 2': MOCK_NAMES[(base + 1) % MOCK_NAMES.length], Horario: `${day} ${hh}:${mm}` });
+      }
+    }
+  }
+  return rows;
 }
 
 // ======= CLASIFICACIÓN / STANDINGS =======

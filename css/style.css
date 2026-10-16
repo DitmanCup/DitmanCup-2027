@@ -1201,3 +1201,40 @@ body.modal-open { overflow: hidden; }
   .tab-panel.active { animation: none; }
   .tab-btn { transition: color .18s ease; }
 }
+
+/* --- Sorteo y calendario --- */
+.sched-title { font-size: 1.4rem; margin: 2.2rem 0 1rem; text-align: left; }
+.schedule { display: flex; flex-direction: column; gap: 1.4rem; }
+.sched-day {
+  border: 1px solid var(--frame);
+  border-radius: 2px;
+  background: rgba(9, 8, 6, .8);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, .4);
+}
+.sched-day-head {
+  display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: .4rem 1rem;
+  padding: .9rem 1.3rem;
+  background: linear-gradient(90deg, rgba(181, 39, 28, .28), rgba(181, 39, 28, .05));
+  border-bottom: 1px solid var(--frame);
+  border-left: 3px solid var(--accent-bright);
+}
+.sched-day-n { font-family: var(--font-title); font-size: 1.25rem; letter-spacing: .08em; text-transform: uppercase; color: var(--text); }
+.sched-day-date { font-family: var(--font-grunge); font-size: 1.05rem; color: var(--gold); text-transform: capitalize; }
+.sched-day.is-tbd .sched-day-date { color: var(--text-muted); text-transform: none; }
+.sched-day-note { margin: 0; padding: .7rem 1.3rem 0; color: var(--text-muted); font-size: .92rem; }
+.sched-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1.2rem 1.6rem; padding: 1rem 1.3rem 1.3rem; }
+.sched-group h4 {
+  margin: 0 0 .5rem; font-size: .85rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--accent-bright); text-align: left; padding-bottom: .4rem; border-bottom: 1px solid var(--border);
+}
+.sched-group ul { list-style: none; margin: 0; padding: 0; }
+.sched-match {
+  display: grid; grid-template-columns: 3.4rem 1fr; gap: .8rem; align-items: center;
+  padding: .6rem 0; border-bottom: 1px dotted var(--border);
+}
+.sched-match:last-child { border-bottom: 0; }
+.sched-time { font-family: var(--font-grunge); color: var(--accent-2); font-variant-numeric: tabular-nums; font-size: 1.02rem; }
+.sched-pair { display: flex; flex-wrap: wrap; align-items: center; gap: .15rem .55rem; color: var(--text); }
+.sched-vs { color: var(--text-muted); font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; }
+.sched .is-tbd, .sched-pair .is-tbd { color: var(--text-muted); font-style: italic; }
+.sched-tz { margin-top: .2rem; }
