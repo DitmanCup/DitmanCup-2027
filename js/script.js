@@ -284,8 +284,6 @@ const I18N = {
     'intro.d4': 'Tiempos y resultados de las qualys',
 
     'sorteo.title': 'Sorteo y calendario',
-    'sorteo.vod': 'El sorteo arranca el 16 de enero',
-    'sorteo.live': 'En vivo por twitch.tv/ditmancup',
     'sorteo.r1.l': 'Que se sortea',
     'sorteo.r1.t': 'No los grupos: los cruces. Tu grupo sale del ranking de clasificatorias y el sorteo define contra quien jugas dentro de el.',
     'sorteo.r2.l': 'Cuando',
@@ -511,8 +509,6 @@ const I18N = {
     'intro.d4': 'Qualifier times and results',
 
     'sorteo.title': 'Draw & Schedule',
-    'sorteo.vod': 'Draw will begin January 16th',
-    'sorteo.live': 'Live on twitch.tv/ditmancup',
     'sorteo.r1.l': 'What is drawn',
     'sorteo.r1.t': 'Not the groups: the matchups. Your group comes from the qualifier ranking and the draw decides who you face inside it.',
     'sorteo.r2.l': 'When',
