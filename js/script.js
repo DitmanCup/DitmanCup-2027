@@ -450,6 +450,13 @@ const I18N = {
     'sim.moveDown': '<span class="sim-move-down">▼</span> <b>{name}</b> desciende a Grupo {group} — peor tiempo del grupo ({time})',
     'sim.boundaryLabel': 'Frontera Grupo {a} / Grupo {b}',
     'sim.bracketTitle': 'Octavos de Final',
+    'sim.wbTitle': 'Cuadro de ganadores — jugalo',
+    'sim.wbNote': 'Carreras BO1, igual que en grupos: gana el mejor tiempo y avanza.',
+    'sim.btnWbNext': 'Jugar {round}',
+    'sim.wbDone': 'Cuadro de ganadores terminado',
+    'sim.btnWbAll': 'Jugar hasta la final de ganadores',
+    'sim.btnWbReset': 'Reiniciar resultados',
+    'sim.wbChamp': 'Campeon del cuadro de ganadores — directo a la Gran Final',
     'sim.bracketLocked': 'Termina las 4 fechas para desbloquear el sorteo de octavos.',
     'sim.bracketExplainer': 'El Top 8 directo queda fijo con el sembrado clasico (no se cruzan entre ellos hasta semis). Sortealos contra los 8 clasificados de la fase de grupos para completar los cruces.',
     'sim.btnDrawNext': 'Sortear siguiente',
@@ -667,6 +674,13 @@ const I18N = {
     'sim.moveDown': '<span class="sim-move-down">▼</span> <b>{name}</b> moves down to Group {group} — group\'s worst time ({time})',
     'sim.boundaryLabel': 'Group {a} / Group {b} boundary',
     'sim.bracketTitle': 'Round of 16',
+    'sim.wbTitle': 'Winners Bracket — play it',
+    'sim.wbNote': 'BO1 races, same as the groups: the best time wins and moves on.',
+    'sim.btnWbNext': 'Play {round}',
+    'sim.wbDone': 'Winners Bracket finished',
+    'sim.btnWbAll': 'Play to the Winners Final',
+    'sim.btnWbReset': 'Reset results',
+    'sim.wbChamp': 'Winners Bracket champion — straight to the Grand Final',
     'sim.bracketLocked': 'Finish all 4 matchdays to unlock the Round of 16 draw.',
     'sim.bracketExplainer': "The direct Top 8 keep the classic seeding (they can't meet each other before the semis). Draw them against the 8 group-stage qualifiers to complete the bracket.",
     'sim.btnDrawNext': 'Draw next',
@@ -872,7 +886,7 @@ function initTabs() {
     const trailer = document.getElementById('trailer');
     if (trailer && btn.dataset.tab !== 'inicio') trailer.pause();
     document.body.dataset.tab = btn.dataset.tab;
-    if (btn.dataset.tab === 'brackets') { drawBracketLines(); requestAnimationFrame(drawBracketLines); }
+    if (btn.dataset.tab === 'brackets' || btn.dataset.tab === 'simulations') { drawAllBracketLines(); requestAnimationFrame(drawAllBracketLines); }
     tabs.classList.remove('open');
     toggle.setAttribute('aria-expanded', 'false');
     if (focusPanel) panel.focus();
@@ -1348,8 +1362,8 @@ function renderBracket() {
 // Conectores de "avanza el ganador": se miden las cajas ya renderizadas y se
 // dibujan codos en un SVG por encima. Hay que volver a llamarla cuando el tab
 // pasa a ser visible (oculto, todo mide 0) y al cambiar el tamaño.
-function drawBracketLines() {
-  const canvas = document.getElementById('bracket-canvas');
+function drawLinesFor(canvasId, links) {
+  const canvas = document.getElementById(canvasId);
   if (!canvas || !canvas.offsetWidth) return;
   const svg = canvas.querySelector('.bracket-lines');
   const base = canvas.getBoundingClientRect();
@@ -1360,7 +1374,7 @@ function drawBracketLines() {
     return { l: r.left - base.left, r: r.right - base.left, y: r.top - base.top + r.height / 2 };
   };
   const paths = { w: '', l: '', g: '' };
-  bracketLinks.forEach(([from, to, kind]) => {
+  links.forEach(([from, to, kind]) => {
     const a = box(from), b = box(to);
     if (!a || !b) return;
     const mid = a.r + Math.min(28, (b.l - a.r) / 2);
@@ -1370,9 +1384,13 @@ function drawBracketLines() {
   svg.setAttribute('height', canvas.scrollHeight);
   svg.innerHTML = ['w', 'l', 'g'].map(k => `<path class="line-${k}" d="${paths[k]}"/>`).join('');
 }
+function drawBracketLines() { drawLinesFor('bracket-canvas', bracketLinks); }
+let simWBLinks = [];
+function drawSimWBLines() { drawLinesFor('sim-wb-canvas', simWBLinks); }
+function drawAllBracketLines() { drawBracketLines(); drawSimWBLines(); }
 let _bracketResizeTimer;
-window.addEventListener('resize', () => { clearTimeout(_bracketResizeTimer); _bracketResizeTimer = setTimeout(drawBracketLines, 120); });
-if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawBracketLines);
+window.addEventListener('resize', () => { clearTimeout(_bracketResizeTimer); _bracketResizeTimer = setTimeout(drawAllBracketLines, 120); });
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawAllBracketLines);
 
 // Orden de siembra estándar para un cuadro de `n` (potencia de 2).
 function seedOrder(n) {
@@ -1924,6 +1942,7 @@ function simInitRunners() {
   simLastRaces = [];
   simLastMoves = [];
   simBracketReady = false;
+  simWB = null;
 }
 
 function simGetGroup(g) { return simRunners.filter(r => r.group === g); }
@@ -2079,6 +2098,7 @@ function simRenderBracket() {
     locked.hidden = false; explainer.hidden = true; controls.hidden = true;
     sidesEl.innerHTML = '';
     simBracketReady = false;
+    simRenderWB();
     return;
   }
   if (!simBracketReady) simInitBracket();
@@ -2107,6 +2127,87 @@ function simRenderBracket() {
   const allBtn = document.getElementById('sim-btn-draw-all');
   if (nextBtn) nextBtn.disabled = done;
   if (allBtn) allBtn.disabled = done;
+  simRenderWB();
+}
+
+// ======= WINNERS BRACKET JUGABLE (Octavos -> Cuartos -> Semis -> Final de ganadores) =======
+// Despues del sorteo de Octavos se juegan las rondas con carreras BO1 (mismo
+// modelo que la fase de grupos: gana el mejor tiempo). El campeon del cuadro
+// de ganadores pasaria directo a la Gran Final; el cuadro de perdedores y la
+// Gran Final todavia no se simulan.
+let simWB = null;
+const SIM_WB_STARTS = [0, 8, 12, 14];   // numero de partida previo a cada ronda (M1..M15)
+
+function simInitWB() {
+  const first = simBracketSeeds.map((s, idx) => ({ a: s.runner, b: simBracketAssignments[idx], seedA: s.seedNum, winner: null, tA: null, tB: null }));
+  simWB = { rounds: [first], played: 0 };
+  [4, 2, 1].forEach(n => simWB.rounds.push(Array.from({ length: n }, () => ({ a: null, b: null, winner: null, tA: null, tB: null }))));
+}
+
+function simWBPlayRound() {
+  if (!simWB || simWB.played >= 4) return;
+  const r = simWB.played;
+  simWB.rounds[r].forEach(m => {
+    const res = simRace(m.a, m.b);
+    m.winner = res.winner; m.tA = res.timeA; m.tB = res.timeB;
+  });
+  simWB.played++;
+  if (r < 3) simWB.rounds[r + 1].forEach((m, i) => { m.a = simWB.rounds[r][2 * i].winner; m.b = simWB.rounds[r][2 * i + 1].winner; });
+}
+
+function simRenderWB() {
+  const host = document.getElementById('sim-wb');
+  if (!host) return;
+  const drawn = simBracketReady && simBracketDrawIndex >= 8;
+  if (!drawn) { simWB = null; simWBLinks = []; host.hidden = true; host.innerHTML = ''; return; }
+  if (!simWB) simInitWB();
+  host.hidden = false;
+
+  const done = simWB.played >= 4;
+  const roundTitles = [roundName(16), roundName(8), roundName(4), t('bracket.round.winnersFinal')];
+  simWBLinks = [];
+  const slot = (m, side, r, i) => {
+    const p = m[side];
+    if (!p) return `<div class="slot is-ref"><span class="slot-name">${esc(t('bracket.winnerOf', { n: SIM_WB_STARTS[r - 1] + 2 * i + (side === 'a' ? 1 : 2) }))}</span></div>`;
+    const played = m.winner != null;
+    const cls = played ? (m.winner === p ? ' is-win' : ' is-lose') : '';
+    const time = played ? (side === 'a' ? m.tA : m.tB) : null;
+    const seed = r === 0 && side === 'a' ? `<span class="slot-seed">${m.seedA}</span>` : '';
+    return `<div class="slot${cls}">${seed}<span class="slot-name">${nameWithFlag(p.name)}</span>${time != null ? `<span class="slot-time">${esc(simFormatRaceTime(time))}</span>` : ''}</div>`;
+  };
+  const rounds = simWB.rounds.map((ms, r) => {
+    const cards = ms.map((m, i) => {
+      const id = `s${r}-${i}`;
+      if (r < 3) simWBLinks.push([id, `s${r + 1}-${Math.floor(i / 2)}`, 'w']);
+      return `<div class="match is-w" data-mid="${id}"><span class="match-num">M${SIM_WB_STARTS[r] + i + 1}</span>${slot(m, 'a', r, i)}${slot(m, 'b', r, i)}</div>`;
+    }).join('');
+    return `<div class="round"><div class="round-title">${esc(roundTitles[r])}</div><div class="round-inner">${cards}</div></div>`;
+  }).join('');
+
+  const champ = done ? simWB.rounds[3][0].winner : null;
+  host.innerHTML = `
+    <h3 class="sim-wb-title">${esc(t('sim.wbTitle'))}</h3>
+    <p class="section-note">${esc(t('sim.wbNote'))}</p>
+    <div class="sim-controls">
+      <button type="button" class="btn-sim btn-sim-primary" id="sim-btn-wb-next"${done ? ' disabled' : ''}>${esc(done ? t('sim.wbDone') : t('sim.btnWbNext', { round: roundTitles[simWB.played] }))}</button>
+      <button type="button" class="btn-sim" id="sim-btn-wb-all"${done ? ' disabled' : ''}>${esc(t('sim.btnWbAll'))}</button>
+      <button type="button" class="btn-sim btn-sim-ghost" id="sim-btn-wb-reset">${esc(t('sim.btnWbReset'))}</button>
+    </div>
+    <div class="bracket-scroll"><div class="bracket-canvas" id="sim-wb-canvas">
+      <svg class="bracket-lines" aria-hidden="true"></svg>
+      <div class="bracket-stack"><section class="bracket-section is-winners">
+        <h3 class="bracket-heading">${esc(t('bracket.winners'))}</h3>
+        <div class="bracket-rounds">${rounds}</div>
+      </section></div>
+    </div></div>
+    ${champ ? `<p class="sim-wb-champ"><span>${esc(t('sim.wbChamp'))}</span><strong>${nameWithFlag(champ.name)}</strong></p>` : ''}`;
+
+  const on = (id, fn) => { const el = document.getElementById(id); if (el) el.addEventListener('click', fn); };
+  on('sim-btn-wb-next', () => { simWBPlayRound(); simRenderWB(); });
+  on('sim-btn-wb-all', () => { while (simWB.played < 4) simWBPlayRound(); simRenderWB(); });
+  on('sim-btn-wb-reset', () => { simInitWB(); simRenderWB(); });
+  drawSimWBLines();
+  requestAnimationFrame(drawSimWBLines);
 }
 
 function renderSimulator() {
