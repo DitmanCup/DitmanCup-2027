@@ -405,6 +405,7 @@ const I18N = {
     'live.checking': 'Chequeando canales…',
 
     'footer.text': 'Ditman Cup 2027 · Hecho para la comunidad',
+    'footer.credit': 'Sitio web por',
 
     'sim.title': 'Simulador — formato tipo Nations League',
     'sim.r1.l': 'Directo',
@@ -630,6 +631,7 @@ const I18N = {
     'live.checking': 'Checking channels…',
 
     'footer.text': 'Ditman Cup 2027 · Made for the community',
+    'footer.credit': 'Website by',
 
     'sim.title': 'Simulator — Nations League–style format',
     'sim.r1.l': 'Direct',

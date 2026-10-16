@@ -1502,3 +1502,6 @@ body { font-size: 1.15rem; }
 .donors-table th:last-child { width: 4.4rem; }
 .dl-amt { font-size: 1.1rem; }
 .prize-amount { font-size: 2.3rem; }
+
+.footer-credit { text-align: center; margin: .5rem 0 0; font-family: var(--font-grunge); font-size: 1.05rem; color: var(--text-muted); letter-spacing: .02em; }
+.footer-credit strong { color: var(--accent-2); font-weight: 700; }
