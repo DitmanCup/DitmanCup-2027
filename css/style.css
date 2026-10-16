@@ -1521,3 +1521,32 @@ body { font-size: 1.15rem; }
 }
 .donations-wrap .donate-btn { font-family: var(--font-grunge); font-size: 1.3rem; }
 .donations-personal { border-style: dashed; }
+
+/* ===== Menu desplegable "Tournament" (Groups / Bracket / Simulations) ===== */
+.nav-group { position: relative; display: flex; }
+.nav-caret { font-size: .7em; margin-left: .15rem; }
+.nav-drop-btn[aria-expanded="true"] { color: #fff; }
+.nav-sub {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 13rem;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--frame);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, .6);
+  padding: .3rem 0;
+  z-index: 20;
+}
+.nav-sub.open { display: flex; }
+.nav-sub .tab-btn { text-align: left; padding: .6rem 1rem; }
+.nav-sub .tab-btn::after { display: none; }
+.nav-sub .tab-btn.active { background: rgba(181, 39, 28, .28); }
+@media (hover: hover) and (min-width: 1201px) {
+  .nav-group:hover .nav-sub { display: flex; }
+}
+@media (max-width: 1200px) {
+  .nav-group { flex-direction: column; }
+  .nav-sub { display: flex; position: static; border: none; box-shadow: none; background: none; padding: 0 0 0 1.2rem; }
+}

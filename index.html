@@ -7,7 +7,7 @@
 <title>Ditman Cup 2027</title>
 <meta name="description" content="Ditman Cup 2027 — community Resident Evil 4 speedrunning tournament. / Torneo comunitario de speedrunning de RE4.">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/7.2.3/css/flag-icons.min.css">
-<link rel="stylesheet" href="css/style.css?v=20261017j">
+<link rel="stylesheet" href="css/style.css?v=20261017k">
 </head>
 <body data-tab="inicio">
 
@@ -34,10 +34,15 @@
 
     <nav class="tabs" id="tabs" aria-label="Sections">
       <button class="tab-btn active" data-tab="inicio" data-i18n="nav.inicio">Home</button>
-      <button class="tab-btn" data-tab="sorteo" data-i18n="nav.sorteo">Schedule</button>
-      <button class="tab-btn" data-tab="grupos" data-i18n="nav.grupos">Groups</button>
-      <button class="tab-btn" data-tab="brackets" data-i18n="nav.brackets">Bracket</button>
-      <button class="tab-btn" data-tab="simulations" data-i18n="nav.simulations">Simulations</button>
+      <button class="tab-btn" data-tab="sorteo" data-i18n="nav.sorteo">2027</button>
+      <div class="nav-group">
+        <button class="tab-btn nav-drop-btn" type="button" aria-haspopup="true" aria-expanded="false" id="nav-drop-btn"><span data-i18n="nav.torneo">Tournament</span> <span class="nav-caret" aria-hidden="true">&#9662;</span></button>
+        <div class="nav-sub" id="nav-sub">
+          <button class="tab-btn" data-tab="grupos" data-i18n="nav.grupos">Groups</button>
+          <button class="tab-btn" data-tab="brackets" data-i18n="nav.brackets">Bracket</button>
+          <button class="tab-btn" data-tab="simulations" data-i18n="nav.simulations">Simulations</button>
+        </div>
+      </div>
       <button class="tab-btn" data-tab="champions" data-i18n="nav.champions">Champions</button>
       <button class="tab-btn" data-tab="clips" data-i18n="nav.clips">Clips</button>
       <button class="tab-btn" data-tab="live" data-i18n="nav.live">Live</button>
@@ -94,7 +99,7 @@
       <h2 class="intro-title" data-i18n="intro.title">Welcome to the Ditman Cup 2027</h2>
       <p class="intro-lead" data-i18n="intro.lead">Everything you need to follow the tournament, in one place.</p>
       <ul class="intro-links">
-        <li><button type="button" class="intro-card" data-go="sorteo"><strong data-i18n="nav.sorteo">Schedule</strong><span data-i18n="intro.d1">Who you face, and when</span></button></li>
+        <li><button type="button" class="intro-card" data-go="sorteo"><strong data-i18n="intro.t1">Schedule</strong><span data-i18n="intro.d1">Who you face, and when</span></button></li>
         <li><button type="button" class="intro-card" data-go="grupos"><strong data-i18n="nav.grupos">Groups</strong><span data-i18n="intro.d2">Top 8 direct + 24 in 3 groups</span></button></li>
         <li><button type="button" class="intro-card" data-go="brackets"><strong data-i18n="nav.brackets">Bracket</strong><span data-i18n="intro.d3">Double elimination to the final</span></button></li>
         <li><button type="button" class="intro-card" data-go="simulations"><strong data-i18n="nav.simulations">Simulations</strong><span data-i18n="intro.d4">Play through the format yourself</span></button></li>
@@ -123,7 +128,7 @@
   </section>
 
   <section id="sorteo" class="tab-panel" tabindex="-1">
-    <h2 data-i18n="sorteo.title">Schedule</h2>
+    <h2 data-i18n="sorteo.title">Ditman Cup 2027</h2>
 
     <div class="sim-intro">
       <div class="sim-rule"><span class="sim-rule-label" data-i18n="sorteo.r1.l">What is drawn</span><span class="sim-rule-text" data-i18n="sorteo.r1.t">Not the groups: the matchups. Your group comes from the qualifier ranking and the draw decides who you face inside it.</span></div>
@@ -374,6 +379,6 @@
   </div>
 </div>
 
-<script src="js/script.js?v=20261017j"></script>
+<script src="js/script.js?v=20261017k"></script>
 </body>
 </html>

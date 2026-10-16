@@ -249,7 +249,9 @@ const YOUTUBE_LIVE_CHANNELS = [
 const I18N = {
   es: {
     'nav.inicio': 'Inicio',
-    'nav.sorteo': 'Calendario',
+    'nav.sorteo': '2027',
+    'nav.torneo': 'Torneo',
+    'intro.t1': 'Calendario',
     'nav.grupos': 'Grupos',
     'nav.brackets': 'Brackets',
     'nav.simulations': 'Simulaciones',
@@ -282,7 +284,7 @@ const I18N = {
     'intro.d3': 'Doble eliminacion hasta la final',
     'intro.d4': 'Proba el formato vos mismo',
 
-    'sorteo.title': 'Calendario',
+    'sorteo.title': 'Ditman Cup 2027',
     'sorteo.r1.l': 'Que se sortea',
     'sorteo.r1.t': 'No los grupos: los cruces. Tu grupo sale del ranking de clasificatorias y el sorteo define contra quien jugas dentro de el.',
     'sorteo.r2.l': 'Cuando',
@@ -321,7 +323,7 @@ const I18N = {
     'group.directNote': 'Clasificaron directo desde las clasificatorias: entran al cuadro en Octavos de Final.',
     'group.stageBadge': 'Fase de grupos',
     'group.stageTitle': '24 corredores · 3 grupos de 8',
-    'group.stageNote': 'Ellos si juegan: los cruces se sortean dentro de cada grupo (ver Calendario).',
+    'group.stageNote': 'Ellos si juegan: los cruces se sortean dentro de cada grupo (ver la pestaña 2027).',
 
     'brackets.title': 'Brackets',
     'brackets.placeholder': 'El cuadro de eliminacion se arma una vez cerrada la fase de grupos.',
@@ -474,7 +476,9 @@ const I18N = {
   },
   en: {
     'nav.inicio': 'Home',
-    'nav.sorteo': 'Schedule',
+    'nav.sorteo': '2027',
+    'nav.torneo': 'Tournament',
+    'intro.t1': 'Schedule',
     'nav.grupos': 'Groups',
     'nav.brackets': 'Bracket',
     'nav.simulations': 'Simulations',
@@ -507,7 +511,7 @@ const I18N = {
     'intro.d3': 'Double elimination to the final',
     'intro.d4': 'Play through the format yourself',
 
-    'sorteo.title': 'Schedule',
+    'sorteo.title': 'Ditman Cup 2027',
     'sorteo.r1.l': 'What is drawn',
     'sorteo.r1.t': 'Not the groups: the matchups. Your group comes from the qualifier ranking and the draw decides who you face inside it.',
     'sorteo.r2.l': 'When',
@@ -546,7 +550,7 @@ const I18N = {
     'group.directNote': 'Qualified straight from the qualifiers: they enter the bracket at the Round of 16.',
     'group.stageBadge': 'Group stage',
     'group.stageTitle': '24 runners · 3 groups of 8',
-    'group.stageNote': 'These are the ones playing: matchups are drawn inside each group (see Schedule).',
+    'group.stageNote': 'These are the ones playing: matchups are drawn inside each group (see the 2027 tab).',
 
     'brackets.title': 'Bracket',
     'brackets.placeholder': 'The knockout bracket goes live once the group stage is finalized.',
@@ -865,10 +869,17 @@ function showTestBanner() {
 
 // ======= NAVEGACIÓN POR PESTAÑAS / TABS =======
 function initTabs() {
-  const buttons = Array.from(document.querySelectorAll('.tab-btn'));
+  const buttons = Array.from(document.querySelectorAll('.tab-btn[data-tab]'));
+  const drop = document.getElementById('nav-drop-btn');
+  const sub = document.getElementById('nav-sub');
   const panels = document.querySelectorAll('.tab-panel');
   const toggle = document.getElementById('nav-toggle');
   const tabs = document.getElementById('tabs');
+
+  function closeDrop() {
+    sub.classList.remove('open');
+    drop.setAttribute('aria-expanded', 'false');
+  }
 
   function activate(btn, focusPanel) {
     buttons.forEach(b => {
@@ -888,6 +899,8 @@ function initTabs() {
     if (trailer && btn.dataset.tab !== 'inicio') trailer.pause();
     document.body.dataset.tab = btn.dataset.tab;
     if (btn.dataset.tab === 'brackets' || btn.dataset.tab === 'simulations') { drawAllBracketLines(); requestAnimationFrame(drawAllBracketLines); }
+    drop.classList.toggle('active', !!btn.closest('.nav-sub'));
+    closeDrop();
     tabs.classList.remove('open');
     toggle.setAttribute('aria-expanded', 'false');
     if (focusPanel) panel.focus();
@@ -904,10 +917,12 @@ function initTabs() {
     // Flechas para moverse entre pestañas (patrón ARIA tabs)
     btn.addEventListener('keydown', e => {
       let next = null;
-      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = buttons[(i + 1) % buttons.length];
-      else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = buttons[(i - 1 + buttons.length) % buttons.length];
-      else if (e.key === 'Home') next = buttons[0];
-      else if (e.key === 'End') next = buttons[buttons.length - 1];
+      const vis = buttons.filter(b => b.offsetParent !== null || b === btn);
+      const vi = vis.indexOf(btn);
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = vis[(vi + 1) % vis.length];
+      else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = vis[(vi - 1 + vis.length) % vis.length];
+      else if (e.key === 'Home') next = vis[0];
+      else if (e.key === 'End') next = vis[vis.length - 1];
       if (next) {
         e.preventDefault();
         activate(next);
@@ -915,6 +930,14 @@ function initTabs() {
       }
     });
   });
+
+  drop.addEventListener('click', e => {
+    e.stopPropagation();
+    const open = sub.classList.toggle('open');
+    drop.setAttribute('aria-expanded', String(open));
+  });
+  document.addEventListener('click', e => { if (!e.target.closest('.nav-group')) closeDrop(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrop(); });
 
   tabs.setAttribute('role', 'tablist');
   document.querySelectorAll('.tab-panel').forEach(p => p.setAttribute('role', 'tabpanel'));
