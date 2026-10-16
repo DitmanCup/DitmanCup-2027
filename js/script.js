@@ -1152,6 +1152,7 @@ async function loadSchedule() {
   renderSchedule();
 }
 
+const schedOpen = new Set();   // matchdays desplegados (se conservan al re-renderizar)
 function renderSchedule() {
   const host = document.getElementById('schedule-container');
   if (!host) return;
@@ -1179,17 +1180,21 @@ function renderSchedule() {
           <span class="sched-pair">${runner(m.a)}<span class="sched-vs">${esc(t('sched.vs'))}</span>${runner(m.b)}</span>
         </li>`).join('')}</ul></div>`;
     }
-    html += `<article class="sched-day${times.length ? '' : ' is-tbd'}">
-      <header class="sched-day-head">
+    html += `<details class="sched-day${times.length ? '' : ' is-tbd'}" data-md="${md}"${schedOpen.has(md) ? ' open' : ''}>
+      <summary class="sched-day-head">
         <span class="sched-day-n">${esc(t('sched.matchday', { n: md }))}</span>
         <span class="sched-day-date">${esc(dateLabel)}</span>
-      </header>
+      </summary>
       <p class="sched-day-note">${esc(t(md === 1 ? 'sched.note1' : 'sched.noteN'))}</p>
       <div class="sched-groups">${cols}</div>
-    </article>`;
+    </details>`;
   }
   html += `<p class="section-note sched-tz">${esc(t('sched.tzNote', { tz }))}</p>`;
   host.innerHTML = html;
+  host.querySelectorAll('details.sched-day').forEach(d => d.addEventListener('toggle', () => {
+    const n = Number(d.dataset.md);
+    if (d.open) schedOpen.add(n); else schedOpen.delete(n);
+  }));
 }
 
 function mockScheduleRows() {

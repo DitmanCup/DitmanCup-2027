@@ -1562,3 +1562,18 @@ body { font-size: 1.15rem; }
 }
 .live-roster .live-name { min-width: 0; }
 .live-roster .live-status { margin-left: auto; }
+
+/* Schedule: cada matchday es un desplegable (cerrado por defecto) */
+.schedule { gap: .8rem; }
+details.sched-day > summary.sched-day-head {
+  list-style: none; cursor: pointer; border-bottom: 0; position: relative;
+  padding-right: 3rem; transition: background .15s;
+}
+details.sched-day > summary.sched-day-head::-webkit-details-marker { display: none; }
+details.sched-day > summary.sched-day-head::after {
+  content: '\25BE'; position: absolute; right: 1.2rem; top: 50%; transform: translateY(-50%);
+  color: var(--accent-bright); font-family: var(--font-safe); transition: transform .2s;
+}
+details.sched-day[open] > summary.sched-day-head { border-bottom: 1px solid var(--frame); }
+details.sched-day[open] > summary.sched-day-head::after { transform: translateY(-50%) rotate(180deg); }
+details.sched-day > summary.sched-day-head:hover { background: linear-gradient(90deg, rgba(181, 39, 28, .4), rgba(181, 39, 28, .1)); }
