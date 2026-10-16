@@ -276,7 +276,12 @@ const I18N = {
     'facts.groups': 'grupos',
     'facts.qualify': 'clasifican directo',
 
-    'intro.p': 'Bienvenidos a la Ditman Cup 2027. Aca vas a encontrar el sorteo, los grupos, el cuadro de eliminacion y todo lo necesario para seguir el torneo de punta a punta.',
+    'intro.title': 'Bienvenidos a la Ditman Cup 2027',
+    'intro.lead': 'Todo para seguir el torneo, en un solo lugar.',
+    'intro.d1': 'Contra quien jugas y cuando',
+    'intro.d2': 'Top 8 directo + 24 en 3 grupos',
+    'intro.d3': 'Doble eliminacion hasta la final',
+    'intro.d4': 'Tiempos y resultados de las qualys',
 
     'sorteo.title': 'Sorteo y calendario',
     'sorteo.vod': 'El sorteo arranca el 16 de enero',
@@ -488,7 +493,12 @@ const I18N = {
     'facts.groups': 'groups',
     'facts.qualify': 'qualify directly',
 
-    'intro.p': "Welcome to the Ditman Cup 2027. Here you'll find the draw, the groups, the knockout bracket and everything you need to follow the tournament end to end.",
+    'intro.title': 'Welcome to the Ditman Cup 2027',
+    'intro.lead': 'Everything you need to follow the tournament, in one place.',
+    'intro.d1': 'Who you face, and when',
+    'intro.d2': 'Top 8 direct + 24 in 3 groups',
+    'intro.d3': 'Double elimination to the final',
+    'intro.d4': 'Qualifier times and results',
 
     'sorteo.title': 'Draw & Schedule',
     'sorteo.vod': 'Draw will begin January 16th',
@@ -2258,3 +2268,13 @@ function setText(id, value) {
 
 function safeGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
 function safeSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+
+// Tarjetas de la bienvenida del Home: llevan directo a cada pestaña
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('[data-go]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tab = document.querySelector(`.tab-btn[data-tab="${btn.dataset.go}"]`);
+      if (tab) { tab.click(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    });
+  });
+});

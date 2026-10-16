@@ -1243,7 +1243,7 @@ body.modal-open { overflow: hidden; }
 #inicio.home-layout.active {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 345px;
-  grid-template-areas: "hero side" "intro side" "trailer side";
+  grid-template-areas: "hero side" "trailer side" "intro side" "timer side" "facts side";
   column-gap: 2.4rem;
   align-items: start;
 }
@@ -1318,7 +1318,7 @@ body.modal-open { overflow: hidden; }
   .donors-card { padding: 1rem 1rem 1.2rem; }
 }
 @media (max-width: 720px) {
-  #inicio.home-layout.active { grid-template-columns: minmax(0, 1fr); grid-template-areas: "hero" "side" "intro" "trailer"; }
+  #inicio.home-layout.active { grid-template-columns: minmax(0, 1fr); grid-template-areas: "hero" "trailer" "side" "intro" "timer" "facts"; }
   .donors-card { margin-top: 0; }
 }
 
@@ -1440,3 +1440,28 @@ body { font-size: 1.15rem; }
 .donors-thanks span { line-height: 1.25; }
 .donors-table th:last-child { width: 3.7rem; }
 .donors-table th:first-child { width: 1.6rem; }
+
+/* --- Home: titulo y redes -> video -> bienvenida -> timer de las qualys -> numeros --- */
+#inicio #countdown { grid-area: timer; margin: 2rem auto 0; width: 100%; max-width: 640px; }
+#inicio .hero-facts { grid-area: facts; margin: 2rem 0 .5rem; }
+#inicio .hero { padding: 2.6rem 0 1.4rem; border-bottom: 0; margin-bottom: 0; }
+#inicio .trailer-frame { margin: 0; }
+#inicio .intro-text { margin: 2.2rem 0 0; max-width: none; text-align: left; }
+.intro-title { font-size: clamp(1.7rem, 3vw, 2.4rem); line-height: 1.15; margin: 0 0 .35rem; text-align: left; color: var(--text); }
+.intro-lead { font-family: var(--font-grunge); font-size: 1.4rem; line-height: 1.4; color: var(--text-dim); margin: 0 0 1.3rem; }
+.intro-links { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: .9rem; }
+.intro-card {
+  width: 100%; height: 100%; text-align: left; cursor: pointer;
+  display: flex; flex-direction: column; gap: .25rem;
+  padding: .95rem 1.1rem;
+  background: linear-gradient(180deg, rgba(32, 28, 22, .92), rgba(12, 10, 8, .92));
+  border: 1px solid var(--frame); border-left: 3px solid var(--accent-bright); border-radius: 2px;
+  color: var(--text);
+  transition: border-color .15s, background .15s, transform .15s;
+}
+.intro-card strong { font-family: var(--font-title); font-weight: 400; font-size: 1.15rem; letter-spacing: .08em; text-transform: uppercase; color: var(--accent-bright); }
+.intro-card span { font-family: var(--font-grunge); font-size: 1.2rem; line-height: 1.3; color: var(--text); }
+.intro-card:hover { border-color: var(--accent-bright); background: rgba(181, 39, 28, .2); transform: translateY(-2px); }
+.intro-text .intro-lead { font-family: var(--font-grunge); font-size: 1.45rem; line-height: 1.4; color: var(--text-dim); margin: 0 0 1.3rem; }
+#inicio #countdown { margin: 2rem 0 0; max-width: 680px; }
+#inicio .hero-facts { justify-content: flex-start; gap: 3rem; }

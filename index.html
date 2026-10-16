@@ -7,7 +7,7 @@
 <title>Ditman Cup 2027</title>
 <meta name="description" content="Ditman Cup 2027 — community Resident Evil 4 speedrunning tournament. / Torneo comunitario de speedrunning de RE4.">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/7.2.3/css/flag-icons.min.css">
-<link rel="stylesheet" href="css/style.css?v=20261016r">
+<link rel="stylesheet" href="css/style.css?v=20261016u">
 </head>
 <body data-tab="inicio">
 
@@ -69,6 +69,38 @@
           <svg class="ic" aria-hidden="true"><use href="#ic-rules"/></svg><span data-i18n="link.rules">Rules</span>
         </a>
       </div>
+    </div>
+
+    <div class="trailer-frame">
+      <video id="trailer" class="trailer-video" controls playsinline preload="metadata"
+             poster="assets/trailer/poster.jpg" aria-label="Ditman Cup 2027 trailer">
+        <source src="assets/trailer/trailer.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <aside class="donors-card" id="donors-card" aria-labelledby="donors-title">
+      <h2 class="donors-title" id="donors-title" data-i18n="donors.title">Top donors</h2>
+      <p class="donors-total" id="donors-total" hidden></p>
+      <table class="donors-table" id="donors-table" hidden>
+        <thead><tr><th>#</th><th data-i18n="donors.colName">Donor</th><th data-i18n="donors.colAmount">Donated</th></tr></thead>
+        <tbody id="donors-body"></tbody>
+      </table>
+      <p class="donors-msg" id="donors-msg" data-i18n="donors.loading">Loading donors…</p>
+      <p class="donors-thanks"><strong data-i18n="donors.thanks">Thank you!</strong><span id="donors-thanks-sub" data-i18n="donors.thanksGeneric">Thank you to every donor who has supported the Ditman Cup.</span></p>
+      <a href="https://mno.gg/s/5e058baec7?c=1" target="_blank" rel="noopener" class="donate-btn donors-donate" data-i18n="don.btn">Donate</a>
+      <p class="donors-src" id="donors-src" hidden></p>
+    </aside>
+
+    <div class="intro-text">
+      <h2 class="intro-title" data-i18n="intro.title">Welcome to the Ditman Cup 2027</h2>
+      <p class="intro-lead" data-i18n="intro.lead">Everything you need to follow the tournament, in one place.</p>
+      <ul class="intro-links">
+        <li><button type="button" class="intro-card" data-go="sorteo"><strong data-i18n="nav.sorteo">Draw &amp; Schedule</strong><span data-i18n="intro.d1">Who you face, and when</span></button></li>
+        <li><button type="button" class="intro-card" data-go="grupos"><strong data-i18n="nav.grupos">Groups</strong><span data-i18n="intro.d2">Top 8 direct + 24 in 3 groups</span></button></li>
+        <li><button type="button" class="intro-card" data-go="brackets"><strong data-i18n="nav.brackets">Bracket</strong><span data-i18n="intro.d3">Double elimination to the final</span></button></li>
+        <li><button type="button" class="intro-card" data-go="clasificatorias"><strong data-i18n="nav.clasificatorias">Standings</strong><span data-i18n="intro.d4">Qualifier times and results</span></button></li>
+      </ul>
+    </div>
 
       <div class="countdown" id="countdown" aria-live="polite">
         <p class="countdown-label" data-i18n="countdown.label">Until the qualifiers open</p>
@@ -89,30 +121,6 @@
         <div class="fact"><span class="fact-number" id="fact-groups">3</span><span class="fact-label" data-i18n="facts.groups">groups</span></div>
         <div class="fact"><span class="fact-number" id="fact-qualify">8</span><span class="fact-label" data-i18n="facts.qualify">qualify directly</span></div>
       </div>
-    </div>
-    <aside class="donors-card" id="donors-card" aria-labelledby="donors-title">
-      <h2 class="donors-title" id="donors-title" data-i18n="donors.title">Top donors</h2>
-      <p class="donors-total" id="donors-total" hidden></p>
-      <table class="donors-table" id="donors-table" hidden>
-        <thead><tr><th>#</th><th data-i18n="donors.colName">Donor</th><th data-i18n="donors.colAmount">Donated</th></tr></thead>
-        <tbody id="donors-body"></tbody>
-      </table>
-      <p class="donors-msg" id="donors-msg" data-i18n="donors.loading">Loading donors…</p>
-      <p class="donors-thanks"><strong data-i18n="donors.thanks">Thank you!</strong><span id="donors-thanks-sub" data-i18n="donors.thanksGeneric">Thank you to every donor who has supported the Ditman Cup.</span></p>
-      <a href="https://mno.gg/s/5e058baec7?c=1" target="_blank" rel="noopener" class="donate-btn donors-donate" data-i18n="don.btn">Donate</a>
-      <p class="donors-src" id="donors-src" hidden></p>
-    </aside>
-
-    <div class="intro-text">
-      <p data-i18n="intro.p">Welcome to the Ditman Cup 2027. Here you'll find the draw, the groups, the knockout bracket and everything you need to follow the tournament end to end.</p>
-    </div>
-
-    <div class="trailer-frame">
-      <video id="trailer" class="trailer-video" controls playsinline preload="metadata"
-             poster="assets/trailer/poster.jpg" aria-label="Ditman Cup 2027 trailer">
-        <source src="assets/trailer/trailer.mp4" type="video/mp4">
-      </video>
-    </div>
   </section>
 
   <section id="sorteo" class="tab-panel" tabindex="-1">
@@ -372,6 +380,6 @@
   </div>
 </div>
 
-<script src="js/script.js?v=20261016r"></script>
+<script src="js/script.js?v=20261016u"></script>
 </body>
 </html>
