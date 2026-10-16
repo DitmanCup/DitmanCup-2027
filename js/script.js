@@ -382,6 +382,7 @@ const I18N = {
 
     'champions.title': 'Historia',
     'champions.edition': 'Ditman Cup {year}',
+    'champions.donors': 'Donadores',
     'champions.champion': 'Campeon',
     'champions.runnerUp': 'Subcampeon',
     'champions.third': '3er puesto',
@@ -606,6 +607,7 @@ const I18N = {
 
     'champions.title': 'History',
     'champions.edition': 'Ditman Cup {year}',
+    'champions.donors': 'Donors',
     'champions.champion': 'Champion',
     'champions.runnerUp': 'Runner-up',
     'champions.third': '3rd place',
@@ -1458,6 +1460,18 @@ function pickKey(obj, names) {
 }
 
 // ======= CAMPEONES / PAST CHAMPIONS =======
+// Lista de donadores de una edicion (sale de data/donors.json, por torneo de Matcherino)
+function editionDonorsHtml(e) {
+  const src = lastDonors && (lastDonors.sources || []).find(s => String(s.startAt || '').startsWith(String(e.year)));
+  if (!src || !src.donors || !src.donors.length) return '';
+  const rows = src.donors.map((d, i) =>
+    `<li class="${i < 3 ? 'rank-' + (i + 1) : ''}"><span class="dl-rank">${i + 1}</span><span class="dl-name">${esc(d.name)}</span><span class="dl-amt">${esc(formatUSD(d.total))}</span></li>`).join('');
+  return `<details class="edition-donors" open>
+    <summary><span class="ed-d-title">${esc(t('champions.donors'))}</span><span class="ed-d-meta">${esc(src.donors.length + ' · ' + formatUSD(src.raised))}</span></summary>
+    <ol class="donor-list">${rows}</ol>
+  </details>`;
+}
+
 function renderChampions() {
   const host = document.getElementById('champions-content');
   if (!host) return;
@@ -1479,6 +1493,7 @@ function renderChampions() {
         ${spot('champions.runnerUp', e.runnerUp, 2)}
         ${spot('champions.third', e.third, 3)}
       </div>
+      ${editionDonorsHtml(e)}
       ${e.prize ? `<div class="edition-prize"><span class="prize-label">${esc(t('champions.prize'))}</span><span class="prize-amount">${esc(e.prize)}</span></div>` : ''}
       <div class="edition-actions">
         ${e.vod ? `<a class="edition-vod" href="${esc(e.vod)}" target="_blank" rel="noopener">${esc(t('champions.vod'))} ↗</a>` : ''}
@@ -1691,6 +1706,7 @@ async function loadDonors() {
     lastDonors = null;
   }
   donorsLoaded = true;
+  renderChampions();
   renderDonors();
 }
 
