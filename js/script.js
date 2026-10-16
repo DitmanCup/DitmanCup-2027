@@ -1680,11 +1680,39 @@ async function renderLive() {
 let lastDonors = null;
 let donorsLoaded = false;   // evita mostrar "error" mientras todavia esta cargando
 
+// Une donadores que son la misma persona: nombres que solo difieren en
+// mayusculas/guiones ("MajorRichy" = "Major_Richy") y alias conocidos.
+const DONOR_ALIASES = { ditmancup: 'JokerUY' };
+function donorKey(name) {
+  const k = String(name).toLowerCase().replace(/[^a-z0-9]/g, '');
+  return DONOR_ALIASES[k] ? DONOR_ALIASES[k].toLowerCase().replace(/[^a-z0-9]/g, '') : k;
+}
+function mergeDonorList(list) {
+  const map = new Map();
+  (list || []).forEach(x => {
+    const k = donorKey(x.name);
+    const alias = DONOR_ALIASES[String(x.name).toLowerCase().replace(/[^a-z0-9]/g, '')];
+    const cur = map.get(k);
+    if (!cur) { map.set(k, { name: alias || x.name, total: x.total, count: x.count, best: x.total }); return; }
+    cur.total += x.total; cur.count += x.count;
+    if (!alias && !DONOR_ALIASES[donorKey(cur.name)] && x.total > cur.best) { cur.name = x.name; cur.best = x.total; }
+  });
+  return [...map.values()].map(({ name, total, count }) => ({ name, total: Math.round(total * 100) / 100, count }))
+    .sort((a, b) => b.total - a.total || a.name.localeCompare(b.name));
+}
+function mergeDonorAliases(d) {
+  if (!d) return d;
+  d.donors = mergeDonorList(d.donors);
+  d.donorCount = d.donors.length;
+  (d.sources || []).forEach(src => { if (src.donors) { src.donors = mergeDonorList(src.donors); src.donorCount = src.donors.length; } });
+  return d;
+}
+
 async function loadDonors() {
   try {
     const res = await fetch('data/donors.json', { cache: 'no-cache' });
     if (!res.ok) throw new Error('HTTP ' + res.status);
-    lastDonors = await res.json();
+    lastDonors = mergeDonorAliases(await res.json());
   } catch (err) {
     console.error('Error cargando donadores:', err);
     lastDonors = null;
