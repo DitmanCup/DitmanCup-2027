@@ -1242,7 +1242,7 @@ body.modal-open { overflow: hidden; }
 /* --- Inicio: contenido a la izquierda, top donadores a la derecha --- */
 #inicio.home-layout.active {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 410px;
+  grid-template-columns: minmax(0, 1fr) 345px;
   grid-template-areas: "hero side" "intro side" "trailer side";
   column-gap: 2.4rem;
   align-items: start;
@@ -1314,7 +1314,7 @@ body.modal-open { overflow: hidden; }
 .donors-donate:hover { background: linear-gradient(180deg, #7dffbb, #2cd172); border-color: #d6ffe6; transform: translateY(-1px); box-shadow: 0 0 34px rgba(61, 220, 132, .65), inset 0 1px 0 rgba(255, 255, 255, .5); }
 .donors-src { margin: .9rem 0 0; color: #7fcf9f; font-family: var(--font-title); font-size: .9rem; text-align: center; }
 @media (max-width: 1100px) {
-  #inicio.home-layout.active { grid-template-columns: minmax(0, 1fr) 320px; column-gap: 1.4rem; }
+  #inicio.home-layout.active { grid-template-columns: minmax(0, 1fr) 310px; column-gap: 1.4rem; }
   .donors-card { padding: 1rem 1rem 1.2rem; }
 }
 @media (max-width: 720px) {
@@ -1363,3 +1363,80 @@ body[data-tab="inicio"] main { max-width: min(1480px, 100%); }
 .donors-thanks strong { font-family: var(--font-grunge); font-size: 2.1rem; letter-spacing: .02em; }
 .donors-thanks span { font-family: var(--font-grunge); font-size: 1.2rem; line-height: 1.45; }
 .donors-msg, .donors-total { font-family: var(--font-grunge); }
+
+/* --- Tabla de donadores: version compacta (~mitad de tamano), top 10 --- */
+.donors-card { padding: .95rem 1rem 1.05rem; margin-top: 1.2rem; }
+.donors-title { font-size: 1.5rem; margin: 0 0 .15rem; }
+.donors-total { font-size: .92rem; margin: 0 0 .55rem; }
+.donors-table { font-size: 1rem; border-spacing: 0 .2rem; }
+.donors-table th { font-size: .7rem; padding: 0 .4rem .1rem; }
+.donors-table td { padding: .3rem .4rem; }
+.donors-table td:first-child { width: 1.5rem; }
+.donors-table td.donor-name { font-size: 1.02rem; }
+.donors-table td.donor-amt { font-family: var(--font-title); font-weight: 700; font-size: 1.02rem; }
+.donors-table tr.rank-1 td, .donors-table tr.rank-2 td, .donors-table tr.rank-3 td { font-size: 1.1rem; padding-top: .42rem; padding-bottom: .42rem; }
+.donors-table tr.rank-1 td.donor-name, .donors-table tr.rank-2 td.donor-name, .donors-table tr.rank-3 td.donor-name { font-size: 1.12rem; }
+.donors-table tr.rank-1 td.donor-amt, .donors-table tr.rank-2 td.donor-amt, .donors-table tr.rank-3 td.donor-amt { font-size: 1.1rem; }
+.donors-thanks { margin-top: .75rem; padding-top: .65rem; }
+.donors-thanks strong { font-size: 1.35rem; }
+.donors-thanks span { font-size: .9rem; margin-top: .1rem; }
+.donors-donate { font-size: 1.1rem; padding: .55rem .8rem; margin-top: .7rem; }
+.donors-src { font-size: .72rem; margin-top: .55rem; }
+
+/* --- History: los dos logos con la misma altura (16:9); el de 2022 se estira un poco hacia abajo --- */
+.edition-banner img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: fill; }
+
+/* --- Clips: vista previa de cada clip --- */
+.clip-frame { overflow: hidden; padding: 0; }
+.clip-thumb { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.clip-play .clip-play-icon { z-index: 1; }
+.clip-thumb ~ .clip-play-icon {
+  inset: 50% auto auto 50%; transform: translate(-50%, -50%);
+  width: 3.4rem; height: 3.4rem; border-radius: 50%;
+  background: rgba(10, 9, 8, .72); border: 2px solid rgba(255, 255, 255, .85);
+  color: #fff; font-size: 1.5rem; padding-left: .2rem;
+  transition: transform .15s, background .15s;
+}
+.clip-play:hover .clip-thumb ~ .clip-play-icon { background: var(--accent); transform: translate(-50%, -50%) scale(1.1); }
+.clip-play::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(0, 0, 0, .55)); pointer-events: none; }
+
+/* --- Textos mas grandes y legibles (fuente del simulador) en el resto de las pestanas --- */
+body { font-size: 1.15rem; }
+.sim-rule { grid-template-columns: 10rem 1fr; gap: 1.2rem; padding: .95rem 0; }
+.sim-rule-label { font-family: var(--font-grunge); font-size: 1.3rem; letter-spacing: .04em; }
+.sim-rule-text { font-family: var(--font-grunge); font-size: 1.4rem; line-height: 1.45; color: var(--text); }
+.sim-proposal { font-family: var(--font-grunge); font-size: 1.15rem; }
+@media (max-width: 560px) { .sim-rule { grid-template-columns: 1fr; } }
+.section-note, .loading-msg { font-family: var(--font-grunge); font-size: 1.25rem; }
+.block-head p { font-family: var(--font-grunge); font-size: 1.25rem; }
+.block-badge { font-size: 1rem; }
+.round-title { font-size: 1.1rem; }
+.match-num { font-size: .95rem; }
+.clip-title { font-family: var(--font-grunge); font-size: 1.3rem; }
+.clip-meta { font-family: var(--font-grunge); font-size: 1.1rem; }
+.podium-role, .prize-label { font-family: var(--font-grunge); font-size: 1.1rem; }
+.podium-name { font-size: 1.35rem; }
+.team-role { font-family: var(--font-grunge); font-size: 1.15rem; }
+.edition-vod, .edition-data-btn { font-family: var(--font-grunge); font-size: 1.1rem; }
+.live-status, .live-game, .live-badge { font-family: var(--font-grunge); font-size: 1.08rem; }
+.sim-log-line, .sim-log-group-label, .sim-legend { font-size: 1.15rem; }
+.sim-groups th, #sim-ranking-table th { font-size: 1.02rem; }
+.sim-seed-tag { font-size: 1.02rem; }
+.cd-lbl, .fact-label { font-size: 1.15rem; }
+.donors-msg { font-size: 1rem; }
+.sched-day-note, .sched-tz { font-size: 1.15rem; }
+.donors-table { table-layout: fixed; }
+.donors-table th:first-child { width: 1.9rem; }
+.donors-table th:last-child { width: 4.6rem; }
+.donors-table td.donor-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; overflow-wrap: normal; }
+.donors-table td { padding-left: .3rem; padding-right: .3rem; }
+.donors-table tr.rank-1 td.donor-name, .donors-table tr.rank-2 td.donor-name, .donors-table tr.rank-3 td.donor-name { font-size: 1.04rem; }
+.donors-card { line-height: 1.2; }
+.donors-table { border-spacing: 0 .16rem; }
+.donors-table td { padding-top: .2rem; padding-bottom: .2rem; }
+.donors-table tr.rank-1 td, .donors-table tr.rank-2 td, .donors-table tr.rank-3 td { padding-top: .32rem; padding-bottom: .32rem; }
+.donors-table td.donor-name { font-size: .98rem; letter-spacing: 0; }
+.donors-table tr.rank-1 td.donor-name, .donors-table tr.rank-2 td.donor-name, .donors-table tr.rank-3 td.donor-name { font-size: 1rem; }
+.donors-thanks span { line-height: 1.25; }
+.donors-table th:last-child { width: 3.7rem; }
+.donors-table th:first-child { width: 1.6rem; }

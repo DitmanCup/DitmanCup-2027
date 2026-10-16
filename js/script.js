@@ -104,6 +104,7 @@ const PAST_EDITIONS = [
   },
   {
     year: 2022,
+    name: 'NG Pro Tournament 2022',
     champion: 'Yuushi',
     runnerUp: 'shimarisu',
     third: 'Sawken',
@@ -180,7 +181,7 @@ const CLIPS = [
     { s: 'TiredShinyFoxSoBayed-nxJfkTKgd96KLv5b', t: 'CREEPYPASTA CABINS', a: 'JokerUY', v: 14, d: '2026-02-09' },
     { s: 'SparklingRelentlessCucumberDoggo-nb2utcMzgCIPBo1X', t: 'mateo mufa', a: 'JokerUY', v: 13, d: '2026-02-07' },
   ] },
-  { section: '2022 Tournament', items: [
+  { section: 'NG Pro Tournament 2022', items: [
     { s: 'TenuousFancyYakinikuLitFam-en79hrjrsVnDO973', t: 'u3 warp?', a: 'eidenfir', v: 362, d: '2022-03-20' },
     { s: 'CogentEnjoyableReubenMVGame-lt1c4ETva9t3cJqp', t: 'Mom IRL RNG', a: 'eidenfir', v: 215, d: '2022-03-05' },
     { s: 'GrossSpotlessJellyfishDxAbomb-YprCYwmP7EPAwfCJ', t: 'biggest combo in history', a: 'sawkenn', v: 199, d: '2022-02-23' },
@@ -305,7 +306,7 @@ const I18N = {
     'donors.src': 'Fuente: Matcherino · ediciones {years}',
     'donors.thanks': 'Gracias!',
     'donors.thanksGeneric': 'Gracias a todos los que apoyaron la Ditman Cup.',
-    'donors.thanksSub': 'Gracias a nuestros {n} donadores por apoyar la Ditman Cup. Sin ustedes esto no seria posible.',
+    'donors.thanksSub': 'Gracias a nuestros {n} donadores por apoyar la Ditman Cup.',
     'visits.label': 'Visitas a la pagina',
 
     'grupos.title': 'Fase de grupos',
@@ -517,7 +518,7 @@ const I18N = {
     'donors.src': 'Source: Matcherino · {years} editions',
     'donors.thanks': 'Thank you!',
     'donors.thanksGeneric': 'Thank you to every donor who has supported the Ditman Cup.',
-    'donors.thanksSub': 'Thank you to our {n} donors for supporting the Ditman Cup. This would not be possible without you.',
+    'donors.thanksSub': 'Thank you to our {n} donors for supporting the Ditman Cup.',
     'visits.label': 'Page visits',
 
     'grupos.title': 'Group stage',
@@ -1441,9 +1442,9 @@ function renderChampions() {
 
   const editions = PAST_EDITIONS.map(e => `
     <article class="edition">
-      ${e.logo ? `<div class="edition-banner"><img src="${esc(e.logo)}" alt="Ditman Cup ${esc(e.year)}" loading="lazy"></div>` : ''}
+      ${e.logo ? `<div class="edition-banner"><img src="${esc(e.logo)}" alt="${esc(e.name || 'Ditman Cup ' + e.year)}" loading="lazy"></div>` : ''}
       <div class="edition-head">
-        <h3 class="edition-year">${esc(t('champions.edition', { year: e.year }))}</h3>
+        <h3 class="edition-year">${esc(e.name || t('champions.edition', { year: e.year }))}</h3>
       </div>
       <div class="podium">
         ${spot('champions.champion', e.champion, 1)}
@@ -1453,7 +1454,7 @@ function renderChampions() {
       ${e.prize ? `<div class="edition-prize"><span class="prize-label">${esc(t('champions.prize'))}</span><span class="prize-amount">${esc(e.prize)}</span></div>` : ''}
       <div class="edition-actions">
         ${e.vod ? `<a class="edition-vod" href="${esc(e.vod)}" target="_blank" rel="noopener">${esc(t('champions.vod'))} ↗</a>` : ''}
-        ${e.sheetUrl ? `<button type="button" class="edition-data-btn" data-sheet-url="${esc(e.sheetUrl)}" data-sheet-title="${esc(t('champions.edition', { year: e.year }))}">${esc(t('champions.viewData'))}</button>` : ''}
+        ${e.sheetUrl ? `<button type="button" class="edition-data-btn" data-sheet-url="${esc(e.sheetUrl)}" data-sheet-title="${esc(e.name || t('champions.edition', { year: e.year }))}">${esc(t('champions.viewData'))}</button>` : ''}
       </div>
     </article>`).join('');
 
@@ -1548,6 +1549,7 @@ function renderClips() {
         const meta = [author && ('by ' + author), c.d, c.v != null && (c.v + ' views')].filter(Boolean).join(' · ');
         return `<figure class="clip">
           <button class="clip-frame clip-play" type="button" data-clip='${esc(JSON.stringify({ s: c.s || '', url: c.url || '' }))}' aria-label="${esc(title || 'clip')}">
+            ${c.s ? `<img class="clip-thumb" src="assets/clips/${esc(c.s)}.jpg" alt="" loading="lazy" onerror="this.remove()">` : ''}
             <span class="clip-play-icon" aria-hidden="true">▶</span>
           </button>
           <figcaption><span class="clip-title">${esc(title)}</span>${meta ? `<span class="clip-meta">${esc(meta)}</span>` : ''}</figcaption>
