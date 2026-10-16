@@ -451,10 +451,12 @@ const I18N = {
     'sim.moveDown': '<span class="sim-move-down">▼</span> <b>{name}</b> desciende a Grupo {group} — peor tiempo del grupo ({time})',
     'sim.boundaryLabel': 'Frontera Grupo {a} / Grupo {b}',
     'sim.bracketTitle': 'Octavos de Final',
-    'sim.wbTitle': 'Cuadro de ganadores — jugalo',
-    'sim.wbNote': 'Carreras BO1, igual que en grupos: gana el mejor tiempo y avanza.',
+    'sim.wbTitle': 'Doble eliminacion — jugala',
+    'sim.wbNote': 'Carreras BO1, igual que en grupos: gana el mejor tiempo. Si perdes una vez bajas al cuadro de perdedores; si perdes de nuevo, quedas eliminado.',
     'sim.btnWbNext': 'Jugar {round}',
-    'sim.wbDone': 'Cuadro de ganadores terminado',
+    'sim.wbDone': 'Torneo terminado',
+    'sim.btnWbEverything': 'Jugar todo hasta la Gran Final',
+    'sim.champion': 'Campeon de la Ditman Cup',
     'sim.btnWbAll': 'Jugar hasta la final de ganadores',
     'sim.btnWbReset': 'Reiniciar resultados',
     'sim.wbChamp': 'Campeon del cuadro de ganadores — directo a la Gran Final',
@@ -676,10 +678,12 @@ const I18N = {
     'sim.moveDown': '<span class="sim-move-down">▼</span> <b>{name}</b> moves down to Group {group} — group\'s worst time ({time})',
     'sim.boundaryLabel': 'Group {a} / Group {b} boundary',
     'sim.bracketTitle': 'Round of 16',
-    'sim.wbTitle': 'Winners Bracket — play it',
-    'sim.wbNote': 'BO1 races, same as the groups: the best time wins and moves on.',
+    'sim.wbTitle': 'Double elimination — play it',
+    'sim.wbNote': 'BO1 races, same as the groups: the best time wins. Lose once and you drop to the Losers Bracket; lose again and you are out.',
     'sim.btnWbNext': 'Play {round}',
-    'sim.wbDone': 'Winners Bracket finished',
+    'sim.wbDone': 'Tournament finished',
+    'sim.btnWbEverything': 'Play everything to the Grand Final',
+    'sim.champion': 'Ditman Cup champion',
     'sim.btnWbAll': 'Play to the Winners Final',
     'sim.btnWbReset': 'Reset results',
     'sim.wbChamp': 'Winners Bracket champion — straight to the Grand Final',
@@ -2146,29 +2150,38 @@ function simRenderBracket() {
   simRenderWB();
 }
 
-// ======= WINNERS BRACKET JUGABLE (Octavos -> Cuartos -> Semis -> Final de ganadores) =======
-// Despues del sorteo de Octavos se juegan las rondas con carreras BO1 (mismo
-// modelo que la fase de grupos: gana el mejor tiempo). El campeon del cuadro
-// de ganadores pasaria directo a la Gran Final; el cuadro de perdedores y la
-// Gran Final todavia no se simulan.
+// ======= BRACKET JUGABLE: doble eliminacion completa =======
+// Despues del sorteo de Octavos se juega todo el cuadro con carreras BO1 (mismo
+// modelo que la fase de grupos): cuadro de ganadores, cuadro de perdedores y
+// Gran Final (una sola partida, sin "reset"). Se usa el mismo modelo que el
+// Bracket real (buildDoubleElim) y las rondas se juegan en este orden:
+// R16, LR1, Cuartos, LR2, LR3, Semis, LR4, LR5, Final de ganadores, LR6, Gran Final.
 let simWB = null;
-const SIM_WB_STARTS = [0, 8, 12, 14];   // numero de partida previo a cada ronda (M1..M15)
+const SIM_WB_STEPS = 11;
 
 function simInitWB() {
-  const first = simBracketSeeds.map((s, idx) => ({ a: s.runner, b: simBracketAssignments[idx], seedA: s.seedNum, winner: null, tA: null, tB: null }));
-  simWB = { rounds: [first], played: 0 };
-  [4, 2, 1].forEach(n => simWB.rounds.push(Array.from({ length: n }, () => ({ a: null, b: null, winner: null, tA: null, tB: null }))));
+  const model = buildDoubleElim(16);
+  const r16 = simBracketSeeds.map((s, idx) => ({ a: s.runner, b: simBracketAssignments[idx], seedA: s.seedNum }));
+  const { wb, lb, gf } = model;
+  simWB = { model, r16, res: {}, step: 0, steps: [wb[0], lb[0], wb[1], lb[1], lb[2], wb[2], lb[3], lb[4], wb[3], lb[5], [gf]] };
 }
 
-function simWBPlayRound() {
-  if (!simWB || simWB.played >= 4) return;
-  const r = simWB.played;
-  simWB.rounds[r].forEach(m => {
-    const res = simRace(m.a, m.b);
-    m.winner = res.winner; m.tA = res.timeA; m.tB = res.timeB;
+function simWBResolve(ref) {
+  const r = simWB.res[ref.w || ref.l];
+  return r ? (ref.w ? r.winner : r.loser) : null;
+}
+function simWBPlayers(m) {
+  if (m.kind === 'w' && m.round === 0) return [simWB.r16[m.idx].a, simWB.r16[m.idx].b];
+  return m.refs.map(simWBResolve);
+}
+function simWBPlayStep() {
+  if (!simWB || simWB.step >= SIM_WB_STEPS) return;
+  simWB.steps[simWB.step].forEach(m => {
+    const [a, b] = simWBPlayers(m);
+    const race = simRace(a, b);
+    simWB.res[m.n] = { winner: race.winner, loser: race.winner === a ? b : a, tA: race.timeA, tB: race.timeB };
   });
-  simWB.played++;
-  if (r < 3) simWB.rounds[r + 1].forEach((m, i) => { m.a = simWB.rounds[r][2 * i].winner; m.b = simWB.rounds[r][2 * i + 1].winner; });
+  simWB.step++;
 }
 
 function simRenderWB() {
@@ -2179,48 +2192,60 @@ function simRenderWB() {
   if (!simWB) simInitWB();
   host.hidden = false;
 
-  const done = simWB.played >= 4;
-  const roundTitles = [roundName(16), roundName(8), roundName(4), t('bracket.round.winnersFinal')];
-  simWBLinks = [];
-  const slot = (m, side, r, i) => {
-    const p = m[side];
-    if (!p) return `<div class="slot is-ref"><span class="slot-name">${esc(t('bracket.winnerOf', { n: SIM_WB_STARTS[r - 1] + 2 * i + (side === 'a' ? 1 : 2) }))}</span></div>`;
-    const played = m.winner != null;
-    const cls = played ? (m.winner === p ? ' is-win' : ' is-lose') : '';
-    const time = played ? (side === 'a' ? m.tA : m.tB) : null;
-    const seed = r === 0 && side === 'a' ? `<span class="slot-seed">${m.seedA}</span>` : '';
+  const { model, res } = simWB;
+  const lr = n => t('bracket.lr', { n });
+  const wbTitles = [roundName(16), roundName(8), roundName(4), t('bracket.round.winnersFinal')];
+  const lbTitle = r => r === 5 ? t('bracket.losersFinal') : r === 4 ? t('bracket.losersSemi') : lr(r + 1);
+  const stepTitles = [wbTitles[0], lr(1), wbTitles[1], lr(2), lr(3), wbTitles[2], lr(4), t('bracket.losersSemi'), wbTitles[3], t('bracket.losersFinal'), t('bracket.grandFinal')];
+  const done = simWB.step >= SIM_WB_STEPS;
+
+  const slot = (m, i) => {
+    const p = simWBPlayers(m)[i];
+    if (!p) {
+      const ref = m.refs[i];
+      return `<div class="slot is-ref"><span class="slot-name">${esc(t(ref.w ? 'bracket.winnerOf' : 'bracket.loserOf', { n: ref.w || ref.l }))}</span></div>`;
+    }
+    const r = res[m.n];
+    const cls = r ? (r.winner === p ? ' is-win' : ' is-lose') : '';
+    const time = r ? (i === 0 ? r.tA : r.tB) : null;
+    const seed = m.kind === 'w' && m.round === 0 && i === 0 ? `<span class="slot-seed">${simWB.r16[m.idx].seedA}</span>` : '';
     return `<div class="slot${cls}">${seed}<span class="slot-name">${nameWithFlag(p.name)}</span>${time != null ? `<span class="slot-time">${esc(simFormatRaceTime(time))}</span>` : ''}</div>`;
   };
-  const rounds = simWB.rounds.map((ms, r) => {
-    const cards = ms.map((m, i) => {
-      const id = `s${r}-${i}`;
-      if (r < 3) simWBLinks.push([id, `s${r + 1}-${Math.floor(i / 2)}`, 'w']);
-      return `<div class="match is-w" data-mid="${id}"><span class="match-num">M${SIM_WB_STARTS[r] + i + 1}</span>${slot(m, 'a', r, i)}${slot(m, 'b', r, i)}</div>`;
-    }).join('');
-    return `<div class="round"><div class="round-title">${esc(roundTitles[r])}</div><div class="round-inner">${cards}</div></div>`;
-  }).join('');
+  const card = m => `<div class="match is-${m.kind}" data-mid="${m.id}"><span class="match-num">M${m.n}</span>${slot(m, 0)}${slot(m, 1)}</div>`;
+  const round = (title, ms) => `<div class="round"><div class="round-title">${esc(title)}</div><div class="round-inner">${ms.map(card).join('')}</div></div>`;
 
-  const champ = done ? simWB.rounds[3][0].winner : null;
+  simWBLinks = model.links;
+  const wbHtml = model.wb.map((ms, r) => round(wbTitles[r], ms)).join('');
+  const lbHtml = model.lb.map((ms, r) => round(lbTitle(r), ms)).join('');
+  const gfRes = res[model.gf.n];
+  const wbFinalRes = res[model.wb[3][0].n];
+  const champ = gfRes ? gfRes.winner : null;
+  const wbChamp = !champ && wbFinalRes ? wbFinalRes.winner : null;
+
   host.innerHTML = `
     <h3 class="sim-wb-title">${esc(t('sim.wbTitle'))}</h3>
     <p class="section-note">${esc(t('sim.wbNote'))}</p>
     <div class="sim-controls">
-      <button type="button" class="btn-sim btn-sim-primary" id="sim-btn-wb-next"${done ? ' disabled' : ''}>${esc(done ? t('sim.wbDone') : t('sim.btnWbNext', { round: roundTitles[simWB.played] }))}</button>
-      <button type="button" class="btn-sim" id="sim-btn-wb-all"${done ? ' disabled' : ''}>${esc(t('sim.btnWbAll'))}</button>
+      <button type="button" class="btn-sim btn-sim-primary" id="sim-btn-wb-next"${done ? ' disabled' : ''}>${esc(done ? t('sim.wbDone') : t('sim.btnWbNext', { round: stepTitles[simWB.step] }))}</button>
+      <button type="button" class="btn-sim" id="sim-btn-wb-wf"${simWB.step >= 9 ? ' disabled' : ''}>${esc(t('sim.btnWbAll'))}</button>
+      <button type="button" class="btn-sim" id="sim-btn-wb-all"${done ? ' disabled' : ''}>${esc(t('sim.btnWbEverything'))}</button>
       <button type="button" class="btn-sim btn-sim-ghost" id="sim-btn-wb-reset">${esc(t('sim.btnWbReset'))}</button>
     </div>
     <div class="bracket-scroll"><div class="bracket-canvas" id="sim-wb-canvas">
       <svg class="bracket-lines" aria-hidden="true"></svg>
-      <div class="bracket-stack"><section class="bracket-section is-winners">
-        <h3 class="bracket-heading">${esc(t('bracket.winners'))}</h3>
-        <div class="bracket-rounds">${rounds}</div>
-      </section></div>
+      <div class="bracket-stack">
+        <section class="bracket-section is-winners"><h3 class="bracket-heading">${esc(t('bracket.winners'))}</h3><div class="bracket-rounds">${wbHtml}</div></section>
+        <section class="bracket-section is-losers"><h3 class="bracket-heading">${esc(t('bracket.losers'))}</h3><div class="bracket-rounds">${lbHtml}</div></section>
+      </div>
+      <div class="bracket-gf">${round(t('bracket.grandFinal'), [model.gf])}</div>
     </div></div>
-    ${champ ? `<p class="sim-wb-champ"><span>${esc(t('sim.wbChamp'))}</span><strong>${nameWithFlag(champ.name)}</strong></p>` : ''}`;
+    ${champ ? `<p class="sim-wb-champ"><span>${esc(t('sim.champion'))}</span><strong>${nameWithFlag(champ.name)}</strong></p>`
+      : wbChamp ? `<p class="sim-wb-champ"><span>${esc(t('sim.wbChamp'))}</span><strong>${nameWithFlag(wbChamp.name)}</strong></p>` : ''}`;
 
   const on = (id, fn) => { const el = document.getElementById(id); if (el) el.addEventListener('click', fn); };
-  on('sim-btn-wb-next', () => { simWBPlayRound(); simRenderWB(); });
-  on('sim-btn-wb-all', () => { while (simWB.played < 4) simWBPlayRound(); simRenderWB(); });
+  on('sim-btn-wb-next', () => { simWBPlayStep(); simRenderWB(); });
+  on('sim-btn-wb-wf', () => { while (simWB.step < 9) simWBPlayStep(); simRenderWB(); });
+  on('sim-btn-wb-all', () => { while (simWB.step < SIM_WB_STEPS) simWBPlayStep(); simRenderWB(); });
   on('sim-btn-wb-reset', () => { simInitWB(); simRenderWB(); });
   drawSimWBLines();
   requestAnimationFrame(drawSimWBLines);
