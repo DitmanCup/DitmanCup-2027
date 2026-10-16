@@ -249,7 +249,7 @@ const YOUTUBE_LIVE_CHANNELS = [
 const I18N = {
   es: {
     'nav.inicio': 'Inicio',
-    'nav.sorteo': '2027',
+    'nav.sorteo': 'Calendario',
     'nav.torneo': 'Torneo',
     'intro.t1': 'Calendario',
     'nav.grupos': 'Grupos',
@@ -284,7 +284,7 @@ const I18N = {
     'intro.d3': 'Doble eliminacion hasta la final',
     'intro.d4': 'Proba el formato vos mismo',
 
-    'sorteo.title': 'Ditman Cup 2027',
+    'sorteo.title': 'Calendario',
     'sorteo.r1.l': 'Que se sortea',
     'sorteo.r1.t': 'No los grupos: los cruces. Tu grupo sale del ranking de clasificatorias y el sorteo define contra quien jugas dentro de el.',
     'sorteo.r2.l': 'Cuando',
@@ -323,7 +323,7 @@ const I18N = {
     'group.directNote': 'Clasificaron directo desde las clasificatorias: entran al cuadro en Octavos de Final.',
     'group.stageBadge': 'Fase de grupos',
     'group.stageTitle': '24 corredores · 3 grupos de 8',
-    'group.stageNote': 'Ellos si juegan: los cruces se sortean dentro de cada grupo (ver la pestaña 2027).',
+    'group.stageNote': 'Ellos si juegan: los cruces se sortean dentro de cada grupo (ver Torneo > Calendario).',
 
     'brackets.title': 'Brackets',
     'brackets.placeholder': 'El cuadro de eliminacion se arma una vez cerrada la fase de grupos.',
@@ -476,7 +476,7 @@ const I18N = {
   },
   en: {
     'nav.inicio': 'Home',
-    'nav.sorteo': '2027',
+    'nav.sorteo': 'Schedule',
     'nav.torneo': 'Tournament',
     'intro.t1': 'Schedule',
     'nav.grupos': 'Groups',
@@ -511,7 +511,7 @@ const I18N = {
     'intro.d3': 'Double elimination to the final',
     'intro.d4': 'Play through the format yourself',
 
-    'sorteo.title': 'Ditman Cup 2027',
+    'sorteo.title': 'Schedule',
     'sorteo.r1.l': 'What is drawn',
     'sorteo.r1.t': 'Not the groups: the matchups. Your group comes from the qualifier ranking and the draw decides who you face inside it.',
     'sorteo.r2.l': 'When',
@@ -550,7 +550,7 @@ const I18N = {
     'group.directNote': 'Qualified straight from the qualifiers: they enter the bracket at the Round of 16.',
     'group.stageBadge': 'Group stage',
     'group.stageTitle': '24 runners · 3 groups of 8',
-    'group.stageNote': 'These are the ones playing: matchups are drawn inside each group (see the 2027 tab).',
+    'group.stageNote': 'These are the ones playing: matchups are drawn inside each group (see Tournament > Schedule).',
 
     'brackets.title': 'Bracket',
     'brackets.placeholder': 'The knockout bracket goes live once the group stage is finalized.',
