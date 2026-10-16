@@ -357,7 +357,7 @@ const I18N = {
     'don.btn': 'Donar',
     'don.pool.title': 'Prize pool y gastos del torneo',
     'don.me.title': 'Apoyame a mi',
-    'don.me.body': 'Esto es totalmente opcional, pero si te gusta la pagina y queres invitarme un cafe, se aprecia un monton. Gracias por ser parte de esta comunidad!',
+    'don.me.body': 'Esto es totalmente opcional, pero si te gusta la pagina y queres apoyarme directamente, se aprecia un monton. Gracias por ser parte de esta comunidad!',
     'don.me.btn': 'Donar a JokerUY',
 
     'org.title': 'Organizacion y staff',
@@ -582,7 +582,7 @@ const I18N = {
     'don.btn': 'Donate',
     'don.pool.title': 'Prize pool & tournament costs',
     'don.me.title': 'Support me',
-    'don.me.body': 'This one is completely optional, but if you like the website and want to buy me a coffee, it is truly appreciated. Thank you for being part of this community!',
+    'don.me.body': 'This one is completely optional, but if you like the website and want to support me directly, it is truly appreciated. Thank you for being part of this community!',
     'don.me.btn': 'Donate to JokerUY',
 
     'org.title': 'Organizers & staff',
