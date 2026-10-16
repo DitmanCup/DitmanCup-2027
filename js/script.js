@@ -1642,6 +1642,7 @@ async function renderLive() {
 // data/donors.json lo arma .github/workflows/update-donors.yml (la API de
 // Matcherino no se puede leer directo desde el navegador por CORS).
 let lastDonors = null;
+let donorsLoaded = false;   // evita mostrar "error" mientras todavia esta cargando
 
 async function loadDonors() {
   try {
@@ -1652,6 +1653,7 @@ async function loadDonors() {
     console.error('Error cargando donadores:', err);
     lastDonors = null;
   }
+  donorsLoaded = true;
   renderDonors();
 }
 
@@ -1668,6 +1670,7 @@ function renderDonors() {
   const msg = document.getElementById('donors-msg');
   const total = document.getElementById('donors-total');
   const src = document.getElementById('donors-src');
+  if (!donorsLoaded) { msg.textContent = t('donors.loading'); return; }
   const d = lastDonors;
   if (!d || !Array.isArray(d.donors) || !d.donors.length) {
     table.hidden = true; total.hidden = true; src.hidden = true; msg.hidden = false;
