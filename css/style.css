@@ -1505,3 +1505,19 @@ body { font-size: 1.15rem; }
 
 .footer-credit { text-align: center; margin: .5rem 0 0; font-family: var(--font-grunge); font-size: 1.05rem; color: var(--text-muted); letter-spacing: .02em; }
 .footer-credit strong { color: var(--accent-2); font-weight: 700; }
+
+/* ===== Donations: dos apartados, fuente grunge (como "Moderator") ===== */
+.donations-wrap { display: grid; gap: 1.5rem; max-width: 560px; margin: 0 auto; }
+.donations-wrap .donations-box {
+  max-width: none; margin: 0; padding: 1.4rem 1.5rem;
+  border: 1px solid var(--border, #333); border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  font-family: var(--font-grunge); font-size: 1.25rem; line-height: 1.5;
+}
+.donations-wrap .donations-box p { margin: 0 0 1.1rem; }
+.donations-wrap .don-sub {
+  margin: 0 0 .7rem; font-family: var(--font-grunge); font-size: 1.7rem;
+  font-weight: normal; letter-spacing: .03em; color: var(--gold, #e0b040);
+}
+.donations-wrap .donate-btn { font-family: var(--font-grunge); font-size: 1.3rem; }
+.donations-personal { border-style: dashed; }

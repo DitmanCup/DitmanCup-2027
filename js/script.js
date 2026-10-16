@@ -249,11 +249,10 @@ const YOUTUBE_LIVE_CHANNELS = [
 const I18N = {
   es: {
     'nav.inicio': 'Inicio',
-    'nav.sorteo': 'Sorteo y calendario',
+    'nav.sorteo': 'Calendario',
     'nav.grupos': 'Grupos',
     'nav.brackets': 'Brackets',
     'nav.simulations': 'Simulaciones',
-    'nav.clasificatorias': 'Clasificatorias',
     'nav.champions': 'Historia',
     'nav.clips': 'Clips',
     'nav.live': 'En vivo',
@@ -281,9 +280,9 @@ const I18N = {
     'intro.d1': 'Contra quien jugas y cuando',
     'intro.d2': 'Top 8 directo + 24 en 3 grupos',
     'intro.d3': 'Doble eliminacion hasta la final',
-    'intro.d4': 'Tiempos y resultados de las qualys',
+    'intro.d4': 'Proba el formato vos mismo',
 
-    'sorteo.title': 'Sorteo y calendario',
+    'sorteo.title': 'Calendario',
     'sorteo.r1.l': 'Que se sortea',
     'sorteo.r1.t': 'No los grupos: los cruces. Tu grupo sale del ranking de clasificatorias y el sorteo define contra quien jugas dentro de el.',
     'sorteo.r2.l': 'Cuando',
@@ -322,7 +321,7 @@ const I18N = {
     'group.directNote': 'Clasificaron directo desde las clasificatorias: entran al cuadro en Octavos de Final.',
     'group.stageBadge': 'Fase de grupos',
     'group.stageTitle': '24 corredores · 3 grupos de 8',
-    'group.stageNote': 'Ellos si juegan: los cruces se sortean dentro de cada grupo (ver Sorteo y calendario).',
+    'group.stageNote': 'Ellos si juegan: los cruces se sortean dentro de cada grupo (ver Calendario).',
 
     'brackets.title': 'Brackets',
     'brackets.placeholder': 'El cuadro de eliminacion se arma una vez cerrada la fase de grupos.',
@@ -347,10 +346,6 @@ const I18N = {
     'bracket.winnerOf': 'Ganador M{n}',
     'bracket.loserOf': 'Perdedor M{n}',
 
-    'clas.title': 'Clasificatorias y placements',
-    'clas.empty': 'Todavia no hay clasificacion cargada.',
-    'clas.sheetError': 'No se pudo cargar la Sheet de clasificacion.',
-    'clas.noData': 'Sin datos todavia.',
     'clas.col.pos': 'Pos',
     'clas.col.runner': 'Corredor',
     'clas.col.group': 'Grupo',
@@ -360,6 +355,10 @@ const I18N = {
     'don.title': 'Donaciones',
     'don.body': 'La Ditman Cup se sostiene gracias a la comunidad. Si queres colaborar con los premios y los gastos del torneo, podes hacerlo aca:',
     'don.btn': 'Donar',
+    'don.pool.title': 'Prize pool y gastos del torneo',
+    'don.me.title': 'Apoyame a mi',
+    'don.me.body': 'Esto es totalmente opcional, pero si te gusta la pagina y queres invitarme un cafe, se aprecia un monton. Gracias por ser parte de esta comunidad!',
+    'don.me.btn': 'Donar a JokerUY',
 
     'org.title': 'Organizacion y staff',
     'org.tier.organizers': 'Organizadores',
@@ -475,11 +474,10 @@ const I18N = {
   },
   en: {
     'nav.inicio': 'Home',
-    'nav.sorteo': 'Draw & Schedule',
+    'nav.sorteo': 'Schedule',
     'nav.grupos': 'Groups',
     'nav.brackets': 'Bracket',
     'nav.simulations': 'Simulations',
-    'nav.clasificatorias': 'Standings',
     'nav.champions': 'History',
     'nav.clips': 'Clips',
     'nav.live': 'Live',
@@ -507,9 +505,9 @@ const I18N = {
     'intro.d1': 'Who you face, and when',
     'intro.d2': 'Top 8 direct + 24 in 3 groups',
     'intro.d3': 'Double elimination to the final',
-    'intro.d4': 'Qualifier times and results',
+    'intro.d4': 'Play through the format yourself',
 
-    'sorteo.title': 'Draw & Schedule',
+    'sorteo.title': 'Schedule',
     'sorteo.r1.l': 'What is drawn',
     'sorteo.r1.t': 'Not the groups: the matchups. Your group comes from the qualifier ranking and the draw decides who you face inside it.',
     'sorteo.r2.l': 'When',
@@ -548,7 +546,7 @@ const I18N = {
     'group.directNote': 'Qualified straight from the qualifiers: they enter the bracket at the Round of 16.',
     'group.stageBadge': 'Group stage',
     'group.stageTitle': '24 runners · 3 groups of 8',
-    'group.stageNote': 'These are the ones playing: matchups are drawn inside each group (see Draw & Schedule).',
+    'group.stageNote': 'These are the ones playing: matchups are drawn inside each group (see Schedule).',
 
     'brackets.title': 'Bracket',
     'brackets.placeholder': 'The knockout bracket goes live once the group stage is finalized.',
@@ -573,10 +571,6 @@ const I18N = {
     'bracket.winnerOf': 'Winner M{n}',
     'bracket.loserOf': 'Loser M{n}',
 
-    'clas.title': 'Standings & placements',
-    'clas.empty': 'No standings loaded yet.',
-    'clas.sheetError': 'Could not load the standings Sheet.',
-    'clas.noData': 'No data yet.',
     'clas.col.pos': 'Pos',
     'clas.col.runner': 'Runner',
     'clas.col.group': 'Group',
@@ -586,6 +580,10 @@ const I18N = {
     'don.title': 'Donations',
     'don.body': 'The Ditman Cup runs on community support. If you want to chip in for the prize pool and tournament costs, you can do it here:',
     'don.btn': 'Donate',
+    'don.pool.title': 'Prize pool & tournament costs',
+    'don.me.title': 'Support me',
+    'don.me.body': 'This one is completely optional, but if you like the website and want to buy me a coffee, it is truly appreciated. Thank you for being part of this community!',
+    'don.me.btn': 'Donate to JokerUY',
 
     'org.title': 'Organizers & staff',
     'org.tier.organizers': 'Organizers',
@@ -847,7 +845,6 @@ function applyLang(lang) {
   }
   if (lastGroupsRows) renderGroups(lastGroupsRows, document.getElementById('groups-grid'));
   else document.getElementById('groups-grid').innerHTML = placeholderGroups();
-  if (lastStandingsRows) renderStandings(lastStandingsRows, document.getElementById('standings-table'));
   renderBracket();
   renderSchedule();
   renderDonors();
@@ -1190,58 +1187,20 @@ function mockScheduleRows() {
 
 // ======= CLASIFICACIÓN / STANDINGS =======
 async function loadStandings() {
-  const container = document.getElementById('standings-table');
-
   if (isMock()) {
     lastStandingsRows = mockStandingsRows();
     indexFlags(lastStandingsRows);
-    renderStandings(lastStandingsRows, container);
     return;
   }
-  if (!SHEET_URLS.standings) return; // se queda con el mensaje por defecto del HTML
+  if (!SHEET_URLS.standings) return;
   try {
     const rows = await fetchCSV(SHEET_URLS.standings);
     lastStandingsRows = rows;
     indexFlags(rows);
-    renderStandings(rows, container);
     renderBracket();
   } catch (err) {
     console.error('Error cargando clasificación:', err);
-    container.innerHTML = '<p class="loading-msg">' + esc(t('clas.sheetError')) + '</p>';
   }
-}
-
-function renderStandings(rows, container) {
-  // Descartar filas que solo tienen el nº de ranking (sheet vacía todavía)
-  const meaningful = r => Object.entries(r).some(([k, v]) =>
-    String(v).trim() !== '' && !/^(rank|#|pos|posici[oó]n)$/i.test(k.trim()));
-  rows = (rows || []).filter(meaningful);
-
-  if (!rows.length) {
-    container.innerHTML = '<p class="loading-msg">' + esc(t('clas.noData')) + '</p>';
-    return;
-  }
-  const headers = Object.keys(rows[0]);
-  const isFlagCol = h => /^(flag|bandera|pa[ií]s|country)$/i.test(h);
-  const isRunnerCol = h => /^(runner|corredor|nombre|player|jugador)$/i.test(h);
-
-  const cell = (r, h) => {
-    const v = r[h];
-    if (isFlagCol(h)) { const c = flagCode(v); return c ? flagSpan(c) : esc(v); }
-    if (isRunnerCol(h)) return nameWithFlag(v);
-    return esc(v);
-  };
-
-  container.innerHTML = `
-    <table>
-      <thead><tr>${headers.map(h => `<th>${esc(h)}</th>`).join('')}</tr></thead>
-      <tbody>
-        ${rows.map(r => `<tr>${headers.map(h =>
-          `<td class="${!isFlagCol(h) && !isRunnerCol(h) && r[h] !== '' && !isNaN(r[h]) ? 'num' : ''}">${cell(r, h)}</td>`
-        ).join('')}</tr>`).join('')}
-      </tbody>
-    </table>
-  `;
 }
 
 // ======= BRACKET / CUADRO DE ELIMINACIÓN (DOBLE ELIMINACIÓN) =======

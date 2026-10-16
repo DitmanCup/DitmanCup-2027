@@ -7,7 +7,7 @@
 <title>Ditman Cup 2027</title>
 <meta name="description" content="Ditman Cup 2027 — community Resident Evil 4 speedrunning tournament. / Torneo comunitario de speedrunning de RE4.">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/7.2.3/css/flag-icons.min.css">
-<link rel="stylesheet" href="css/style.css?v=20261017h">
+<link rel="stylesheet" href="css/style.css?v=20261017i">
 </head>
 <body data-tab="inicio">
 
@@ -34,11 +34,10 @@
 
     <nav class="tabs" id="tabs" aria-label="Sections">
       <button class="tab-btn active" data-tab="inicio" data-i18n="nav.inicio">Home</button>
-      <button class="tab-btn" data-tab="sorteo" data-i18n="nav.sorteo">Draw &amp; Schedule</button>
+      <button class="tab-btn" data-tab="sorteo" data-i18n="nav.sorteo">Schedule</button>
       <button class="tab-btn" data-tab="grupos" data-i18n="nav.grupos">Groups</button>
       <button class="tab-btn" data-tab="brackets" data-i18n="nav.brackets">Bracket</button>
       <button class="tab-btn" data-tab="simulations" data-i18n="nav.simulations">Simulations</button>
-      <button class="tab-btn" data-tab="clasificatorias" data-i18n="nav.clasificatorias">Standings</button>
       <button class="tab-btn" data-tab="champions" data-i18n="nav.champions">Champions</button>
       <button class="tab-btn" data-tab="clips" data-i18n="nav.clips">Clips</button>
       <button class="tab-btn" data-tab="live" data-i18n="nav.live">Live</button>
@@ -95,10 +94,10 @@
       <h2 class="intro-title" data-i18n="intro.title">Welcome to the Ditman Cup 2027</h2>
       <p class="intro-lead" data-i18n="intro.lead">Everything you need to follow the tournament, in one place.</p>
       <ul class="intro-links">
-        <li><button type="button" class="intro-card" data-go="sorteo"><strong data-i18n="nav.sorteo">Draw &amp; Schedule</strong><span data-i18n="intro.d1">Who you face, and when</span></button></li>
+        <li><button type="button" class="intro-card" data-go="sorteo"><strong data-i18n="nav.sorteo">Schedule</strong><span data-i18n="intro.d1">Who you face, and when</span></button></li>
         <li><button type="button" class="intro-card" data-go="grupos"><strong data-i18n="nav.grupos">Groups</strong><span data-i18n="intro.d2">Top 8 direct + 24 in 3 groups</span></button></li>
         <li><button type="button" class="intro-card" data-go="brackets"><strong data-i18n="nav.brackets">Bracket</strong><span data-i18n="intro.d3">Double elimination to the final</span></button></li>
-        <li><button type="button" class="intro-card" data-go="clasificatorias"><strong data-i18n="nav.clasificatorias">Standings</strong><span data-i18n="intro.d4">Qualifier times and results</span></button></li>
+        <li><button type="button" class="intro-card" data-go="simulations"><strong data-i18n="nav.simulations">Simulations</strong><span data-i18n="intro.d4">Play through the format yourself</span></button></li>
       </ul>
     </div>
 
@@ -124,7 +123,7 @@
   </section>
 
   <section id="sorteo" class="tab-panel" tabindex="-1">
-    <h2 data-i18n="sorteo.title">Draw &amp; Schedule</h2>
+    <h2 data-i18n="sorteo.title">Schedule</h2>
 
     <div class="sim-intro">
       <div class="sim-rule"><span class="sim-rule-label" data-i18n="sorteo.r1.l">What is drawn</span><span class="sim-rule-text" data-i18n="sorteo.r1.t">Not the groups: the matchups. Your group comes from the qualifier ranking and the draw decides who you face inside it.</span></div>
@@ -216,13 +215,6 @@
     <p class="section-note sim-footnote" data-i18n="sim.footer">Simulation with placeholder data — meant to explain the format, not to predict real results.</p>
   </section>
 
-  <section id="clasificatorias" class="tab-panel" tabindex="-1">
-    <h2 data-i18n="clas.title">Standings &amp; placements</h2>
-    <div id="standings-table" class="standings-wrapper">
-      <p class="loading-msg" data-i18n="clas.empty">No standings loaded yet.</p>
-    </div>
-  </section>
-
   <section id="champions" class="tab-panel" tabindex="-1">
     <h2 data-i18n="champions.title">Champions</h2>
     <div id="champions-content"></div>
@@ -242,9 +234,17 @@
 
   <section id="donaciones" class="tab-panel" tabindex="-1">
     <h2 data-i18n="don.title">Donations</h2>
-    <div class="donations-box">
-      <p data-i18n="don.body">The Ditman Cup runs on community support. If you want to chip in for the prize pool and tournament costs, you can do it here:</p>
-      <a href="https://mno.gg/s/5e058baec7?c=1" target="_blank" rel="noopener" class="donate-btn" id="donate-link" data-i18n="don.btn">Donate</a>
+    <div class="donations-wrap">
+      <div class="donations-box">
+        <h3 class="don-sub" data-i18n="don.pool.title">Prize pool &amp; tournament costs</h3>
+        <p data-i18n="don.body">The Ditman Cup runs on community support. If you want to chip in for the prize pool and tournament costs, you can do it here:</p>
+        <a href="https://mno.gg/s/5e058baec7?c=1" target="_blank" rel="noopener" class="donate-btn" id="donate-link" data-i18n="don.btn">Donate</a>
+      </div>
+      <div class="donations-box donations-personal">
+        <h3 class="don-sub" data-i18n="don.me.title">Support me</h3>
+        <p data-i18n="don.me.body">This one is completely optional, but if you like the website and want to buy me a coffee, it is truly appreciated. Thank you for being part of this community!</p>
+        <a href="https://www.paypal.com/paypalme/jokeruy" target="_blank" rel="noopener" class="donate-btn donate-btn-alt" data-i18n="don.me.btn">Donate to JokerUY</a>
+      </div>
     </div>
   </section>
 
@@ -374,6 +374,6 @@
   </div>
 </div>
 
-<script src="js/script.js?v=20261017h"></script>
+<script src="js/script.js?v=20261017i"></script>
 </body>
 </html>
