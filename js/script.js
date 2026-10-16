@@ -1118,7 +1118,8 @@ function renderSchedule() {
   for (let md = 1; md <= TOURNAMENT_CONFIG.matchdays; md++) {
     const groups = data[md] || {};
     const times = Object.values(groups).flat().map(m => m.when).filter(Boolean).sort((x, y) => x - y);
-    const dateLabel = times.length ? fmtDay.format(times[0]) : t('sched.dateTbd');
+    const rawDate = times.length ? fmtDay.format(times[0]) : t('sched.dateTbd');
+    const dateLabel = rawDate.charAt(0).toUpperCase() + rawDate.slice(1);
     let cols = '';
     for (let g = 1; g <= TOURNAMENT_CONFIG.numGroups; g++) {
       const ms = (groups[g] || []).slice().sort((x, y) => (x.when || 0) - (y.when || 0));
