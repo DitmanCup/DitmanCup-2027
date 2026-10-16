@@ -478,7 +478,7 @@ main { max-width: 1180px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
 
 .loading-msg { color: var(--text-muted); font-family: var(--font-grunge); font-size: 1.15rem; }
 
-/* --- Brackets --- */
+/* --- Brackets (doble eliminacion) --- */
 .bracket-placeholder {
   background: rgba(9, 8, 6, .85);
   border: 1px solid var(--frame);
@@ -487,78 +487,103 @@ main { max-width: 1180px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
   text-align: center;
   color: var(--text-muted);
 }
-.bracket-note { text-align: left; margin: 0 0 1.25rem; }
+.bracket-note { text-align: left; margin: 0 0 1.4rem; max-width: 80ch; }
+/* El tab de Brackets usa todo el ancho disponible (el cuadro es muy ancho) */
+body[data-tab="brackets"] main { max-width: min(1880px, 100%); }
 
-.bracket-scroll { overflow-x: auto; overflow-y: hidden; padding-bottom: .5rem; }
-.bracket { display: flex; padding: .5rem 0 1rem; width: max-content; }
-
-.round { display: flex; flex-direction: column; min-width: 152px; }
-.round-inner {
-  flex: 1;
+.bracket-scroll { overflow-x: auto; overflow-y: hidden; padding: .4rem 0 1.2rem; }
+.bracket-canvas {
+  position: relative;
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  align-items: center;
+  gap: 4.2rem;
+  width: max-content;
+  min-width: 100%;
+  padding: .4rem .2rem;
 }
+.bracket-lines { position: absolute; inset: 0; pointer-events: none; overflow: visible; z-index: 0; }
+.bracket-lines path { fill: none; stroke-width: 1.8; stroke-linejoin: round; }
+.bracket-lines .line-w { stroke: rgba(201, 162, 75, .55); }
+.bracket-lines .line-l { stroke: rgba(225, 70, 44, .6); }
+.bracket-lines .line-g { stroke: var(--gold); stroke-width: 2.2; }
+.bracket-stack, .bracket-gf { position: relative; z-index: 1; }
+.bracket-stack { display: flex; flex-direction: column; gap: 2.2rem; }
+
+.bracket-section {
+  border: 1px solid var(--sec, var(--frame));
+  border-radius: 3px;
+  padding: 1.1rem 1.4rem 1.5rem;
+  background: linear-gradient(180deg, var(--sec-tint, rgba(255, 255, 255, .03)), rgba(9, 8, 6, .55) 38%);
+}
+.bracket-section.is-winners { --sec: rgba(201, 162, 75, .5); --sec-tint: rgba(201, 162, 75, .1); --tone: var(--gold); }
+.bracket-section.is-losers { --sec: rgba(225, 70, 44, .5); --sec-tint: rgba(181, 39, 28, .13); --tone: var(--accent-bright); }
+.bracket-heading {
+  font-size: 1.15rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--tone);
+  margin: 0 0 1.1rem;
+  padding-left: .8rem;
+  border-left: 3px solid var(--tone);
+  text-align: left;
+}
+.bracket-rounds { display: flex; gap: 4.2rem; }
+
+.round { display: flex; flex-direction: column; width: 244px; flex: none; }
+.round-inner { flex: 1; display: flex; flex-direction: column; justify-content: space-around; gap: 1rem; }
 .round-title {
   text-align: center;
   font-family: var(--font-title);
-  font-size: .82rem;
-  letter-spacing: .08em;
+  font-size: .8rem;
+  letter-spacing: .12em;
   text-transform: uppercase;
-  color: var(--accent-bright);
-  padding: 0 .7rem .8rem;
+  color: var(--tone, var(--gold));
+  padding: 0 0 .9rem;
   white-space: nowrap;
 }
+.bracket-gf .round-title { color: var(--gold); }
 
 .match {
   position: relative;
-  margin: .45rem .7rem;
-  background: linear-gradient(rgba(9, 8, 6, .95), rgba(9, 8, 6, .9));
-  border: 1px solid var(--frame);
+  background: linear-gradient(180deg, #17130e, #0f0c09);
+  border: 1px solid var(--sec, var(--frame));
+  border-left: 3px solid var(--tone, var(--gold));
   border-radius: 2px;
-  display: flex;
-  flex-direction: column;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .45);
+}
+.match-num {
+  position: absolute;
+  top: -9px; left: 10px;
+  font-family: var(--font-grunge);
+  font-size: .72rem;
+  letter-spacing: .06em;
+  color: var(--text-muted);
+  background: var(--bg);
+  padding: 0 .4rem;
+  line-height: 1.2;
 }
 .slot {
-  padding: .45rem .6rem;
-  font-size: .92rem;
+  display: flex; align-items: center; gap: .55rem;
+  min-height: 2.3rem;
+  padding: .4rem .8rem;
+  font-size: 1.02rem;
+  color: var(--text);
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 190px;
 }
 .slot + .slot { border-top: 1px solid var(--border); }
-.slot.is-bye { color: var(--text-muted); font-style: italic; }
-.match-champion .slot { color: var(--accent-bright); }
-
-/* Conectores estilo llave (CSS puro) */
-.round:not(:last-child) .round-inner .match::after {
-  content: '';
-  position: absolute;
-  left: 100%;
-  width: .7rem;
-  border-right: 1px solid var(--frame);
+.slot-seed { color: var(--tone, var(--gold)); font-family: var(--font-grunge); font-size: .82rem; min-width: 1.2em; }
+.slot-name { overflow: hidden; text-overflow: ellipsis; }
+.slot.is-ref .slot-name { color: var(--text-muted); font-style: italic; font-size: .9rem; }
+.slot.is-bye .slot-name { color: var(--text-muted); font-style: italic; }
+.match.is-g, .match-champion {
+  --tone: var(--gold);
+  --sec: var(--gold);
+  border-color: var(--gold);
+  background: linear-gradient(180deg, rgba(201, 162, 75, .2), #0f0c09);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .6), 0 0 24px rgba(201, 162, 75, .28);
 }
-.round:not(:last-child) .round-inner .match:nth-child(odd)::after {
-  top: 50%;
-  bottom: -.45rem;
-  border-top: 1px solid var(--frame);
-}
-.round:not(:last-child) .round-inner .match:nth-child(even)::after {
-  top: -.45rem;
-  bottom: 50%;
-  border-bottom: 1px solid var(--frame);
-}
-.round:not(:first-child) .round-inner .match::before {
-  content: '';
-  position: absolute;
-  right: 100%;
-  top: 50%;
-  width: .7rem;
-  border-top: 1px solid var(--frame);
-}
-.round-champion .round-inner .match::before { content: none; }
-.round:first-child .round-inner .match:only-child::after { content: none; }
+.match-champion .slot-name { color: var(--gold); font-style: normal; font-size: 1.05rem; }
+.bracket-gf { display: flex; flex-direction: column; gap: 2.2rem; }
 
 /* --- Clasificatorias --- */
 .standings-wrapper { overflow-x: auto; }

@@ -294,7 +294,7 @@ const I18N = {
 
     'brackets.title': 'Brackets',
     'brackets.placeholder': 'El cuadro de eliminacion se arma una vez cerrada la fase de grupos.',
-    'brackets.previewNote': 'Vista previa del cuadro — {n} clasificados. Los cruces reales se definen al cerrar la fase de grupos.',
+    'brackets.previewNote': 'Doble eliminacion · {n} clasificados. Si perdes una vez bajas al cuadro de perdedores; si perdes de nuevo, quedas eliminado. Los cruces reales se definen al cerrar la fase de grupos.',
     'bracket.champion': 'Campeon/a',
     'bracket.tbd': '—',
     'bracket.bye': 'BYE',
@@ -305,6 +305,15 @@ const I18N = {
     'bracket.round.r16': 'Octavos',
     'bracket.round.r32': '16avos',
     'bracket.round.generic': 'Ronda de {n}',
+    'bracket.winners': 'Cuadro de ganadores',
+    'bracket.losers': 'Cuadro de perdedores',
+    'bracket.grandFinal': 'Gran Final',
+    'bracket.round.winnersFinal': 'Final de ganadores',
+    'bracket.lr': 'Ronda de perdedores {n}',
+    'bracket.losersSemi': 'Semifinal de perdedores',
+    'bracket.losersFinal': 'Final de perdedores',
+    'bracket.winnerOf': 'Ganador M{n}',
+    'bracket.loserOf': 'Perdedor M{n}',
 
     'clas.title': 'Clasificatorias y placements',
     'clas.empty': 'Todavia no hay clasificacion cargada.',
@@ -471,7 +480,7 @@ const I18N = {
 
     'brackets.title': 'Bracket',
     'brackets.placeholder': 'The knockout bracket goes live once the group stage is finalized.',
-    'brackets.previewNote': 'Bracket preview — {n} qualifiers. Real matchups are set once the group stage is finalized.',
+    'brackets.previewNote': 'Double elimination · {n} qualifiers. Lose once and you drop to the Losers Bracket; lose again and you are out. Real matchups are set once the group stage is finalized.',
     'bracket.champion': 'Champion',
     'bracket.tbd': '—',
     'bracket.bye': 'BYE',
@@ -482,6 +491,15 @@ const I18N = {
     'bracket.round.r16': 'Round of 16',
     'bracket.round.r32': 'Round of 32',
     'bracket.round.generic': 'Round of {n}',
+    'bracket.winners': 'Winners Bracket',
+    'bracket.losers': 'Losers Bracket',
+    'bracket.grandFinal': 'Grand Final',
+    'bracket.round.winnersFinal': 'Winners Final',
+    'bracket.lr': 'Losers Round {n}',
+    'bracket.losersSemi': 'Losers Semifinal',
+    'bracket.losersFinal': 'Losers Final',
+    'bracket.winnerOf': 'Winner M{n}',
+    'bracket.loserOf': 'Loser M{n}',
 
     'clas.title': 'Standings & placements',
     'clas.empty': 'No standings loaded yet.',
@@ -781,7 +799,9 @@ function initTabs() {
     const panel = document.getElementById(btn.dataset.tab);
     panel.classList.add('active');
     const trailer = document.getElementById('trailer');
-    if (trailer && btn.dataset.tab !== 'inicio') trailer.pause();    document.body.dataset.tab = btn.dataset.tab;
+    if (trailer && btn.dataset.tab !== 'inicio') trailer.pause();
+    document.body.dataset.tab = btn.dataset.tab;
+    if (btn.dataset.tab === 'brackets') { drawBracketLines(); requestAnimationFrame(drawBracketLines); }
     tabs.classList.remove('open');
     toggle.setAttribute('aria-expanded', 'false');
     if (focusPanel) panel.focus();
@@ -1028,75 +1048,153 @@ function renderStandings(rows, container) {
   `;
 }
 
-// ======= BRACKET / CUADRO DE ELIMINACIÓN =======
-// Se arma a partir de TOURNAMENT_CONFIG: directQualifiers + groupQualifiers
-// entrantes (8 directo por PB de clasificatorias + 8 de la fase de grupos
-// por puntaje). Con datos (Sheet o mock) muestra nombres; sin datos,
-// casilleros "Sembrado 1", "Sembrado 2", etc.
+// ======= BRACKET / CUADRO DE ELIMINACIÓN (DOBLE ELIMINACIÓN) =======
+// 16 entrantes: Top 8 directo (sembrados 1-8, por orden de clasificatorias)
+// + 8 de la fase de grupos (9-16, por puntaje). Cuadro de ganadores, cuadro
+// de perdedores y Gran Final. Perder una vez te manda a perdedores; perder
+// ahi te elimina. Sin datos de resultados, los casilleros muestran "Ganador
+// M3" / "Perdedor M5" para que se entienda el recorrido de cada llave.
+let bracketLinks = [];
+
+// Modelo: devuelve { wb:[[match]], lb:[[match]], gf:match, links:[[desde,hasta,tipo]] }.
+// Cada match = { id, n, kind, round, idx, refs:[ref|null, ref|null] } donde
+// ref = {w:n} (ganador del match n) o {l:n} (perdedor del match n).
+function buildDoubleElim(size) {
+  const k = Math.log2(size);
+  let n = 0;
+  const mk = (kind, round, idx) => ({ id: 'm' + (++n), n, kind, round, idx, refs: [null, null] });
+  const wb = [];
+  for (let r = 0; r < k; r++) {
+    wb[r] = [];
+    for (let i = 0; i < size / 2 ** (r + 1); i++) wb[r].push(mk('w', r, i));
+  }
+  const lb = [];
+  const lrCount = 2 * (k - 1);
+  for (let r = 0; r < lrCount; r++) {
+    lb[r] = [];
+    for (let i = 0; i < size / 2 ** (Math.floor(r / 2) + 2); i++) lb[r].push(mk('l', r, i));
+  }
+  const gf = mk('g', 0, 0);
+
+  const W = m => ({ w: m.n }), L = m => ({ l: m.n });
+  const links = [];
+  for (let r = 1; r < k; r++) wb[r].forEach((m, i) => {
+    m.refs = [W(wb[r - 1][2 * i]), W(wb[r - 1][2 * i + 1])];
+  });
+  lb.forEach((round, r) => round.forEach((m, i) => {
+    if (r === 0) m.refs = [L(wb[0][2 * i]), L(wb[0][2 * i + 1])];
+    else if (r % 2 === 1) {                      // ronda con "drop-in": viene de perdedores del cuadro de ganadores
+      const drop = wb[(r + 1) / 2];
+      m.refs = [W(lb[r - 1][i]), L(drop[drop.length - 1 - i])];
+    } else m.refs = [W(lb[r - 1][2 * i]), W(lb[r - 1][2 * i + 1])];
+  }));
+  gf.refs = [W(wb[k - 1][0]), W(lb[lrCount - 1][0])];
+
+  for (let r = 0; r < k - 1; r++) wb[r].forEach((m, i) => links.push([m.id, wb[r + 1][Math.floor(i / 2)].id, 'w']));
+  links.push([wb[k - 1][0].id, gf.id, 'g']);
+  lb.forEach((round, r) => round.forEach((m, i) => {
+    if (r === lrCount - 1) links.push([m.id, gf.id, 'g']);
+    else links.push([m.id, lb[r + 1][r % 2 === 0 ? i : Math.floor(i / 2)].id, 'l']);
+  }));
+  return { wb, lb, gf, links, k, lrCount };
+}
+
 function renderBracket() {
   const host = document.getElementById('bracket-container');
   if (!host) return;
 
   const nEntrants = TOURNAMENT_CONFIG.directQualifiers + TOURNAMENT_CONFIG.groupQualifiers;
-  if (nEntrants < 2) { host.innerHTML = `<p>${esc(t('brackets.placeholder'))}</p>`; return; }
+  if (nEntrants < 4) { host.innerHTML = `<p>${esc(t('brackets.placeholder'))}</p>`; return; }
 
-  const size = 1 << Math.ceil(Math.log2(nEntrants));   // próxima potencia de 2
-  const order = seedOrder(size);                        // orden de siembra 1..size
-
-  // Etiqueta de cada semilla: 1..8 = Top 8 directo (por PB), 9..16 = mejores
-  // de la fase de grupos (por puntaje), en ese orden. Resto -> BYE.
+  const size = 1 << Math.ceil(Math.log2(nEntrants));   // proxima potencia de 2
+  const order = seedOrder(size);
   const qualified = qualifiedFromData();                // [nombre1..nombre16] o null
-  function seedLabel(seed) {
-    if (seed > nEntrants) return { txt: t('bracket.bye'), bye: true };
-    if (qualified && qualified[seed - 1]) {
-      const nm = qualified[seed - 1];
-      return { txt: nm, html: nameWithFlag(nm), bye: false };
-    }
-    return { txt: t('bracket.seedTag', { n: seed }), bye: false, tag: seed };
-  }
+  const model = buildDoubleElim(size);
+  bracketLinks = model.links;
 
-  // Ronda 1: pares (order[0] vs order[1]), (order[2] vs order[3]), ...
-  let matches = [];
-  for (let i = 0; i < size; i += 2) {
-    matches.push([seedLabel(order[i]), seedLabel(order[i + 1])]);
-  }
+  const slotSeed = seed => {
+    if (seed > nEntrants) return `<div class="slot is-bye"><span class="slot-name">${esc(t('bracket.bye'))}</span></div>`;
+    const nm = qualified && qualified[seed - 1];
+    return nm
+      ? `<div class="slot"><span class="slot-seed">${seed}</span><span class="slot-name">${nameWithFlag(nm)}</span></div>`
+      : `<div class="slot is-ref"><span class="slot-seed">${seed}</span><span class="slot-name">${esc(t('bracket.seedTag', { n: seed }))}</span></div>`;
+  };
+  const slotRef = ref => `<div class="slot is-ref"><span class="slot-name">${esc(t(ref.w ? 'bracket.winnerOf' : 'bracket.loserOf', { n: ref.w || ref.l }))}</span></div>`;
+  const card = (m, seedPair) => `
+    <div class="match is-${m.kind}" data-mid="${m.id}">
+      <span class="match-num">M${m.n}</span>
+      ${seedPair ? slotSeed(seedPair[0]) + slotSeed(seedPair[1]) : m.refs.map(slotRef).join('')}
+    </div>`;
+  const round = (title, cards) => `
+    <div class="round"><div class="round-title">${esc(title)}</div><div class="round-inner">${cards}</div></div>`;
 
-  const rounds = [];
-  let teams = size;
-  let current = matches;
-  while (true) {
-    rounds.push({ name: roundName(teams), matches: current });
-    if (current.length <= 1) break;
-    teams = teams / 2;
-    current = new Array(current.length / 2).fill(0).map(() => ([null, null]));
-  }
+  const wbRounds = model.wb.map((ms, r) => {
+    const teams = size / 2 ** r;
+    const title = r === model.k - 1 ? t('bracket.round.winnersFinal') : roundName(teams);
+    return round(title, ms.map((m, i) => card(m, r === 0 ? [order[2 * i], order[2 * i + 1]] : null)).join(''));
+  }).join('');
 
-  const html = [
-    `<p class="section-note bracket-note">${esc(t('brackets.previewNote', { n: nEntrants }))}</p>`,
-    `<div class="bracket-scroll"><div class="bracket" role="group" aria-label="${esc(t('brackets.title'))}">`,
-  ];
+  const lbRounds = model.lb.map((ms, r) => {
+    const title = r === model.lrCount - 1 ? t('bracket.losersFinal')
+      : r === model.lrCount - 2 ? t('bracket.losersSemi')
+      : t('bracket.lr', { n: r + 1 });
+    return round(title, ms.map(m => card(m, null)).join(''));
+  }).join('');
 
-  rounds.forEach((round, ri) => {
-    html.push(`<div class="round" data-round="${ri}"><div class="round-title">${esc(round.name)}</div><div class="round-inner">`);
-    round.matches.forEach(m => {
-      const a = m[0], b = m[1];
-      const slotHtml = x => x ? (x.html || esc(x.txt)) : esc(t('bracket.tbd'));
-      html.push(`<div class="match">
-        <span class="slot${a && a.bye ? ' is-bye' : ''}">${slotHtml(a)}</span>
-        <span class="slot${b && b.bye ? ' is-bye' : ''}">${slotHtml(b)}</span>
-      </div>`);
-    });
-    html.push(`</div></div>`);
-  });
-
-  // Columna del campeón
-  html.push(`<div class="round round-champion"><div class="round-title">${esc(t('bracket.champion'))}</div><div class="round-inner">
-    <div class="match match-champion"><span class="slot">${esc(t('bracket.tbd'))}</span></div>
-  </div></div>`);
-
-  html.push(`</div></div>`);
-  host.innerHTML = html.join('');
+  host.innerHTML = `
+    <p class="section-note bracket-note">${esc(t('brackets.previewNote', { n: nEntrants }))}</p>
+    <div class="bracket-scroll">
+      <div class="bracket-canvas" id="bracket-canvas" role="group" aria-label="${esc(t('brackets.title'))}">
+        <svg class="bracket-lines" aria-hidden="true"></svg>
+        <div class="bracket-stack">
+          <section class="bracket-section is-winners">
+            <h3 class="bracket-heading">${esc(t('bracket.winners'))}</h3>
+            <div class="bracket-rounds">${wbRounds}</div>
+          </section>
+          <section class="bracket-section is-losers">
+            <h3 class="bracket-heading">${esc(t('bracket.losers'))}</h3>
+            <div class="bracket-rounds">${lbRounds}</div>
+          </section>
+        </div>
+        <div class="bracket-gf">
+          ${round(t('bracket.grandFinal'), card(model.gf, null))}
+          <div class="round"><div class="round-title">${esc(t('bracket.champion'))}</div>
+            <div class="round-inner"><div class="match match-champion"><div class="slot is-ref"><span class="slot-name">${esc(t('bracket.tbd'))}</span></div></div></div></div>
+        </div>
+      </div>
+    </div>`;
+  drawBracketLines();
+  requestAnimationFrame(drawBracketLines);
 }
+
+// Conectores de "avanza el ganador": se miden las cajas ya renderizadas y se
+// dibujan codos en un SVG por encima. Hay que volver a llamarla cuando el tab
+// pasa a ser visible (oculto, todo mide 0) y al cambiar el tamaño.
+function drawBracketLines() {
+  const canvas = document.getElementById('bracket-canvas');
+  if (!canvas || !canvas.offsetWidth) return;
+  const svg = canvas.querySelector('.bracket-lines');
+  const base = canvas.getBoundingClientRect();
+  const box = id => {
+    const el = canvas.querySelector(`[data-mid="${id}"]`);
+    if (!el) return null;
+    const r = el.getBoundingClientRect();
+    return { l: r.left - base.left, r: r.right - base.left, y: r.top - base.top + r.height / 2 };
+  };
+  const paths = { w: '', l: '', g: '' };
+  bracketLinks.forEach(([from, to, kind]) => {
+    const a = box(from), b = box(to);
+    if (!a || !b) return;
+    const mid = a.r + Math.min(28, (b.l - a.r) / 2);
+    paths[kind] += `M${a.r} ${a.y}H${mid}V${b.y}H${b.l}`;
+  });
+  svg.setAttribute('width', canvas.scrollWidth);
+  svg.setAttribute('height', canvas.scrollHeight);
+  svg.innerHTML = ['w', 'l', 'g'].map(k => `<path class="line-${k}" d="${paths[k]}"/>`).join('');
+}
+let _bracketResizeTimer;
+window.addEventListener('resize', () => { clearTimeout(_bracketResizeTimer); _bracketResizeTimer = setTimeout(drawBracketLines, 120); });
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawBracketLines);
 
 // Orden de siembra estándar para un cuadro de `n` (potencia de 2).
 function seedOrder(n) {
