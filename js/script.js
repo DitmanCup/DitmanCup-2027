@@ -303,6 +303,9 @@ const I18N = {
     'donors.error': 'No se pudo cargar la lista de donadores.',
     'donors.total': '{amount} recaudados · {n} donadores',
     'donors.src': 'Fuente: Matcherino · ediciones {years}',
+    'donors.thanks': 'Gracias!',
+    'donors.thanksGeneric': 'Gracias a todos los que apoyaron la Ditman Cup.',
+    'donors.thanksSub': 'Gracias a nuestros {n} donadores por apoyar la Ditman Cup. Sin ustedes esto no seria posible.',
     'visits.label': 'Visitas a la pagina',
 
     'grupos.title': 'Fase de grupos',
@@ -512,6 +515,9 @@ const I18N = {
     'donors.error': 'Could not load the donors list.',
     'donors.total': '{amount} raised · {n} donors',
     'donors.src': 'Source: Matcherino · {years} editions',
+    'donors.thanks': 'Thank you!',
+    'donors.thanksGeneric': 'Thank you to every donor who has supported the Ditman Cup.',
+    'donors.thanksSub': 'Thank you to our {n} donors for supporting the Ditman Cup. This would not be possible without you.',
     'visits.label': 'Page visits',
 
     'grupos.title': 'Group stage',
@@ -1679,13 +1685,14 @@ function renderDonors() {
   }
   const TOP = 10;
   document.getElementById('donors-body').innerHTML = d.donors.slice(0, TOP).map((x, i) =>
-    `<tr class="${i < 3 ? 'rank-top' : ''}"><td>${i + 1}</td><td class="donor-name">${esc(x.name)}</td><td class="donor-amt">${esc(formatUSD(x.total))}</td></tr>`).join('');
+    `<tr class="${i < 3 ? 'rank-' + (i + 1) : ''}"><td>${i + 1}</td><td class="donor-name">${esc(x.name)}</td><td class="donor-amt">${esc(formatUSD(x.total))}</td></tr>`).join('');
   table.hidden = false; msg.hidden = true;
   total.textContent = t('donors.total', { amount: formatUSD(d.total), n: d.donorCount });
   total.hidden = false;
   const years = [...new Set((d.sources || []).map(s => String(s.startAt || '').slice(0, 4)).filter(Boolean))].sort().join(' · ');
   src.textContent = t('donors.src', { years });
   src.hidden = !years;
+  document.getElementById('donors-thanks-sub').textContent = t('donors.thanksSub', { n: d.donorCount });
 }
 
 // ======= CONTADOR DE VISITAS =======
