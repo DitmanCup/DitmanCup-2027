@@ -1242,7 +1242,7 @@ body.modal-open { overflow: hidden; }
 /* --- Inicio: contenido a la izquierda, top donadores a la derecha --- */
 #inicio.home-layout.active {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 345px;
+  grid-template-columns: minmax(0, 1fr) 380px;
   grid-template-areas: "hero side" "timer side" "facts side" "intro side" "trailer side";
   column-gap: 2.4rem;
   align-items: start;
@@ -1314,7 +1314,7 @@ body.modal-open { overflow: hidden; }
 .donors-donate:hover { background: linear-gradient(180deg, #7dffbb, #2cd172); border-color: #d6ffe6; transform: translateY(-1px); box-shadow: 0 0 34px rgba(61, 220, 132, .65), inset 0 1px 0 rgba(255, 255, 255, .5); }
 .donors-src { margin: .9rem 0 0; color: #7fcf9f; font-family: var(--font-title); font-size: .9rem; text-align: center; }
 @media (max-width: 1100px) {
-  #inicio.home-layout.active { grid-template-columns: minmax(0, 1fr) 310px; column-gap: 1.4rem; }
+  #inicio.home-layout.active { grid-template-columns: minmax(0, 1fr) 340px; column-gap: 1.4rem; }
   .donors-card { padding: 1rem 1rem 1.2rem; }
 }
 @media (max-width: 720px) {
@@ -1526,3 +1526,11 @@ body { font-size: 1.15rem; }
 .dl-name { font-size: 1rem; letter-spacing: 0; }
 .dl-amt { font-size: .95rem; }
 .donor-list li { grid-template-columns: 1.4rem 1fr auto; gap: .35rem; padding: .28rem .4rem; }
+
+/* Montos de dinero: fuente legible (Virgula) en todos lados */
+.donors-table td.donor-amt, .dl-amt, .prize-amount { font-family: var(--font-grunge); font-weight: 700; letter-spacing: 0; }
+.donors-table td.donor-amt { font-size: 1.12rem; }
+.donors-table tr.rank-1 td.donor-amt, .donors-table tr.rank-2 td.donor-amt, .donors-table tr.rank-3 td.donor-amt { font-size: 1.18rem; }
+.donors-table th:last-child { width: 4.4rem; }
+.dl-amt { font-size: 1.1rem; }
+.prize-amount { font-size: 2.3rem; }
