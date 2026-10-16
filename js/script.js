@@ -286,6 +286,11 @@ const I18N = {
     'group.word': 'Grupo',
     'group.tbd': 'Por definir',
     'group.directTitle': 'Top 8 — directo a Octavos',
+    'group.directBadge': 'No juegan grupos',
+    'group.directNote': 'Clasificaron directo desde las clasificatorias: entran al cuadro en Octavos de Final.',
+    'group.stageBadge': 'Fase de grupos',
+    'group.stageTitle': '24 corredores · 3 grupos de 8',
+    'group.stageNote': 'Ellos si juegan: los cruces se sortean dentro de cada grupo (ver Sorteo y calendario).',
 
     'brackets.title': 'Brackets',
     'brackets.placeholder': 'El cuadro de eliminacion se arma una vez cerrada la fase de grupos.',
@@ -360,7 +365,17 @@ const I18N = {
     'footer.text': 'Ditman Cup 2027 · Hecho para la comunidad',
 
     'sim.title': 'Simulador — formato tipo Nations League',
-    'sim.intro': 'El Top 8 de las clasificatorias (por PB real) clasifica directo a Octavos de Final y no juega la fase de grupos. Los otros 24 corredores forman 3 grupos de 8, con 4 fechas en total. Cada fecha corren BO1 dentro de su grupo, cerca de su PB pero con algo de variacion. En cada frontera suben los 4 que ganaron su carrera en el grupo de abajo, y bajan los 4 que perdieron en el grupo de arriba — ganar tu carrera es obligatorio para subir, y perderla lo es para bajar. Cada victoria suma puntos segun el grupo donde la conseguiste (Grupo 1 = 2 pts, Grupo 2 = 1, Grupo 3 = 1). Ademas, si perdiste tu carrera por menos de 30s (estuvo pareja), sumas un bono igual: +1 pt en Grupo 1, +0.5 pt en Grupo 2 y Grupo 3. Al cerrar la fecha 4, los 8 corredores con mas puntos de la fase de grupos (desempate: promedio de sus 2 mejores carreras de las 4 jugadas) completan el cuadro de Octavos junto al Top 8 directo — 16 en total. Esto es una propuesta de formato, todavia no es el definitivo.',
+    'sim.r1.l': 'Directo',
+    'sim.r1.t': 'El Top 8 de las clasificatorias no juega grupos y va directo a Octavos de Final.',
+    'sim.r2.l': 'Grupos',
+    'sim.r2.t': 'Los otros 24 juegan 3 grupos de 8 en 4 fechas. Un BO1 por fecha, dentro de tu grupo.',
+    'sim.r3.l': 'Movimiento',
+    'sim.r3.t': 'Si ganas, subis de grupo. Si perdes, bajas.',
+    'sim.r4.l': 'Puntos',
+    'sim.r4.t': 'Victoria: 2 pts en Grupo 1, 1 pt en Grupos 2 y 3. Si perdes por menos de 30s: bono de +1 (Grupo 1) o +0.5 (Grupos 2 y 3).',
+    'sim.r5.l': 'Clasifican',
+    'sim.r5.t': 'Tras la fecha 4, los 8 mejores por puntos pasan a Octavos. Desempate: promedio de tus 2 mejores carreras.',
+    'sim.proposal': 'Propuesta de formato — todavia no es el definitivo.',
     'sim.dateBadge': 'Fecha',
     'sim.btnNext': 'Simular siguiente fecha',
     'sim.btnNext5': 'Simular hasta el final',
@@ -448,6 +463,11 @@ const I18N = {
     'group.word': 'Group',
     'group.tbd': 'TBD',
     'group.directTitle': 'Top 8 — direct to Round of 16',
+    'group.directBadge': 'Skip the groups',
+    'group.directNote': 'Qualified straight from the qualifiers: they enter the bracket at the Round of 16.',
+    'group.stageBadge': 'Group stage',
+    'group.stageTitle': '24 runners · 3 groups of 8',
+    'group.stageNote': 'These are the ones playing: matchups are drawn inside each group (see Draw & Schedule).',
 
     'brackets.title': 'Bracket',
     'brackets.placeholder': 'The knockout bracket goes live once the group stage is finalized.',
@@ -522,7 +542,17 @@ const I18N = {
     'footer.text': 'Ditman Cup 2027 · Made for the community',
 
     'sim.title': 'Simulator — Nations League–style format',
-    'sim.intro': "The Top 8 from qualifiers (by real PB) qualify directly to the Round of 16 and skip the group stage. The other 24 runners form 3 groups of 8, over 4 matchdays total. Each matchday everyone races BO1 within their group, close to their PB with some variance. At every boundary, the 4 runners who won their race in the group below move up, and the 4 who lost theirs in the group above move down — winning your race is required to move up, and losing it is required to move down. Every win scores points based on the group where you earned it (Group 1 = 2 pts, Group 2 = 1, Group 3 = 1). On top of that, losing your race by less than 30s (a close one) still earns a bonus: +1 pt in Group 1, +0.5 pt in Group 2 and Group 3. After matchday 4, the 8 runners with the most points from the group stage (tiebreak: average of their 2 best races out of the 4 played) complete the Round of 16 bracket alongside the direct Top 8 — 16 in total. This is a format proposal — not the confirmed one yet.",
+    'sim.r1.l': 'Direct',
+    'sim.r1.t': 'The Top 8 from qualifiers skip the groups and go straight to the Round of 16.',
+    'sim.r2.l': 'Groups',
+    'sim.r2.t': 'The other 24 play 3 groups of 8 over 4 matchdays. One BO1 per matchday, inside your group.',
+    'sim.r3.l': 'Movement',
+    'sim.r3.t': 'Win and you move up a group. Lose and you move down.',
+    'sim.r4.l': 'Points',
+    'sim.r4.t': 'Win: 2 pts in Group 1, 1 pt in Groups 2 and 3. Lose by under 30s: bonus of +1 (Group 1) or +0.5 (Groups 2 and 3).',
+    'sim.r5.l': 'Qualify',
+    'sim.r5.t': 'After matchday 4 the 8 best by points join the Round of 16. Tiebreak: average of your 2 best races.',
+    'sim.proposal': 'Format proposal — not final yet.',
     'sim.dateBadge': 'Matchday',
     'sim.btnNext': 'Simulate next matchday',
     'sim.btnNext5': 'Simulate to the end',
@@ -874,18 +904,44 @@ async function loadGroups() {
   }
 }
 
+// Dos bloques bien separados: el Top 8 (clasifican directo, NO juegan la
+// fase de grupos) y los 24 que si la juegan (3 grupos de 8).
+function directBlockHtml(names) {
+  const items = Array.from({ length: TOURNAMENT_CONFIG.directQualifiers }, (_, i) =>
+    names[i] ? `<li>${nameWithFlag(names[i])}</li>` : `<li class="is-tbd">${esc(t('group.tbd'))}</li>`).join('');
+  return `<section class="direct-block">
+    <header class="block-head">
+      <span class="block-badge">${esc(t('group.directBadge'))}</span>
+      <h3>${esc(t('group.directTitle'))}</h3>
+      <p>${esc(t('group.directNote'))}</p>
+    </header>
+    <ol class="direct-list">${items}</ol>
+  </section>`;
+}
+
+function stageBlockHtml(cardsHtml) {
+  return `<section class="stage-block">
+    <header class="block-head">
+      <span class="block-badge is-stage">${esc(t('group.stageBadge'))}</span>
+      <h3>${esc(t('group.stageTitle'))}</h3>
+      <p>${esc(t('group.stageNote'))}</p>
+    </header>
+    <div class="groups-grid">${cardsHtml}</div>
+  </section>`;
+}
+
+function groupCardHtml(label, names, size) {
+  const items = Array.from({ length: Math.max(size || 0, names.length) }, (_, i) =>
+    names[i] ? `<li>${nameWithFlag(names[i])}</li>` : `<li>${esc(t('group.tbd'))}</li>`).join('');
+  return `<div class="group-card"><h3>${esc(label)}</h3><ol>${items}</ol></div>`;
+}
+
 function placeholderGroups() {
-  let html = `<div class="group-card"><h3>${esc(t('group.directTitle'))}</h3><ol>`;
-  for (let i = 0; i < TOURNAMENT_CONFIG.directQualifiers; i++) html += `<li>${esc(t('group.tbd'))}</li>`;
-  html += `</ol></div>`;
+  let cards = '';
   for (let g = 1; g <= TOURNAMENT_CONFIG.numGroups; g++) {
-    html += `<div class="group-card"><h3>${esc(t('group.word'))} ${g}</h3><ol>`;
-    for (let i = 0; i < TOURNAMENT_CONFIG.groupSize; i++) {
-      html += `<li>${esc(t('group.tbd'))}</li>`;
-    }
-    html += `</ol></div>`;
+    cards += groupCardHtml(`${t('group.word')} ${g}`, [], TOURNAMENT_CONFIG.groupSize);
   }
-  return html;
+  return directBlockHtml([]) + stageBlockHtml(cards);
 }
 
 // Espera columnas en la Sheet: Grupo, Corredor (una fila por corredor).
@@ -898,18 +954,9 @@ function renderGroups(rows, container) {
     container.innerHTML = placeholderGroups();
     return;
   }
-
-  let html = '';
-  if (groups['0']) {
-    html += `<div class="group-card"><h3>${esc(t('group.directTitle'))}</h3><ol>${groups['0'].map(n => `<li>${nameWithFlag(n)}</li>`).join('')}</ol></div>`;
-  }
-  html += keys.filter(g => g !== '0').map(g => `
-    <div class="group-card">
-      <h3>${esc(t('group.word'))} ${esc(g)}</h3>
-      <ol>${groups[g].map(n => `<li>${nameWithFlag(n)}</li>`).join('')}</ol>
-    </div>
-  `).join('');
-  container.innerHTML = html;
+  const cards = keys.filter(g => g !== '0')
+    .map(g => groupCardHtml(`${t('group.word')} ${g}`, groups[g], TOURNAMENT_CONFIG.groupSize)).join('');
+  container.innerHTML = directBlockHtml(groups['0'] || []) + stageBlockHtml(cards);
 }
 
 // { "0": ["nombre", ...], "1": [...], ... } a partir de filas {Grupo, Corredor}

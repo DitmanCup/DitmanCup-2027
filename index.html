@@ -7,7 +7,7 @@
 <title>Ditman Cup 2027</title>
 <meta name="description" content="Ditman Cup 2027 — community Resident Evil 4 speedrunning tournament. / Torneo comunitario de speedrunning de RE4.">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/7.2.3/css/flag-icons.min.css">
-<link rel="stylesheet" href="css/style.css?v=20260924e">
+<link rel="stylesheet" href="css/style.css?v=20261016a">
 </head>
 <body data-tab="inicio">
 
@@ -117,7 +117,7 @@
 
   <section id="grupos" class="tab-panel" tabindex="-1">
     <h2 data-i18n="grupos.title">Group stage</h2>
-    <div id="groups-grid" class="groups-grid">
+    <div id="groups-grid" class="groups-wrap">
       <p class="loading-msg" data-i18n="grupos.loading">Loading groups…</p>
     </div>
   </section>
@@ -131,7 +131,14 @@
 
   <section id="simulations" class="tab-panel sim-panel" tabindex="-1">
     <h2 data-i18n="sim.title">Simulator — Nations League–style format</h2>
-    <p class="section-note sim-intro" data-i18n="sim.intro">32 runners with their real PBs, 4 groups of 8, 4 matchdays total. This is a proposal — not the confirmed format.</p>
+    <div class="sim-intro">
+      <div class="sim-rule"><span class="sim-rule-label" data-i18n="sim.r1.l">Direct</span><span class="sim-rule-text" data-i18n="sim.r1.t">The Top 8 from qualifiers skip the groups and go straight to the Round of 16.</span></div>
+      <div class="sim-rule"><span class="sim-rule-label" data-i18n="sim.r2.l">Groups</span><span class="sim-rule-text" data-i18n="sim.r2.t">The other 24 play 3 groups of 8 over 4 matchdays. One BO1 per matchday, inside your group.</span></div>
+      <div class="sim-rule"><span class="sim-rule-label" data-i18n="sim.r3.l">Movement</span><span class="sim-rule-text" data-i18n="sim.r3.t">Win and you move up a group. Lose and you move down.</span></div>
+      <div class="sim-rule"><span class="sim-rule-label" data-i18n="sim.r4.l">Points</span><span class="sim-rule-text" data-i18n="sim.r4.t">Win: 2 pts in Group 1, 1 pt in Groups 2 and 3. Lose by under 30s: bonus of +1 (Group 1) or +0.5 (Groups 2 and 3).</span></div>
+      <div class="sim-rule"><span class="sim-rule-label" data-i18n="sim.r5.l">Qualify</span><span class="sim-rule-text" data-i18n="sim.r5.t">After matchday 4 the 8 best by points join the Round of 16. Tiebreak: average of your 2 best races.</span></div>
+      <p class="sim-proposal" data-i18n="sim.proposal">Format proposal — not final yet.</p>
+    </div>
 
     <div class="sim-bracket-panel sim-direct-panel" id="sim-direct-panel">
       <h3 data-i18n="sim.directTitle">Top 8 — direct qualifiers to the Round of 16</h3>
@@ -341,6 +348,6 @@
   </div>
 </div>
 
-<script src="js/script.js?v=20260924e"></script>
+<script src="js/script.js?v=20261016a"></script>
 </body>
 </html>

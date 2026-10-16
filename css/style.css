@@ -383,6 +383,48 @@ main { max-width: 1180px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
 
 /* --- Grupos (marco de diálogo del Merchant) --- */
 .groups-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 1.25rem; }
+
+/* --- Fase de grupos: Top 8 (directo) separado de los 24 que juegan --- */
+:root { --gold: #C9A24B; }
+.groups-wrap { display: flex; flex-direction: column; gap: 2.4rem; }
+.block-head { margin-bottom: 1.1rem; }
+.block-head h3 { font-size: 1.35rem; margin: .5rem 0 .3rem; }
+.block-head p { color: var(--text-muted); font-size: .98rem; margin: 0; max-width: 62ch; }
+.block-badge {
+  display: inline-block;
+  font-family: var(--font-title);
+  font-size: .72rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: .3rem .7rem;
+  border-radius: 2px;
+  color: #1a1408;
+  background: var(--gold);
+}
+.block-badge.is-stage { background: transparent; color: var(--accent-bright); border: 1px solid var(--accent-bright); }
+.direct-block {
+  border: 1px solid var(--gold);
+  border-radius: 2px;
+  padding: 1.4rem 1.5rem 1.5rem;
+  background: linear-gradient(135deg, rgba(201, 162, 75, .16), rgba(201, 162, 75, .03) 60%);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .5), 0 8px 30px rgba(0, 0, 0, .35);
+}
+.direct-block .block-head h3 { color: var(--gold); }
+.direct-list {
+  list-style: none; margin: 0; padding: 0; counter-reset: seed;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: .55rem .8rem;
+}
+.direct-list li {
+  counter-increment: seed;
+  display: flex; align-items: center; gap: .55rem;
+  padding: .55rem .8rem;
+  background: rgba(0, 0, 0, .35);
+  border-left: 3px solid var(--gold);
+  color: var(--text);
+}
+.direct-list li::before { content: counter(seed); color: var(--gold); font-family: var(--font-grunge); min-width: 1.1em; }
+.direct-list li.is-tbd { color: var(--text-muted); }
+.stage-block { border-top: 1px dashed var(--frame); padding-top: 2.2rem; }
 .group-card {
   position: relative;
   background: linear-gradient(rgba(9, 8, 6, .92), rgba(9, 8, 6, .84));
@@ -959,7 +1001,26 @@ body.modal-open { overflow: hidden; }
 /* Toda la sección usa por defecto la misma fuente que la descripción
    (más legible); los títulos (h2/h3) mantienen la fuente del juego. */
 .sim-panel { font-family: var(--font-grunge); }
-.sim-intro { text-align: left; margin-bottom: 1.6rem; max-width: 74ch; }
+.sim-intro { margin: 0 0 1.8rem; max-width: 78ch; }
+.sim-rule {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr;
+  gap: 1rem;
+  padding: .75rem 0;
+  border-bottom: 1px dotted var(--frame);
+  align-items: baseline;
+}
+.sim-rule:first-child { border-top: 1px dotted var(--frame); }
+.sim-rule-label {
+  font-family: var(--font-title);
+  color: var(--accent-bright);
+  font-size: .8rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.sim-rule-text { color: var(--text-dim); font-size: 1.02rem; line-height: 1.5; }
+.sim-proposal { color: var(--text-muted); font-size: .85rem; margin: .8rem 0 0; font-style: italic; }
+@media (max-width: 560px) { .sim-rule { grid-template-columns: 1fr; gap: .2rem; } }
 
 .sim-controls {
   display: flex;
