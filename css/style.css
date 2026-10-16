@@ -1243,7 +1243,7 @@ body.modal-open { overflow: hidden; }
 #inicio.home-layout.active {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 345px;
-  grid-template-areas: "hero side" "trailer side" "intro side" "timer side" "facts side";
+  grid-template-areas: "hero side" "timer side" "facts side" "intro side" "trailer side";
   column-gap: 2.4rem;
   align-items: start;
 }
@@ -1318,7 +1318,7 @@ body.modal-open { overflow: hidden; }
   .donors-card { padding: 1rem 1rem 1.2rem; }
 }
 @media (max-width: 720px) {
-  #inicio.home-layout.active { grid-template-columns: minmax(0, 1fr); grid-template-areas: "hero" "trailer" "side" "intro" "timer" "facts"; }
+  #inicio.home-layout.active { grid-template-columns: minmax(0, 1fr); grid-template-areas: "hero" "timer" "facts" "side" "intro" "trailer"; }
   .donors-card { margin-top: 0; }
 }
 
@@ -1485,3 +1485,10 @@ body { font-size: 1.15rem; }
 .slot.is-lose { opacity: .5; }
 .sim-wb-champ { margin: 1.2rem 0 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: .4rem 1rem; font-family: var(--font-grunge); font-size: 1.3rem; color: var(--text-dim); }
 .sim-wb-champ strong { color: var(--gold); font-weight: 400; font-size: 1.7rem; text-shadow: 0 0 16px rgba(201, 162, 75, .45); }
+
+/* Home: orden contador -> bienvenida -> video (como antes), todo centrado */
+#inicio .hero { padding: 3.2rem 0 0; }
+#inicio #countdown { margin: 1.8rem auto 0; max-width: 640px; }
+#inicio .hero-facts { justify-content: center; gap: 2.5rem; margin: 2rem 0 0; padding-bottom: 2.4rem; border-bottom: 1px solid var(--border); }
+#inicio .intro-text { margin-top: 2.4rem; }
+#inicio .trailer-frame { margin: 2.4rem 0 1rem; }
