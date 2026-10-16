@@ -107,7 +107,7 @@ a { color: var(--accent-bright); }
   z-index: 10;
 }
 .topbar-inner {
-  max-width: 1100px;
+  max-width: 1360px;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -169,7 +169,7 @@ a { color: var(--accent-bright); }
   font-family: var(--font-title);
   font-size: 1.08rem;
   letter-spacing: .07em;
-  padding: .5rem .85rem;
+  padding: .5rem .7rem;
   cursor: pointer;
   transition: color .18s ease, letter-spacing .18s ease, text-shadow .18s ease;
 }
@@ -1238,3 +1238,47 @@ body.modal-open { overflow: hidden; }
 .sched-vs { color: var(--text-muted); font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; }
 .sched .is-tbd, .sched-pair .is-tbd { color: var(--text-muted); font-style: italic; }
 .sched-tz { margin-top: .2rem; }
+
+/* --- Inicio: contenido a la izquierda, top donadores a la derecha --- */
+#inicio.home-layout.active {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  grid-template-areas: "hero side" "intro side" "trailer side";
+  column-gap: 2.4rem;
+  align-items: start;
+}
+#inicio .hero { grid-area: hero; }
+#inicio .intro-text { grid-area: intro; }
+#inicio .trailer-frame { grid-area: trailer; width: 100%; }
+.donors-card {
+  grid-area: side;
+  position: sticky; top: 5.2rem;
+  margin-top: 1.5rem;
+  padding: 1.2rem 1.3rem 1.4rem;
+  background: linear-gradient(180deg, rgba(201, 162, 75, .1), rgba(9, 8, 6, .88) 40%);
+  border: 1px solid var(--frame);
+  border-top: 3px solid var(--gold);
+  border-radius: 2px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, .45);
+}
+.donors-title { font-size: 1.15rem; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin: 0 0 .3rem; text-align: left; }
+.donors-total { margin: 0 0 .9rem; color: var(--text-muted); font-size: .9rem; }
+.donors-table { width: 100%; border-collapse: collapse; font-size: 1rem; }
+.donors-table th { text-align: left; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); font-weight: 400; padding: .35rem .3rem; border-bottom: 1px solid var(--frame); }
+.donors-table th:last-child, .donors-table td:last-child { text-align: right; }
+.donors-table td { padding: .5rem .3rem; border-bottom: 1px dotted var(--border); color: var(--text); }
+.donors-table td:first-child { width: 1.8rem; color: var(--text-muted); font-family: var(--font-grunge); }
+.donors-table td.donor-name { overflow-wrap: anywhere; }
+.donors-table td.donor-amt { font-family: var(--font-grunge); color: var(--accent-2); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.donors-table tr.rank-top td:first-child, .donors-table tr.rank-top td.donor-amt { color: var(--gold); }
+.donors-msg { color: var(--text-muted); font-size: .95rem; margin: .5rem 0 0; }
+.donors-donate { display: block; text-align: center; margin-top: 1.1rem; }
+.donors-src { margin: .8rem 0 0; color: var(--text-muted); font-size: .78rem; }
+@media (max-width: 960px) {
+  #inicio.home-layout.active { grid-template-columns: minmax(0, 1fr); grid-template-areas: "hero" "side" "intro" "trailer"; }
+  .donors-card { position: static; margin-top: 0; }
+}
+
+/* --- Contador de visitas (footer) --- */
+.visit-counter { text-align: center; color: var(--text-muted); font-size: .9rem; margin-top: .4rem; }
+.visit-counter strong { color: var(--accent-2); font-family: var(--font-grunge); font-weight: 400; font-variant-numeric: tabular-nums; }

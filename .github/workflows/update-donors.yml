@@ -1,0 +1,31 @@
+name: Actualizar donadores
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-donors
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Leer donaciones de Matcherino
+        shell: pwsh
+        run: ./scripts/update-donors.ps1
+      - name: Commit si cambio algo
+        run: |
+          if [ -n "$(git status --porcelain data/donors.json)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add data/donors.json
+            git commit -m "Actualizar donadores de Matcherino"
+            git push
+          fi

@@ -7,7 +7,7 @@
 <title>Ditman Cup 2027</title>
 <meta name="description" content="Ditman Cup 2027 — community Resident Evil 4 speedrunning tournament. / Torneo comunitario de speedrunning de RE4.">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/7.2.3/css/flag-icons.min.css">
-<link rel="stylesheet" href="css/style.css?v=20261016d">
+<link rel="stylesheet" href="css/style.css?v=20261016f">
 </head>
 <body data-tab="inicio">
 
@@ -50,7 +50,7 @@
 
 <main>
 
-  <section id="inicio" class="tab-panel active" tabindex="-1">
+  <section id="inicio" class="tab-panel active home-layout" tabindex="-1">
     <div class="hero">
       <h1 class="hero-title">Ditman Cup 2027</h1>
       <p class="hero-subtitle" data-i18n="hero.subtitle">Community Resident Evil 4 speedrunning tournament.</p>
@@ -90,6 +90,18 @@
         <div class="fact"><span class="fact-number" id="fact-qualify">8</span><span class="fact-label" data-i18n="facts.qualify">qualify directly</span></div>
       </div>
     </div>
+    <aside class="donors-card" id="donors-card" aria-labelledby="donors-title">
+      <h2 class="donors-title" id="donors-title" data-i18n="donors.title">Top donors</h2>
+      <p class="donors-total" id="donors-total" hidden></p>
+      <table class="donors-table" id="donors-table" hidden>
+        <thead><tr><th>#</th><th data-i18n="donors.colName">Donor</th><th data-i18n="donors.colAmount">Donated</th></tr></thead>
+        <tbody id="donors-body"></tbody>
+      </table>
+      <p class="donors-msg" id="donors-msg" data-i18n="donors.loading">Loading donors…</p>
+      <a href="https://mno.gg/s/5e058baec7?c=1" target="_blank" rel="noopener" class="donate-btn donors-donate" data-i18n="don.btn">Donate</a>
+      <p class="donors-src" id="donors-src" hidden></p>
+    </aside>
+
     <div class="intro-text">
       <p data-i18n="intro.p">Welcome to the Ditman Cup 2027. Here you'll find the draw, the groups, the knockout bracket and everything you need to follow the tournament end to end.</p>
     </div>
@@ -342,6 +354,7 @@
     </a>
   </div>
   <p class="footer-note" data-i18n="footer.text">Ditman Cup 2027 · Made by the community</p>
+  <p class="visit-counter" id="visit-counter" hidden><span data-i18n="visits.label">Page visits</span>: <strong id="visit-count">0</strong></p>
 </footer>
 
 <div id="sheet-modal" class="sheet-modal" hidden role="dialog" aria-modal="true" aria-labelledby="sheet-modal-title">
@@ -358,6 +371,6 @@
   </div>
 </div>
 
-<script src="js/script.js?v=20261016d"></script>
+<script src="js/script.js?v=20261016f"></script>
 </body>
 </html>

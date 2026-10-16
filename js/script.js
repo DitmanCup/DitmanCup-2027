@@ -295,6 +295,15 @@ const I18N = {
     'sched.noteN': 'Los grupos se arman con los resultados de la fecha anterior.',
     'sched.vs': 'vs',
     'sched.tzNote': 'Horarios en tu zona horaria ({tz}).',
+    'donors.title': 'Top donadores',
+    'donors.colName': 'Donador',
+    'donors.colAmount': 'Donado',
+    'donors.loading': 'Cargando donadores…',
+    'donors.empty': 'Todavia no hay donadores.',
+    'donors.error': 'No se pudo cargar la lista de donadores.',
+    'donors.total': '{amount} recaudados · {n} donadores',
+    'donors.src': 'Fuente: Matcherino · ediciones {years}',
+    'visits.label': 'Visitas a la pagina',
 
     'grupos.title': 'Fase de grupos',
     'grupos.loading': 'Cargando grupos…',
@@ -495,6 +504,15 @@ const I18N = {
     'sched.noteN': 'Groups are set from the previous matchday results.',
     'sched.vs': 'vs',
     'sched.tzNote': 'Times shown in your local time zone ({tz}).',
+    'donors.title': 'Top donors',
+    'donors.colName': 'Donor',
+    'donors.colAmount': 'Donated',
+    'donors.loading': 'Loading donors…',
+    'donors.empty': 'No donors yet.',
+    'donors.error': 'Could not load the donors list.',
+    'donors.total': '{amount} raised · {n} donors',
+    'donors.src': 'Source: Matcherino · {years} editions',
+    'visits.label': 'Page visits',
 
     'grupos.title': 'Group stage',
     'grupos.loading': 'Loading groups…',
@@ -740,6 +758,8 @@ document.addEventListener('DOMContentLoaded', () => {
   loadGroups();
   loadStandings();
   loadSchedule();
+  loadDonors();
+  initVisitCounter();
   renderBracket();
   renderChampions();
   renderClips();
@@ -795,6 +815,8 @@ function applyLang(lang) {
   if (lastStandingsRows) renderStandings(lastStandingsRows, document.getElementById('standings-table'));
   renderBracket();
   renderSchedule();
+  renderDonors();
+  renderVisits();
   renderChampions();
   renderClips();
   renderLive();
@@ -1614,6 +1636,82 @@ async function renderLive() {
   if (all.length) html += `<div class="live-roster">${all.join('')}</div>`;
 
   host.innerHTML = html;
+}
+
+// ======= TOP DONADORES (Matcherino) =======
+// data/donors.json lo arma .github/workflows/update-donors.yml (la API de
+// Matcherino no se puede leer directo desde el navegador por CORS).
+let lastDonors = null;
+
+async function loadDonors() {
+  try {
+    const res = await fetch('data/donors.json', { cache: 'no-cache' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    lastDonors = await res.json();
+  } catch (err) {
+    console.error('Error cargando donadores:', err);
+    lastDonors = null;
+  }
+  renderDonors();
+}
+
+function formatUSD(n) {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency', currency: 'USD',
+    minimumFractionDigits: Number.isInteger(n) ? 0 : 2, maximumFractionDigits: 2,
+  }).format(n);
+}
+
+function renderDonors() {
+  const table = document.getElementById('donors-table');
+  if (!table) return;
+  const msg = document.getElementById('donors-msg');
+  const total = document.getElementById('donors-total');
+  const src = document.getElementById('donors-src');
+  const d = lastDonors;
+  if (!d || !Array.isArray(d.donors) || !d.donors.length) {
+    table.hidden = true; total.hidden = true; src.hidden = true; msg.hidden = false;
+    msg.textContent = t(d ? 'donors.empty' : 'donors.error');
+    return;
+  }
+  const TOP = 10;
+  document.getElementById('donors-body').innerHTML = d.donors.slice(0, TOP).map((x, i) =>
+    `<tr class="${i < 3 ? 'rank-top' : ''}"><td>${i + 1}</td><td class="donor-name">${esc(x.name)}</td><td class="donor-amt">${esc(formatUSD(x.total))}</td></tr>`).join('');
+  table.hidden = false; msg.hidden = true;
+  total.textContent = t('donors.total', { amount: formatUSD(d.total), n: d.donorCount });
+  total.hidden = false;
+  const years = [...new Set((d.sources || []).map(s => String(s.startAt || '').slice(0, 4)).filter(Boolean))].sort().join(' · ');
+  src.textContent = t('donors.src', { years });
+  src.hidden = !years;
+}
+
+// ======= CONTADOR DE VISITAS =======
+// Servicio externo gratuito y sin cookies (Abacus). Cuenta 1 visita por sesion
+// del navegador: recargar o cambiar de pestaña no suma. En localhost solo lee.
+const VISITS_API = 'https://abacus.jasoncameron.dev';
+const VISITS_PATH = 'ditmancup-2027/visits';
+let visitValue = null;
+
+async function initVisitCounter() {
+  if (!document.getElementById('visit-counter')) return;
+  const isLocal = ['localhost', '127.0.0.1', ''].includes(location.hostname);
+  let counted = false;
+  try { counted = sessionStorage.getItem('dc-visit') === '1'; } catch (e) { /* sin storage */ }
+  const action = (isLocal || counted) ? 'get' : 'hit';
+  try {
+    const res = await fetch(`${VISITS_API}/${action}/${VISITS_PATH}`);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    visitValue = Number((await res.json()).value);
+    if (action === 'hit') { try { sessionStorage.setItem('dc-visit', '1'); } catch (e) { /* sin storage */ } }
+    renderVisits();
+  } catch (err) { /* si el servicio no responde, simplemente no se muestra */ }
+}
+
+function renderVisits() {
+  const box = document.getElementById('visit-counter');
+  if (!box || visitValue == null || isNaN(visitValue)) return;
+  document.getElementById('visit-count').textContent = visitValue.toLocaleString(currentLang === 'es' ? 'es-AR' : 'en-US');
+  box.hidden = false;
 }
 
 // ======= DATOS FALSOS / MOCK DATA =======

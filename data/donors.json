@@ -1,0 +1,184 @@
+{
+    "currency":  "USD",
+    "total":  2568,
+    "donorCount":  32,
+    "sources":  [
+                    {
+                        "id":  175467,
+                        "title":  "Ditman Cup",
+                        "startAt":  "2026-01-09T15:00:00Z",
+                        "status":  "closed",
+                        "raised":  1568
+                    },
+                    {
+                        "id":  66141,
+                        "title":  "Resident Evil 4 New Game Pro Tournament 2022",
+                        "startAt":  "2022-02-06T04:30:00Z",
+                        "status":  "closed",
+                        "raised":  1000
+                    }
+                ],
+    "donors":  [
+                   {
+                       "name":  "KillaTrayy_",
+                       "total":  400,
+                       "count":  6
+                   },
+                   {
+                       "name":  "Kamo_Katayama23",
+                       "total":  380,
+                       "count":  5
+                   },
+                   {
+                       "name":  "luis_sera",
+                       "total":  248,
+                       "count":  1
+                   },
+                   {
+                       "name":  "MajorRichy",
+                       "total":  195,
+                       "count":  2
+                   },
+                   {
+                       "name":  "prepsboy",
+                       "total":  180,
+                       "count":  4
+                   },
+                   {
+                       "name":  "ALEXngawi",
+                       "total":  130,
+                       "count":  2
+                   },
+                   {
+                       "name":  "JokerUY",
+                       "total":  107,
+                       "count":  4
+                   },
+                   {
+                       "name":  "Major_Richy",
+                       "total":  100,
+                       "count":  1
+                   },
+                   {
+                       "name":  "MrMuBa",
+                       "total":  100,
+                       "count":  1
+                   },
+                   {
+                       "name":  "Waifu",
+                       "total":  100,
+                       "count":  1
+                   },
+                   {
+                       "name":  "DrumsetWereWolf",
+                       "total":  60,
+                       "count":  1
+                   },
+                   {
+                       "name":  "Simoteus",
+                       "total":  60,
+                       "count":  3
+                   },
+                   {
+                       "name":  "JustFero",
+                       "total":  56,
+                       "count":  2
+                   },
+                   {
+                       "name":  "Indra_Nusantara",
+                       "total":  50,
+                       "count":  1
+                   },
+                   {
+                       "name":  "MollyWollyyy",
+                       "total":  50,
+                       "count":  1
+                   },
+                   {
+                       "name":  "Omarqi",
+                       "total":  50,
+                       "count":  1
+                   },
+                   {
+                       "name":  "sawkenn",
+                       "total":  40,
+                       "count":  2
+                   },
+                   {
+                       "name":  "casualspeedrun",
+                       "total":  30,
+                       "count":  1
+                   },
+                   {
+                       "name":  "geogaddii",
+                       "total":  30,
+                       "count":  1
+                   },
+                   {
+                       "name":  "Mauricio_Elhordoy",
+                       "total":  30,
+                       "count":  1
+                   },
+                   {
+                       "name":  "CanIhasnameplease",
+                       "total":  25,
+                       "count":  2
+                   },
+                   {
+                       "name":  "windmill1",
+                       "total":  24,
+                       "count":  1
+                   },
+                   {
+                       "name":  "DerekT21288",
+                       "total":  20,
+                       "count":  1
+                   },
+                   {
+                       "name":  "Gustavo_Heidemann",
+                       "total":  20,
+                       "count":  1
+                   },
+                   {
+                       "name":  "RichyWichy",
+                       "total":  20,
+                       "count":  1
+                   },
+                   {
+                       "name":  "Soto_Pav",
+                       "total":  20,
+                       "count":  1
+                   },
+                   {
+                       "name":  "ImSniperKiller",
+                       "total":  10,
+                       "count":  1
+                   },
+                   {
+                       "name":  "Jakub_Kaiser",
+                       "total":  10,
+                       "count":  1
+                   },
+                   {
+                       "name":  "Lyon99",
+                       "total":  10,
+                       "count":  1
+                   },
+                   {
+                       "name":  "MateoUsh27",
+                       "total":  5,
+                       "count":  1
+                   },
+                   {
+                       "name":  "youcri1031",
+                       "total":  5,
+                       "count":  1
+                   },
+                   {
+                       "name":  "guillaume_astuce",
+                       "total":  3,
+                       "count":  1
+                   }
+               ],
+    "updatedAt":  "2026-10-16T15:24:41Z"
+}
