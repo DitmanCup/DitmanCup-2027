@@ -1274,7 +1274,11 @@ body.modal-open { overflow: hidden; }
 .donors-msg { color: var(--text-muted); font-size: .95rem; margin: .5rem 0 0; }
 .donors-donate { display: block; text-align: center; margin-top: 1.1rem; }
 .donors-src { margin: .8rem 0 0; color: var(--text-muted); font-size: .78rem; }
-@media (max-width: 960px) {
+@media (max-width: 1100px) {
+  #inicio.home-layout.active { grid-template-columns: minmax(0, 1fr) 290px; column-gap: 1.4rem; }
+  .donors-card { padding: 1rem 1rem 1.2rem; }
+}
+@media (max-width: 720px) {
   #inicio.home-layout.active { grid-template-columns: minmax(0, 1fr); grid-template-areas: "hero" "side" "intro" "trailer"; }
   .donors-card { position: static; margin-top: 0; }
 }
