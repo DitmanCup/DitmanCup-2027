@@ -363,7 +363,7 @@ const I18N = {
 
     'org.title': 'Organizacion y staff',
     'org.tier.organizers': 'Organizadores',
-    'org.tier.mods': 'Moderadores',
+    'org.tier.mods': 'SRC Moderators',
     'org.tier.helpers': 'Helpers y casters',
     'org.tier.design': 'Arte y diseño',
     'org.role.admin': 'Admin',
@@ -589,7 +589,7 @@ const I18N = {
 
     'org.title': 'Organizers & staff',
     'org.tier.organizers': 'Organizers',
-    'org.tier.mods': 'Moderators',
+    'org.tier.mods': 'SRC Moderators',
     'org.tier.helpers': 'Helpers & casters',
     'org.tier.design': 'Art & design',
     'org.role.admin': 'Admin',
