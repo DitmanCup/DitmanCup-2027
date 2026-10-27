@@ -285,6 +285,7 @@ const I18N = {
     'facts.groups': 'grupos',
     'facts.qualify': 'clasifican directo',
 
+    'trailer.title': 'Ditman Cup 2027: video de anuncio',
     'intro.title': 'Bienvenidos a la Ditman Cup 2027',
     'intro.lead': 'Todo para seguir el torneo, en un solo lugar.',
     'intro.d1': 'Contra quien jugas y cuando',
@@ -514,6 +515,7 @@ const I18N = {
     'facts.groups': 'groups',
     'facts.qualify': 'qualify directly',
 
+    'trailer.title': 'Ditman Cup 2027 Announcement video',
     'intro.title': 'Welcome to the Ditman Cup 2027',
     'intro.lead': 'Everything you need to follow the tournament, in one place.',
     'intro.d1': 'Who you face, and when',
