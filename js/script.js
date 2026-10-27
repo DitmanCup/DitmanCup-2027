@@ -992,8 +992,21 @@ function renderCountdown() {
     try { return d.toLocaleDateString(locale, fmtOpts); }
     catch (e) { return d.toLocaleDateString(locale, { day: 'numeric', month: 'long', year: 'numeric' }); }
   };
+  // Hora de apertura en la zona de la config (ej. "00:00 (UTC-3)"), igual para todos
+  const fmtTime = d => {
+    const o = String(TOURNAMENT_CONFIG.qualysOpen).match(/([+-])(\d{2}):(\d{2})$/);
+    let utc = 'UTC';
+    if (o) utc += o[1] + String(Number(o[2])) + (o[3] !== '00' ? ':' + o[3] : '');
+    let hm;
+    try {
+      const topts = { hour: '2-digit', minute: '2-digit', hour12: false };
+      if (TOURNAMENT_CONFIG.qualysTimeZone) topts.timeZone = TOURNAMENT_CONFIG.qualysTimeZone;
+      hm = d.toLocaleTimeString('en-GB', topts);
+    } catch (e) { hm = '00:00'; }
+    return hm + ' (' + utc + ')';
+  };
   if (dateLine) {
-    let line = t('countdown.datePrefix') + ' ' + fmtDate(_countdownTarget);
+    let line = t('countdown.datePrefix') + ' ' + fmtDate(_countdownTarget) + ', ' + fmtTime(_countdownTarget);
     const closeDate = new Date(TOURNAMENT_CONFIG.qualysClose);
     if (!isNaN(closeDate.getTime())) line += '  ·  ' + t('countdown.closePrefix') + ' ' + fmtDate(closeDate);
     dateLine.textContent = line;
