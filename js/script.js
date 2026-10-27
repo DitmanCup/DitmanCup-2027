@@ -245,6 +245,8 @@ const YOUTUBE_LIVE_CHANNELS = [
   { name: 'Bang Gori', id: 'UCMnXQX5GWrrcfSVZrOIaJUA' },
   { name: 'nyr9468', url: 'https://www.youtube.com/@nyr9468/live' },
   { name: 'Fedo_Ras', url: 'https://www.youtube.com/@Fedo_Ras/live' },
+  { name: 'NETJU', url: 'https://www.youtube.com/@junetkhairulamri9336/live' },
+  { name: 'aqbilghilman', url: 'https://www.youtube.com/@aqbilghilman30/live' },
   { name: 'Muh01', url: 'https://www.youtube.com/results?search_query=Muh01+resident+evil+4' }, // handle sin confirmar
 ];
 
