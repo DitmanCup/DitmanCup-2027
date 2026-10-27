@@ -234,7 +234,7 @@ const RE4_LIVE_CHANNELS = [
   'abdou_mz', 'novi_fan', 'MineZowski', 'MikeWavRR', 'FrancoBv17', 'chanwii',
   'gabrielsinmarr', 'redshines', 'MrMuba', 'Ninazerotwo', 'Gallardd', 'iiLanceLM', 'nobu_22',
   'Neuroticc_', 'derekt21288', 'yuushi_1234', 'ezequiel_kazama', 'yisuseldragon', 'otakuterere',
-  'luis_sera', 'joydurnyup', 'M4tiuss_',
+  'luis_sera', 'joydurnyup', 'M4tiuss_', 'orchlon', 'droprecks', 'spicee',
 ];
 
 // Runners que streamean en YouTube. No hay forma sin API key de saber si están
