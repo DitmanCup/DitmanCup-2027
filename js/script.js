@@ -232,8 +232,9 @@ const RE4_LIVE_CHANNELS = [
   'pixieesaki', 'vechman', 'RazieCR', 'fritrrs', 'MateoUsh27', 'youcri1031', 'majorrichy',
   'infamouslol8', 'shularune', 'slifercs', 'doradori_dolph', 'xjoker115', 'eidenfir',
   'abdou_mz', 'novi_fan', 'MineZowski', 'MikeWavRR', 'FrancoBv17', 'chanwii',
-  'gabrielsinmarr', 'redshines', 'MrMuba',
-  // sin resolver (Twitch dice "no existe"): joydurnjup, matiussEC
+  'gabrielsinmarr', 'redshines', 'MrMuba', 'Ninazerotwo', 'Gallardd', 'iiLanceLM', 'nobu_22',
+  'Neuroticc_', 'derekt21288', 'yuushi_1234', 'ezequiel_kazama', 'yisuseldragon', 'otakuterere',
+  // sin resolver (Twitch dice "no existe"): joydurnjup, MatiussEC
 ];
 
 // Runners que streamean en YouTube. No hay forma sin API key de saber si están
@@ -242,6 +243,8 @@ const RE4_LIVE_CHANNELS = [
 const YOUTUBE_LIVE_CHANNELS = [
   { name: 'seppp', id: 'UCeClRyYfzoODHyA7FJKcjvA' },
   { name: 'Bang Gori', id: 'UCMnXQX5GWrrcfSVZrOIaJUA' },
+  { name: 'nyr9468', url: 'https://www.youtube.com/@nyr9468/live' },
+  { name: 'Fedo_Ras', url: 'https://www.youtube.com/@Fedo_Ras/live' },
   { name: 'Muh01', url: 'https://www.youtube.com/results?search_query=Muh01+resident+evil+4' }, // handle sin confirmar
 ];
 
