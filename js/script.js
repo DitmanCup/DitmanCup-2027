@@ -11,8 +11,8 @@ const TOURNAMENT_CONFIG = {
 
   // Apertura de las clasificatorias ("qualys"). Formato ISO con offset.
   // Qualifier window opens. ISO format with UTC offset.
-  qualysOpen: '2026-12-28T00:00:00-03:00',      // abren: 28 dic 2026, 00:00 hora Argentina (UTC-3)
-  qualysClose: '2027-01-15T00:00:00-03:00',     // cierran: 15 ene 2027, 00:00 hora Argentina (UTC-3)
+  qualysOpen: '2026-12-26T00:00:00-03:00',      // abren: 26 dic 2026, 00:00 hora Argentina (UTC-3)
+  qualysClose: '',                              // cierre: sin definir (si se deja vacio, no se muestra)
   qualysTimeZone: 'America/Argentina/Buenos_Aires', // solo para mostrar la fecha siempre igual
 
   // Modo prueba: usa datos falsos en Grupos / Clasificatorias / Brackets.
