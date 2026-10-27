@@ -234,6 +234,7 @@ const RE4_LIVE_CHANNELS = [
   'abdou_mz', 'novi_fan', 'MineZowski', 'MikeWavRR', 'FrancoBv17', 'chanwii',
   'gabrielsinmarr', 'redshines', 'MrMuba', 'Ninazerotwo', 'Gallardd', 'iiLanceLM', 'nobu_22',
   'Neuroticc_', 'derekt21288', 'yuushi_1234', 'ezequiel_kazama', 'yisuseldragon', 'otakuterere',
+  'luis_sera',
   // sin resolver (Twitch dice "no existe"): joydurnjup, MatiussEC
 ];
 
@@ -247,6 +248,8 @@ const YOUTUBE_LIVE_CHANNELS = [
   { name: 'Fedo_Ras', url: 'https://www.youtube.com/@Fedo_Ras/live' },
   { name: 'NETJU', url: 'https://www.youtube.com/@junetkhairulamri9336/live' },
   { name: 'aqbilghilman', url: 'https://www.youtube.com/@aqbilghilman30/live' },
+  { name: 'Mrchampppt', url: 'https://www.youtube.com/@mrchampppt/live' },
+  { name: 'Zudinnn', id: 'UCkX2rtFOeywknZ0ibu-ajWA' },
   { name: 'Muh01', url: 'https://www.youtube.com/results?search_query=Muh01+resident+evil+4' }, // handle sin confirmar
 ];
 
@@ -387,6 +390,8 @@ const I18N = {
     'champions.title': 'Historia',
     'champions.edition': 'Ditman Cup {year}',
     'champions.donors': 'Donadores',
+    'champions.timeline': 'Todas las donaciones (cronologia)',
+    'champions.txToggle': 'Ver cada donacion',
     'champions.champion': 'Campeon',
     'champions.runnerUp': '2do puesto',
     'champions.third': '3er puesto',
@@ -614,6 +619,8 @@ const I18N = {
     'champions.title': 'History',
     'champions.edition': 'Ditman Cup {year}',
     'champions.donors': 'Donors',
+    'champions.timeline': 'All donations (chronological)',
+    'champions.txToggle': 'Show each donation',
     'champions.champion': 'Champion',
     'champions.runnerUp': '2nd place',
     'champions.third': '3rd place',
@@ -1455,14 +1462,37 @@ function pickKey(obj, names) {
 
 // ======= CAMPEONES / PAST CHAMPIONS =======
 // Lista de donadores de una edicion (sale de data/donors.json, por torneo de Matcherino)
+function donationDate(iso) {
+  try {
+    return new Date(iso).toLocaleDateString(currentLang === 'es' ? 'es-AR' : 'en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+  } catch (e) { return String(iso).slice(0, 10); }
+}
+
 function editionDonorsHtml(e) {
   const src = lastDonors && (lastDonors.sources || []).find(s => String(s.startAt || '').startsWith(String(e.year)));
   if (!src || !src.donors || !src.donors.length) return '';
-  const rows = src.donors.map((d, i) =>
-    `<li class="${i < 3 ? 'rank-' + (i + 1) : ''}"><span class="dl-rank">${i + 1}</span><span class="dl-name">${esc(d.name)}</span><span class="dl-amt">${esc(formatUSD(d.total))}</span></li>`).join('');
+  const hasTx = src.donors.every(d => d.donations && d.donations.length);
+  const rows = src.donors.map((d, i) => {
+    const head = `<span class="dl-rank">${i + 1}</span><span class="dl-name">${esc(d.name)}</span><span class="dl-amt">${esc(formatUSD(d.total))}</span>`;
+    const cls = i < 3 ? 'rank-' + (i + 1) : '';
+    if (!hasTx) return `<li class="${cls}"><div class="dl-row">${head}</div></li>`;
+    const tx = d.donations.map(x => `<li><span class="dl-tx-date">${esc(donationDate(x.date))}</span><span class="dl-tx-amt">${esc(formatUSD(x.amount))}</span></li>`).join('');
+    return `<li class="${cls}"><button type="button" class="dl-row dl-toggle" aria-expanded="false" title="${esc(t('champions.txToggle'))}">${head}</button><ul class="dl-tx" hidden>${tx}</ul></li>`;
+  }).join('');
+  let timeline = '';
+  if (hasTx) {
+    const all = [];
+    src.donors.forEach(d => d.donations.forEach(x => all.push({ name: d.name, date: x.date, amount: x.amount })));
+    all.sort((a, b) => String(a.date).localeCompare(String(b.date)));
+    timeline = `<details class="edition-timeline">
+      <summary><span class="ed-d-title">${esc(t('champions.timeline'))}</span><span class="ed-d-meta">${esc(String(all.length))}</span></summary>
+      <ol class="timeline-list">${all.map(x => `<li><span class="tl-date">${esc(donationDate(x.date))}</span><span class="tl-name">${esc(x.name)}</span><span class="tl-amt">${esc(formatUSD(x.amount))}</span></li>`).join('')}</ol>
+    </details>`;
+  }
   return `<details class="edition-donors" open>
     <summary><span class="ed-d-title">${esc(t('champions.donors'))}</span><span class="ed-d-meta">${esc(src.donors.length + ' · ' + formatUSD(src.raised))}</span></summary>
     <ol class="donor-list">${rows}</ol>
+    ${timeline}
   </details>`;
 }
 
@@ -1505,6 +1535,15 @@ function renderChampions() {
 
   host.querySelectorAll('.edition-data-btn').forEach(btn => {
     btn.addEventListener('click', () => openSheetModal(btn.dataset.sheetUrl, btn.dataset.sheetTitle));
+  });
+  // Donador -> despliega cada donacion por separado
+  host.querySelectorAll('.dl-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const list = btn.nextElementSibling;
+      const open = btn.getAttribute('aria-expanded') !== 'true';
+      btn.setAttribute('aria-expanded', String(open));
+      list.hidden = !open;
+    });
   });
 }
 
@@ -1703,11 +1742,11 @@ function mergeDonorList(list) {
     const k = donorKey(x.name);
     const alias = DONOR_ALIASES[String(x.name).toLowerCase().replace(/[^a-z0-9]/g, '')];
     const cur = map.get(k);
-    if (!cur) { map.set(k, { name: alias || x.name, total: x.total, count: x.count, best: x.total }); return; }
-    cur.total += x.total; cur.count += x.count;
+    if (!cur) { map.set(k, { name: alias || x.name, total: x.total, count: x.count, best: x.total, tx: (x.donations || []).slice() }); return; }
+    cur.total += x.total; cur.count += x.count; cur.tx = cur.tx.concat(x.donations || []);
     if (!alias && !DONOR_ALIASES[donorKey(cur.name)] && x.total > cur.best) { cur.name = x.name; cur.best = x.total; }
   });
-  return [...map.values()].map(({ name, total, count }) => ({ name, total: Math.round(total * 100) / 100, count }))
+  return [...map.values()].map(({ name, total, count, tx }) => ({ name, total: Math.round(total * 100) / 100, count, donations: tx.sort((a, b) => String(a.date).localeCompare(String(b.date))) }))
     .sort((a, b) => b.total - a.total || a.name.localeCompare(b.name));
 }
 function mergeDonorAliases(d) {

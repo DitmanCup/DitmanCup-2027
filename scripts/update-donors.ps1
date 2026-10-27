@@ -25,12 +25,14 @@ foreach ($id in $Tournaments) {
     $byName[$key].cents += [int64]$tx.amount
     $byName[$key].count += 1
     $cents += [int64]$tx.amount
-    if (-not $local.ContainsKey($key)) { $local[$key] = @{ name = ([string]$tx.displayName).Trim(); cents = [int64]0; count = 0 } }
+    if (-not $local.ContainsKey($key)) { $local[$key] = @{ name = ([string]$tx.displayName).Trim(); cents = [int64]0; count = 0; tx = @() } }
     $local[$key].cents += [int64]$tx.amount
     $local[$key].count += 1
+    # Cada donacion por separado (fecha UTC + monto) para mostrar la cronologia
+    $local[$key].tx += ,[ordered]@{ date = ([datetime]$tx.createdAt).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ'); amount = [math]::Round([int64]$tx.amount / 100, 2) }
   }
   $perDonors = @($local.Values | Sort-Object @{ Expression = { $_.cents }; Descending = $true }, @{ Expression = { $_.name } } |
-    ForEach-Object { [ordered]@{ name = $_.name; total = [math]::Round($_.cents / 100, 2); count = $_.count } })
+    ForEach-Object { [ordered]@{ name = $_.name; total = [math]::Round($_.cents / 100, 2); count = $_.count; donations = @($_.tx | Sort-Object { $_.date }) } })
   $sources += [ordered]@{ id = $id; title = $b.title; startAt = $b.startAt; status = $b.status; raised = [math]::Round($cents / 100, 2); donorCount = $perDonors.Count; donors = $perDonors }
   $totalCents += $cents
 }

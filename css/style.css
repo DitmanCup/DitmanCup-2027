@@ -1577,3 +1577,38 @@ details.sched-day > summary.sched-day-head::after {
 details.sched-day[open] > summary.sched-day-head { border-bottom: 1px solid var(--frame); }
 details.sched-day[open] > summary.sched-day-head::after { transform: translateY(-50%) rotate(180deg); }
 details.sched-day > summary.sched-day-head:hover { background: linear-gradient(90deg, rgba(181, 39, 28, .4), rgba(181, 39, 28, .1)); }
+
+/* History: cronologia de donaciones (por donador y lista completa) */
+.donor-list > li { display: block; padding: 0; }
+.donor-list > li > .dl-row {
+  display: grid; grid-template-columns: 1.4rem 1fr auto; gap: .35rem; align-items: baseline;
+  width: 100%; padding: .28rem .4rem; text-align: left; color: inherit; font: inherit;
+  background: none; border: 0; border-radius: 2px;
+}
+.donor-list > li > .dl-toggle { cursor: pointer; }
+.donor-list > li > .dl-toggle:hover { background: rgba(61, 220, 132, .14); }
+.dl-toggle .dl-name::after { content: ' \25BE'; font-size: .8em; opacity: .6; }
+.dl-toggle[aria-expanded="true"] .dl-name::after { content: ' \25B4'; }
+.donor-list .dl-tx { list-style: none; margin: 0; padding: .15rem .6rem .4rem 2rem; }
+.donor-list .dl-tx[hidden] { display: none; }
+.donor-list .dl-tx li {
+  display: flex; justify-content: space-between; gap: 1rem; padding: .12rem 0;
+  background: none; border-bottom: 1px dotted rgba(255, 255, 255, .12);
+  font-family: var(--font-grunge); font-size: 1rem; color: var(--text-dim);
+}
+.dl-tx-amt, .tl-amt { color: var(--money-bright); font-weight: 700; }
+.edition-timeline { margin: .9rem 0 0; }
+.edition-timeline summary { cursor: pointer; list-style: none; display: flex; align-items: baseline; gap: .8rem; }
+.edition-timeline summary::-webkit-details-marker { display: none; }
+.edition-timeline .ed-d-title::before { content: '\25B8'; margin-right: .5rem; font-size: .9em; }
+.edition-timeline[open] .ed-d-title::before { content: '\25BE'; }
+.timeline-list { list-style: none; margin: .6rem 0 0; padding: 0; max-height: 26rem; overflow-y: auto; }
+.timeline-list li {
+  display: grid; grid-template-columns: 7.5rem 1fr auto; gap: .6rem; padding: .25rem .5rem;
+  border-bottom: 1px dotted rgba(255, 255, 255, .12); font-family: var(--font-grunge); font-size: 1.05rem;
+}
+.tl-date { color: var(--text-dim); }
+.tl-name { color: #fff; overflow-wrap: anywhere; }
+.dl-tx-date, .tl-date { white-space: nowrap; }
+.donor-list .dl-tx { padding-left: 1.4rem; padding-right: .3rem; }
+.donor-list .dl-tx li { gap: .5rem; font-size: .95rem; }
