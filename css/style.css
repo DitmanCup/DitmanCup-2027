@@ -1620,3 +1620,13 @@ details.sched-day > summary.sched-day-head:hover { background: linear-gradient(9
   margin: 0 0 .8rem; text-align: left; font-family: var(--font-display);
   font-size: clamp(1.4rem, 2.6vw, 2rem); letter-spacing: .04em; line-height: 1.15; color: var(--text);
 }
+
+/* Botones del hero con el color de cada app */
+.hero-links a.btn-discord { background: #4752c4; border-color: #4752c4; color: #fff; }
+.hero-links a.btn-discord:hover { background: #5865f2; border-color: #5865f2; }
+.hero-links a.btn-youtube { background: #cc0000; border-color: #cc0000; color: #fff; }
+.hero-links a.btn-youtube:hover { background: #ff0000; border-color: #ff0000; }
+.hero-links a.btn-twitch { background: #772ce8; border-color: #772ce8; color: #fff; }
+.hero-links a.btn-twitch:hover { background: #9146ff; border-color: #9146ff; }
+.hero-links a.btn-docs { background: #1a73e8; border-color: #1a73e8; color: #fff; }
+.hero-links a.btn-docs:hover { background: #4285f4; border-color: #4285f4; }
