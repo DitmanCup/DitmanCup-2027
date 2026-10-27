@@ -257,6 +257,7 @@ const YOUTUBE_LIVE_CHANNELS = [
 const I18N = {
   es: {
     'nav.inicio': 'Inicio',
+    'nav.home': 'Ir al inicio',
     'nav.sorteo': 'Calendario',
     'nav.torneo': 'Torneo',
     'intro.t1': 'Calendario',
@@ -487,6 +488,7 @@ const I18N = {
   },
   en: {
     'nav.inicio': 'Home',
+    'nav.home': 'Go to home',
     'nav.sorteo': 'Schedule',
     'nav.torneo': 'Tournament',
     'intro.t1': 'Schedule',
@@ -2485,6 +2487,13 @@ function safeSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
 
 // Tarjetas de la bienvenida del Home: llevan directo a cada pestaña
 document.addEventListener('DOMContentLoaded', () => {
+  // Logo de arriba: vuelve al Home
+  const brand = document.getElementById('brand-home');
+  if (brand) brand.addEventListener('click', e => {
+    e.preventDefault();
+    const home = document.querySelector('.tab-btn[data-tab="inicio"]');
+    if (home) { home.click(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  });
   document.querySelectorAll('[data-go]').forEach(btn => {
     btn.addEventListener('click', () => {
       const tab = document.querySelector(`.tab-btn[data-tab="${btn.dataset.go}"]`);
