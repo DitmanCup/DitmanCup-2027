@@ -234,8 +234,8 @@ const RE4_LIVE_CHANNELS = [
   'abdou_mz', 'novi_fan', 'MineZowski', 'MikeWavRR', 'FrancoBv17', 'chanwii',
   'gabrielsinmarr', 'redshines', 'MrMuba', 'Ninazerotwo', 'Gallardd', 'iiLanceLM', 'nobu_22',
   'Neuroticc_', 'derekt21288', 'yuushi_1234', 'ezequiel_kazama', 'yisuseldragon', 'otakuterere',
-  'luis_sera',
-  // sin resolver (Twitch dice "no existe"): joydurnjup, MatiussEC
+  'luis_sera', 'joydurnyup',
+  // sin resolver (Twitch dice "no existe"): MatiussEC
 ];
 
 // Runners que streamean en YouTube. No hay forma sin API key de saber si están
