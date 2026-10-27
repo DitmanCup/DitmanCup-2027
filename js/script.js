@@ -250,6 +250,7 @@ const YOUTUBE_LIVE_CHANNELS = [
   { name: 'aqbilghilman', url: 'https://www.youtube.com/@aqbilghilman30/live' },
   { name: 'Mrchampppt', url: 'https://www.youtube.com/@mrchampppt/live' },
   { name: 'Zudinnn', id: 'UCkX2rtFOeywknZ0ibu-ajWA' },
+  { name: 'VAL', url: 'https://www.youtube.com/@valyorleza/live' },
   { name: 'Muh01', url: 'https://www.youtube.com/results?search_query=Muh01+resident+evil+4' }, // handle sin confirmar
 ];
 
