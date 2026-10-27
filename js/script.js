@@ -384,7 +384,7 @@ const I18N = {
     'org.role.artDesignWeb': 'Arte y diseño, Diseñador web',
 
     'link.discord': 'Discord',
-    'link.rules': 'Reglas',
+    'link.rules': 'Documento',
     'link.youtube': 'YouTube',
     'link.twitch': 'Twitch',
 
@@ -614,7 +614,7 @@ const I18N = {
     'org.role.artDesignWeb': 'Art & design, Website Designer',
 
     'link.discord': 'Discord',
-    'link.rules': 'Rules',
+    'link.rules': 'Document',
     'link.youtube': 'YouTube',
     'link.twitch': 'Twitch',
 
