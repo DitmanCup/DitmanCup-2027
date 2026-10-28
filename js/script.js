@@ -1669,7 +1669,7 @@ const TWITCH_GQL_CLIENT_ID = 'kimne78kx3ncx6brgo4mv6wki5h1ko'; // client-id púb
 
 async function twitchLiveStatus(logins) {
   if (!logins.length) return {};
-  const q = `query{users(logins:[${logins.map(l => JSON.stringify(l.toLowerCase())).join(',')}]){login displayName stream{id game{name} viewersCount title}}}`;
+  const q = `query{users(logins:[${logins.map(l => JSON.stringify(l.toLowerCase())).join(',')}]){login displayName followers{totalCount} stream{id game{name} viewersCount title}}}`;
   const res = await fetch('https://gql.twitch.tv/gql', {
     method: 'POST',
     headers: { 'Client-ID': TWITCH_GQL_CLIENT_ID, 'Content-Type': 'application/json' },
@@ -1697,8 +1697,13 @@ async function renderLive() {
 
   const rows = tw.map(ch => {
     const u = status[ch.toLowerCase()];
-    return { ch, name: (u && u.displayName) || ch, live: !!(u && u.stream), stream: u && u.stream };
-  }).sort((a, b) => (b.live - a.live) || a.name.localeCompare(b.name));
+    return { ch, name: (u && u.displayName) || ch, live: !!(u && u.stream), stream: u && u.stream,
+             followers: (u && u.followers && u.followers.totalCount) || 0 };
+  // Popularidad: en vivo primero (mas espectadores arriba); luego el resto por seguidores
+  }).sort((a, b) => (b.live - a.live)
+    || (a.live ? (b.stream.viewersCount || 0) - (a.stream.viewersCount || 0) : 0)
+    || (b.followers - a.followers)
+    || a.name.localeCompare(b.name));
 
   const liveRows = rows.filter(r => r.live);
   const offRows = rows.filter(r => !r.live);
