@@ -441,6 +441,14 @@ const I18N = {
     'sim.directTag': 'clasificado directo',
     'sim.directTitle': 'Top 8 — clasificados directo a Octavos',
     'sim.directNote': 'Los 8 mejores tiempos de las clasificatorias no juegan la fase de grupos: quedan sembrados directo en Octavos de Final.',
+    'sim.logColGroup': 'Grupo',
+    'sim.logColWinner': 'Gana',
+    'sim.logColLoser': 'Pierde',
+    'sim.logColMargin': 'Diferencia',
+    'sim.logColMove': 'Movimiento',
+    'sim.stays': 'se queda en Grupo {g}',
+    'sim.movesUp': 'sube a Grupo {g}',
+    'sim.movesDown': 'baja a Grupo {g}',
     'sim.group1': 'Grupo 1',
     'sim.group2': 'Grupo 2',
     'sim.group3': 'Grupo 3',
@@ -456,13 +464,9 @@ const I18N = {
     'sim.logTitleEmpty': 'Todavia no se corrio ninguna ronda',
     'sim.logTitle': 'Resultados de la ronda {n}',
     'sim.logTitleFinal': 'Resultados de la ronda {n} (final)',
-    'sim.raceResult': '<b>{a}</b> {timeA} vs <b>{b}</b> {timeB} — gana {winner} por {margin}',
-    'sim.moveUp': '<span class="sim-move-up">▲</span> <b>{name}</b> asciende a Grupo {group} — mejor tiempo del grupo ({time})',
-    'sim.moveDown': '<span class="sim-move-down">▼</span> <b>{name}</b> desciende a Grupo {group} — peor tiempo del grupo ({time})',
-    'sim.boundaryLabel': 'Frontera Grupo {a} / Grupo {b}',
     'sim.bracketTitle': 'Octavos de Final',
     'sim.wbTitle': 'Doble eliminacion — jugala',
-    'sim.wbNote': 'Carreras BO1, igual que en grupos: gana el mejor tiempo. Si perdes una vez bajas al cuadro de perdedores; si perdes de nuevo, quedas eliminado.',
+    'sim.wbNote': 'Octavos y Cuartos: si la diferencia del primer race es de 2:00 o mas, es el unico race (BO1); si no, es BO3. Semis y Finales son siempre BO3 y la Gran Final es BO5. Si perdes una vez bajas al cuadro de perdedores; si perdes de nuevo, quedas eliminado.',
     'sim.btnWbNext': 'Jugar {round}',
     'sim.wbDone': 'Torneo terminado',
     'sim.btnWbEverything': 'Jugar todo hasta la Gran Final',
@@ -670,6 +674,14 @@ const I18N = {
     'sim.directTag': 'direct qualifier',
     'sim.directTitle': 'Top 8 — direct qualifiers to the Round of 16',
     'sim.directNote': "The 8 fastest qualifier times skip the group stage entirely: they're seeded straight into the Round of 16.",
+    'sim.logColGroup': 'Group',
+    'sim.logColWinner': 'Winner',
+    'sim.logColLoser': 'Loser',
+    'sim.logColMargin': 'Margin',
+    'sim.logColMove': 'Movement',
+    'sim.stays': 'stays in Group {g}',
+    'sim.movesUp': 'moves up to Group {g}',
+    'sim.movesDown': 'moves down to Group {g}',
     'sim.group1': 'Group 1',
     'sim.group2': 'Group 2',
     'sim.group3': 'Group 3',
@@ -685,13 +697,9 @@ const I18N = {
     'sim.logTitleEmpty': 'No round played yet',
     'sim.logTitle': 'Round {n} results',
     'sim.logTitleFinal': 'Round {n} results (final)',
-    'sim.raceResult': '<b>{a}</b> {timeA} vs <b>{b}</b> {timeB} — {winner} wins by {margin}',
-    'sim.moveUp': '<span class="sim-move-up">▲</span> <b>{name}</b> moves up to Group {group} — group\'s best time ({time})',
-    'sim.moveDown': '<span class="sim-move-down">▼</span> <b>{name}</b> moves down to Group {group} — group\'s worst time ({time})',
-    'sim.boundaryLabel': 'Group {a} / Group {b} boundary',
     'sim.bracketTitle': 'Round of 16',
     'sim.wbTitle': 'Double elimination — play it',
-    'sim.wbNote': 'BO1 races, same as the groups: the best time wins. Lose once and you drop to the Losers Bracket; lose again and you are out.',
+    'sim.wbNote': 'Round of 16 and Quarterfinals: if the first race is decided by 2:00 or more, that is the only race (BO1); otherwise it becomes a BO3. Semifinals and Finals are always BO3, and the Grand Final is BO5. Lose once and you drop to the Losers Bracket; lose again and you are out.',
     'sim.btnWbNext': 'Play {round}',
     'sim.wbDone': 'Tournament finished',
     'sim.btnWbEverything': 'Play everything to the Grand Final',
@@ -1378,16 +1386,39 @@ function renderBracket() {
 // Conectores de "avanza el ganador": se miden las cajas ya renderizadas y se
 // dibujan codos en un SVG por encima. Hay que volver a llamarla cuando el tab
 // pasa a ser visible (oculto, todo mide 0) y al cambiar el tamaño.
+// Ajusta el cuadro al ancho disponible: lo achica (transform: scale) para que se
+// vea completo sin scroll horizontal con el zoom normal del navegador.
+const BRACKET_MIN_SCALE = 0.3;
+function fitBracketCanvas(canvas) {
+  const wrap = canvas.closest('.bracket-scroll');
+  if (!wrap) return;
+  canvas.style.transform = '';
+  wrap.style.height = '';
+  wrap.style.overflowX = '';
+  const natural = canvas.offsetWidth;
+  const avail = wrap.clientWidth;
+  if (!natural || !avail) return;
+  const k = Math.max(BRACKET_MIN_SCALE, Math.min(1, avail / natural));
+  if (k >= 0.999) return;
+  canvas.style.transformOrigin = '0 0';
+  canvas.style.transform = `scale(${k})`;
+  const cs = getComputedStyle(wrap);
+  wrap.style.height = (canvas.offsetHeight * k + parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom)) + 'px';
+  if (k > BRACKET_MIN_SCALE + 0.001) wrap.style.overflowX = 'hidden';
+}
+
 function drawLinesFor(canvasId, links) {
   const canvas = document.getElementById(canvasId);
   if (!canvas || !canvas.offsetWidth) return;
+  fitBracketCanvas(canvas);
   const svg = canvas.querySelector('.bracket-lines');
   const base = canvas.getBoundingClientRect();
+  const k = (base.width / canvas.offsetWidth) || 1;   // escala actual del cuadro
   const box = id => {
     const el = canvas.querySelector(`[data-mid="${id}"]`);
     if (!el) return null;
     const r = el.getBoundingClientRect();
-    return { l: r.left - base.left, r: r.right - base.left, y: r.top - base.top + r.height / 2 };
+    return { l: (r.left - base.left) / k, r: (r.right - base.left) / k, y: (r.top - base.top + r.height / 2) / k };
   };
   const paths = { w: '', l: '', g: '' };
   links.forEach(([from, to, kind]) => {
@@ -2226,8 +2257,8 @@ function simRenderBracket() {
 }
 
 // ======= BRACKET JUGABLE: doble eliminacion completa =======
-// Despues del sorteo de Octavos se juega todo el cuadro con carreras BO1 (mismo
-// modelo que la fase de grupos): cuadro de ganadores, cuadro de perdedores y
+// Despues del sorteo de Octavos se juega todo el cuadro con series BO1/BO3/BO5
+// segun la ronda (ver SIM_WB_FORMAT): cuadro de ganadores, cuadro de perdedores y
 // Gran Final (una sola partida, sin "reset"). Se usa el mismo modelo que el
 // Bracket real (buildDoubleElim) y las rondas se juegan en este orden:
 // R16, LR1, Cuartos, LR2, LR3, Semis, LR4, LR5, Final de ganadores, LR6, Gran Final.
@@ -2249,12 +2280,34 @@ function simWBPlayers(m) {
   if (m.kind === 'w' && m.round === 0) return [simWB.r16[m.idx].a, simWB.r16[m.idx].b];
   return m.refs.map(simWBResolve);
 }
+// Formato de cada paso del cuadro (igual que el reglamento): Octavos y Cuartos
+// (ganadores y perdedores) son BO1 si el primer race se decide por 2:00 o mas,
+// si no pasan a BO3; Semis y Finales siempre BO3; la Gran Final es BO5.
+const SIM_WB_FORMAT = ['cond', 'cond', 'cond', 'cond', 'cond', 3, 3, 3, 3, 3, 5];
+const SIM_BO1_GAP = 120; // segundos
+
+function simPlaySeries(a, b, mode) {
+  const need = mode === 5 ? 3 : 2;
+  let wa = 0, wb = 0;
+  const first = simRace(a, b);
+  first.winner === a ? wa++ : wb++;
+  if (mode === 'cond' && first.margin >= SIM_BO1_GAP) {
+    return { winner: first.winner, loser: first.winner === a ? b : a, tA: first.timeA, tB: first.timeB, games: 1, wa, wb, fmt: 'BO1' };
+  }
+  while (wa < need && wb < need) {
+    const g = simRace(a, b);
+    g.winner === a ? wa++ : wb++;
+  }
+  const winner = wa > wb ? a : b;
+  return { winner, loser: winner === a ? b : a, tA: first.timeA, tB: first.timeB, games: wa + wb, wa, wb, fmt: mode === 5 ? 'BO5' : 'BO3' };
+}
+
 function simWBPlayStep() {
   if (!simWB || simWB.step >= SIM_WB_STEPS) return;
+  const mode = SIM_WB_FORMAT[simWB.step];
   simWB.steps[simWB.step].forEach(m => {
     const [a, b] = simWBPlayers(m);
-    const race = simRace(a, b);
-    simWB.res[m.n] = { winner: race.winner, loser: race.winner === a ? b : a, tA: race.timeA, tB: race.timeB };
+    simWB.res[m.n] = simPlaySeries(a, b, mode);
   });
   simWB.step++;
 }
@@ -2284,9 +2337,10 @@ function simRenderWB() {
     const cls = r ? (r.winner === p ? ' is-win' : ' is-lose') : '';
     const time = r ? (i === 0 ? r.tA : r.tB) : null;
     const seed = m.kind === 'w' && m.round === 0 && i === 0 ? `<span class="slot-seed">${simWB.r16[m.idx].seedA}</span>` : '';
-    return `<div class="slot${cls}">${seed}<span class="slot-name">${nameWithFlag(p.name)}</span>${time != null ? `<span class="slot-time">${esc(simFormatRaceTime(time))}</span>` : ''}</div>`;
+    const score = r && r.games > 1 ? `<span class="slot-score">${i === 0 ? r.wa : r.wb}</span>` : '';
+    return `<div class="slot${cls}">${seed}<span class="slot-name">${nameWithFlag(p.name)}</span>${time != null ? `<span class="slot-time">${esc(simFormatRaceTime(time))}</span>` : ''}${score}</div>`;
   };
-  const card = m => `<div class="match is-${m.kind}" data-mid="${m.id}"><span class="match-num">M${m.n}</span>${slot(m, 0)}${slot(m, 1)}</div>`;
+  const card = m => `<div class="match is-${m.kind}" data-mid="${m.id}"><span class="match-num">M${m.n}${res[m.n] ? ` · <span class="match-fmt">${res[m.n].fmt}</span>` : ''}</span>${slot(m, 0)}${slot(m, 1)}</div>`;
   const round = (title, ms) => `<div class="round"><div class="round-title">${esc(title)}</div><div class="round-inner">${ms.map(card).join('')}</div></div>`;
 
   simWBLinks = model.links;
@@ -2368,33 +2422,33 @@ function renderSimulator() {
 
   const racesEl = document.getElementById('sim-log-races');
   if (racesEl) {
-    racesEl.innerHTML = '';
-    for (let g = 1; g <= SIM_NUM_GROUPS; g++) {
-      const col = document.createElement('div');
-      const races = simLastRaces.filter(r => r.group === g);
-      col.innerHTML = `<div class="sim-log-group-label">${esc(labels[g])}</div>` +
-        races.map(r => `<div class="sim-log-line">${t('sim.raceResult', {
-          a: esc(r.a), timeA: simFormatRaceTime(r.timeA), b: esc(r.b), timeB: simFormatRaceTime(r.timeB),
-          winner: esc(r.winner), margin: simFormatMargin(r.margin),
-        })}</div>`).join('');
-      racesEl.appendChild(col);
-    }
-  }
-
-  const movesEl = document.getElementById('sim-log-moves');
-  if (movesEl) {
-    if (simLastMoves.length) {
-      const byBoundary = {};
-      simLastMoves.forEach(m => { (byBoundary[m.boundary] = byBoundary[m.boundary] || []).push(m); });
-      movesEl.innerHTML = Object.keys(byBoundary).sort().map(b => {
-        const [ga, gb] = b.split('-');
-        return `<div class="sim-log-group-label">${esc(t('sim.boundaryLabel', { a: ga, b: gb }))}</div>` +
-          byBoundary[b].map(m => `
-            <div class="sim-log-line">${t('sim.moveUp', { name: esc(m.up.name), group: m.toGroup, time: simFormatSeconds(m.timeUp) })}</div>
-            <div class="sim-log-line">${t('sim.moveDown', { name: esc(m.down.name), group: m.fromGroup, time: simFormatSeconds(m.timeDown) })}</div>`).join('');
+    if (!simLastRaces.length) { racesEl.innerHTML = ''; }
+    else {
+      // Una fila por carrera: ganador vs perdedor y a que grupo va cada uno
+      const where = (name, g, won) => {
+        if (won) return g === 1
+          ? `<b>${esc(name)}</b> ${t('sim.stays', { g })}`
+          : `<span class="sim-move-up">▲</span> <b>${esc(name)}</b> ${t('sim.movesUp', { g: g - 1 })}`;
+        return g === SIM_NUM_GROUPS
+          ? `<b>${esc(name)}</b> ${t('sim.stays', { g })}`
+          : `<span class="sim-move-down">▼</span> <b>${esc(name)}</b> ${t('sim.movesDown', { g: g + 1 })}`;
+      };
+      const rows = simLastRaces.map((r, i) => {
+        const aWon = r.winner === r.a;
+        const wName = aWon ? r.a : r.b, lName = aWon ? r.b : r.a;
+        const wTime = aWon ? r.timeA : r.timeB, lTime = aWon ? r.timeB : r.timeA;
+        return `<tr class="sim-log-g${r.group}">
+          <td class="sl-n">${i + 1}</td>
+          <td class="sl-g">G${r.group}</td>
+          <td class="sl-w"><b>${esc(wName)}</b> <span class="sl-time">${simFormatRaceTime(wTime)}</span></td>
+          <td class="sl-l"><b>${esc(lName)}</b> <span class="sl-time">${simFormatRaceTime(lTime)}</span></td>
+          <td class="sl-d">${simFormatMargin(r.margin)}</td>
+          <td class="sl-m">${where(wName, r.group, true)}<span class="sl-sep"> · </span>${where(lName, r.group, false)}</td>
+        </tr>`;
       }).join('');
-    } else {
-      movesEl.innerHTML = '';
+      racesEl.innerHTML = `<div class="table-scroll"><table class="sim-log-table">
+        <thead><tr><th>#</th><th>${esc(t('sim.logColGroup'))}</th><th>${esc(t('sim.logColWinner'))}</th><th>${esc(t('sim.logColLoser'))}</th><th>${esc(t('sim.logColMargin'))}</th><th>${esc(t('sim.logColMove'))}</th></tr></thead>
+        <tbody>${rows}</tbody></table></div>`;
     }
   }
 

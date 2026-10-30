@@ -1644,3 +1644,41 @@ a.brand:hover .brand-name { color: #fff; text-shadow: 0 0 12px rgba(225, 70, 44,
 #simulations h3 { font-size: 1.5rem; }
 #simulations th { font-size: 1.05rem; }
 #simulations .round-title { font-size: 1.2rem; }
+
+/* Resultados de cada ronda: una sola tabla ancha, una carrera por fila */
+.sim-log-panel { padding-left: 1.2rem; padding-right: 1.2rem; }
+.sim-log-table { width: 100%; border-collapse: collapse; font-size: 1.05rem; }
+.sim-log-table th { text-align: left; padding: .5rem .7rem; border-bottom: 1px solid var(--frame); white-space: nowrap; color: var(--accent-bright); }
+.sim-log-table td { padding: .45rem .7rem; border-bottom: 1px dotted rgba(255, 255, 255, .12); vertical-align: top; color: var(--text-dim); }
+.sim-log-table td b { color: #fff; font-weight: 600; }
+.sim-log-table .sl-n { color: var(--text-muted); width: 2rem; }
+.sim-log-table .sl-g { white-space: nowrap; color: var(--accent-bright); }
+.sim-log-table .sl-time, .sim-log-table .sl-d { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.sim-log-table .sl-m { line-height: 1.5; }
+.sim-log-table tr.sim-log-g2 td, .sim-log-table tr.sim-log-g3 td { }
+.sim-log-table tr:hover td { background: rgba(255, 255, 255, .04); }
+.sim-log-table td.sl-m .sim-move-up, .sim-log-table td.sl-m .sim-move-down { font-size: .85em; }
+.sim-log-table { font-size: 1rem; }
+.sim-log-table th, .sim-log-table td { padding: .4rem .55rem; white-space: nowrap; }
+.sim-log-table .sl-m { line-height: 1.4; }
+.sim-log-table .sl-sep { color: var(--text-muted); }
+.sim-log-table tr.sim-log-g2 td { background: rgba(255, 255, 255, .02); }
+.sim-log-table tbody tr:nth-child(4n) td, .sim-log-table tbody tr:nth-child(8n) td { border-bottom: 1px solid var(--frame); }
+
+/* ancho completo para que cada carrera entre en una linea */
+.sim-log-panel { width: min(97vw, 1640px); max-width: none; margin-left: 50%; transform: translateX(-50%); box-sizing: border-box; }
+.sim-log-table { font-size: .94rem; }
+.sim-log-table th, .sim-log-table td { padding: .38rem .45rem; }
+.sim-log-table .sl-n { width: 1.6rem; }
+@media (max-width: 900px) { .sim-log-panel { width: 100%; margin-left: 0; transform: none; } }
+.sim-log-panel { margin-left: calc(50% - min(97vw, 1640px) / 2); transform: none; }
+.sim-log-table { font-size: .92rem; }
+.sim-log-table th, .sim-log-table td { padding: .34rem .38rem; }
+@media (max-width: 900px) { .sim-log-panel { margin-left: 0; } }
+
+/* Simulaciones: mas ancho (como Brackets) para que el cuadro se vea grande */
+body[data-tab="simulations"] main { max-width: min(1880px, 100%); }
+.sim-log-panel { padding-left: .8rem; padding-right: .8rem; }
+.bracket-canvas { will-change: auto; }
+.slot-score { margin-left: .4rem; min-width: 1.1rem; text-align: center; font-family: var(--font-grunge); font-weight: 700; color: var(--gold); }
+.match-fmt { color: var(--gold); font-family: var(--font-grunge); font-size: .85em; letter-spacing: .04em; }
