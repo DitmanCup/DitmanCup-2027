@@ -46,6 +46,7 @@ const RUNNER_FLAGS = {
   shimarisu: 'JP',
 
   frit: 'US',
+  derekt21288: 'GB-SCT',
   majorrichy: 'US',
 
   seppp: 'ID',
@@ -779,6 +780,7 @@ function flagCode(input) {
   const ri = [...s].map(c => c.codePointAt(0)).filter(cp => cp >= 0x1F1E6 && cp <= 0x1F1FF);
   if (ri.length === 2) return String.fromCharCode(...ri.map(cp => cp - 0x1F1E6 + 97));
   if (/^[A-Za-z]{2}$/.test(s)) return s.toLowerCase();
+  if (/^[A-Za-z]{2}-[A-Za-z]{2,3}$/.test(s)) return s.toLowerCase();   // subdivisiones: GB-SCT (Escocia)...
   return (COUNTRY_CODES[s.toLowerCase()] || '').toLowerCase();
 }
 
@@ -1999,19 +2001,20 @@ const SIM_SEED_ORDER = [1, 8, 4, 5, 2, 7, 3, 6]; // sembrado clásico de 8 cabez
 
 const SIM_RUNNER_NAMES = [
   'JokerUY', 'Sawken', 'Missing', 'seppp', 'Frit', '4rcadan', 'OtakuXD', 'Pochoide',
-  'ChampT', 'TheNevs', 'Zudinn', 'MikeWavRR', 'MateoUsh27', 'Youcri', 'VAL', 'Muh',
-  'Pixiesaki', 'novi_fan', 'MattGael', 'manboo', 'Lu1u', 'Matiuss', 'abdou_mz', 'luis_sera',
-  'Gui19', 'Razie', 'aqbilghilman', 'doradori_dolph', 'Nobu_22', 'HannNrY', 'MajorRichy', 'InfamousLol8',
+  'DerekT21288', 'ChampT', 'TheNevs', 'Zudinn', 'MikeWavRR', 'MateoUsh27', 'Youcri', 'luis_sera',
+  'VAL', 'Muh', 'Pixiesaki', 'novi_fan', 'MattGael', 'manboo', 'Lu1u', 'Matiuss',
+  'abdou_mz', 'Gui19', 'Razie', 'aqbilghilman', 'doradori_dolph', 'Nobu_22', 'HannNrY', 'MajorRichy',
 ];
 // PBs de speedrun.com/re4steam (New Game, Professional, Single Segment, 60 FPS;
 // tiempo sin loads, en segundos redondeados hacia abajo), mismo orden que SIM_RUNNER_NAMES
 // (de menor a mayor: los primeros 8 son el Top 8 directo). Actualizado el 30/10/2026.
 // Equivalencias: ChampT = MRChampT01, VAL = _VAL_, Muh = MUHnster, aqbilghilman = aqbilghilman_.
+// luis_sera: 1:24:10 (PB indicado por el organizador). DerekT21288 entra por pedido (runner OG); sale InfamousLol8 (el mas lento).
 const SIM_RUNNER_PBS = [
   '1:21:04', '1:21:27', '1:21:48', '1:21:48', '1:21:57', '1:22:01', '1:22:14', '1:22:30',
-  '1:23:26', '1:23:35', '1:23:37', '1:23:42', '1:23:43', '1:23:46', '1:24:19', '1:24:20',
-  '1:24:27', '1:24:40', '1:24:41', '1:24:48', '1:24:52', '1:24:58', '1:24:59', '1:25:06',
-  '1:25:19', '1:25:26', '1:25:26', '1:25:33', '1:25:35', '1:25:45', '1:26:10', '1:26:23',
+  '1:22:54', '1:23:26', '1:23:35', '1:23:37', '1:23:42', '1:23:43', '1:23:46', '1:24:10',
+  '1:24:19', '1:24:20', '1:24:27', '1:24:40', '1:24:41', '1:24:48', '1:24:52', '1:24:58',
+  '1:24:59', '1:25:19', '1:25:26', '1:25:26', '1:25:33', '1:25:35', '1:25:45', '1:26:10',
 ];
 
 // Reservas: runners de speedrun.com con PB menor a 1:30:00 y run de los ultimos 12 meses
