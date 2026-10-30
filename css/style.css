@@ -1682,3 +1682,17 @@ body[data-tab="simulations"] main { max-width: min(1880px, 100%); }
 .bracket-canvas { will-change: auto; }
 .slot-score { margin-left: .4rem; min-width: 1.1rem; text-align: center; font-family: var(--font-grunge); font-weight: 700; color: var(--gold); }
 .match-fmt { color: var(--gold); font-family: var(--font-grunge); font-size: .85em; letter-spacing: .04em; }
+
+/* Panel "Try yourself" (reservas del simulador) */
+.sim-swap { margin: 0 0 1.4rem; border: 1px solid var(--frame); background: rgba(9, 8, 6, .8); padding: .8rem 1.1rem; }
+.sim-swap > summary { cursor: pointer; font-family: var(--font-grunge); font-size: 1.25rem; color: var(--gold); }
+.sim-swap .section-note { margin: .6rem 0; }
+.sim-swap-row { display: flex; flex-wrap: wrap; align-items: center; gap: .7rem 1rem; }
+.sim-swap-row label { display: inline-flex; align-items: center; gap: .5rem; font-family: var(--font-grunge); font-size: 1.1rem; color: var(--text-dim); }
+.sim-swap select, .sim-swap input {
+  background: var(--surface); color: var(--text); border: 1px solid var(--border);
+  font-family: var(--font-grunge); font-size: 1.05rem; padding: .35rem .5rem; border-radius: 2px; max-width: 16rem;
+}
+.sim-swap-custom { display: inline-flex; gap: .5rem; }
+.sim-swap-custom[hidden] { display: none; }
+.sim-swap-custom input { width: 9rem; }

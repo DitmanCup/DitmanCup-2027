@@ -11,7 +11,7 @@
 <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png?v=4">
 <link rel="apple-touch-icon" href="assets/icons/icon-192.png?v=4">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/7.2.3/css/flag-icons.min.css">
-<link rel="stylesheet" href="css/style.css?v=20261030i">
+<link rel="stylesheet" href="css/style.css?v=20261030j">
 </head>
 <body data-tab="inicio">
 
@@ -179,6 +179,22 @@
       <p class="section-note" data-i18n="sim.directNote">The 8 fastest qualifier times skip the group stage entirely: they're seeded straight into the Round of 16.</p>
       <div id="sim-direct-list"></div>
     </div>
+
+    <details class="sim-swap" id="sim-swap">
+      <summary data-i18n="sim.swapTitle">Try yourself: swap a runner for a reserve</summary>
+      <p class="section-note" data-i18n="sim.swapNote">If you are not among the 32 in the simulator, pick who to replace and jump in.</p>
+      <div class="sim-swap-row">
+        <label><span data-i18n="sim.swapOut">Replace</span> <select id="sim-swap-out"></select></label>
+        <label><span data-i18n="sim.swapIn">with</span> <select id="sim-swap-in"></select></label>
+        <span class="sim-swap-custom" id="sim-swap-custom" hidden>
+          <input type="text" id="sim-swap-name" maxlength="24" placeholder="Name" data-i18n-attr="placeholder:sim.swapName" autocomplete="off">
+          <input type="text" id="sim-swap-pb" maxlength="7" placeholder="1:25:30" data-i18n-attr="placeholder:sim.swapPb" autocomplete="off">
+        </span>
+        <button type="button" class="btn-sim btn-sim-primary" id="sim-swap-apply" data-i18n="sim.swapApply">Swap</button>
+        <button type="button" class="btn-sim btn-sim-ghost" id="sim-swap-restore" data-i18n="sim.swapRestore">Restore original roster</button>
+      </div>
+      <p class="section-note" id="sim-swap-msg" hidden></p>
+    </details>
 
     <div class="sim-controls">
       <span class="sim-badge"><span data-i18n="sim.dateBadge">Round</span> <span id="sim-fecha-counter">0</span> / 4</span>
@@ -380,6 +396,6 @@
   </div>
 </div>
 
-<script src="js/script.js?v=20261030i"></script>
+<script src="js/script.js?v=20261030j"></script>
 </body>
 </html>

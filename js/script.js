@@ -450,6 +450,20 @@ const I18N = {
     'sim.stays': 'se queda en Grupo {g}',
     'sim.movesUp': 'sube a Grupo {g}',
     'sim.movesDown': 'baja a Grupo {g}',
+    'sim.swapTitle': 'Probate vos: cambia a un runner por una reserva',
+    'sim.swapNote': 'Si no estas entre los 32 del simulador y queres ver como te iria, elegi a quien reemplazar y entra vos (o cualquiera de las reservas: PB menor a 1:30:00 y run del ultimo año). Tambien podes escribir un nombre y un PB a mano. Se reordena por PB y el simulador se reinicia.',
+    'sim.swapOut': 'Reemplazar a',
+    'sim.swapIn': 'por',
+    'sim.swapCustom': 'Otro (escribir nombre y PB)…',
+    'sim.swapName': 'Nombre',
+    'sim.swapPb': 'PB (H:MM:SS)',
+    'sim.swapApply': 'Cambiar',
+    'sim.swapRestore': 'Volver al plantel original',
+    'sim.swapBadName': 'Escribi un nombre (maximo 24 caracteres).',
+    'sim.swapBadPb': 'El PB tiene que ser H:MM:SS, entre 1:00:00 y 2:30:00 (ej. 1:25:30).',
+    'sim.swapDup': 'Ese nombre ya esta en el simulador.',
+    'sim.swapDone': '{name} entra al simulador en lugar de {out}. Se reordeno por PB y se reinicio.',
+    'sim.swapRestored': 'Plantel original restaurado.',
     'sim.group1': 'Grupo 1',
     'sim.group2': 'Grupo 2',
     'sim.group3': 'Grupo 3',
@@ -683,6 +697,20 @@ const I18N = {
     'sim.stays': 'stays in Group {g}',
     'sim.movesUp': 'moves up to Group {g}',
     'sim.movesDown': 'moves down to Group {g}',
+    'sim.swapTitle': 'Try yourself: swap a runner for a reserve',
+    'sim.swapNote': 'If you are not among the 32 in the simulator and want to see how you would do, pick who to replace and jump in (or any of the reserves: PB under 1:30:00 and a run in the last year). You can also type a name and a PB by hand. The roster is re-sorted by PB and the simulator restarts.',
+    'sim.swapOut': 'Replace',
+    'sim.swapIn': 'with',
+    'sim.swapCustom': 'Other (type a name and PB)…',
+    'sim.swapName': 'Name',
+    'sim.swapPb': 'PB (H:MM:SS)',
+    'sim.swapApply': 'Swap',
+    'sim.swapRestore': 'Restore original roster',
+    'sim.swapBadName': 'Type a name (24 characters max).',
+    'sim.swapBadPb': 'The PB must be H:MM:SS, between 1:00:00 and 2:30:00 (e.g. 1:25:30).',
+    'sim.swapDup': 'That name is already in the simulator.',
+    'sim.swapDone': '{name} joins the simulator in place of {out}. Re-sorted by PB and restarted.',
+    'sim.swapRestored': 'Original roster restored.',
     'sim.group1': 'Group 1',
     'sim.group2': 'Group 2',
     'sim.group3': 'Group 3',
@@ -879,6 +907,7 @@ function applyLang(lang) {
   renderClips();
   renderLive();
   renderSimulator();
+  if (typeof simSwapRefresh === 'function') simSwapRefresh();
 }
 
 function showTestBanner() {
@@ -2018,8 +2047,8 @@ const SIM_RUNNER_PBS = [
 ];
 
 // Reservas: runners de speedrun.com con PB menor a 1:30:00 y run de los ultimos 12 meses
-// que NO estan en el simulador. Para meterlos, agregalos a las dos listas de arriba
-// (y saca a otro) manteniendo el orden por PB. Formato: [puesto en la leaderboard, nombre, PB, fecha del run]
+// que NO estan en el simulador. Se pueden meter desde el panel "Try yourself" de la pestana
+// Simulations (cambian a un runner del simulador). Formato: [puesto en la leaderboard, nombre, PB, fecha del run]
 const SIM_SUBSTITUTES = [
   [13, 'eidenfir', '1:23:39', '2026-07-26'],
   [27, 'JoydurnYup', '1:24:54', '2026-05-29'],
@@ -2028,6 +2057,7 @@ const SIM_SUBSTITUTES = [
   [44, 'erOotea', '1:26:18', '2026-08-12'],
   [45, 'NETJU', '1:26:21', '2026-08-25'],
   [47, '_slifer_', '1:26:23', '2026-02-28'],
+  [46, 'InfamousLol8', '1:26:23', '2026-01-10'],
   [51, 'Egg_Cangying', '1:26:35', '2026-08-01'],
   [52, 'ShulaRune', '1:26:35', '2026-08-16'],
   [54, 'Vechman', '1:26:38', '2026-10-08'],
@@ -2089,12 +2119,17 @@ let simBracketPool = [];
 let simBracketAssignments = [];
 let simBracketDrawIndex = 0;
 
+// Plantel del simulador (se puede modificar desde el panel de reservas)
+let simRoster = null;
+function simRosterDefault() { return SIM_RUNNER_NAMES.map((name, i) => ({ name, pb: SIM_RUNNER_PBS[i] })); }
+
 function simInitRunners() {
-  simRunners = SIM_RUNNER_NAMES.map((name, i) => ({
+  if (!simRoster) simRoster = simRosterDefault();
+  simRunners = simRoster.map(({ name, pb }, i) => ({
     id: i + 1,
     name,
-    pbSeconds: simParseTime(SIM_RUNNER_PBS[i]),
-    pbLabel: SIM_RUNNER_PBS[i],
+    pbSeconds: simParseTime(pb),
+    pbLabel: pb,
     // top 8 por PB real: clasifican directo a Octavos, no juegan la fase de
     // grupos (group=0). El resto (24) forma 3 grupos de 8.
     group: i < 8 ? 0 : Math.floor((i - 8) / SIM_GROUP_SIZE) + 1,
@@ -2552,9 +2587,63 @@ function simRenderRanking(qualifiedIds) {
     </table></div>`;
 }
 
+// Panel "Try yourself": cambia a un runner del simulador por una reserva (o un nombre/PB a mano)
+let simSwapRefresh = null;
+function initSimSwap() {
+  const outSel = document.getElementById('sim-swap-out');
+  const inSel = document.getElementById('sim-swap-in');
+  if (!outSel || !inSel) return;
+  const customBox = document.getElementById('sim-swap-custom');
+  const msg = document.getElementById('sim-swap-msg');
+  const say = (key, vars) => { msg.hidden = !key; if (key) msg.textContent = t(key, vars); };
+
+  const fill = () => {
+    outSel.innerHTML = simRoster.map((r, i) => `<option value="${i}">${esc(r.name)} · ${esc(r.pb)}</option>`).join('');
+    const used = new Set(simRoster.map(r => r.name.toLowerCase()));
+    inSel.innerHTML = SIM_SUBSTITUTES.filter(r => !used.has(r[1].toLowerCase()))
+      .map(r => `<option value="${esc(r[1])}|${esc(r[2])}">${esc(r[1])} · ${esc(r[2])}</option>`).join('')
+      + `<option value="__custom">${esc(t('sim.swapCustom'))}</option>`;
+    customBox.hidden = inSel.value !== '__custom';
+  };
+  if (!simRoster) simRoster = simRosterDefault();
+  fill();
+  inSel.addEventListener('change', () => { customBox.hidden = inSel.value !== '__custom'; });
+
+  document.getElementById('sim-swap-apply').addEventListener('click', () => {
+    let name, pb;
+    if (inSel.value === '__custom') {
+      name = document.getElementById('sim-swap-name').value.trim();
+      pb = document.getElementById('sim-swap-pb').value.trim();
+      if (!name || name.length > 24) return say('sim.swapBadName');
+      if (!/^[1-2]:[0-5]\d:[0-5]\d$/.test(pb) || simParseTime(pb) < 3600 || simParseTime(pb) > 9000) return say('sim.swapBadPb');
+      if (simRoster.some(r => r.name.toLowerCase() === name.toLowerCase())) return say('sim.swapDup');
+    } else {
+      [name, pb] = inSel.value.split('|');
+    }
+    const outIdx = Number(outSel.value);
+    const outName = simRoster[outIdx].name;
+    simRoster[outIdx] = { name, pb };
+    simRoster.sort((a, b) => simParseTime(a.pb) - simParseTime(b.pb));
+    simInitRunners();
+    renderSimulator();
+    fill();
+    say('sim.swapDone', { name, out: outName });
+  });
+  document.getElementById('sim-swap-restore').addEventListener('click', () => {
+    simRoster = simRosterDefault();
+    simInitRunners();
+    renderSimulator();
+    fill();
+    say('sim.swapRestored');
+  });
+  // al cambiar de idioma se vuelve a armar el selector (la opcion "Otro")
+  simSwapRefresh = fill;
+}
+
 function initSimulator() {
   if (!document.getElementById('sim-groups')) return;
   simInitRunners();
+  initSimSwap();
 
   const on = (id, fn) => { const el = document.getElementById(id); if (el) el.addEventListener('click', fn); };
   on('sim-btn-next', simAdvanceFecha);
