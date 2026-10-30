@@ -11,7 +11,7 @@
 <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png?v=4">
 <link rel="apple-touch-icon" href="assets/icons/icon-192.png?v=4">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/7.2.3/css/flag-icons.min.css">
-<link rel="stylesheet" href="css/style.css?v=20261030a">
+<link rel="stylesheet" href="css/style.css?v=20261030b">
 </head>
 <body data-tab="inicio">
 
@@ -139,7 +139,7 @@
 
     <div class="sim-intro">
       <div class="sim-rule"><span class="sim-rule-label" data-i18n="sorteo.r1.l">What is drawn</span><span class="sim-rule-text" data-i18n="sorteo.r1.t">Not the groups: the matchups. Your group comes from the qualifier ranking and the draw decides who you face inside it.</span></div>
-      <div class="sim-rule"><span class="sim-rule-label" data-i18n="sorteo.r2.l">When</span><span class="sim-rule-text" data-i18n="sorteo.r2.t">A new live draw before each matchday, once the previous results have moved runners between groups.</span></div>
+      <div class="sim-rule"><span class="sim-rule-label" data-i18n="sorteo.r2.l">When</span><span class="sim-rule-text" data-i18n="sorteo.r2.t">A new live draw before each round, once the previous results have moved runners between groups.</span></div>
       <div class="sim-rule"><span class="sim-rule-label" data-i18n="sorteo.r3.l">Where</span><span class="sim-rule-text" data-i18n="sorteo.r3.t">Live on twitch.tv/ditmancup. Matchups appear below with day and time.</span></div>
       <div class="sim-rule"><span class="sim-rule-label" data-i18n="sorteo.r4.l">Top 8</span><span class="sim-rule-text" data-i18n="sorteo.r4.t">Straight to the Round of 16: they skip the groups, so they are not drawn.</span></div>
     </div>
@@ -167,10 +167,10 @@
     <h2 data-i18n="sim.title">Simulator — Nations League–style format</h2>
     <div class="sim-intro">
       <div class="sim-rule"><span class="sim-rule-label" data-i18n="sim.r1.l">Direct</span><span class="sim-rule-text" data-i18n="sim.r1.t">The Top 8 from qualifiers skip the groups and go straight to the Round of 16.</span></div>
-      <div class="sim-rule"><span class="sim-rule-label" data-i18n="sim.r2.l">Groups</span><span class="sim-rule-text" data-i18n="sim.r2.t">The other 24 play 3 groups of 8 over 4 matchdays. One BO1 per matchday, inside your group.</span></div>
+      <div class="sim-rule"><span class="sim-rule-label" data-i18n="sim.r2.l">Groups</span><span class="sim-rule-text" data-i18n="sim.r2.t">The other 24 play 3 groups of 8 over 4 rounds. One BO1 per round, inside your group.</span></div>
       <div class="sim-rule"><span class="sim-rule-label" data-i18n="sim.r3.l">Movement</span><span class="sim-rule-text" data-i18n="sim.r3.t">Win and you move up a group. Lose and you move down.</span></div>
       <div class="sim-rule"><span class="sim-rule-label" data-i18n="sim.r4.l">Points</span><span class="sim-rule-text" data-i18n="sim.r4.t">Win: 2 pts in Group 1, 1 pt in Groups 2 and 3. Lose by under 30s: bonus of +1 (Group 1) or +0.5 (Groups 2 and 3).</span></div>
-      <div class="sim-rule"><span class="sim-rule-label" data-i18n="sim.r5.l">Qualify</span><span class="sim-rule-text" data-i18n="sim.r5.t">After matchday 4 the 8 best by points join the Round of 16. Tiebreak: average of your 2 best races.</span></div>
+      <div class="sim-rule"><span class="sim-rule-label" data-i18n="sim.r5.l">Qualify</span><span class="sim-rule-text" data-i18n="sim.r5.t">After round 4 the 8 best by points join the Round of 16. Tiebreak: average of your 2 best races.</span></div>
       <p class="sim-proposal" data-i18n="sim.proposal">Format proposal — not final yet.</p>
     </div>
 
@@ -181,8 +181,8 @@
     </div>
 
     <div class="sim-controls">
-      <span class="sim-badge"><span data-i18n="sim.dateBadge">Matchday</span> <span id="sim-fecha-counter">0</span> / 4</span>
-      <button type="button" class="btn-sim btn-sim-primary" id="sim-btn-next" data-i18n="sim.btnNext">Simulate next matchday</button>
+      <span class="sim-badge"><span data-i18n="sim.dateBadge">Round</span> <span id="sim-fecha-counter">0</span> / 4</span>
+      <button type="button" class="btn-sim btn-sim-primary" id="sim-btn-next" data-i18n="sim.btnNext">Simulate next round</button>
       <button type="button" class="btn-sim" id="sim-btn-next5" data-i18n="sim.btnNext5">Simulate to the end</button>
       <button type="button" class="btn-sim btn-sim-ghost" id="sim-btn-reset" data-i18n="sim.btnReset">Reset</button>
     </div>
@@ -200,14 +200,14 @@
     <div class="groups-grid sim-groups" id="sim-groups"></div>
 
     <div class="sim-log-panel">
-      <h3 id="sim-log-title" data-i18n="sim.logTitleEmpty">No matchday played yet</h3>
+      <h3 id="sim-log-title" data-i18n="sim.logTitleEmpty">No round played yet</h3>
       <div class="sim-log-cols" id="sim-log-races"></div>
       <div class="sim-log-moves" id="sim-log-moves"></div>
     </div>
 
     <div class="sim-bracket-panel" id="sim-bracket-panel">
       <h3 data-i18n="sim.bracketTitle">Round of 16</h3>
-      <p class="section-note" id="sim-bracket-locked" data-i18n="sim.bracketLocked">Finish all 4 matchdays to unlock the Round of 16 draw.</p>
+      <p class="section-note" id="sim-bracket-locked" data-i18n="sim.bracketLocked">Finish all 4 rounds to unlock the Round of 16 draw.</p>
       <p class="section-note" id="sim-bracket-explainer" data-i18n="sim.bracketExplainer" hidden>The 8 from Group 1 keep the classic seeding. Draw them against the 8 from Group 2 to complete the bracket.</p>
       <div class="sim-controls" id="sim-bracket-controls" hidden>
         <button type="button" class="btn-sim btn-sim-primary" id="sim-btn-draw-next" data-i18n="sim.btnDrawNext">Draw next</button>
@@ -381,6 +381,6 @@
   </div>
 </div>
 
-<script src="js/script.js?v=20261030a"></script>
+<script src="js/script.js?v=20261030b"></script>
 </body>
 </html>
