@@ -1998,17 +1998,57 @@ function simLossBonus(group, margin) {
 const SIM_SEED_ORDER = [1, 8, 4, 5, 2, 7, 3, 6]; // sembrado clásico de 8 cabezas de serie
 
 const SIM_RUNNER_NAMES = [
-  'JokerUY', 'Sawken', '4rcadan', 'Missing', 'seppp', 'Frit', 'Pochoide', 'OtakuXD',
-  'TheNevs', 'Youcri', 'ChampT', 'MikeWavRR', 'MateoUsh27', 'Muh', 'Pixiesaki', 'MattGael',
-  'Zudinn', 'Lu1u', 'luis_sera', 'manboo', 'novi_fan', 'aqbilghilman', 'abdou_mz', 'doradori_dolph',
-  'VAL', 'Gui19', 'Razie', 'Nobu_22', 'MajorRichy', 'HannNrY', 'InfamousLol8', 'Matiuss',
+  'JokerUY', 'Sawken', 'Missing', 'seppp', 'Frit', '4rcadan', 'OtakuXD', 'Pochoide',
+  'ChampT', 'TheNevs', 'Zudinn', 'MikeWavRR', 'MateoUsh27', 'Youcri', 'VAL', 'Muh',
+  'Pixiesaki', 'novi_fan', 'MattGael', 'manboo', 'Lu1u', 'Matiuss', 'abdou_mz', 'luis_sera',
+  'Gui19', 'Razie', 'aqbilghilman', 'doradori_dolph', 'Nobu_22', 'HannNrY', 'MajorRichy', 'InfamousLol8',
 ];
-// PBs reales, mismo orden que SIM_RUNNER_NAMES (formato H:MM:SS)
+// PBs de speedrun.com/re4steam (New Game, Professional, Single Segment, 60 FPS;
+// tiempo sin loads, en segundos redondeados hacia abajo), mismo orden que SIM_RUNNER_NAMES
+// (de menor a mayor: los primeros 8 son el Top 8 directo). Actualizado el 30/10/2026.
+// Equivalencias: ChampT = MRChampT01, VAL = _VAL_, Muh = MUHnster, aqbilghilman = aqbilghilman_.
 const SIM_RUNNER_PBS = [
-  '1:21:04', '1:21:27', '1:21:31', '1:21:48', '1:21:48', '1:21:57', '1:22:00', '1:22:21',
-  '1:23:05', '1:23:16', '1:23:41', '1:23:42', '1:23:43', '1:23:50', '1:24:10', '1:24:11',
-  '1:24:19', '1:24:22', '1:24:30', '1:24:48', '1:24:52', '1:24:56', '1:24:59', '1:25:00',
-  '1:25:03', '1:25:06', '1:25:19', '1:25:35', '1:25:40', '1:25:45', '1:25:53', '1:25:59',
+  '1:21:04', '1:21:27', '1:21:48', '1:21:48', '1:21:57', '1:22:01', '1:22:14', '1:22:30',
+  '1:23:26', '1:23:35', '1:23:37', '1:23:42', '1:23:43', '1:23:46', '1:24:19', '1:24:20',
+  '1:24:27', '1:24:40', '1:24:41', '1:24:48', '1:24:52', '1:24:58', '1:24:59', '1:25:06',
+  '1:25:19', '1:25:26', '1:25:26', '1:25:33', '1:25:35', '1:25:45', '1:26:10', '1:26:23',
+];
+
+// Reservas: runners de speedrun.com con PB menor a 1:30:00 y run de los ultimos 12 meses
+// que NO estan en el simulador. Para meterlos, agregalos a las dos listas de arriba
+// (y saca a otro) manteniendo el orden por PB. Formato: [puesto en la leaderboard, nombre, PB, fecha del run]
+const SIM_SUBSTITUTES = [
+  [13, 'eidenfir', '1:23:39', '2026-07-26'],
+  [27, 'JoydurnYup', '1:24:54', '2026-05-29'],
+  [40, 'Sachire', '1:26:07', '2025-12-21'],
+  [41, 'Fedo_Kuhaku', '1:26:09', '2026-09-27'],
+  [44, 'erOotea', '1:26:18', '2026-08-12'],
+  [45, 'NETJU', '1:26:21', '2026-08-25'],
+  [47, '_slifer_', '1:26:23', '2026-02-28'],
+  [51, 'Egg_Cangying', '1:26:35', '2026-08-01'],
+  [52, 'ShulaRune', '1:26:35', '2026-08-16'],
+  [54, 'Vechman', '1:26:38', '2026-10-08'],
+  [55, 'alvinnn', '1:26:42', '2026-10-04'],
+  [56, 'Chanwi', '1:26:43', '2026-09-23'],
+  [59, 'Ryllmen', '1:26:47', '2026-08-20'],
+  [61, 'Prastry', '1:26:53', '2026-06-11'],
+  [62, 'Bang_Gori', '1:26:54', '2026-09-01'],
+  [64, 'libee', '1:26:57', '2026-09-25'],
+  [65, 'GLAISON_GAMES_MOBILE', '1:27:01', '2026-05-16'],
+  [66, 'IanPriaMisterius', '1:27:07', '2026-04-21'],
+  [68, 'Clementinee', '1:27:22', '2026-03-24'],
+  [70, 'Dims_jesse', '1:27:27', '2026-07-12'],
+  [71, 'Ornot_ms', '1:27:31', '2026-05-01'],
+  [72, 'fiveskill', '1:27:36', '2026-06-20'],
+  [76, 'FrancoBv17', '1:27:59', '2026-08-17'],
+  [78, 'gabrielsinmarr', '1:28:07', '2026-10-23'],
+  [79, 'NanonSBz', '1:28:09', '2026-10-16'],
+  [83, 'KaykyBeck', '1:28:30', '2026-08-05'],
+  [87, 'Neoxz', '1:28:43', '2026-05-10'],
+  [90, 'oldust_', '1:29:01', '2026-08-13'],
+  [95, 'bigbloo77', '1:29:14', '2026-06-05'],
+  [101, 'Dhannn', '1:29:36', '2026-07-21'],
+  [105, 'redshines', '1:29:57', '2026-07-09'],
 ];
 
 function simParseTime(str) {
