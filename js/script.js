@@ -436,8 +436,6 @@ const I18N = {
     'sim.btnNext': 'Simular siguiente fecha',
     'sim.btnNext5': 'Simular hasta el final',
     'sim.btnReset': 'Reiniciar',
-    'sim.qualifyTitleLive': 'Si el torneo cortara aca, clasifican estos 16 (8 directos + 8 de grupos por puntaje)',
-    'sim.qualifyTitleFinal': 'Torneo terminado — clasificados definitivos (8 directos + 8 de grupos por puntaje)',
     'sim.legendQualified': 'Clasificado a Octavos (Top 8 de la fase de grupos)',
     'sim.legendEliminated': 'Eliminado',
     'sim.directTag': 'clasificado directo',
@@ -667,8 +665,6 @@ const I18N = {
     'sim.btnNext': 'Simulate next matchday',
     'sim.btnNext5': 'Simulate to the end',
     'sim.btnReset': 'Reset',
-    'sim.qualifyTitleLive': 'If the tournament ended now, these 16 would qualify (8 direct + 8 from groups by points)',
-    'sim.qualifyTitleFinal': 'Tournament over — final qualifiers (8 direct + 8 from groups by points)',
     'sim.legendQualified': 'Qualified to Round of 16 (Top 8 from groups)',
     'sim.legendEliminated': 'Eliminated',
     'sim.directTag': 'direct qualifier',
@@ -2341,13 +2337,6 @@ function renderSimulator() {
 
   const top16 = simQualifiers();
   const qualifiedIds = new Set(top16.map(r => r.id));
-  const qualified = top16.map(r => r.isTop8Seed
-    ? `<strong>${nameWithFlag(r.name)}</strong> (${t('sim.directTag')} · ${esc(r.pbLabel)})`
-    : `<strong>${nameWithFlag(r.name)}</strong> (${simFormatPoints(r.points)} pts · ${r.wins}/${simFecha} · G${r.group})`);
-  setText('sim-qualify-title', t(isFinal ? 'sim.qualifyTitleFinal' : 'sim.qualifyTitleLive'));
-  const namesEl = document.getElementById('sim-qualify-names');
-  if (namesEl) namesEl.innerHTML = qualified.join(', ');
-
   const labels = { 1: t('sim.group1'), 2: t('sim.group2'), 3: t('sim.group3') };
 
   panel.innerHTML = '';

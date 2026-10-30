@@ -1634,3 +1634,13 @@ details.sched-day > summary.sched-day-head:hover { background: linear-gradient(9
 /* Logo de arriba clickeable (lleva al Home) */
 a.brand { color: inherit; text-decoration: none; cursor: pointer; }
 a.brand:hover .brand-name { color: #fff; text-shadow: 0 0 12px rgba(225, 70, 44, .6); }
+
+/* Simulador: titulos y encabezados con la fuente legible (Virgula), como los nombres de runners */
+#simulations h3, #simulations h4, #simulations th, #simulations .round-title,
+#simulations .sim-rule-label, #simulations .group-tag, #simulations .sim-badge,
+#simulations .sim-wb-title, #simulations .sim-log-group-label {
+  font-family: var(--font-grunge); letter-spacing: .03em;
+}
+#simulations h3 { font-size: 1.5rem; }
+#simulations th { font-size: 1.05rem; }
+#simulations .round-title { font-size: 1.2rem; }
