@@ -1707,3 +1707,7 @@ body[data-tab="simulations"] main { max-width: min(1880px, 100%); }
 .sim-wb .slot-time { grid-area: time; margin-left: 0; font-size: .85rem; line-height: 1.1; }
 .sim-wb .slot-score { grid-area: score; margin-left: 0; font-size: 1.15rem; }
 .sim-wb .slot:not(:has(.slot-seed)) { grid-template-columns: 1fr auto; grid-template-areas: "name score" "time score"; }
+
+/* History: tarjeta del trofeo con la fuente legible (Virgula), como los nombres de runners */
+.trophy-card h3 { font-family: var(--font-grunge); font-size: 1.6rem; letter-spacing: .03em; text-transform: none; }
+.trophy-card p { font-family: var(--font-grunge); font-size: 1.3rem; letter-spacing: 0; text-transform: none; line-height: 1.4; }
