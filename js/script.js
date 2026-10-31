@@ -288,6 +288,7 @@ const I18N = {
     'facts.qualify': 'clasifican directo',
 
     'trailer.title': 'Ditman Cup 2027: video de anuncio',
+    'hero.emblemAlt': 'Emblema de la Ditman Cup 2027: el trofeo dorado dentro de un aro',
     'intro.title': 'Bienvenidos a la Ditman Cup 2027',
     'intro.lead': 'Todo para seguir el torneo, en un solo lugar.',
     'intro.d1': 'Contra quien jugas y cuando',
@@ -402,7 +403,7 @@ const I18N = {
     'champions.vod': 'Ver final',
     'champions.prize': 'Prize pool',
     'champions.trophyTitle': 'El trofeo',
-    'champions.trophyPending': 'El trofeo de la Ditman Cup 2027 todavia se esta diseñando.',
+    'champions.trophyPending': 'El trofeo oficial de la Ditman Cup 2027.',
     'champions.viewData': 'Ver todos los datos',
     'champions.modalHint': 'Datos originales de la planilla del torneo.',
 
@@ -535,6 +536,7 @@ const I18N = {
     'facts.qualify': 'qualify directly',
 
     'trailer.title': 'Ditman Cup 2027 Announcement video',
+    'hero.emblemAlt': 'Ditman Cup 2027 emblem: the golden trophy inside a ring',
     'intro.title': 'Welcome to the Ditman Cup 2027',
     'intro.lead': 'Everything you need to follow the tournament, in one place.',
     'intro.d1': 'Who you face, and when',
@@ -649,7 +651,7 @@ const I18N = {
     'champions.vod': 'Watch the final',
     'champions.prize': 'Prize pool',
     'champions.trophyTitle': 'The trophy',
-    'champions.trophyPending': 'The Ditman Cup 2027 trophy is still being designed.',
+    'champions.trophyPending': 'The official Ditman Cup 2027 trophy.',
     'champions.viewData': 'View all data',
     'champions.modalHint': 'Original data from the tournament spreadsheet.',
 
@@ -1602,8 +1604,11 @@ function renderChampions() {
 
   host.innerHTML = `
     <div class="trophy-card">
-      <h3>${esc(t('champions.trophyTitle'))}</h3>
-      <p>${esc(t('champions.trophyPending'))}</p>
+      <img class="trophy-logo" src="assets/logo-2027.webp" width="800" height="800" alt="${esc(t('hero.emblemAlt'))}" loading="lazy">
+      <div class="trophy-text">
+        <h3>${esc(t('champions.trophyTitle'))}</h3>
+        <p>${esc(t('champions.trophyPending'))}</p>
+      </div>
     </div>
     <div class="editions">${editions}</div>
   `;

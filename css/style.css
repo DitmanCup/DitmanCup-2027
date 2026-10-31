@@ -1711,3 +1711,10 @@ body[data-tab="simulations"] main { max-width: min(1880px, 100%); }
 /* History: tarjeta del trofeo con la fuente legible (Virgula), como los nombres de runners */
 .trophy-card h3 { font-family: var(--font-grunge); font-size: 1.6rem; letter-spacing: .03em; text-transform: none; }
 .trophy-card p { font-family: var(--font-grunge); font-size: 1.3rem; letter-spacing: 0; text-transform: none; line-height: 1.4; }
+
+/* Emblema del torneo (logo del aro dorado) en el Home y en History */
+.hero-emblem { display: block; width: clamp(130px, 17vw, 200px); height: auto; aspect-ratio: 1; margin: 0 auto 1rem; border-radius: 50%; box-shadow: 0 0 40px rgba(255, 190, 60, .25), 0 0 0 1px rgba(255, 190, 60, .18); }
+.trophy-card { display: flex; align-items: center; gap: 1.4rem; flex-wrap: wrap; }
+.trophy-logo { width: clamp(110px, 16vw, 170px); height: auto; aspect-ratio: 1; border-radius: 50%; flex: none; box-shadow: 0 0 30px rgba(255, 190, 60, .22); }
+.trophy-text { flex: 1 1 14rem; min-width: 0; }
+.trophy-card h3 { margin-top: 0; }
