@@ -288,6 +288,7 @@ const I18N = {
     'facts.qualify': 'clasifican directo',
 
     'trailer.title': 'Ditman Cup 2027: video de anuncio',
+    'trailer.play': 'Reproducir el video de anuncio de la Ditman Cup 2027',
     'intro.title': 'Bienvenidos a la Ditman Cup 2027',
     'intro.lead': 'Todo para seguir el torneo, en un solo lugar.',
     'intro.d1': 'Contra quien jugas y cuando',
@@ -535,6 +536,7 @@ const I18N = {
     'facts.qualify': 'qualify directly',
 
     'trailer.title': 'Ditman Cup 2027 Announcement video',
+    'trailer.play': 'Play the Ditman Cup 2027 announcement video',
     'intro.title': 'Welcome to the Ditman Cup 2027',
     'intro.lead': 'Everything you need to follow the tournament, in one place.',
     'intro.d1': 'Who you face, and when',
@@ -838,6 +840,7 @@ function isMock() {
 document.addEventListener('DOMContentLoaded', () => {
   initLang();
   initTabs();
+  initTrailer();
   initFacts();
   initCountdown();
   initSheetModal();
@@ -919,6 +922,37 @@ function showTestBanner() {
 }
 
 // ======= NAVEGACIÓN POR PESTAÑAS / TABS =======
+// Video del Home: se muestra la miniatura y el reproductor de YouTube (dominio de
+// privacidad ampliada) recien se carga al hacer clic. Al salir del Home se descarga.
+let _trailerFacade = null;
+function initTrailer() {
+  const frame = document.getElementById('trailer-frame');
+  if (!frame) return;
+  _trailerFacade = frame.innerHTML;
+  frame.addEventListener('click', e => {
+    const btn = e.target.closest('#trailer-play');
+    if (!btn) return;
+    const iframe = document.createElement('iframe');
+    iframe.src = `https://www.youtube-nocookie.com/embed/${frame.dataset.yt}?autoplay=1&rel=0&modestbranding=1&hl=${currentLang === 'es' ? 'es' : 'en'}`;
+    iframe.title = t('trailer.title');
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen';
+    iframe.allowFullscreen = true;
+    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+    frame.innerHTML = '';
+    frame.appendChild(iframe);
+  });
+}
+function resetTrailer() {
+  const frame = document.getElementById('trailer-frame');
+  if (frame && _trailerFacade && frame.querySelector('iframe')) {
+    frame.innerHTML = _trailerFacade;
+    frame.querySelectorAll('[data-i18n-attr]').forEach(el => el.getAttribute('data-i18n-attr').split(';').forEach(pair => {
+      const [attr, key] = pair.split(':').map(x => x && x.trim());
+      if (attr && key) el.setAttribute(attr, t(key));
+    }));
+  }
+}
+
 function initTabs() {
   const buttons = Array.from(document.querySelectorAll('.tab-btn[data-tab]'));
   const drop = document.getElementById('nav-drop-btn');
@@ -946,8 +980,7 @@ function initTabs() {
 
     const panel = document.getElementById(btn.dataset.tab);
     panel.classList.add('active');
-    const trailer = document.getElementById('trailer');
-    if (trailer && btn.dataset.tab !== 'inicio') trailer.pause();
+    if (btn.dataset.tab !== 'inicio') resetTrailer();   // corta el video de YouTube al salir del Home
     document.body.dataset.tab = btn.dataset.tab;
     if (btn.dataset.tab === 'brackets' || btn.dataset.tab === 'simulations') { drawAllBracketLines(); requestAnimationFrame(drawAllBracketLines); }
     drop.classList.toggle('active', !!btn.closest('.nav-sub'));
