@@ -420,7 +420,8 @@ const I18N = {
     'live.intro': 'Canales de la comunidad que estan corriendo Resident Evil 4 ahora mismo.',
     'live.on': 'EN VIVO',
     'live.off': 'Desconectado',
-    'live.none': 'Ningun canal de la lista esta en vivo en este momento.',
+    'live.none': 'Ningun canal de la lista esta jugando Resident Evil 4 en este momento.',
+    'live.otherGame': 'En vivo · otro juego',
     'live.watch': 'Ver en Twitch',
     'live.checking': 'Chequeando canales…',
 
@@ -675,7 +676,8 @@ const I18N = {
     'live.intro': 'Community channels running Resident Evil 4 right now.',
     'live.on': 'LIVE',
     'live.off': 'Offline',
-    'live.none': 'No channel from the list is live right now.',
+    'live.none': 'No channel from the list is streaming Resident Evil 4 right now.',
+    'live.otherGame': 'Live · other game',
     'live.watch': 'Watch on Twitch',
     'live.checking': 'Checking channels…',
 
@@ -930,7 +932,8 @@ const I18N = {
     'live.intro': 'Channel komunitas yang sedang menjalankan Resident Evil 4 sekarang.',
     'live.on': 'LIVE',
     'live.off': 'Offline',
-    'live.none': 'Tidak ada channel dari daftar yang sedang live saat ini.',
+    'live.none': 'Tidak ada channel dari daftar yang sedang streaming Resident Evil 4 saat ini.',
+    'live.otherGame': 'Live · game lain',
     'live.watch': 'Tonton di Twitch',
     'live.checking': 'Memeriksa channel…',
 
@@ -2040,8 +2043,10 @@ async function renderLive() {
     || (b.followers - a.followers)
     || a.name.localeCompare(b.name));
 
-  const liveRows = rows.filter(r => r.live);
-  const offRows = rows.filter(r => !r.live);
+  // Arriba (en vivo) solo los que estan jugando Resident Evil 4; el resto va abajo con el roster
+  const isRE4 = r => r.live && /resident\s*evil\s*4/i.test((r.stream.game && r.stream.game.name) || '');
+  const liveRows = rows.filter(isRE4);
+  const offRows = rows.filter(r => !isRE4(r));
 
   const twIcon = '<svg class="ic" aria-hidden="true"><use href="#ic-twitch"/></svg>';
   const ytIcon = '<svg class="ic" aria-hidden="true"><use href="#ic-youtube"/></svg>';
@@ -2064,7 +2069,7 @@ async function renderLive() {
 
   const offCards = offRows.map(r =>
     `<a class="live-card is-off" href="https://twitch.tv/${encodeURIComponent(r.ch)}" target="_blank" rel="noopener">
-       <span class="live-name">${twIcon}${esc(r.name)}</span><span class="live-status">${esc(t('live.off'))}</span>
+       <span class="live-name">${twIcon}${esc(r.name)}</span><span class="live-status">${esc(t(r.live ? 'live.otherGame' : 'live.off'))}</span>
      </a>`);
 
   const ytCards = yt.map(c => {
