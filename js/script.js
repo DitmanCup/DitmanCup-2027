@@ -428,6 +428,8 @@ const I18N = {
     'live.otherGame': 'En vivo · otro juego',
     'live.play': 'Reproducir el stream de',
     'live.watch': 'Ver en Twitch',
+    'live.watchYt': 'Ver en YouTube',
+    'live.watchKick': 'Ver en Kick',
     'live.checking': 'Chequeando canales…',
 
     'footer.text': 'Ditman Cup 2027 · Hecho para la comunidad',
@@ -685,6 +687,8 @@ const I18N = {
     'live.otherGame': 'Live · other game',
     'live.play': 'Play the stream of',
     'live.watch': 'Watch on Twitch',
+    'live.watchYt': 'Watch on YouTube',
+    'live.watchKick': 'Watch on Kick',
     'live.checking': 'Checking channels…',
 
     'footer.text': 'Ditman Cup 2027 · Made for the community',
@@ -942,6 +946,8 @@ const I18N = {
     'live.otherGame': 'Live · game lain',
     'live.play': 'Putar stream dari',
     'live.watch': 'Tonton di Twitch',
+    'live.watchYt': 'Tonton di YouTube',
+    'live.watchKick': 'Tonton di Kick',
     'live.checking': 'Memeriksa channel…',
 
     'footer.text': 'Ditman Cup 2027 · Dibuat untuk komunitas',
@@ -1199,6 +1205,8 @@ const I18N = {
     'live.otherGame': 'Live · 別のゲーム',
     'live.play': '配信を再生：',
     'live.watch': 'Twitchで見る',
+    'live.watchYt': 'YouTubeで見る',
+    'live.watchKick': 'Kickで見る',
     'live.checking': 'チャンネルを確認中…',
 
     'footer.text': 'Ditman Cup 2027 · コミュニティのために',
@@ -2393,6 +2401,7 @@ async function renderLive() {
         <div class="live-meta">
           <span class="live-badge">● ${esc(t('live.on'))}</span>
           <a href="${esc(pageUrl(r))}" target="_blank" rel="noopener">${r.kind === 'yt' ? ytIcon : r.kind === 'kick' ? kickIcon : twIcon}${esc(r.name)}</a>
+          <a class="live-watch live-watch-${r.kind}" href="${esc(pageUrl(r))}" target="_blank" rel="noopener">${r.kind === 'yt' ? ytIcon : r.kind === 'kick' ? kickIcon : twIcon}<span>${esc(t(r.kind === 'yt' ? 'live.watchYt' : r.kind === 'kick' ? 'live.watchKick' : 'live.watch'))}</span></a>
         </div>
       </div>`).join('') + `</div>`;
   } else {
