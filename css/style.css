@@ -1776,3 +1776,5 @@ body[data-tab="simulations"] main { max-width: min(1880px, 100%); }
   .lang-btn { padding: .5rem .7rem; }
   .lang-btn .fi { font-size: 1.35rem; }
 }
+.live-card.is-kick .ic, .live-meta a .ic { flex: none; }
+.live-card.is-kick .ic { color: #53FC18; }

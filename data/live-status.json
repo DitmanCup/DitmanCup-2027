@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-01T20:09:01.887Z",
-  "channels": {
+  "updatedAt": "2026-11-01T20:48:07.743Z",
+  "youtube": {
     "seppp": {
       "live": false
     },
@@ -27,6 +27,13 @@
     },
     "VAL": {
       "live": false
+    }
+  },
+  "kick": {
+    "chacoide": {
+      "name": "chacoide",
+      "live": false,
+      "followers": 7768
     }
   }
 }

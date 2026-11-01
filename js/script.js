@@ -254,6 +254,10 @@ const YOUTUBE_LIVE_CHANNELS = [
   { name: 'Muh01', url: 'https://www.youtube.com/results?search_query=Muh01+resident+evil+4' }, // handle sin confirmar
 ];
 
+// Runners que streamean en Kick. Kick no se puede consultar desde el navegador: el estado
+// (en vivo, espectadores, juego) lo arma scripts/update-live-status.js en GitHub Actions.
+const KICK_LIVE_CHANNELS = ['chacoide'];
+
 // ======= TEXTOS BILINGÜES / BILINGUAL STRINGS =======
 const I18N = {
   es: {
@@ -2279,19 +2283,20 @@ async function twitchLiveStatus(logins) {
   return map;
 }
 
-// data/youtube-live.json lo arma .github/workflows/update-youtube-live.yml (cada ~5 min):
-// { channels: { "<nombre>": { live, videoId, title, viewers, embed } } }
-async function youtubeLiveStatus() {
+// data/live-status.json lo arma .github/workflows/update-live-status.yml (cada ~5 min):
+// { youtube: { "<nombre>": { live, videoId, title, viewers, embed } },
+//   kick: { "<slug>": { name, live, viewers, game, title, thumb, followers } } }
+async function liveStatusData() {
   try {
-    const res = await fetch('data/youtube-live.json', { cache: 'no-cache' });
+    const res = await fetch('data/live-status.json', { cache: 'no-cache' });
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const d = await res.json();
     // Si el chequeo lleva mas de 12 h sin actualizarse, no se confia en los datos
-    if (!d.updatedAt || Date.now() - Date.parse(d.updatedAt) > 12 * 3600 * 1000) return {};
-    return d.channels || {};
+    if (!d.updatedAt || Date.now() - Date.parse(d.updatedAt) > 12 * 3600 * 1000) return { youtube: {}, kick: {} };
+    return { youtube: d.youtube || {}, kick: d.kick || {} };
   } catch (e) {
-    console.error('YouTube live check falló:', e);
-    return {};
+    console.error('YouTube/Kick live check falló:', e);
+    return { youtube: {}, kick: {} };
   }
 }
 
@@ -2306,10 +2311,11 @@ async function renderLive() {
   host.innerHTML = `<p class="loading-msg">${esc(t('live.checking'))}</p>`;
   const parent = location.hostname;
 
-  const [status, ytStatus] = await Promise.all([
+  const [status, extra] = await Promise.all([
     twitchLiveStatus(tw).catch(e => { console.error('Twitch live check falló:', e); return {}; }),
-    youtubeLiveStatus(),
+    liveStatusData(),
   ]);
+  const ytStatus = extra.youtube;
 
   const rows = tw.map(ch => {
     const u = status[ch.toLowerCase()];
@@ -2329,22 +2335,37 @@ async function renderLive() {
   const ytLive = yt.filter(c => ytStatus[c.name] && ytStatus[c.name].live)
     .map(c => ({ kind: 'yt', name: c.name, ...ytStatus[c.name] }));
 
+  // Kick: igual que en Twitch, arriba solo los que juegan Resident Evil 4
+  const kickRows = (KICK_LIVE_CHANNELS || []).filter(Boolean).map(slug => {
+    const k = extra.kick[slug.toLowerCase()] || {};
+    return { kind: 'kick', slug, name: k.name || slug, live: !!k.live, game: k.game || '', viewers: k.viewers || 0, thumb: k.thumb || '', followers: k.followers || 0 };
+  });
+  const kickTop = kickRows.filter(r => r.live && /resident\s*evil\s*4/i.test(r.game));
+  const kickOther = kickRows.filter(r => !kickTop.includes(r));
+
   // Todos los vivos juntos, de mas a menos espectadores
   const liveRows = rows.filter(isRE4)
     .map(r => ({ kind: 'tw', ch: r.ch, name: r.name, viewers: (r.stream && r.stream.viewersCount) || 0 }))
     .concat(ytLive.map(r => ({ ...r, viewers: r.viewers || 0 })))
+    .concat(kickTop)
     .sort((a, b) => b.viewers - a.viewers);
 
   const twIcon = '<svg class="ic" aria-hidden="true"><use href="#ic-twitch"/></svg>';
   const ytIcon = '<svg class="ic" aria-hidden="true"><use href="#ic-youtube"/></svg>';
+  const kickIcon = '<svg class="ic" aria-hidden="true"><use href="#ic-kick"/></svg>';
 
   // Reproductor de cada vivo; autoplay=1 solo se usa en el primero
   const playerSrc = r => r.kind === 'yt'
     ? `https://www.youtube.com/embed/${encodeURIComponent(r.videoId)}?autoplay=1&mute=1&playsinline=1`
-    : `https://player.twitch.tv/?channel=${encodeURIComponent(r.ch)}&parent=${parent}&muted=true`;
-  const pageUrl = r => r.kind === 'yt' ? `https://www.youtube.com/watch?v=${encodeURIComponent(r.videoId)}` : `https://twitch.tv/${encodeURIComponent(r.ch)}`;
+    : r.kind === 'kick'
+      ? `https://player.kick.com/${encodeURIComponent(r.slug)}?autoplay=true&muted=true`
+      : `https://player.twitch.tv/?channel=${encodeURIComponent(r.ch)}&parent=${parent}&muted=true`;
+  const pageUrl = r => r.kind === 'yt' ? `https://www.youtube.com/watch?v=${encodeURIComponent(r.videoId)}`
+    : r.kind === 'kick' ? `https://kick.com/${encodeURIComponent(r.slug)}`
+    : `https://twitch.tv/${encodeURIComponent(r.ch)}`;
   const thumbUrl = r => r.kind === 'yt'
     ? `https://i.ytimg.com/vi/${encodeURIComponent(r.videoId)}/mqdefault_live.jpg`
+    : r.kind === 'kick' ? r.thumb
     : `https://static-cdn.jtvnw.net/previews-ttv/live_user_${encodeURIComponent(r.ch.toLowerCase())}-640x360.jpg`;
 
   let html = '';
@@ -2353,7 +2374,7 @@ async function renderLive() {
     // Solo el primero (el de mas espectadores) arranca solo; los demas cargan al hacer clic,
     // asi no se reproducen varios streams a la vez.
     const playBtn = r => {
-      const inner = `<img class="clip-thumb" src="${esc(thumbUrl(r))}" alt="" loading="lazy" onerror="this.remove()">
+      const inner = `${thumbUrl(r) ? `<img class="clip-thumb" src="${esc(thumbUrl(r))}" alt="" loading="lazy" onerror="this.remove()">` : ''}
                <span class="clip-play-icon" aria-hidden="true">▶</span>`;
       const label = esc(t('live.play') + ' ' + r.name);
       // Un vivo de YouTube que no deja embeberse se abre directo en YouTube
@@ -2367,7 +2388,7 @@ async function renderLive() {
           : playBtn(r)}</div>
         <div class="live-meta">
           <span class="live-badge">● ${esc(t('live.on'))}</span>
-          <a href="${esc(pageUrl(r))}" target="_blank" rel="noopener">${r.kind === 'yt' ? ytIcon : twIcon}${esc(r.name)}</a>
+          <a href="${esc(pageUrl(r))}" target="_blank" rel="noopener">${r.kind === 'yt' ? ytIcon : r.kind === 'kick' ? kickIcon : twIcon}${esc(r.name)}</a>
         </div>
       </div>`).join('') + `</div>`;
   } else {
@@ -2387,7 +2408,12 @@ async function renderLive() {
      </a>`;
   });
 
-  const all = offCards.concat(ytCards);
+  const kickCards = kickOther.map(r =>
+    `<a class="live-card is-off is-kick" href="https://kick.com/${encodeURIComponent(r.slug)}" target="_blank" rel="noopener">
+       <span class="live-name">${kickIcon}${esc(r.name)}</span><span class="live-status">${esc(t(r.live ? 'live.otherGame' : 'live.off'))}</span>
+     </a>`);
+
+  const all = offCards.concat(kickCards, ytCards);
   if (all.length) html += `<div class="live-roster">${all.join('')}</div>`;
 
   host.innerHTML = html;

@@ -1,0 +1,114 @@
+// Mira quien esta en vivo en YouTube (YOUTUBE_LIVE_CHANNELS) y en Kick
+// (KICK_LIVE_CHANNELS), ambas listas en js/script.js, y guarda el resultado en
+// data/live-status.json, que lee la pestaña Live.
+// Ni YouTube ni Kick se pueden consultar desde el navegador (CORS) y el link de cada
+// vivo de YouTube cambia, por eso esto lo corre GitHub Actions
+// (.github/workflows/update-live-status.yml). Twitch si se consulta directo desde la pagina.
+const fs = require('fs');
+const path = require('path');
+
+const ROOT = path.join(__dirname, '..');
+const OUT = path.join(ROOT, 'data', 'live-status.json');
+const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36';
+const YT_HEADERS = {
+  'User-Agent': UA,
+  'Accept-Language': 'en-US,en;q=0.9',
+  // Evita la pantalla de consentimiento de cookies que YouTube muestra en algunas regiones
+  'Cookie': 'CONSENT=YES+1; SOCS=CAI',
+};
+const KICK_HEADERS = { 'User-Agent': UA, 'Accept': 'application/json' };
+
+function loadList(name) {
+  const src = fs.readFileSync(path.join(ROOT, 'js', 'script.js'), 'utf8');
+  const m = src.match(new RegExp('const ' + name + ' = (\\[[\\s\\S]*?\\n\\]);'));
+  if (!m) throw new Error('No se encontro ' + name + ' en js/script.js');
+  return new Function('return ' + m[1])();
+}
+
+// ---------- YouTube ----------
+// URL de /live del canal; los que solo tienen una busqueda (sin handle) se saltean
+function liveUrl(c) {
+  if (c.id) return `https://www.youtube.com/channel/${c.id}/live`;
+  if (c.url && /youtube\.com\/(@|channel\/)/.test(c.url)) return c.url;
+  return '';
+}
+
+async function checkYouTube(c) {
+  const url = liveUrl(c);
+  if (!url) return null;
+  const res = await fetch(url, { headers: YT_HEADERS, redirect: 'follow', signal: AbortSignal.timeout(20000) });
+  if (!res.ok) throw new Error('HTTP ' + res.status);
+  const html = await res.text();
+  const canon = (html.match(/<link rel="canonical" href="([^"]+)"/) || [])[1] || '';
+  const videoId = (canon.match(/[?&]v=([\w-]{11})/) || [])[1];
+  if (!videoId) {
+    if (!/<link rel="canonical"/.test(html)) throw new Error('pagina sin canonical (consentimiento o bloqueo)');
+    return { live: false };
+  }
+  // En vivo de verdad: reproducible (no "empieza en unos momentos") y marcado como en directo ahora
+  const playable = /"playabilityStatus":\{"status":"OK"/.test(html);
+  const liveNow = /"isLiveNow":true/.test(html);
+  if (!playable || !liveNow) return { live: false };
+  const viewers = Number(((html.match(/"runs":\[\{"text":"([\d,.]+)"\},\{"text":" watching now"/) || [])[1] || '0').replace(/[^\d]/g, ''));
+  const title = (html.match(/<meta name="title" content="([^"]*)"/) || [])[1] || '';
+  return {
+    live: true,
+    videoId,
+    title: title.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;/g, "'"),
+    viewers,
+    embed: !/"playableInEmbed":false/.test(html),
+  };
+}
+
+// ---------- Kick ----------
+async function checkKick(slug) {
+  const res = await fetch(`https://kick.com/api/v2/channels/${encodeURIComponent(slug)}`, { headers: KICK_HEADERS, signal: AbortSignal.timeout(20000) });
+  if (!res.ok) throw new Error('HTTP ' + res.status);
+  const j = await res.json();
+  const name = (j.user && j.user.username) || slug;
+  const followers = j.followers_count || 0;
+  const ls = j.livestream;
+  if (!ls) return { name, live: false, followers };
+  return {
+    name,
+    live: true,
+    viewers: ls.viewer_count || 0,
+    game: (ls.categories && ls.categories[0] && ls.categories[0].name) || '',
+    title: ls.session_title || '',
+    thumb: (ls.thumbnail && (ls.thumbnail.url || ls.thumbnail.src)) || '',
+    followers,
+  };
+}
+
+async function collect(items, keyOf, check, old, label) {
+  const result = {};
+  let failures = 0;
+  for (const it of items) {
+    const key = keyOf(it);
+    try {
+      const r = await check(it);
+      if (r) result[key] = r;
+    } catch (e) {
+      failures++;
+      console.warn(`${label} ${key}: ${e.message}`);
+      if (old && old[key]) result[key] = old[key];   // se mantiene lo ultimo conocido
+    }
+  }
+  return { result, failures };
+}
+
+(async () => {
+  const old = fs.existsSync(OUT) ? JSON.parse(fs.readFileSync(OUT, 'utf8')) : {};
+  const yt = await collect(loadList('YOUTUBE_LIVE_CHANNELS'), c => c.name, checkYouTube, old.youtube, 'YouTube');
+  const kick = await collect(loadList('KICK_LIVE_CHANNELS'), s => s.toLowerCase(), checkKick, old.kick, 'Kick');
+
+  // Si no cambio quien esta en vivo (los espectadores varian siempre), no se toca el archivo
+  // (salvo cada ~6 horas, para que la pagina sepa que el chequeo sigue funcionando)
+  const strip = o => JSON.stringify(Object.fromEntries(Object.entries(o || {}).map(([k, v]) => [k, { ...v, viewers: undefined, followers: undefined }])));
+  const fresh = old.updatedAt && Date.now() - Date.parse(old.updatedAt) < 6 * 3600 * 1000;
+  if (fresh && strip(old.youtube) === strip(yt.result) && strip(old.kick) === strip(kick.result)) { console.log('Sin cambios.'); return; }
+
+  fs.writeFileSync(OUT, JSON.stringify({ updatedAt: new Date().toISOString(), youtube: yt.result, kick: kick.result }, null, 2) + '\n');
+  const live = o => Object.entries(o).filter(([, v]) => v.live).map(([k]) => k).join(', ') || 'ninguno';
+  console.log(`OK. YouTube (${Object.keys(yt.result).length}) en vivo: ${live(yt.result)} | Kick (${Object.keys(kick.result).length}) en vivo: ${live(kick.result)}${yt.failures + kick.failures ? ` | ${yt.failures + kick.failures} con error` : ''}`);
+})();
