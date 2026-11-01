@@ -436,6 +436,8 @@ const I18N = {
     'sim.r3.t': 'Si ganas, subis de grupo. Si perdes, bajas.',
     'sim.r4.l': 'Puntos',
     'sim.r4.t': 'Victoria: 2 pts en Grupo 1, 1 pt en Grupos 2 y 3. Si perdes por menos de 30s: bono de +1 (Grupo 1) o +0.5 (Grupos 2 y 3).',
+    'sim.r6.l': 'Cruces',
+    'sim.r6.t': 'Los que se mueven juntos (los 4 que bajan o los 4 que suben) no pueden enfrentarse en la fecha siguiente, y nunca te toca dos veces el mismo rival.',
     'sim.r5.l': 'Clasifican',
     'sim.r5.t': 'Tras la ronda 4, los 8 mejores por puntos pasan a Octavos. Desempate: promedio de tus 2 mejores carreras.',
     'sim.proposal': 'Propuesta de formato — todavia no es el definitivo.',
@@ -689,6 +691,8 @@ const I18N = {
     'sim.r3.t': 'Win and you move up a group. Lose and you move down.',
     'sim.r4.l': 'Points',
     'sim.r4.t': 'Win: 2 pts in Group 1, 1 pt in Groups 2 and 3. Lose by under 30s: bonus of +1 (Group 1) or +0.5 (Groups 2 and 3).',
+    'sim.r6.l': 'Matchups',
+    'sim.r6.t': 'Runners who move together (the 4 who drop or the 4 who climb) cannot face each other in the next round, and you never get the same opponent twice.',
     'sim.r5.l': 'Qualify',
     'sim.r5.t': 'After round 4 the 8 best by points join the Round of 16. Tiebreak: average of your 2 best races.',
     'sim.proposal': 'Format proposal — not final yet.',
@@ -942,6 +946,8 @@ const I18N = {
     'sim.r3.t': 'Menang, kamu naik satu grup. Kalah, kamu turun satu grup.',
     'sim.r4.l': 'Poin',
     'sim.r4.t': 'Menang: 2 poin di Group 1, 1 poin di Group 2 dan 3. Kalah kurang dari 30 detik: bonus +1 (Group 1) atau +0,5 (Group 2 dan 3).',
+    'sim.r6.l': 'Matchups',
+    'sim.r6.t': 'Runner yang berpindah bersama (4 yang turun atau 4 yang naik) tidak bisa saling bertemu di round berikutnya, dan kamu tidak akan pernah bertemu lawan yang sama dua kali.',
     'sim.r5.l': 'Lolos',
     'sim.r5.t': 'Setelah round 4, 8 runner dengan poin terbanyak masuk ke Round of 16. Tiebreak: rata-rata 2 race terbaikmu.',
     'sim.proposal': 'Usulan format — belum final.',
@@ -2420,6 +2426,8 @@ function simInitRunners() {
     isTop8Seed: i < 8,
     lastResult: null,
     lastMove: null,
+    cohort: null,    // con quienes se movio la ultima vez (misma frontera y sentido)
+    opponents: [],   // ids de los rivales que ya enfrento
     history: [],
     wins: 0,
     points: 0,
@@ -2448,6 +2456,34 @@ function simRace(a, b) {
   return { winner, loser, margin, timeA, timeB };
 }
 
+// Cruces de un grupo. Dos reglas duras:
+//  1) no repetir un rival ya enfrentado en una fecha anterior;
+//  2) los que se movieron juntos (misma frontera y mismo sentido: los 4 que bajan
+//     o los 4 que suben) no se enfrentan entre si en la fecha siguiente.
+// Si con ambas no hay ningun cruce posible, se relajan en ese orden.
+let simPairRelaxed = 0;
+function simMatch(list, ok) {
+  if (!list.length) return [];
+  const [a, ...rest] = list;
+  for (let i = 0; i < rest.length; i++) {
+    const b = rest[i];
+    if (!ok(a, b)) continue;
+    const sub = simMatch(rest.filter((_, j) => j !== i), ok);
+    if (sub) return [[a, b], ...sub];
+  }
+  return null;
+}
+function simPairGroup(members) {
+  const fresh = (a, b) => !a.opponents.includes(b.id);
+  const apart = (a, b) => !(a.cohort && a.cohort === b.cohort);
+  const rules = [(a, b) => fresh(a, b) && apart(a, b), fresh, apart, () => true];
+  for (let k = 0; k < rules.length; k++) {
+    const pairs = simMatch(simShuffle(members), rules[k]);
+    if (pairs) { if (k) simPairRelaxed++; return pairs; }
+  }
+  return [];
+}
+
 function simAdvanceFecha() {
   if (simFecha >= SIM_MAX_FECHAS) return;
   simFecha++;
@@ -2455,9 +2491,8 @@ function simAdvanceFecha() {
   simRunners.forEach(r => { r.lastMove = null; });
 
   for (let g = 1; g <= SIM_NUM_GROUPS; g++) {
-    const members = simShuffle(simGetGroup(g));
-    for (let i = 0; i < members.length; i += 2) {
-      const a = members[i], b = members[i + 1];
+    for (const [a, b] of simPairGroup(simGetGroup(g))) {
+      a.opponents.push(b.id); b.opponents.push(a.id);
       const { winner, margin, timeA, timeB } = simRace(a, b);
       a.lastResult = { opponent: b.name, won: a === winner, margin, time: timeA };
       b.lastResult = { opponent: a.name, won: b === winner, margin, time: timeB };
@@ -2493,8 +2528,9 @@ function simAdvanceFecha() {
     }
   }
   simRunners.forEach(r => {
-    if (promote[r.id] !== undefined) { r.group = promote[r.id]; r.lastMove = 'up'; }
-    else if (relegate[r.id] !== undefined) { r.group = relegate[r.id]; r.lastMove = 'down'; }
+    r.cohort = null;
+    if (promote[r.id] !== undefined) { r.cohort = 'up' + r.group; r.group = promote[r.id]; r.lastMove = 'up'; }
+    else if (relegate[r.id] !== undefined) { r.cohort = 'down' + r.group; r.group = relegate[r.id]; r.lastMove = 'down'; }
   });
 
   renderSimulator();
