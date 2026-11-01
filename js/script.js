@@ -2383,8 +2383,8 @@ async function renderLive() {
   let html = '';
 
   if (liveRows.length) {
-    // Solo el primero (el de mas espectadores) arranca solo; los demas cargan al hacer clic,
-    // asi no se reproducen varios streams a la vez.
+    // Ningun stream arranca solo: todos muestran la miniatura con un play y cargan al hacer clic,
+    // asi no se reproducen varios a la vez ni se lagea la PC.
     const playBtn = r => {
       const inner = `${thumbUrl(r) ? `<img class="clip-thumb" src="${esc(thumbUrl(r))}" alt="" loading="lazy" onerror="this.remove()">` : ''}
                <span class="clip-play-icon" aria-hidden="true">▶</span>`;
@@ -2393,11 +2393,9 @@ async function renderLive() {
       if (r.kind === 'yt' && r.embed === false) return `<a class="live-play" href="${esc(pageUrl(r))}" target="_blank" rel="noopener" aria-label="${label}">${inner}</a>`;
       return `<button class="live-play" type="button" data-src="${esc(playerSrc(r))}" data-name="${esc(r.name)}" aria-label="${label}">${inner}</button>`;
     };
-    html += `<div class="live-live">` + liveRows.map((r, i) => `
+    html += `<div class="live-live">` + liveRows.map(r => `
       <div class="live-card is-live">
-        <div class="live-frame">${i === 0 && !(r.kind === 'yt' && r.embed === false)
-          ? `<iframe src="${esc(playerSrc(r))}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen title="${esc(r.name)}"></iframe>`
-          : playBtn(r)}</div>
+        <div class="live-frame">${playBtn(r)}</div>
         <div class="live-meta">
           <span class="live-badge">● ${esc(t('live.on'))}</span>
           <a href="${esc(pageUrl(r))}" target="_blank" rel="noopener">${r.kind === 'yt' ? ytIcon : r.kind === 'kick' ? kickIcon : twIcon}${esc(r.name)}</a>
