@@ -439,7 +439,7 @@ const I18N = {
     'sim.r4.l': 'Puntos',
     'sim.r4.t': 'Victoria: 2 pts en Grupo 1, 1 pt en Grupos 2 y 3. Si perdes por menos de 30s: bono de +1 (Grupo 1) o +0.5 (Grupos 2 y 3).',
     'sim.r6.l': 'Cruces',
-    'sim.r6.t': 'Los que se mueven juntos (los 4 que bajan o los 4 que suben) no pueden enfrentarse en la fecha siguiente, y nunca te toca dos veces el mismo rival.',
+    'sim.r6.t': 'Los 4 que bajan juntos no pueden enfrentarse en la fecha siguiente, y lo mismo vale para los que suben al Grupo 2 o 3. En el Grupo 1 los que suben quedan libres, asi los que se quedan pueden cruzarse entre si. Nunca te toca dos veces el mismo rival.',
     'sim.r5.l': 'Clasifican',
     'sim.r5.t': 'Tras la ronda 4, los 8 mejores por puntos pasan a Octavos. Desempate: promedio de tus 2 mejores carreras.',
     'sim.proposal': 'Propuesta de formato — todavia no es el definitivo.',
@@ -696,7 +696,7 @@ const I18N = {
     'sim.r4.l': 'Points',
     'sim.r4.t': 'Win: 2 pts in Group 1, 1 pt in Groups 2 and 3. Lose by under 30s: bonus of +1 (Group 1) or +0.5 (Groups 2 and 3).',
     'sim.r6.l': 'Matchups',
-    'sim.r6.t': 'Runners who move together (the 4 who drop or the 4 who climb) cannot face each other in the next round, and you never get the same opponent twice.',
+    'sim.r6.t': 'The 4 runners who drop together cannot face each other in the next round, and the same goes for those who climb into Group 2 or 3. In Group 1 the rule is lifted for climbers, so the winners who stay can meet each other. You never get the same opponent twice.',
     'sim.r5.l': 'Qualify',
     'sim.r5.t': 'After round 4 the 8 best by points join the Round of 16. Tiebreak: average of your 2 best races.',
     'sim.proposal': 'Format proposal — not final yet.',
@@ -953,7 +953,7 @@ const I18N = {
     'sim.r4.l': 'Poin',
     'sim.r4.t': 'Menang: 2 poin di Group 1, 1 poin di Group 2 dan 3. Kalah kurang dari 30 detik: bonus +1 (Group 1) atau +0,5 (Group 2 dan 3).',
     'sim.r6.l': 'Matchups',
-    'sim.r6.t': 'Runner yang berpindah bersama (4 yang turun atau 4 yang naik) tidak bisa saling bertemu di round berikutnya, dan kamu tidak akan pernah bertemu lawan yang sama dua kali.',
+    'sim.r6.t': '4 runner yang turun bersama tidak bisa saling bertemu di round berikutnya, begitu juga yang naik ke Group 2 atau 3. Di Group 1 aturan ini tidak berlaku bagi yang naik, sehingga yang bertahan bisa saling bertemu. Kamu tidak akan bertemu lawan yang sama dua kali.',
     'sim.r5.l': 'Lolos',
     'sim.r5.t': 'Setelah round 4, 8 runner dengan poin terbanyak masuk ke Round of 16. Tiebreak: rata-rata 2 race terbaikmu.',
     'sim.proposal': 'Usulan format — belum final.',
@@ -1212,7 +1212,7 @@ const I18N = {
     'sim.r5.l': '勝ち上がり',
     'sim.r5.t': '4ラウンド終了後、ポイント上位8人がRound of 16に進出します。同点の場合は、ベスト2レースの平均タイムで決まります。',
     'sim.r6.l': '対戦',
-    'sim.r6.t': '一緒に移動したrunner（降格する4人、または昇格する4人）は、次のラウンドで対戦できません。また、同じ相手と2度当たることもありません。',
+    'sim.r6.t': '一緒に降格する4人は次のラウンドで対戦できません。Group 2または3に昇格する4人も同様です。Group 1に昇格する人にはこの制限がなく、Group 1に残った人同士も対戦できます。同じ相手と2度当たることもありません。',
     'sim.proposal': 'フォーマット案 — まだ確定ではありません。',
     'sim.dateBadge': 'Round',
     'sim.btnNext': '次のラウンドをシミュレート',
@@ -2783,7 +2783,8 @@ function simRace(a, b) {
 // Cruces de un grupo. Dos reglas duras:
 //  1) no repetir un rival ya enfrentado en una fecha anterior;
 //  2) los que se movieron juntos (misma frontera y mismo sentido: los 4 que bajan
-//     o los 4 que suben) no se enfrentan entre si en la fecha siguiente.
+//     o los 4 que suben al Grupo 2 o 3) no se enfrentan entre si en la fecha siguiente.
+//     Los que suben al Grupo 1 no tienen esta restriccion.
 // Si con ambas no hay ningun cruce posible, se relajan en ese orden.
 let simPairRelaxed = 0;
 function simMatch(list, ok) {
@@ -2853,7 +2854,8 @@ function simAdvanceFecha() {
   }
   simRunners.forEach(r => {
     r.cohort = null;
-    if (promote[r.id] !== undefined) { r.cohort = 'up' + r.group; r.group = promote[r.id]; r.lastMove = 'up'; }
+    // Los que suben al Grupo 1 (vienen del 2) quedan libres: asi los que se quedan en el 1 pueden cruzarse entre si
+    if (promote[r.id] !== undefined) { r.cohort = r.group === 2 ? null : 'up' + r.group; r.group = promote[r.id]; r.lastMove = 'up'; }
     else if (relegate[r.id] !== undefined) { r.cohort = 'down' + r.group; r.group = relegate[r.id]; r.lastMove = 'down'; }
   });
 
