@@ -235,7 +235,7 @@ const RE4_LIVE_CHANNELS = [
   'abdou_mz', 'novi_fan', 'MineZowski', 'MikeWavRR', 'FrancoBv17', 'chanwii',
   'gabrielsinmarr', 'redshines', 'MrMuba', 'Ninazerotwo', 'Gallardd', 'iiLanceLM', 'nobu_22',
   'Neuroticc_', 'derekt21288', 'yuushi_1234', 'ezequiel_kazama', 'yisuseldragon', 'otakuterere',
-  'luis_sera', 'joydurnyup', 'M4tiuss_', 'orchlon', 'droprecks', 'spicee',
+  'luis_sera', 'joydurnyup', 'M4tiuss_', 'orchlon', 'droprecks', 'spicee', 'thecarpenter',
 ];
 
 // Runners que streamean en YouTube. No hay forma sin API key de saber si están
@@ -417,7 +417,7 @@ const I18N = {
     'clips.empty': 'Todavia no hay clips cargados. ¿Tenes uno? Pasalo por Discord.',
 
     'live.title': 'Runners de RE4 en vivo',
-    'live.intro': 'Canales de la comunidad que estan corriendo Resident Evil 4 ahora mismo.',
+    'live.intro': 'Canales de la comunidad que estan corriendo o haciendo glitch hunting en Resident Evil 4 ahora mismo.',
     'live.on': 'EN VIVO',
     'live.off': 'Desconectado',
     'live.none': 'Ningun canal de la lista esta jugando Resident Evil 4 en este momento.',
@@ -674,7 +674,7 @@ const I18N = {
     'clips.empty': "No clips added yet. Got one? Drop it in the Discord.",
 
     'live.title': 'RE4 runners live',
-    'live.intro': 'Community channels running Resident Evil 4 right now.',
+    'live.intro': 'Community channels running or glitch hunting Resident Evil 4 right now.',
     'live.on': 'LIVE',
     'live.off': 'Offline',
     'live.none': 'No channel from the list is streaming Resident Evil 4 right now.',
@@ -931,7 +931,7 @@ const I18N = {
     'clips.empty': 'Belum ada klip. Punya klip bagus? Kirim ke Discord.',
 
     'live.title': 'Runner RE4 yang sedang live',
-    'live.intro': 'Channel komunitas yang sedang menjalankan Resident Evil 4 sekarang.',
+    'live.intro': 'Channel komunitas yang sedang menjalankan atau glitch hunting Resident Evil 4 sekarang.',
     'live.on': 'LIVE',
     'live.off': 'Offline',
     'live.none': 'Tidak ada channel dari daftar yang sedang streaming Resident Evil 4 saat ini.',
@@ -1188,7 +1188,7 @@ const I18N = {
     'clips.empty': 'まだクリップが追加されていません。持っている方はDiscordで共有してください。',
 
     'live.title': 'RE4 runnerライブ',
-    'live.intro': 'いま Resident Evil 4 をプレイ中のコミュニティチャンネル。',
+    'live.intro': 'いま Resident Evil 4 の run や glitch hunting をしているコミュニティチャンネル。',
     'live.on': 'LIVE',
     'live.off': 'オフライン',
     'live.none': 'リストのチャンネルで、いま Resident Evil 4 を配信している人はいません。',
