@@ -2350,6 +2350,10 @@ async function renderLive() {
     .concat(kickTop)
     .sort((a, b) => b.viewers - a.viewers);
 
+  // Cantidad de vivos de Resident Evil 4 junto a la pestaña Live del menu
+  const liveBadge = document.getElementById('live-count');
+  if (liveBadge) { liveBadge.textContent = liveRows.length; liveBadge.hidden = !liveRows.length; }
+
   const twIcon = '<svg class="ic" aria-hidden="true"><use href="#ic-twitch"/></svg>';
   const ytIcon = '<svg class="ic" aria-hidden="true"><use href="#ic-youtube"/></svg>';
   const kickIcon = '<svg class="ic" aria-hidden="true"><use href="#ic-kick"/></svg>';
