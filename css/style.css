@@ -1748,3 +1748,20 @@ body[data-tab="simulations"] main { max-width: min(1880px, 100%); }
 .live-play { position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; background: #000; cursor: pointer; display: block; }
 .live-play:hover .clip-play-icon { background: var(--accent); transform: translate(-50%, -50%) scale(1.1); }
 .live-play .clip-thumb ~ .clip-play-icon { inset: 50% auto auto 50%; }
+
+/* Japones: las fuentes del sitio no tienen kana/kanji; se usa una fuente japonesa del sistema */
+:root[lang="ja"] {
+  --font-display: 'Biohazard Game Font', 'Yu Gothic UI', 'Meiryo', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+  --font-title: 'RE4 Remake', 'Yu Gothic UI', 'Meiryo', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+  --font-grunge: 'Virgula Vulgaris', 'Yu Gothic UI', 'Meiryo', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+  --font-body: 'RE4 Remake', 'Yu Gothic UI', 'Meiryo', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+}
+:root[lang="ja"] body { line-break: strict; overflow-wrap: anywhere; }
+
+/* Simulador en celular: reglas en una columna, tabla de resultados con scroll propio y selects que no se salgan */
+@media (max-width: 560px) { .sim-rule { grid-template-columns: 1fr; gap: .2rem; } }
+#sim-log-races { display: block; overflow-x: auto; min-width: 0; }
+.sim-log-panel { min-width: 0; max-width: 100%; }
+#simulations select, #simulations input, #simulations label { max-width: 100%; min-width: 0; box-sizing: border-box; }
+.sim-groups > .group-card { min-width: 0; max-width: 100%; }
+@media (max-width: 720px) { .groups-grid.sim-groups { grid-template-columns: minmax(0, 1fr); } }

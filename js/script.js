@@ -1027,6 +1027,263 @@ const I18N = {
 
     'testmode': 'MODE UJI COBA · data palsu',
   },
+  ja: {
+    'nav.inicio': 'ホーム',
+    'nav.home': 'ホームへ',
+    'nav.sorteo': 'スケジュール',
+    'nav.torneo': '大会',
+    'intro.t1': 'スケジュール',
+    'nav.grupos': 'グループ',
+    'nav.brackets': 'Bracket',
+    'nav.simulations': 'シミュレーション',
+    'nav.champions': '歴代大会',
+    'nav.clips': 'クリップ',
+    'nav.live': 'Live',
+    'nav.donaciones': '寄付',
+    'nav.organizadores': '運営',
+    'nav.menu': 'メニューを開く',
+
+    'hero.subtitle': 'コミュニティ主催の Resident Evil 4 スピードラン大会。',
+
+    'countdown.label': '予選開始まで',
+    'countdown.days': '日',
+    'countdown.hours': '時間',
+    'countdown.mins': '分',
+    'countdown.secs': '秒',
+    'countdown.open': '予選がスタートしました！',
+    'countdown.datePrefix': '開始：',
+    'countdown.closePrefix': '終了：',
+
+    'facts.runners': 'runner',
+    'facts.groups': 'グループ',
+    'facts.qualify': '本戦直行',
+
+    'trailer.title': 'Ditman Cup 2027 告知ビデオ',
+    'trailer.yt': 'YouTubeで見る',
+    'hero.emblemAlt': 'Ditman Cup 2027のエンブレム：リングの中の金のトロフィー',
+    'intro.title': 'Ditman Cup 2027へようこそ',
+    'intro.lead': '大会をフォローするために必要な情報を、すべてここに。',
+    'intro.d1': '対戦相手と日程',
+    'intro.d2': 'Top 8は本戦直行 + 24人が3グループ',
+    'intro.d3': 'Double eliminationで決勝まで',
+    'intro.d4': 'フォーマットを実際に試してみよう',
+
+    'sorteo.title': 'スケジュール',
+    'sorteo.r1.l': '抽選する内容',
+    'sorteo.r1.t': 'グループではなく、対戦カードを抽選します。グループは予選のランキングで決まり、抽選ではそのグループ内の対戦相手が決まります。',
+    'sorteo.r2.l': '日時',
+    'sorteo.r2.t': '各ラウンドの前に、前ラウンドの結果でrunnerがグループ間を移動したあと、ライブ抽選を行います。',
+    'sorteo.r3.l': '場所',
+    'sorteo.r3.t': 'twitch.tv/ditmancupでライブ配信。対戦カードは日時とともに下に表示されます。',
+    'sorteo.r4.l': 'Top 8',
+    'sorteo.r4.t': 'グループステージを経ずにRound of 16へ直行するため、抽選の対象外です。',
+    'sched.title': 'スケジュール',
+    'sched.round': 'Round {n}',
+    'sched.dateTbd': '日程未定',
+    'sched.note1': 'グループは予選のランキングで決まります。',
+    'sched.noteN': 'グループは前ラウンドの結果で決まります。',
+    'sched.vs': 'vs',
+    'sched.tzNote': '時刻はお使いのタイムゾーン（{tz}）で表示されます。',
+    'donors.title': 'トップ寄付者',
+    'donors.colName': '寄付者',
+    'donors.colAmount': '寄付額',
+    'donors.loading': '寄付者を読み込み中…',
+    'donors.empty': 'まだ寄付者はいません。',
+    'donors.error': '寄付者リストを読み込めませんでした。',
+    'donors.total': '{amount} 集まりました · {n}人の寄付者',
+    'donors.totalOne': '{amount} 集まりました · 1人の寄付者',
+    'donors.thisTitle': 'この大会 · Ditman Cup {year}',
+    'donors.allTimeTitle': '歴代トップ寄付者',
+    'donors.curEmpty': 'この大会への寄付はまだありません。最初の寄付者になりましょう！',
+    'donors.src': '出典：Matcherino · {years} 大会',
+    'donors.thanks': 'ありがとうございます！',
+    'donors.thanksGeneric': 'Ditman Cupを支えてくださったすべての寄付者の皆さまに感謝します。',
+    'donors.thanksSub': 'Ditman Cupを支えてくださった{n}人の寄付者の皆さまに感謝します。',
+    'visits.label': 'ページ閲覧数',
+
+    'grupos.title': 'グループステージ',
+    'grupos.loading': 'グループを読み込み中…',
+    'grupos.sheetError': 'シートを読み込めませんでした。サンプルデータを表示しています。',
+    'group.word': 'Group',
+    'group.tbd': '未定',
+    'group.directTitle': 'Top 8 — Round of 16へ直行',
+    'group.directBadge': 'グループをスキップ',
+    'group.directNote': '予選から直接勝ち上がり、Round of 16からBracketに入ります。',
+    'group.stageBadge': 'グループステージ',
+    'group.stageTitle': '24 runner · 8人ずつ3グループ',
+    'group.stageNote': 'ここで戦うのはこの24人です。対戦相手は各グループ内で抽選されます（大会 > スケジュール を参照）。',
+
+    'brackets.title': 'Bracket',
+    'brackets.placeholder': 'グループステージ確定後に、トーナメント表が公開されます。',
+    'brackets.previewNote': 'Double elimination · {n}人が出場。1回負けるとLosers Bracketへ、もう1回負けると敗退です。実際の対戦カードはグループステージ確定後に決まります。',
+    'bracket.champion': '優勝',
+    'bracket.tbd': '—',
+    'bracket.bye': 'BYE',
+    'bracket.seedTag': 'Seed {n}',
+    'bracket.round.final': 'Final',
+    'bracket.round.semi': 'Semifinals',
+    'bracket.round.quarter': 'Quarterfinals',
+    'bracket.round.r16': 'Round of 16',
+    'bracket.round.r32': 'Round of 32',
+    'bracket.round.generic': 'Round of {n}',
+    'bracket.winners': 'Winners Bracket',
+    'bracket.losers': 'Losers Bracket',
+    'bracket.grandFinal': 'Grand Final',
+    'bracket.round.winnersFinal': 'Winners Final',
+    'bracket.lr': 'Losers Round {n}',
+    'bracket.losersSemi': 'Losers Semifinal',
+    'bracket.losersFinal': 'Losers Final',
+    'bracket.winnerOf': 'Winner M{n}',
+    'bracket.loserOf': 'Loser M{n}',
+
+    'clas.col.pos': '順位',
+    'clas.col.runner': 'Runner',
+    'clas.col.group': 'Group',
+    'clas.col.time': 'ベストタイム',
+    'clas.col.pts': 'Pts',
+
+    'don.title': '寄付',
+    'don.body': 'Ditman Cupはコミュニティの支援で成り立っています。賞金プールや大会運営費への支援は、こちらからお願いします：',
+    'don.btn': '寄付する',
+    'don.pool.title': '賞金プールと大会運営費',
+    'don.me.title': '私を応援する',
+    'don.me.body': 'これは完全に任意ですが、このウェブサイトを気に入っていただけたら、直接応援していただけると本当に嬉しいです。このコミュニティの一員でいてくれてありがとうございます！',
+    'don.me.btn': 'JokerUYに寄付する',
+
+    'org.title': '運営・スタッフ',
+    'org.tier.organizers': '運営',
+    'org.tier.mods': 'SRCモデレーター',
+    'org.tier.helpers': 'ヘルパー・実況',
+    'org.tier.design': 'アート・デザイン',
+    'org.role.admin': '管理者',
+    'org.role.mod': 'モデレーター',
+    'org.role.helper': 'ヘルパー',
+    'org.role.helperCaster': 'ヘルパー / 実況',
+    'org.role.artDesign': 'アート・デザイン',
+    'org.role.artDesignWeb': 'アート・デザイン、ウェブサイトデザイナー',
+
+    'link.discord': 'Discord',
+    'link.rules': 'ドキュメント',
+    'link.youtube': 'YouTube',
+    'link.twitch': 'Twitch',
+
+    'champions.title': '歴代大会',
+    'champions.edition': 'Ditman Cup {year}',
+    'champions.donors': '寄付者',
+    'champions.timeline': 'すべての寄付（時系列）',
+    'champions.txToggle': '各寄付を表示',
+    'champions.champion': '優勝',
+    'champions.runnerUp': '準優勝',
+    'champions.third': '3位',
+    'champions.tbd': '未確定',
+    'champions.vod': '決勝を見る',
+    'champions.prize': '賞金プール',
+    'champions.trophyTitle': 'トロフィー',
+    'champions.trophyPending': 'Ditman Cup 2027 公式トロフィー。',
+    'champions.viewData': 'すべてのデータを見る',
+    'champions.modalHint': '大会スプレッドシートの元データです。',
+
+    'clips.title': 'ベストクリップ',
+    'clips.intro': '過去の大会やその他の大会からのハイライト。',
+    'clips.empty': 'まだクリップが追加されていません。持っている方はDiscordで共有してください。',
+
+    'live.title': 'RE4 runnerライブ',
+    'live.intro': 'いま Resident Evil 4 をプレイ中のコミュニティチャンネル。',
+    'live.on': 'LIVE',
+    'live.off': 'オフライン',
+    'live.none': 'リストのチャンネルで、いま Resident Evil 4 を配信している人はいません。',
+    'live.otherGame': 'Live · 別のゲーム',
+    'live.play': '配信を再生：',
+    'live.watch': 'Twitchで見る',
+    'live.checking': 'チャンネルを確認中…',
+
+    'footer.text': 'Ditman Cup 2027 · コミュニティのために',
+    'footer.credit': 'ウェブサイト制作',
+
+    'sim.title': 'シミュレーター — Nations League形式',
+    'sim.r1.l': '直行',
+    'sim.r1.t': '予選のTop 8はグループステージを飛ばして、Round of 16へ直行します。',
+    'sim.r2.l': 'グループ',
+    'sim.r2.t': '残りの24人が8人ずつ3グループに分かれ、4ラウンド戦います。1ラウンドにつき、自分のグループ内でBO1を1試合。',
+    'sim.r3.l': '移動',
+    'sim.r3.t': '勝てば1つ上のグループへ、負ければ1つ下のグループへ移動します。',
+    'sim.r4.l': 'ポイント',
+    'sim.r4.t': '勝利：Group 1で2pt、Group 2と3で1pt。30秒未満の差で敗れた場合はボーナス +1（Group 1）または +0.5（Group 2と3）。',
+    'sim.r5.l': '勝ち上がり',
+    'sim.r5.t': '4ラウンド終了後、ポイント上位8人がRound of 16に進出します。同点の場合は、ベスト2レースの平均タイムで決まります。',
+    'sim.r6.l': '対戦',
+    'sim.r6.t': '一緒に移動したrunner（降格する4人、または昇格する4人）は、次のラウンドで対戦できません。また、同じ相手と2度当たることもありません。',
+    'sim.proposal': 'フォーマット案 — まだ確定ではありません。',
+    'sim.dateBadge': 'Round',
+    'sim.btnNext': '次のラウンドをシミュレート',
+    'sim.btnNext5': '最後までシミュレート',
+    'sim.btnReset': 'リセット',
+    'sim.legendQualified': 'Round of 16進出（グループのTop 8）',
+    'sim.legendEliminated': '敗退',
+    'sim.directTag': '本戦直行',
+    'sim.directTitle': 'Top 8 — Round of 16へ直行',
+    'sim.directNote': '予選タイム上位8人はグループステージを完全にスキップし、Round of 16に直接シードされます。',
+    'sim.logColGroup': 'Group',
+    'sim.logColWinner': '勝者',
+    'sim.logColLoser': '敗者',
+    'sim.logColMargin': '差',
+    'sim.logColMove': '移動',
+    'sim.stays': 'Group {g}に残留',
+    'sim.movesUp': 'Group {g}に昇格',
+    'sim.movesDown': 'Group {g}に降格',
+    'sim.swapTitle': '自分で試す：runnerを控えと入れ替える',
+    'sim.swapNote': 'シミュレーターの32人に入っていないけれど、自分ならどうなるか見てみたい場合は、入れ替える相手を選んで参加してみましょう（控えのいずれかでもOK：PBが1:30:00未満で、直近1年以内に走った人）。名前とPBを手入力することもできます。ロースターはPB順に並べ直され、シミュレーターは最初からやり直しになります。',
+    'sim.swapOut': '交代される人',
+    'sim.swapIn': '交代で入る人',
+    'sim.swapCustom': 'その他（名前とPBを入力）…',
+    'sim.swapName': '名前',
+    'sim.swapPb': 'PB (H:MM:SS)',
+    'sim.swapApply': '入れ替える',
+    'sim.swapRestore': '元のロースターに戻す',
+    'sim.swapBadName': '名前を入力してください（24文字まで）。',
+    'sim.swapBadPb': 'PBはH:MM:SS形式で、1:00:00〜2:30:00の範囲で入力してください（例：1:25:30）。',
+    'sim.swapDup': 'その名前はすでにシミュレーターに入っています。',
+    'sim.swapDone': '{name}が{out}に代わってシミュレーターに参加しました。PB順に並べ直して、最初からやり直します。',
+    'sim.swapRestored': '元のロースターに戻しました。',
+    'sim.group1': 'Group 1',
+    'sim.group2': 'Group 2',
+    'sim.group3': 'Group 3',
+    'sim.runnersCount': '{n} runner',
+    'sim.thRunner': 'Runner',
+    'sim.thPB': 'PB',
+    'sim.thPts': 'Pts',
+    'sim.thBest': 'ベストタイム',
+    'sim.thBestAvg': 'ベスト平均タイム',
+    'sim.thHistory': '履歴',
+    'sim.rankingTitle': 'グループステージ順位 — ポイントのみで並び替え',
+    'sim.rankingNote': 'グループステージの24人を1つの表にまとめ、ポイントの高い順に並べています（グループ内の同点処理や個別の表はありません）。上位8人が、直行のTop 8とともにRound of 16に進みます。',
+    'sim.logTitleEmpty': 'まだラウンドが行われていません',
+    'sim.logTitle': 'Round {n} 結果',
+    'sim.logTitleFinal': 'Round {n} 結果（最終）',
+    'sim.bracketTitle': 'Round of 16',
+    'sim.wbTitle': 'Double elimination — プレイしてみよう',
+    'sim.wbNote': 'Round of 16とQuarterfinals：最初のレースの差が2:00以上なら、それが唯一のレース（BO1）。そうでなければBO3になります。SemifinalsとFinalsは常にBO3、Grand FinalはBO5です。1回負けるとLosers Bracketへ、もう1回負けると敗退です。',
+    'sim.btnWbNext': '{round}をプレイ',
+    'sim.wbDone': '大会終了',
+    'sim.btnWbEverything': 'Grand Finalまですべてプレイ',
+    'sim.champion': 'Ditman Cup 優勝者',
+    'sim.btnWbAll': 'Winners Finalまでプレイ',
+    'sim.btnWbReset': '結果をリセット',
+    'sim.wbChamp': 'Winners Bracket優勝 — そのままGrand Finalへ',
+    'sim.bracketLocked': '4ラウンドをすべて終えると、Round of 16の抽選が解放されます。',
+    'sim.bracketExplainer': '直行のTop 8は従来のシード配置を維持します（準決勝より前にお互いが当たることはありません）。グループステージを勝ち上がった8人と抽選で組み合わせ、Bracketを完成させましょう。',
+    'sim.btnDrawNext': '次を抽選',
+    'sim.btnDrawAll': 'すべて抽選',
+    'sim.btnDrawReset': '抽選をリセット',
+    'sim.sideA': 'Side A',
+    'sim.sideB': 'Side B',
+    'sim.seedTag': 'Top {n}',
+    'sim.pending': '抽選待ち',
+    'sim.footer': 'サンプルデータによるシミュレーションです。フォーマットの説明が目的で、実際の結果を予測するものではありません。',
+    'sim.doneLabel': '大会終了',
+
+    'testmode': 'テストモード · ダミーデータ',
+  },
 };
 
 // Estado en memoria para poder re-renderizar al cambiar de idioma
@@ -1036,7 +1293,7 @@ let lastGroupsRows = null;
 let lastStandingsRows = null;
 
 // Locale de fechas/numeros por idioma
-const LOCALES = { en: 'en-US', es: 'es-AR', id: 'id-ID' };
+const LOCALES = { en: 'en-US', es: 'es-AR', id: 'id-ID', ja: 'ja-JP' };
 
 function t(key, vars) {
   const dict = I18N[currentLang] || I18N.en;
@@ -1137,8 +1394,8 @@ document.addEventListener('DOMContentLoaded', () => {
 // ======= IDIOMA / LANGUAGE =======
 function initLang() {
   const saved = safeGet('dc-lang');
-  // Inglés por defecto; recordamos si el visitante eligió español o indonesio.
-  applyLang(saved === 'es' || saved === 'en' || saved === 'id' ? saved : 'en');
+  // Inglés por defecto; recordamos el idioma que haya elegido el visitante.
+  applyLang(I18N[saved] ? saved : 'en');
 
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.addEventListener('click', () => applyLang(btn.dataset.lang));
@@ -1503,7 +1760,7 @@ function renderSchedule() {
   const data = scheduleFromRows(lastScheduleRows);
   const loc = LOCALES[currentLang];
   const fmtDay = new Intl.DateTimeFormat(loc, { weekday: 'long', day: 'numeric', month: 'long' });
-  const fmtTime = new Intl.DateTimeFormat(currentLang === 'id' ? 'en-GB' : loc, { hour: '2-digit', minute: '2-digit', hour12: false });
+  const fmtTime = new Intl.DateTimeFormat(currentLang === 'id' || currentLang === 'ja' ? 'en-GB' : loc, { hour: '2-digit', minute: '2-digit', hour12: false });
   const tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || '').replace(/_/g, ' ');
   const tbd = `<span class="is-tbd">${esc(t('group.tbd'))}</span>`;
   const runner = n => n ? nameWithFlag(n) : tbd;
@@ -2022,6 +2279,22 @@ async function twitchLiveStatus(logins) {
   return map;
 }
 
+// data/youtube-live.json lo arma .github/workflows/update-youtube-live.yml (cada ~5 min):
+// { channels: { "<nombre>": { live, videoId, title, viewers, embed } } }
+async function youtubeLiveStatus() {
+  try {
+    const res = await fetch('data/youtube-live.json', { cache: 'no-cache' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const d = await res.json();
+    // Si el chequeo lleva mas de 12 h sin actualizarse, no se confia en los datos
+    if (!d.updatedAt || Date.now() - Date.parse(d.updatedAt) > 12 * 3600 * 1000) return {};
+    return d.channels || {};
+  } catch (e) {
+    console.error('YouTube live check falló:', e);
+    return {};
+  }
+}
+
 async function renderLive() {
   const host = document.getElementById('live-grid');
   if (!host) return;
@@ -2033,8 +2306,10 @@ async function renderLive() {
   host.innerHTML = `<p class="loading-msg">${esc(t('live.checking'))}</p>`;
   const parent = location.hostname;
 
-  let status = {};
-  try { status = await twitchLiveStatus(tw); } catch (e) { console.error('Twitch live check falló:', e); }
+  const [status, ytStatus] = await Promise.all([
+    twitchLiveStatus(tw).catch(e => { console.error('Twitch live check falló:', e); return {}; }),
+    youtubeLiveStatus(),
+  ]);
 
   const rows = tw.map(ch => {
     const u = status[ch.toLowerCase()];
@@ -2046,31 +2321,53 @@ async function renderLive() {
     || (b.followers - a.followers)
     || a.name.localeCompare(b.name));
 
-  // Arriba (en vivo) solo los que estan jugando Resident Evil 4; el resto va abajo con el roster
+  // Arriba (en vivo) solo los de Twitch que estan jugando Resident Evil 4; el resto va abajo con el roster
   const isRE4 = r => r.live && /resident\s*evil\s*4/i.test((r.stream.game && r.stream.game.name) || '');
-  const liveRows = rows.filter(isRE4);
   const offRows = rows.filter(r => !isRE4(r));
+
+  // Los canales de YouTube que estan en vivo ahora (el link del vivo cambia, viene del chequeo automatico)
+  const ytLive = yt.filter(c => ytStatus[c.name] && ytStatus[c.name].live)
+    .map(c => ({ kind: 'yt', name: c.name, ...ytStatus[c.name] }));
+
+  // Todos los vivos juntos, de mas a menos espectadores
+  const liveRows = rows.filter(isRE4)
+    .map(r => ({ kind: 'tw', ch: r.ch, name: r.name, viewers: (r.stream && r.stream.viewersCount) || 0 }))
+    .concat(ytLive.map(r => ({ ...r, viewers: r.viewers || 0 })))
+    .sort((a, b) => b.viewers - a.viewers);
 
   const twIcon = '<svg class="ic" aria-hidden="true"><use href="#ic-twitch"/></svg>';
   const ytIcon = '<svg class="ic" aria-hidden="true"><use href="#ic-youtube"/></svg>';
+
+  // Reproductor de cada vivo; autoplay=1 solo se usa en el primero
+  const playerSrc = r => r.kind === 'yt'
+    ? `https://www.youtube.com/embed/${encodeURIComponent(r.videoId)}?autoplay=1&mute=1&playsinline=1`
+    : `https://player.twitch.tv/?channel=${encodeURIComponent(r.ch)}&parent=${parent}&muted=true`;
+  const pageUrl = r => r.kind === 'yt' ? `https://www.youtube.com/watch?v=${encodeURIComponent(r.videoId)}` : `https://twitch.tv/${encodeURIComponent(r.ch)}`;
+  const thumbUrl = r => r.kind === 'yt'
+    ? `https://i.ytimg.com/vi/${encodeURIComponent(r.videoId)}/mqdefault_live.jpg`
+    : `https://static-cdn.jtvnw.net/previews-ttv/live_user_${encodeURIComponent(r.ch.toLowerCase())}-640x360.jpg`;
 
   let html = '';
 
   if (liveRows.length) {
     // Solo el primero (el de mas espectadores) arranca solo; los demas cargan al hacer clic,
     // asi no se reproducen varios streams a la vez.
-    const playerSrc = ch => `https://player.twitch.tv/?channel=${encodeURIComponent(ch)}&parent=${parent}&muted=true`;
+    const playBtn = r => {
+      const inner = `<img class="clip-thumb" src="${esc(thumbUrl(r))}" alt="" loading="lazy" onerror="this.remove()">
+               <span class="clip-play-icon" aria-hidden="true">▶</span>`;
+      const label = esc(t('live.play') + ' ' + r.name);
+      // Un vivo de YouTube que no deja embeberse se abre directo en YouTube
+      if (r.kind === 'yt' && r.embed === false) return `<a class="live-play" href="${esc(pageUrl(r))}" target="_blank" rel="noopener" aria-label="${label}">${inner}</a>`;
+      return `<button class="live-play" type="button" data-src="${esc(playerSrc(r))}" data-name="${esc(r.name)}" aria-label="${label}">${inner}</button>`;
+    };
     html += `<div class="live-live">` + liveRows.map((r, i) => `
       <div class="live-card is-live">
-        <div class="live-frame">${i === 0
-          ? `<iframe src="${playerSrc(r.ch)}" allowfullscreen title="${esc(r.name)}"></iframe>`
-          : `<button class="live-play" type="button" data-ch="${esc(r.ch)}" data-name="${esc(r.name)}" aria-label="${esc(t('live.play') + ' ' + r.name)}">
-               <img class="clip-thumb" src="https://static-cdn.jtvnw.net/previews-ttv/live_user_${encodeURIComponent(r.ch.toLowerCase())}-640x360.jpg" alt="" loading="lazy" onerror="this.remove()">
-               <span class="clip-play-icon" aria-hidden="true">▶</span>
-             </button>`}</div>
+        <div class="live-frame">${i === 0 && !(r.kind === 'yt' && r.embed === false)
+          ? `<iframe src="${esc(playerSrc(r))}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen title="${esc(r.name)}"></iframe>`
+          : playBtn(r)}</div>
         <div class="live-meta">
           <span class="live-badge">● ${esc(t('live.on'))}</span>
-          <a href="https://twitch.tv/${encodeURIComponent(r.ch)}" target="_blank" rel="noopener">${twIcon}${esc(r.name)}</a>
+          <a href="${esc(pageUrl(r))}" target="_blank" rel="noopener">${r.kind === 'yt' ? ytIcon : twIcon}${esc(r.name)}</a>
         </div>
       </div>`).join('') + `</div>`;
   } else {
@@ -2082,7 +2379,8 @@ async function renderLive() {
        <span class="live-name">${twIcon}${esc(r.name)}</span><span class="live-status">${esc(t(r.live ? 'live.otherGame' : 'live.off'))}</span>
      </a>`);
 
-  const ytCards = yt.map(c => {
+  // Los de YouTube que estan en vivo ya salieron arriba; el resto queda en el listado
+  const ytCards = yt.filter(c => !(ytStatus[c.name] && ytStatus[c.name].live)).map(c => {
     const href = c.url || (c.id ? `https://www.youtube.com/channel/${c.id}/live` : `https://www.youtube.com/results?search_query=${encodeURIComponent(c.name)}`);
     return `<a class="live-card is-off is-yt" href="${esc(href)}" target="_blank" rel="noopener">
        <span class="live-name">${ytIcon}${esc(c.name)}</span><span class="live-status">YouTube</span>
@@ -2094,12 +2392,13 @@ async function renderLive() {
 
   host.innerHTML = html;
 
-  host.querySelectorAll('.live-play').forEach(btn => {
+  host.querySelectorAll('button.live-play').forEach(btn => {
     btn.addEventListener('click', () => {
       const frame = document.createElement('iframe');
-      frame.src = `https://player.twitch.tv/?channel=${encodeURIComponent(btn.dataset.ch)}&parent=${parent}&muted=true`;
+      frame.src = btn.dataset.src;
+      frame.allow = 'autoplay; encrypted-media; picture-in-picture';
       frame.allowFullscreen = true;
-      frame.title = btn.dataset.name || btn.dataset.ch;
+      frame.title = btn.dataset.name || '';
       btn.replaceWith(frame);
     });
   });

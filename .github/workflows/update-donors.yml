@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: update-donors
+  group: update-data
   cancel-in-progress: false
 
 jobs:
