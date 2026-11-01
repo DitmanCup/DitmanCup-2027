@@ -410,6 +410,8 @@ const I18N = {
     'clips.title': 'Mejores clips',
     'clips.intro': 'Momentos destacados de ediciones y torneos anteriores.',
     'clips.empty': 'Todavia no hay clips cargados. ¿Tenes uno? Pasalo por Discord.',
+    'clips.by': 'por',
+    'clips.views': 'vistas',
 
     'live.title': 'Runners de RE4 en vivo',
     'live.intro': 'Canales de la comunidad que estan corriendo Resident Evil 4 ahora mismo.',
@@ -658,6 +660,8 @@ const I18N = {
     'clips.title': 'Best clips',
     'clips.intro': 'Highlights from past editions and other tournaments.',
     'clips.empty': "No clips added yet. Got one? Drop it in the Discord.",
+    'clips.by': 'by',
+    'clips.views': 'views',
 
     'live.title': 'RE4 runners live',
     'live.intro': 'Community channels running Resident Evil 4 right now.',
@@ -752,6 +756,256 @@ const I18N = {
 
     'testmode': 'TEST MODE · fake data',
   },
+  id: {
+    'nav.inicio': 'Beranda',
+    'nav.home': 'Ke beranda',
+    'nav.sorteo': 'Jadwal',
+    'nav.torneo': 'Turnamen',
+    'intro.t1': 'Jadwal',
+    'nav.grupos': 'Grup',
+    'nav.brackets': 'Bracket',
+    'nav.simulations': 'Simulasi',
+    'nav.champions': 'Riwayat',
+    'nav.clips': 'Klip',
+    'nav.live': 'Live',
+    'nav.donaciones': 'Donasi',
+    'nav.organizadores': 'Panitia',
+    'nav.menu': 'Buka menu',
+
+    'hero.subtitle': 'Turnamen speedrun Resident Evil 4 buatan komunitas.',
+
+    'countdown.label': 'Hingga kualifikasi dibuka',
+    'countdown.days': 'hari',
+    'countdown.hours': 'jam',
+    'countdown.mins': 'mnt',
+    'countdown.secs': 'dtk',
+    'countdown.open': 'Kualifikasi sudah dibuka!',
+    'countdown.datePrefix': 'Dibuka:',
+    'countdown.closePrefix': 'Ditutup:',
+
+    'facts.runners': 'runner',
+    'facts.groups': 'grup',
+    'facts.qualify': 'lolos langsung',
+
+    'trailer.title': 'Video pengumuman Ditman Cup 2027',
+    'hero.emblemAlt': 'Emblem Ditman Cup 2027: trofi emas di dalam sebuah cincin',
+    'intro.title': 'Selamat datang di Ditman Cup 2027',
+    'intro.lead': 'Semua yang kamu butuhkan untuk mengikuti turnamen, di satu tempat.',
+    'intro.d1': 'Siapa lawanmu, dan kapan',
+    'intro.d2': 'Top 8 langsung + 24 di 3 grup',
+    'intro.d3': 'Double elimination sampai final',
+    'intro.d4': 'Coba mainkan formatnya sendiri',
+
+    'sorteo.title': 'Jadwal',
+    'sorteo.r1.l': 'Apa yang diundi',
+    'sorteo.r1.t': 'Bukan grupnya, melainkan lawannya. Grupmu ditentukan dari peringkat kualifikasi, dan undian menentukan siapa lawanmu di dalam grup itu.',
+    'sorteo.r2.l': 'Kapan',
+    'sorteo.r2.t': 'Undian live baru sebelum setiap ronde, setelah hasil ronde sebelumnya memindahkan runner antar grup.',
+    'sorteo.r3.l': 'Di mana',
+    'sorteo.r3.t': 'Live di twitch.tv/ditmancup. Pertandingan ditampilkan di bawah lengkap dengan hari dan jam.',
+    'sorteo.r4.l': 'Top 8',
+    'sorteo.r4.t': 'Langsung ke Babak 16 Besar: mereka tidak bermain di grup, jadi tidak ikut diundi.',
+    'sched.title': 'Jadwal',
+    'sched.round': 'Ronde {n}',
+    'sched.dateTbd': 'Tanggal menyusul',
+    'sched.note1': 'Grup ditentukan dari peringkat kualifikasi.',
+    'sched.noteN': 'Grup ditentukan dari hasil ronde sebelumnya.',
+    'sched.vs': 'vs',
+    'sched.tzNote': 'Waktu ditampilkan sesuai zona waktumu ({tz}).',
+    'donors.title': 'Donatur teratas',
+    'donors.colName': 'Donatur',
+    'donors.colAmount': 'Donasi',
+    'donors.loading': 'Memuat donatur…',
+    'donors.empty': 'Belum ada donatur.',
+    'donors.error': 'Daftar donatur tidak dapat dimuat.',
+    'donors.total': '{amount} terkumpul · {n} donatur',
+    'donors.src': 'Sumber: Matcherino · {years} edisi',
+    'donors.thanks': 'Terima kasih!',
+    'donors.thanksGeneric': 'Terima kasih kepada semua donatur yang telah mendukung Ditman Cup.',
+    'donors.thanksSub': 'Terima kasih kepada {n} donatur kami yang telah mendukung Ditman Cup.',
+    'visits.label': 'Kunjungan halaman',
+
+    'grupos.title': 'Babak grup',
+    'grupos.loading': 'Memuat grup…',
+    'grupos.sheetError': 'Sheet tidak dapat dimuat. Menampilkan data contoh.',
+    'group.word': 'Grup',
+    'group.tbd': 'Menyusul',
+    'group.directTitle': 'Top 8 — langsung ke Babak 16 Besar',
+    'group.directBadge': 'Lewati babak grup',
+    'group.directNote': 'Lolos langsung dari kualifikasi: mereka masuk bracket di Babak 16 Besar.',
+    'group.stageBadge': 'Babak grup',
+    'group.stageTitle': '24 runner · 3 grup berisi 8',
+    'group.stageNote': 'Merekalah yang bertanding: lawan diundi di dalam setiap grup (lihat Turnamen > Jadwal).',
+
+    'brackets.title': 'Bracket',
+    'brackets.placeholder': 'Bracket gugur akan tampil setelah babak grup selesai.',
+    'brackets.previewNote': 'Double elimination · {n} peserta. Kalah sekali, kamu turun ke Losers Bracket; kalah lagi, kamu tersingkir. Pertandingan sebenarnya ditentukan setelah babak grup selesai.',
+    'bracket.champion': 'Juara',
+    'bracket.tbd': '—',
+    'bracket.bye': 'BYE',
+    'bracket.seedTag': 'Seed {n}',
+    'bracket.round.final': 'Final',
+    'bracket.round.semi': 'Semifinal',
+    'bracket.round.quarter': 'Perempat final',
+    'bracket.round.r16': 'Babak 16 Besar',
+    'bracket.round.r32': 'Babak 32 Besar',
+    'bracket.round.generic': 'Babak {n} Besar',
+    'bracket.winners': 'Winners Bracket',
+    'bracket.losers': 'Losers Bracket',
+    'bracket.grandFinal': 'Grand Final',
+    'bracket.round.winnersFinal': 'Final Winners',
+    'bracket.lr': 'Ronde Losers {n}',
+    'bracket.losersSemi': 'Semifinal Losers',
+    'bracket.losersFinal': 'Final Losers',
+    'bracket.winnerOf': 'Pemenang M{n}',
+    'bracket.loserOf': 'Yang kalah M{n}',
+
+    'clas.col.pos': 'Pos',
+    'clas.col.runner': 'Runner',
+    'clas.col.group': 'Grup',
+    'clas.col.time': 'Waktu terbaik',
+    'clas.col.pts': 'Poin',
+
+    'don.title': 'Donasi',
+    'don.body': 'Ditman Cup berjalan berkat dukungan komunitas. Kalau kamu ingin ikut menyumbang untuk prize pool dan biaya turnamen, bisa lewat sini:',
+    'don.btn': 'Donasi',
+    'don.pool.title': 'Prize pool & biaya turnamen',
+    'don.me.title': 'Dukung saya',
+    'don.me.body': 'Ini sepenuhnya opsional, tapi kalau kamu suka websitenya dan ingin mendukung saya secara langsung, saya sangat menghargainya. Terima kasih sudah menjadi bagian dari komunitas ini!',
+    'don.me.btn': 'Donasi ke JokerUY',
+
+    'org.title': 'Panitia & staf',
+    'org.tier.organizers': 'Panitia',
+    'org.tier.mods': 'Moderator SRC',
+    'org.tier.helpers': 'Helper & caster',
+    'org.tier.design': 'Seni & desain',
+    'org.role.admin': 'Admin',
+    'org.role.mod': 'Moderator',
+    'org.role.helper': 'Helper',
+    'org.role.helperCaster': 'Helper / Caster',
+    'org.role.artDesign': 'Seni & desain',
+    'org.role.artDesignWeb': 'Seni & desain, Desainer website',
+
+    'link.discord': 'Discord',
+    'link.rules': 'Dokumen',
+    'link.youtube': 'YouTube',
+    'link.twitch': 'Twitch',
+
+    'champions.title': 'Riwayat',
+    'champions.edition': 'Ditman Cup {year}',
+    'champions.donors': 'Donatur',
+    'champions.timeline': 'Semua donasi (kronologis)',
+    'champions.txToggle': 'Tampilkan setiap donasi',
+    'champions.champion': 'Juara',
+    'champions.runnerUp': 'Juara 2',
+    'champions.third': 'Juara 3',
+    'champions.tbd': 'Menunggu konfirmasi',
+    'champions.vod': 'Tonton final',
+    'champions.prize': 'Prize pool',
+    'champions.trophyTitle': 'Trofi',
+    'champions.trophyPending': 'Trofi resmi Ditman Cup 2027.',
+    'champions.viewData': 'Lihat semua data',
+    'champions.modalHint': 'Data asli dari spreadsheet turnamen.',
+
+    'clips.title': 'Klip terbaik',
+    'clips.intro': 'Momen terbaik dari edisi sebelumnya dan turnamen lainnya.',
+    'clips.empty': 'Belum ada klip. Punya klip bagus? Kirim ke Discord.',
+    'clips.by': 'oleh',
+    'clips.views': 'tayangan',
+
+    'live.title': 'Runner RE4 yang sedang live',
+    'live.intro': 'Channel komunitas yang sedang menjalankan Resident Evil 4 sekarang.',
+    'live.on': 'LIVE',
+    'live.off': 'Offline',
+    'live.none': 'Tidak ada channel dari daftar yang sedang live saat ini.',
+    'live.watch': 'Tonton di Twitch',
+    'live.checking': 'Memeriksa channel…',
+
+    'footer.text': 'Ditman Cup 2027 · Dibuat untuk komunitas',
+    'footer.credit': 'Website oleh',
+
+    'sim.title': 'Simulator — format ala Nations League',
+    'sim.r1.l': 'Langsung',
+    'sim.r1.t': 'Top 8 dari kualifikasi melewati babak grup dan langsung ke Babak 16 Besar.',
+    'sim.r2.l': 'Grup',
+    'sim.r2.t': '24 runner lainnya bermain di 3 grup berisi 8 selama 4 ronde. Satu BO1 per ronde, di dalam grupmu.',
+    'sim.r3.l': 'Perpindahan',
+    'sim.r3.t': 'Menang, kamu naik satu grup. Kalah, kamu turun satu grup.',
+    'sim.r4.l': 'Poin',
+    'sim.r4.t': 'Menang: 2 poin di Grup 1, 1 poin di Grup 2 dan 3. Kalah kurang dari 30 detik: bonus +1 (Grup 1) atau +0,5 (Grup 2 dan 3).',
+    'sim.r5.l': 'Lolos',
+    'sim.r5.t': 'Setelah ronde 4, 8 runner dengan poin terbanyak masuk ke Babak 16 Besar. Tiebreak: rata-rata 2 race terbaikmu.',
+    'sim.proposal': 'Usulan format — belum final.',
+    'sim.dateBadge': 'Ronde',
+    'sim.btnNext': 'Simulasikan ronde berikutnya',
+    'sim.btnNext5': 'Simulasikan sampai akhir',
+    'sim.btnReset': 'Reset',
+    'sim.legendQualified': 'Lolos ke Babak 16 Besar (Top 8 dari grup)',
+    'sim.legendEliminated': 'Tersingkir',
+    'sim.directTag': 'lolos langsung',
+    'sim.directTitle': 'Top 8 — lolos langsung ke Babak 16 Besar',
+    'sim.directNote': '8 waktu tercepat dari kualifikasi melewati babak grup sepenuhnya: mereka langsung ditempatkan di Babak 16 Besar.',
+    'sim.logColGroup': 'Grup',
+    'sim.logColWinner': 'Menang',
+    'sim.logColLoser': 'Kalah',
+    'sim.logColMargin': 'Selisih',
+    'sim.logColMove': 'Perpindahan',
+    'sim.stays': 'tetap di Grup {g}',
+    'sim.movesUp': 'naik ke Grup {g}',
+    'sim.movesDown': 'turun ke Grup {g}',
+    'sim.swapTitle': 'Coba sendiri: tukar seorang runner dengan cadangan',
+    'sim.swapNote': 'Kalau kamu tidak termasuk 32 runner di simulator dan ingin tahu bagaimana hasilmu, pilih siapa yang digantikan lalu masuklah (atau pilih salah satu cadangan: PB di bawah 1:30:00 dan punya run dalam setahun terakhir). Kamu juga bisa mengetik nama dan PB secara manual. Daftar diurutkan ulang berdasarkan PB dan simulator dimulai dari awal.',
+    'sim.swapOut': 'Ganti',
+    'sim.swapIn': 'dengan',
+    'sim.swapCustom': 'Lainnya (ketik nama dan PB)…',
+    'sim.swapName': 'Nama',
+    'sim.swapPb': 'PB (H:MM:SS)',
+    'sim.swapApply': 'Tukar',
+    'sim.swapRestore': 'Kembalikan daftar asli',
+    'sim.swapBadName': 'Ketik sebuah nama (maksimal 24 karakter).',
+    'sim.swapBadPb': 'PB harus berformat H:MM:SS, antara 1:00:00 dan 2:30:00 (contoh: 1:25:30).',
+    'sim.swapDup': 'Nama itu sudah ada di simulator.',
+    'sim.swapDone': '{name} masuk ke simulator menggantikan {out}. Diurutkan ulang berdasarkan PB dan dimulai dari awal.',
+    'sim.swapRestored': 'Daftar asli dikembalikan.',
+    'sim.group1': 'Grup 1',
+    'sim.group2': 'Grup 2',
+    'sim.group3': 'Grup 3',
+    'sim.runnersCount': '{n} runner',
+    'sim.thRunner': 'Runner',
+    'sim.thPB': 'PB',
+    'sim.thPts': 'Poin',
+    'sim.thBest': 'Waktu terbaik',
+    'sim.thBestAvg': 'Rata-rata waktu terbaik',
+    'sim.thHistory': 'Riwayat',
+    'sim.rankingTitle': 'Peringkat babak grup — diurutkan hanya berdasarkan poin',
+    'sim.rankingNote': '24 runner babak grup dalam satu tabel, diurutkan dari poin tertinggi ke terendah (tanpa tiebreak grup, tanpa tabel terpisah). 8 teratas lolos ke Babak 16 Besar bersama Top 8 langsung.',
+    'sim.logTitleEmpty': 'Belum ada ronde yang dimainkan',
+    'sim.logTitle': 'Hasil ronde {n}',
+    'sim.logTitleFinal': 'Hasil ronde {n} (final)',
+    'sim.bracketTitle': 'Babak 16 Besar',
+    'sim.wbTitle': 'Double elimination — mainkan',
+    'sim.wbNote': 'Babak 16 Besar dan Perempat final: jika race pertama dimenangkan dengan selisih 2:00 atau lebih, itu menjadi satu-satunya race (BO1); jika tidak, menjadi BO3. Semifinal dan Final selalu BO3, dan Grand Final BO5. Kalah sekali, kamu turun ke Losers Bracket; kalah lagi, kamu tersingkir.',
+    'sim.btnWbNext': 'Mainkan {round}',
+    'sim.wbDone': 'Turnamen selesai',
+    'sim.btnWbEverything': 'Mainkan semuanya sampai Grand Final',
+    'sim.champion': 'Juara Ditman Cup',
+    'sim.btnWbAll': 'Mainkan sampai Final Winners',
+    'sim.btnWbReset': 'Reset hasil',
+    'sim.wbChamp': 'Juara Winners Bracket — langsung ke Grand Final',
+    'sim.bracketLocked': 'Selesaikan semua 4 ronde untuk membuka undian Babak 16 Besar.',
+    'sim.bracketExplainer': 'Top 8 langsung mempertahankan seeding klasik (mereka tidak bisa saling bertemu sebelum semifinal). Undi mereka melawan 8 peserta lolos dari babak grup untuk melengkapi bracket.',
+    'sim.btnDrawNext': 'Undi berikutnya',
+    'sim.btnDrawAll': 'Undi semua',
+    'sim.btnDrawReset': 'Reset undian',
+    'sim.sideA': 'Sisi A',
+    'sim.sideB': 'Sisi B',
+    'sim.seedTag': 'Top {n}',
+    'sim.pending': 'Belum diundi',
+    'sim.footer': 'Simulasi dengan data contoh — dibuat untuk menjelaskan format, bukan untuk memprediksi hasil sebenarnya.',
+    'sim.doneLabel': 'Turnamen selesai',
+
+    'testmode': 'MODE UJI COBA · data palsu',
+  },
 };
 
 // Estado en memoria para poder re-renderizar al cambiar de idioma
@@ -760,9 +1014,12 @@ let currentLang = 'en';
 let lastGroupsRows = null;
 let lastStandingsRows = null;
 
+// Locale de fechas/numeros por idioma
+const LOCALES = { en: 'en-US', es: 'es-AR', id: 'id-ID' };
+
 function t(key, vars) {
-  const dict = I18N[currentLang] || I18N.es;
-  let s = dict[key] != null ? dict[key] : (I18N.es[key] != null ? I18N.es[key] : key);
+  const dict = I18N[currentLang] || I18N.en;
+  let s = dict[key] != null ? dict[key] : (I18N.en[key] != null ? I18N.en[key] : (I18N.es[key] != null ? I18N.es[key] : key));
   if (vars) Object.keys(vars).forEach(k => { s = s.replace('{' + k + '}', vars[k]); });
   return s;
 }
@@ -859,8 +1116,8 @@ document.addEventListener('DOMContentLoaded', () => {
 // ======= IDIOMA / LANGUAGE =======
 function initLang() {
   const saved = safeGet('dc-lang');
-  // Inglés por defecto; solo recordamos si el visitante eligió español.
-  applyLang(saved === 'es' || saved === 'en' ? saved : 'en');
+  // Inglés por defecto; recordamos si el visitante eligió español o indonesio.
+  applyLang(saved === 'es' || saved === 'en' || saved === 'id' ? saved : 'en');
 
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.addEventListener('click', () => applyLang(btn.dataset.lang));
@@ -868,7 +1125,7 @@ function initLang() {
 }
 
 function applyLang(lang) {
-  currentLang = I18N[lang] ? lang : 'es';
+  currentLang = I18N[lang] ? lang : 'en';
   document.documentElement.lang = currentLang;
 
   document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -1026,7 +1283,7 @@ function renderCountdown() {
   if (!box || !_countdownTarget) return;
 
   const dateLine = document.getElementById('countdown-date');
-  const locale = currentLang === 'en' ? 'en-US' : 'es-ES';
+  const locale = currentLang === 'es' ? 'es-ES' : LOCALES[currentLang];
   const fmtOpts = { day: 'numeric', month: 'long', year: 'numeric' };
   if (TOURNAMENT_CONFIG.qualysTimeZone) fmtOpts.timeZone = TOURNAMENT_CONFIG.qualysTimeZone;
   const fmtDate = d => {
@@ -1223,9 +1480,9 @@ function renderSchedule() {
   const host = document.getElementById('schedule-container');
   if (!host) return;
   const data = scheduleFromRows(lastScheduleRows);
-  const loc = currentLang === 'es' ? 'es-AR' : 'en-US';
+  const loc = LOCALES[currentLang];
   const fmtDay = new Intl.DateTimeFormat(loc, { weekday: 'long', day: 'numeric', month: 'long' });
-  const fmtTime = new Intl.DateTimeFormat(loc, { hour: '2-digit', minute: '2-digit', hour12: false });
+  const fmtTime = new Intl.DateTimeFormat(currentLang === 'id' ? 'en-GB' : loc, { hour: '2-digit', minute: '2-digit', hour12: false });
   const tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || '').replace(/_/g, ' ');
   const tbd = `<span class="is-tbd">${esc(t('group.tbd'))}</span>`;
   const runner = n => n ? nameWithFlag(n) : tbd;
@@ -1541,7 +1798,7 @@ function pickKey(obj, names) {
 // Lista de donadores de una edicion (sale de data/donors.json, por torneo de Matcherino)
 function donationDate(iso) {
   try {
-    return new Date(iso).toLocaleDateString(currentLang === 'es' ? 'es-AR' : 'en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+    return new Date(iso).toLocaleDateString(LOCALES[currentLang], { day: 'numeric', month: 'short', year: 'numeric' });
   } catch (e) { return String(iso).slice(0, 10); }
 }
 
@@ -1702,7 +1959,7 @@ function renderClips() {
       ${s.items.map((c, i) => {
         const title = c.t || c.title || '';
         const author = c.a || c.author || '';
-        const meta = [author && ('by ' + author), c.d, c.v != null && (c.v + ' views')].filter(Boolean).join(' · ');
+        const meta = [author && (t('clips.by') + ' ' + author), c.d, c.v != null && (c.v + ' ' + t('clips.views'))].filter(Boolean).join(' · ');
         return `<figure class="clip">
           <button class="clip-frame clip-play" type="button" data-clip='${esc(JSON.stringify({ s: c.s || '', url: c.url || '' }))}' aria-label="${esc(title || 'clip')}">
             ${c.s ? `<img class="clip-thumb" src="assets/clips/${esc(c.s)}.jpg" alt="" loading="lazy" onerror="this.remove()">` : ''}
@@ -1913,7 +2170,7 @@ async function initVisitCounter() {
 function renderVisits() {
   const box = document.getElementById('visit-counter');
   if (!box || visitValue == null || isNaN(visitValue)) return;
-  document.getElementById('visit-count').textContent = visitValue.toLocaleString(currentLang === 'es' ? 'es-AR' : 'en-US');
+  document.getElementById('visit-count').textContent = visitValue.toLocaleString(LOCALES[currentLang]);
   box.hidden = false;
 }
 
