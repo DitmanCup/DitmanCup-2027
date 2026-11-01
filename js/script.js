@@ -422,6 +422,7 @@ const I18N = {
     'live.off': 'Desconectado',
     'live.none': 'Ningun canal de la lista esta jugando Resident Evil 4 en este momento.',
     'live.otherGame': 'En vivo · otro juego',
+    'live.play': 'Reproducir el stream de',
     'live.watch': 'Ver en Twitch',
     'live.checking': 'Chequeando canales…',
 
@@ -678,6 +679,7 @@ const I18N = {
     'live.off': 'Offline',
     'live.none': 'No channel from the list is streaming Resident Evil 4 right now.',
     'live.otherGame': 'Live · other game',
+    'live.play': 'Play the stream of',
     'live.watch': 'Watch on Twitch',
     'live.checking': 'Checking channels…',
 
@@ -934,6 +936,7 @@ const I18N = {
     'live.off': 'Offline',
     'live.none': 'Tidak ada channel dari daftar yang sedang streaming Resident Evil 4 saat ini.',
     'live.otherGame': 'Live · game lain',
+    'live.play': 'Putar stream dari',
     'live.watch': 'Tonton di Twitch',
     'live.checking': 'Memeriksa channel…',
 
@@ -2054,13 +2057,20 @@ async function renderLive() {
   let html = '';
 
   if (liveRows.length) {
-    html += `<div class="live-live">` + liveRows.map(r => `
+    // Solo el primero (el de mas espectadores) arranca solo; los demas cargan al hacer clic,
+    // asi no se reproducen varios streams a la vez.
+    const playerSrc = ch => `https://player.twitch.tv/?channel=${encodeURIComponent(ch)}&parent=${parent}&muted=true`;
+    html += `<div class="live-live">` + liveRows.map((r, i) => `
       <div class="live-card is-live">
-        <div class="live-frame"><iframe src="https://player.twitch.tv/?channel=${encodeURIComponent(r.ch)}&parent=${parent}&muted=true" allowfullscreen title="${esc(r.name)}"></iframe></div>
+        <div class="live-frame">${i === 0
+          ? `<iframe src="${playerSrc(r.ch)}" allowfullscreen title="${esc(r.name)}"></iframe>`
+          : `<button class="live-play" type="button" data-ch="${esc(r.ch)}" data-name="${esc(r.name)}" aria-label="${esc(t('live.play') + ' ' + r.name)}">
+               <img class="clip-thumb" src="https://static-cdn.jtvnw.net/previews-ttv/live_user_${encodeURIComponent(r.ch.toLowerCase())}-640x360.jpg" alt="" loading="lazy" onerror="this.remove()">
+               <span class="clip-play-icon" aria-hidden="true">▶</span>
+             </button>`}</div>
         <div class="live-meta">
           <span class="live-badge">● ${esc(t('live.on'))}</span>
           <a href="https://twitch.tv/${encodeURIComponent(r.ch)}" target="_blank" rel="noopener">${twIcon}${esc(r.name)}</a>
-          ${r.stream && r.stream.game ? `<span class="live-game">${esc(r.stream.game.name)}</span>` : ''}
         </div>
       </div>`).join('') + `</div>`;
   } else {
@@ -2083,6 +2093,16 @@ async function renderLive() {
   if (all.length) html += `<div class="live-roster">${all.join('')}</div>`;
 
   host.innerHTML = html;
+
+  host.querySelectorAll('.live-play').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const frame = document.createElement('iframe');
+      frame.src = `https://player.twitch.tv/?channel=${encodeURIComponent(btn.dataset.ch)}&parent=${parent}&muted=true`;
+      frame.allowFullscreen = true;
+      frame.title = btn.dataset.name || btn.dataset.ch;
+      btn.replaceWith(frame);
+    });
+  });
 }
 
 // ======= TOP DONADORES (Matcherino) =======
