@@ -288,6 +288,7 @@ const I18N = {
     'facts.qualify': 'clasifican directo',
 
     'trailer.title': 'Ditman Cup 2027: video de anuncio',
+    'trailer.yt': 'Ver en YouTube',
     'hero.emblemAlt': 'Emblema de la Ditman Cup 2027: el trofeo dorado dentro de un aro',
     'intro.title': 'Bienvenidos a la Ditman Cup 2027',
     'intro.lead': 'Todo para seguir el torneo, en un solo lugar.',
@@ -540,6 +541,7 @@ const I18N = {
     'facts.qualify': 'qualify directly',
 
     'trailer.title': 'Ditman Cup 2027 Announcement video',
+    'trailer.yt': 'Watch on YouTube',
     'hero.emblemAlt': 'Ditman Cup 2027 emblem: the golden trophy inside a ring',
     'intro.title': 'Welcome to the Ditman Cup 2027',
     'intro.lead': 'Everything you need to follow the tournament, in one place.',
@@ -792,6 +794,7 @@ const I18N = {
     'facts.qualify': 'lolos langsung',
 
     'trailer.title': 'Video pengumuman Ditman Cup 2027',
+    'trailer.yt': 'Tonton di YouTube',
     'hero.emblemAlt': 'Emblem Ditman Cup 2027: trofi emas di dalam sebuah cincin',
     'intro.title': 'Selamat datang di Ditman Cup 2027',
     'intro.lead': 'Semua yang kamu butuhkan untuk mengikuti turnamen, di satu tempat.',
