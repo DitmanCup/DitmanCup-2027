@@ -1765,3 +1765,14 @@ body[data-tab="simulations"] main { max-width: min(1880px, 100%); }
 #simulations select, #simulations input, #simulations label { max-width: 100%; min-width: 0; box-sizing: border-box; }
 .sim-groups > .group-card { min-width: 0; max-width: 100%; }
 @media (max-width: 720px) { .groups-grid.sim-groups { grid-template-columns: minmax(0, 1fr); } }
+
+/* Selector de idioma: banderas y botones mas grandes */
+.lang-btn { display: inline-flex; align-items: center; gap: .45rem; font-size: 1.05rem; padding: .45rem .8rem; }
+.lang-btn .fi { font-size: 1.25rem; border-radius: 2px; box-shadow: 0 0 0 1px rgba(255, 255, 255, .18); opacity: .6; transition: opacity .15s; }
+.lang-btn:hover .fi, .lang-btn.active .fi { opacity: 1; }
+@media (max-width: 480px) { .lang-btn { gap: .3rem; font-size: .95rem; padding: .4rem .5rem; } .lang-btn .fi { font-size: 1.1rem; } }
+@media (max-width: 480px) {
+  .lang-btn > span:not(.fi) { display: none; }
+  .lang-btn { padding: .5rem .7rem; }
+  .lang-btn .fi { font-size: 1.35rem; }
+}
