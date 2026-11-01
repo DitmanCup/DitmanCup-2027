@@ -319,6 +319,10 @@ const I18N = {
     'donors.empty': 'Todavia no hay donadores.',
     'donors.error': 'No se pudo cargar la lista de donadores.',
     'donors.total': '{amount} recaudados · {n} donadores',
+    'donors.totalOne': '{amount} recaudados · 1 donador',
+    'donors.thisTitle': 'Este torneo · Ditman Cup {year}',
+    'donors.allTimeTitle': 'Top histórico',
+    'donors.curEmpty': 'Todavía no hay donaciones para este torneo. ¡Sé el primero!',
     'donors.src': 'Fuente: Matcherino · ediciones {years}',
     'donors.thanks': 'Gracias!',
     'donors.thanksGeneric': 'Gracias a todos los que apoyaron la Ditman Cup.',
@@ -567,6 +571,10 @@ const I18N = {
     'donors.empty': 'No donors yet.',
     'donors.error': 'Could not load the donors list.',
     'donors.total': '{amount} raised · {n} donors',
+    'donors.totalOne': '{amount} raised · 1 donor',
+    'donors.thisTitle': 'This tournament · Ditman Cup {year}',
+    'donors.allTimeTitle': 'All-time top donors',
+    'donors.curEmpty': 'No donations for this tournament yet. Be the first!',
     'donors.src': 'Source: Matcherino · {years} editions',
     'donors.thanks': 'Thank you!',
     'donors.thanksGeneric': 'Thank you to every donor who has supported the Ditman Cup.',
@@ -815,6 +823,10 @@ const I18N = {
     'donors.empty': 'Belum ada donatur.',
     'donors.error': 'Daftar donatur tidak dapat dimuat.',
     'donors.total': '{amount} terkumpul · {n} donatur',
+    'donors.totalOne': '{amount} terkumpul · 1 donatur',
+    'donors.thisTitle': 'Turnamen ini · Ditman Cup {year}',
+    'donors.allTimeTitle': 'Donatur teratas sepanjang masa',
+    'donors.curEmpty': 'Belum ada donasi untuk turnamen ini. Jadilah yang pertama!',
     'donors.src': 'Sumber: Matcherino · {years} edisi',
     'donors.thanks': 'Terima kasih!',
     'donors.thanksGeneric': 'Terima kasih kepada semua donatur yang telah mendukung Ditman Cup.',
@@ -2128,10 +2140,23 @@ function renderDonors() {
     return;
   }
   const TOP = 10;
-  document.getElementById('donors-body').innerHTML = d.donors.slice(0, TOP).map((x, i) =>
+  const rows = list => list.slice(0, TOP).map((x, i) =>
     `<tr class="${i < 3 ? 'rank-' + (i + 1) : ''}"><td>${i + 1}</td><td class="donor-name">${esc(x.name)}</td><td class="donor-amt">${esc(formatUSD(x.total))}</td></tr>`).join('');
+  const totalLine = (amount, n) => t(n === 1 ? 'donors.totalOne' : 'donors.total', { amount: formatUSD(amount), n });
+  // Este torneo (la edicion mas reciente de Matcherino) arriba; el top historico abajo
+  const cur = (d.sources || []).filter(x => x.startAt).sort((a, b) => String(b.startAt).localeCompare(String(a.startAt)))[0];
+  const curList = cur && cur.donors || [];
+  document.getElementById('donors-cur-title').textContent = t('donors.thisTitle', { year: cur ? String(cur.startAt).slice(0, 4) : '' });
+  const curTable = document.getElementById('donors-cur-table'), curMsg = document.getElementById('donors-cur-msg'), curTotal = document.getElementById('donors-cur-total');
+  curTable.hidden = !curList.length; curTotal.hidden = !curList.length; curMsg.hidden = !!curList.length;
+  curMsg.textContent = t('donors.curEmpty');
+  if (curList.length) {
+    document.getElementById('donors-cur-body').innerHTML = rows(curList);
+    curTotal.textContent = totalLine(cur.raised != null ? cur.raised : curList.reduce((a, x) => a + x.total, 0), curList.length);
+  }
+  document.getElementById('donors-body').innerHTML = rows(d.donors);
   table.hidden = false; msg.hidden = true;
-  total.textContent = t('donors.total', { amount: formatUSD(d.total), n: d.donorCount });
+  total.textContent = totalLine(d.total, d.donorCount);
   total.hidden = false;
   const years = [...new Set((d.sources || []).map(s => String(s.startAt || '').slice(0, 4)).filter(Boolean))].sort().join(' · ');
   src.textContent = t('donors.src', { years });

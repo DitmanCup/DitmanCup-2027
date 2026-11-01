@@ -21,7 +21,7 @@
 <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png?v=4">
 <link rel="apple-touch-icon" href="assets/icons/icon-192.png?v=4">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/7.2.3/css/flag-icons.min.css">
-<link rel="stylesheet" href="css/style.css?v=20261101c">
+<link rel="stylesheet" href="css/style.css?v=20261101e">
 </head>
 <body data-tab="inicio">
 
@@ -105,6 +105,14 @@
 
     <aside class="donors-card" id="donors-card" aria-labelledby="donors-title">
       <h2 class="donors-title" id="donors-title" data-i18n="donors.title">Top donors</h2>
+      <h3 class="donors-sub" id="donors-cur-title" data-i18n="donors.thisTitle">This tournament</h3>
+      <p class="donors-total" id="donors-cur-total" hidden></p>
+      <table class="donors-table" id="donors-cur-table" hidden>
+        <thead><tr><th>#</th><th data-i18n="donors.colName">Donor</th><th data-i18n="donors.colAmount">Donated</th></tr></thead>
+        <tbody id="donors-cur-body"></tbody>
+      </table>
+      <p class="donors-msg" id="donors-cur-msg" hidden></p>
+      <h3 class="donors-sub" data-i18n="donors.allTimeTitle">All-time top donors</h3>
       <p class="donors-total" id="donors-total" hidden></p>
       <table class="donors-table" id="donors-table" hidden>
         <thead><tr><th>#</th><th data-i18n="donors.colName">Donor</th><th data-i18n="donors.colAmount">Donated</th></tr></thead>
@@ -412,6 +420,6 @@
   </div>
 </div>
 
-<script src="js/script.js?v=20261101c"></script>
+<script src="js/script.js?v=20261101e"></script>
 </body>
 </html>

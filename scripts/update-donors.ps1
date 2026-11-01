@@ -6,7 +6,7 @@
 # Para sumar una edicion nueva (ej. la de 2027): agregar su ID a $Tournaments
 # (es el numero de la URL matcherino.com/tournaments/<ID>).
 $ErrorActionPreference = 'Stop'
-$Tournaments = @(175467, 66141)   # 2026, 2022
+$Tournaments = @(222380, 175467, 66141)   # 2027, 2026, 2022
 
 $out = Join-Path $PSScriptRoot '..\data\donors.json'
 $byName = @{}
