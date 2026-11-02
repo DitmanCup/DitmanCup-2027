@@ -1,15 +1,15 @@
 {
   "currency": "USD",
-  "total": 2688.0,
-  "donorCount": 34,
+  "total": 2698.0,
+  "donorCount": 35,
   "sources": [
     {
       "id": 222380,
       "title": "Ditman Cup 2027",
       "startAt": "2027-01-17T18:15:00Z",
       "status": "ready",
-      "raised": 120.0,
-      "donorCount": 2,
+      "raised": 130.0,
+      "donorCount": 3,
       "donors": [
         {
           "name": "JokerUY",
@@ -30,6 +30,17 @@
             {
               "date": "2026-11-01T17:14:31Z",
               "amount": 20.0
+            }
+          ]
+        },
+        {
+          "name": "Mathías_(Gato)",
+          "total": 10.0,
+          "count": 1,
+          "donations": [
+            {
+              "date": "2026-11-02T01:21:36Z",
+              "amount": 10.0
             }
           ]
         }
@@ -676,6 +687,11 @@
       "count": 1
     },
     {
+      "name": "Mathías_(Gato)",
+      "total": 10.0,
+      "count": 1
+    },
+    {
       "name": "DitmanCup",
       "total": 6.0,
       "count": 2
@@ -696,5 +712,5 @@
       "count": 1
     }
   ],
-  "updatedAt": "2026-11-01T18:29:49Z"
+  "updatedAt": "2026-11-02T01:44:05Z"
 }
