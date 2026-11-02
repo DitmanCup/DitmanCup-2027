@@ -242,15 +242,15 @@ const RE4_LIVE_CHANNELS = [
 // en vivo, así que el card lleva a youtube.com/.../live (YouTube redirige al
 // stream si están transmitiendo).
 const YOUTUBE_LIVE_CHANNELS = [
-  { name: 'seppp', url: 'https://www.youtube.com/@sepppx/live' },
-  { name: 'Bang Gori', url: 'https://www.youtube.com/@banggori2.0/live' },
+  { name: 'seppp', url: 'https://www.youtube.com/@sepppx/live', tiktok: 'seppvlr' },
+  { name: 'Bang Gori', url: 'https://www.youtube.com/@banggori2.0/live', tiktok: 'bang_gori2.0' },
   { name: 'nyr9468', url: 'https://www.youtube.com/@nyr9468/live' },
   { name: 'Fedo_Ras', url: 'https://www.youtube.com/@Fedo_Ras/live' },
   { name: 'NETJU', url: 'https://www.youtube.com/@junetkhairulamri9336/live' },
   { name: 'aqbilghilman', url: 'https://www.youtube.com/@aqbilghilman30/live' },
-  { name: 'Mrchampppt', url: 'https://www.youtube.com/@mrchampppt/live' },
+  { name: 'Mrchampppt', url: 'https://www.youtube.com/@mrchampppt/live', tiktok: 'mrchampppt' },
   { name: 'Zudinnn', id: 'UCkX2rtFOeywknZ0ibu-ajWA' },
-  { name: 'VAL', url: 'https://www.youtube.com/@valyorleza/live' },
+  { name: 'VAL', url: 'https://www.youtube.com/@valyorleza/live', tiktok: 'valyorleza' },
   { name: 'Muh01', url: 'https://www.youtube.com/results?search_query=Muh01+resident+evil+4' }, // handle sin confirmar
 ];
 
@@ -258,9 +258,10 @@ const YOUTUBE_LIVE_CHANNELS = [
 // (en vivo, espectadores, juego) lo arma scripts/update-live-status.js en GitHub Actions.
 const KICK_LIVE_CHANNELS = ['chacoide'];
 
-// Runners que streamean en TikTok (sin @). TikTok bloquea las consultas automaticas (anti-bots),
+// Runners que streamean SOLO en TikTok (sin @); los que tambien estan en YouTube llevan `tiktok: 'usuario'`
+// en YOUTUBE_LIVE_CHANNELS y su boton sale en la misma tarjeta. TikTok bloquea las consultas automaticas (anti-bots),
 // asi que no se detecta si estan en vivo: la tarjeta lleva directo a @usuario/live.
-const TIKTOK_LIVE_CHANNELS = ['valyorleza', 'mrchampppt'];
+const TIKTOK_LIVE_CHANNELS = [];
 
 // ======= TEXTOS BILINGÜES / BILINGUAL STRINGS =======
 const I18N = {
@@ -434,6 +435,7 @@ const I18N = {
     'live.watch': 'Ver en Twitch',
     'live.watchYt': 'Ver en YouTube',
     'live.watchKick': 'Ver en Kick',
+    'live.watchTt': 'Ver en TikTok',
     'live.checking': 'Chequeando canales…',
 
     'footer.text': 'Ditman Cup 2027 · Hecho para la comunidad',
@@ -693,6 +695,7 @@ const I18N = {
     'live.watch': 'Watch on Twitch',
     'live.watchYt': 'Watch on YouTube',
     'live.watchKick': 'Watch on Kick',
+    'live.watchTt': 'Watch on TikTok',
     'live.checking': 'Checking channels…',
 
     'footer.text': 'Ditman Cup 2027 · Made for the community',
@@ -952,6 +955,7 @@ const I18N = {
     'live.watch': 'Tonton di Twitch',
     'live.watchYt': 'Tonton di YouTube',
     'live.watchKick': 'Tonton di Kick',
+    'live.watchTt': 'Tonton di TikTok',
     'live.checking': 'Memeriksa channel…',
 
     'footer.text': 'Ditman Cup 2027 · Dibuat untuk komunitas',
@@ -1211,6 +1215,7 @@ const I18N = {
     'live.watch': 'Twitchで見る',
     'live.watchYt': 'YouTubeで見る',
     'live.watchKick': 'Kickで見る',
+    'live.watchTt': 'TikTokで見る',
     'live.checking': 'チャンネルを確認中…',
 
     'footer.text': 'Ditman Cup 2027 · コミュニティのために',
@@ -2345,7 +2350,7 @@ async function renderLive() {
 
   // Los canales de YouTube que estan en vivo ahora (el link del vivo cambia, viene del chequeo automatico)
   const ytLive = yt.filter(c => ytStatus[c.name] && ytStatus[c.name].live)
-    .map(c => ({ kind: 'yt', name: c.name, ...ytStatus[c.name] }));
+    .map(c => ({ kind: 'yt', name: c.name, tiktok: c.tiktok, ...ytStatus[c.name] }));
 
   // Kick: igual que en Twitch, arriba solo los que juegan Resident Evil 4
   const kickRows = (KICK_LIVE_CHANNELS || []).filter(Boolean).map(slug => {
@@ -2369,6 +2374,8 @@ async function renderLive() {
   const twIcon = '<svg class="ic" aria-hidden="true"><use href="#ic-twitch"/></svg>';
   const ytIcon = '<svg class="ic" aria-hidden="true"><use href="#ic-youtube"/></svg>';
   const kickIcon = '<svg class="ic" aria-hidden="true"><use href="#ic-kick"/></svg>';
+  const ttIcon = '<svg class="ic" aria-hidden="true"><use href="#ic-tiktok"/></svg>';
+  const ttUrl = u => `https://www.tiktok.com/@${encodeURIComponent(u)}/live`;
 
   // Reproductor de cada vivo; autoplay=1 solo se usa en el primero
   const playerSrc = r => r.kind === 'yt'
@@ -2403,7 +2410,10 @@ async function renderLive() {
         <div class="live-meta">
           <span class="live-badge">● ${esc(t('live.on'))}</span>
           <a href="${esc(pageUrl(r))}" target="_blank" rel="noopener">${r.kind === 'yt' ? ytIcon : r.kind === 'kick' ? kickIcon : twIcon}${esc(r.name)}</a>
+          <span class="live-btns">
           <a class="live-watch live-watch-${r.kind}" href="${esc(pageUrl(r))}" target="_blank" rel="noopener">${r.kind === 'yt' ? ytIcon : r.kind === 'kick' ? kickIcon : twIcon}<span>${esc(t(r.kind === 'yt' ? 'live.watchYt' : r.kind === 'kick' ? 'live.watchKick' : 'live.watch'))}</span></a>
+          ${r.tiktok ? `<a class="live-watch live-watch-tt" href="${esc(ttUrl(r.tiktok))}" target="_blank" rel="noopener">${ttIcon}<span>${esc(t('live.watchTt'))}</span></a>` : ''}
+          </span>
         </div>
       </div>`).join('') + `</div>`;
   } else {
@@ -2418,6 +2428,10 @@ async function renderLive() {
   // Los de YouTube que estan en vivo ya salieron arriba; el resto queda en el listado
   const ytCards = yt.filter(c => !(ytStatus[c.name] && ytStatus[c.name].live)).map(c => {
     const href = c.url || (c.id ? `https://www.youtube.com/channel/${c.id}/live` : `https://www.youtube.com/results?search_query=${encodeURIComponent(c.name)}`);
+    if (c.tiktok) return `<div class="live-card is-off is-yt">
+       <a class="live-name" href="${esc(href)}" target="_blank" rel="noopener">${ytIcon}${esc(c.name)}</a><span class="live-status">YouTube</span>
+       <a class="live-tt" href="${esc(ttUrl(c.tiktok))}" target="_blank" rel="noopener">${ttIcon}TikTok</a>
+     </div>`;
     return `<a class="live-card is-off is-yt" href="${esc(href)}" target="_blank" rel="noopener">
        <span class="live-name">${ytIcon}${esc(c.name)}</span><span class="live-status">YouTube</span>
      </a>`;
@@ -2429,8 +2443,8 @@ async function renderLive() {
      </a>`);
 
   const tiktokCards = (TIKTOK_LIVE_CHANNELS || []).filter(Boolean).map(u =>
-    `<a class="live-card is-off is-tiktok" href="https://www.tiktok.com/@${encodeURIComponent(u)}/live" target="_blank" rel="noopener">
-       <span class="live-name"><svg class="ic" aria-hidden="true"><use href="#ic-tiktok"/></svg>${esc(u)}</span><span class="live-status">TikTok</span>
+    `<a class="live-card is-off is-tiktok" href="${esc(ttUrl(u))}" target="_blank" rel="noopener">
+       <span class="live-name">${ttIcon}${esc(u)}</span><span class="live-status">TikTok</span>
      </a>`);
 
   const all = offCards.concat(kickCards, ytCards, tiktokCards);

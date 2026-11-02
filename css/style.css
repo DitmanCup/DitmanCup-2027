@@ -1807,3 +1807,13 @@ body[data-tab="simulations"] main { max-width: min(1880px, 100%); }
 .live-meta a.live-watch-kick { background: #53fc18; border-color: #53fc18; color: #0b1a05; }
 .live-meta a.live-watch-kick:hover { background: #7dff4a; border-color: #7dff4a; }
 .live-card.is-tiktok .ic { color: #25F4EE; flex: none; }
+.live-meta a.live-watch + a.live-watch { margin-left: 0; }
+.live-meta a.live-watch-tt { background: #000; border-color: #25f4ee; box-shadow: -2px 0 0 #fe2c55; }
+.live-meta a.live-watch-tt:hover { background: #111; border-color: #fff; }
+.live-meta a.live-watch-tt .ic { color: #25f4ee; }
+.live-tt { display: inline-flex; align-items: center; gap: .35rem; flex: none; font-family: var(--font-title); font-size: .8rem; letter-spacing: .06em; text-transform: uppercase; color: #fff; text-decoration: none; background: #000; border: 1px solid #25f4ee; border-radius: 2px; padding: .15rem .5rem; }
+.live-tt .ic { color: #25f4ee; width: 1em; height: 1em; }
+.live-tt:hover { border-color: #fff; }
+.live-card.is-off > a.live-name { color: inherit; text-decoration: none; }
+.live-btns { display: flex; flex-wrap: wrap; gap: .4rem; margin-left: auto; justify-content: flex-end; }
+.live-btns a.live-watch { margin-left: 0; }
