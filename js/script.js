@@ -267,7 +267,7 @@ const TIKTOK_LIVE_CHANNELS = [];
 
 // Runners de Twitch que tambien streamean en TikTok: { 'canal de twitch en minusculas': 'usuario de tiktok' }.
 // Su boton de TikTok sale en la misma tarjeta, igual que en YOUTUBE_LIVE_CHANNELS.
-const TWITCH_TIKTOK = { 'ezequiel_kazama': 'ezequiel._.kazama' };
+const TWITCH_TIKTOK = { 'ezequiel_kazama': 'ezequiel._.kazama', 'gabrielsinmarr': 'gabrielsinmar' };
 
 // ======= TEXTOS BILINGÜES / BILINGUAL STRINGS =======
 const I18N = {
