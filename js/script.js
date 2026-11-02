@@ -443,6 +443,49 @@ const I18N = {
     'live.watchYt': 'Ver en YouTube',
     'live.watchKick': 'Ver en Kick',
     'live.watchTt': 'Ver en TikTok',
+    'nav.predictions': 'Predicciones',
+    'pred.title': 'Predicciones',
+    'pred.intro': 'La penca de la Ditman Cup: pronosticá el ganador de cada partida y, si te animás, la diferencia de tiempo. Sumá puntos y subí en el ranking.',
+    'pred.sub.picks': 'Mis pronósticos',
+    'pred.sub.board': 'Ranking',
+    'pred.sub.rules': 'Reglas',
+    'pred.login': 'Entrar con Discord',
+    'pred.logout': 'Salir',
+    'pred.hello': 'Jugando como {name}',
+    'pred.needLogin': 'Entrá con Discord para guardar tus pronósticos y aparecer en el ranking.',
+    'pred.local': 'Modo local: tus pronósticos se guardan solo en este navegador. El ranking compartido todavía no está conectado.',
+    'pred.myPts': 'puntos',
+    'pred.myHits': 'aciertos',
+    'pred.myRank': 'en el ranking',
+    'pred.noMatches': 'Las partidas aparecen acá apenas se anuncie el calendario.',
+    'pred.timeTbd': 'Horario a definir',
+    'pred.underdog': 'Underdog',
+    'pred.underdogTip': 'Peor puesto en la clasificatoria: si gana, vale más',
+    'pred.diffLabel': 'Diferencia de tiempo (opcional)',
+    'pred.saving': 'Guardando…',
+    'pred.saved': 'Guardado ✓',
+    'pred.saveError': 'No se pudo guardar. Probá de nuevo.',
+    'pred.closed': 'Cerrada',
+    'pred.noPick': 'Sin pronóstico',
+    'pred.yourPick': 'Tu pronóstico: {name}',
+    'pred.gap': 'diferencia {d}',
+    'pred.pts': '{n} pts',
+    'pred.kind.diff': 'ganador + diferencia',
+    'pred.kind.underdog': 'ganador underdog',
+    'pred.kind.winner': 'ganador',
+    'pred.kind.miss': 'fallaste',
+    'pred.board.player': 'Jugador',
+    'pred.board.hits': 'Aciertos',
+    'pred.board.pts': 'Pts',
+    'pred.board.loading': 'Cargando el ranking…',
+    'pred.board.error': 'No se pudo cargar el ranking. Probá de nuevo en un rato.',
+    'pred.board.empty': 'Todavía no hay puntos. El ranking se llena cuando se cargan los primeros resultados.',
+    'pred.board.local': 'El ranking compartido todavía no está conectado.',
+    'pred.rules.1': 'Elegí el ganador de cada partida antes de que empiece. Podés cambiar tu elección hasta que arranque la carrera.',
+    'pred.rules.2': 'Acertás solo el ganador: {n} pts.',
+    'pred.rules.3': 'Acertás el ganador y era el underdog (el runner con peor puesto en la clasificatoria): {n} pts.',
+    'pred.rules.4': 'Acertás el ganador y además la diferencia de tiempo (la carrera termina con una diferencia de hasta {s} segundos más o menos de la que pusiste): {n} pts.',
+    'pred.rules.5': 'El máximo por partida es {n} pts y los puntos no se suman entre sí. La diferencia de tiempo es opcional.',
     'live.checking': 'Chequeando canales…',
 
     'footer.text': 'Ditman Cup 2027 · Hecho para la comunidad',
@@ -703,6 +746,49 @@ const I18N = {
     'live.watchYt': 'Watch on YouTube',
     'live.watchKick': 'Watch on Kick',
     'live.watchTt': 'Watch on TikTok',
+    'nav.predictions': 'Predictions',
+    'pred.title': 'Predictions',
+    'pred.intro': 'The Ditman Cup prediction game: pick the winner of every match and, if you dare, the time gap. Earn points and climb the leaderboard.',
+    'pred.sub.picks': 'My picks',
+    'pred.sub.board': 'Leaderboard',
+    'pred.sub.rules': 'Rules',
+    'pred.login': 'Log in with Discord',
+    'pred.logout': 'Log out',
+    'pred.hello': 'Playing as {name}',
+    'pred.needLogin': 'Log in with Discord to save your picks and join the leaderboard.',
+    'pred.local': 'Local mode: your picks are saved only in this browser. The shared leaderboard is not connected yet.',
+    'pred.myPts': 'points',
+    'pred.myHits': 'hits',
+    'pred.myRank': 'rank',
+    'pred.noMatches': 'Matches will show up here as soon as the schedule is announced.',
+    'pred.timeTbd': 'Time TBD',
+    'pred.underdog': 'Underdog',
+    'pred.underdogTip': 'Worse qualifier ranking: a win is worth more',
+    'pred.diffLabel': 'Time gap (optional)',
+    'pred.saving': 'Saving…',
+    'pred.saved': 'Saved ✓',
+    'pred.saveError': 'Could not save. Try again.',
+    'pred.closed': 'Closed',
+    'pred.noPick': 'No pick',
+    'pred.yourPick': 'Your pick: {name}',
+    'pred.gap': 'gap {d}',
+    'pred.pts': '{n} pts',
+    'pred.kind.diff': 'winner + time gap',
+    'pred.kind.underdog': 'underdog winner',
+    'pred.kind.winner': 'winner',
+    'pred.kind.miss': 'missed',
+    'pred.board.player': 'Player',
+    'pred.board.hits': 'Hits',
+    'pred.board.pts': 'Pts',
+    'pred.board.loading': 'Loading the leaderboard…',
+    'pred.board.error': 'Could not load the leaderboard. Try again in a bit.',
+    'pred.board.empty': 'No points yet. The leaderboard fills in once the first results are in.',
+    'pred.board.local': 'The shared leaderboard is not connected yet.',
+    'pred.rules.1': 'Pick the winner of each match before it starts. You can change your pick until the race begins.',
+    'pred.rules.2': 'Correct winner only: {n} pts.',
+    'pred.rules.3': 'Correct winner and it was the underdog (the runner with the worse qualifier ranking): {n} pts.',
+    'pred.rules.4': 'Correct winner and the time gap too (the race ends with a gap within {s} seconds, plus or minus, of the one you entered): {n} pts.',
+    'pred.rules.5': 'The maximum per match is {n} pts and points do not stack. The time gap is optional.',
     'live.checking': 'Checking channels…',
 
     'footer.text': 'Ditman Cup 2027 · Made for the community',
@@ -963,6 +1049,49 @@ const I18N = {
     'live.watchYt': 'Tonton di YouTube',
     'live.watchKick': 'Tonton di Kick',
     'live.watchTt': 'Tonton di TikTok',
+    'nav.predictions': 'Prediksi',
+    'pred.title': 'Prediksi',
+    'pred.intro': 'Game tebak-tebakan Ditman Cup: pilih pemenang setiap match dan, kalau berani, selisih waktunya. Kumpulkan poin dan naik di leaderboard.',
+    'pred.sub.picks': 'Pilihanku',
+    'pred.sub.board': 'Leaderboard',
+    'pred.sub.rules': 'Aturan',
+    'pred.login': 'Masuk dengan Discord',
+    'pred.logout': 'Keluar',
+    'pred.hello': 'Bermain sebagai {name}',
+    'pred.needLogin': 'Masuk dengan Discord untuk menyimpan pilihanmu dan tampil di leaderboard.',
+    'pred.local': 'Mode lokal: pilihanmu hanya tersimpan di browser ini. Leaderboard bersama belum terhubung.',
+    'pred.myPts': 'poin',
+    'pred.myHits': 'tebakan benar',
+    'pred.myRank': 'peringkat',
+    'pred.noMatches': 'Match akan muncul di sini begitu jadwal diumumkan.',
+    'pred.timeTbd': 'Jam belum ditentukan',
+    'pred.underdog': 'Underdog',
+    'pred.underdogTip': 'Peringkat kualifikasi lebih rendah: kalau menang, nilainya lebih besar',
+    'pred.diffLabel': 'Selisih waktu (opsional)',
+    'pred.saving': 'Menyimpan…',
+    'pred.saved': 'Tersimpan ✓',
+    'pred.saveError': 'Gagal menyimpan. Coba lagi.',
+    'pred.closed': 'Ditutup',
+    'pred.noPick': 'Tidak ada pilihan',
+    'pred.yourPick': 'Pilihanmu: {name}',
+    'pred.gap': 'selisih {d}',
+    'pred.pts': '{n} poin',
+    'pred.kind.diff': 'pemenang + selisih waktu',
+    'pred.kind.underdog': 'pemenang underdog',
+    'pred.kind.winner': 'pemenang',
+    'pred.kind.miss': 'meleset',
+    'pred.board.player': 'Pemain',
+    'pred.board.hits': 'Benar',
+    'pred.board.pts': 'Poin',
+    'pred.board.loading': 'Memuat leaderboard…',
+    'pred.board.error': 'Leaderboard gagal dimuat. Coba lagi nanti.',
+    'pred.board.empty': 'Belum ada poin. Leaderboard terisi setelah hasil pertama masuk.',
+    'pred.board.local': 'Leaderboard bersama belum terhubung.',
+    'pred.rules.1': 'Pilih pemenang setiap match sebelum dimulai. Pilihanmu bisa diubah sampai race dimulai.',
+    'pred.rules.2': 'Hanya pemenang yang benar: {n} poin.',
+    'pred.rules.3': 'Pemenang benar dan ia adalah underdog (runner dengan peringkat kualifikasi lebih rendah): {n} poin.',
+    'pred.rules.4': 'Pemenang benar dan selisih waktu juga tepat (race berakhir dengan selisih dalam kisaran {s} detik lebih atau kurang dari yang kamu isi): {n} poin.',
+    'pred.rules.5': 'Poin maksimal per match adalah {n} dan poin tidak dijumlahkan. Selisih waktu bersifat opsional.',
     'live.checking': 'Memeriksa channel…',
 
     'footer.text': 'Ditman Cup 2027 · Dibuat untuk komunitas',
@@ -1223,6 +1352,49 @@ const I18N = {
     'live.watchYt': 'YouTubeで見る',
     'live.watchKick': 'Kickで見る',
     'live.watchTt': 'TikTokで見る',
+    'nav.predictions': '予想',
+    'pred.title': '予想',
+    'pred.intro': 'Ditman Cup の勝敗予想ゲーム。各マッチの勝者と、自信があればタイム差も予想しよう。ポイントを稼いでリーダーボードを駆け上がろう。',
+    'pred.sub.picks': 'マイ予想',
+    'pred.sub.board': 'リーダーボード',
+    'pred.sub.rules': 'ルール',
+    'pred.login': 'Discordでログイン',
+    'pred.logout': 'ログアウト',
+    'pred.hello': '{name} としてプレイ中',
+    'pred.needLogin': 'Discordでログインすると、予想が保存されリーダーボードに載ります。',
+    'pred.local': 'ローカルモード：予想はこのブラウザにのみ保存されます。共有リーダーボードはまだ接続されていません。',
+    'pred.myPts': 'ポイント',
+    'pred.myHits': '的中',
+    'pred.myRank': '順位',
+    'pred.noMatches': 'スケジュールが発表されると、ここにマッチが表示されます。',
+    'pred.timeTbd': '時間未定',
+    'pred.underdog': 'Underdog',
+    'pred.underdogTip': '予選の順位が低い方：勝つと高得点',
+    'pred.diffLabel': 'タイム差（任意）',
+    'pred.saving': '保存中…',
+    'pred.saved': '保存しました ✓',
+    'pred.saveError': '保存できませんでした。もう一度お試しください。',
+    'pred.closed': '締め切り',
+    'pred.noPick': '予想なし',
+    'pred.yourPick': 'あなたの予想：{name}',
+    'pred.gap': '差 {d}',
+    'pred.pts': '{n} pt',
+    'pred.kind.diff': '勝者＋タイム差',
+    'pred.kind.underdog': 'underdog 勝者',
+    'pred.kind.winner': '勝者',
+    'pred.kind.miss': '不的中',
+    'pred.board.player': 'プレイヤー',
+    'pred.board.hits': '的中',
+    'pred.board.pts': 'pt',
+    'pred.board.loading': 'リーダーボードを読み込み中…',
+    'pred.board.error': 'リーダーボードを読み込めませんでした。しばらくしてからもう一度お試しください。',
+    'pred.board.empty': 'まだポイントがありません。最初の結果が入るとリーダーボードが埋まります。',
+    'pred.board.local': '共有リーダーボードはまだ接続されていません。',
+    'pred.rules.1': '各マッチの開始前に勝者を選びます。レースが始まるまで予想は変更できます。',
+    'pred.rules.2': '勝者のみ的中：{n} pt。',
+    'pred.rules.3': '勝者が的中し、それが underdog（予選順位が低い方のランナー）だった場合：{n} pt。',
+    'pred.rules.4': '勝者に加えてタイム差も的中（レースの結果が、入力したタイム差の前後 {s} 秒以内）：{n} pt。',
+    'pred.rules.5': '1マッチの最大は {n} pt で、ポイントは加算されません。タイム差の入力は任意です。',
     'live.checking': 'チャンネルを確認中…',
 
     'footer.text': 'Ditman Cup 2027 · コミュニティのために',
@@ -1406,6 +1578,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initFacts();
   initCountdown();
   initSheetModal();
+  initPredictions();
   if (isMock()) showTestBanner();
   loadGroups();
   loadStandings();
@@ -1471,6 +1644,7 @@ function applyLang(lang) {
   renderChampions();
   renderClips();
   renderLive();
+  renderPredictions();
   renderSimulator();
   if (typeof simSwapRefresh === 'function') simSwapRefresh();
 }
@@ -1779,6 +1953,7 @@ async function loadSchedule() {
     } catch (err) { console.error('Error cargando calendario:', err); }
   }
   renderSchedule();
+  renderPredictions();
 }
 
 const schedOpen = new Set();   // matchdays desplegados (se conservan al re-renderizar)
@@ -1835,7 +2010,12 @@ function mockScheduleRows() {
         const base = ((md - 1) * 5 + (g - 1) * 8 + i * 2) % MOCK_NAMES.length;
         const mins = 14 * 60 + (g - 1) * 120 + i * 30;
         const hh = String(Math.floor(mins / 60)).padStart(2, '0'), mm = String(mins % 60).padStart(2, '0');
-        rows.push({ Fecha: String(md), Grupo: String(g), 'Corredor 1': MOCK_NAMES[base], 'Corredor 2': MOCK_NAMES[(base + 1) % MOCK_NAMES.length], Horario: `${day} ${hh}:${mm}` });
+        const row = { Fecha: String(md), Grupo: String(g), 'Corredor 1': MOCK_NAMES[base], 'Corredor 2': MOCK_NAMES[(base + 1) % MOCK_NAMES.length], Horario: `${day} ${hh}:${mm}` };
+        if (md === 1 && i < 3) {   // algunas partidas con resultado, para probar los puntos
+          const t1 = 480 + (i * 7 + g * 3) % 40, t2 = t1 + ((i * 13 + g * 5) % 50) - 20;
+          row['Tiempo 1'] = fmtRaceTime(t1); row['Tiempo 2'] = fmtRaceTime(t2);
+        }
+        rows.push(row);
       }
     }
   }
@@ -1855,6 +2035,7 @@ async function loadStandings() {
     lastStandingsRows = rows;
     indexFlags(rows);
     renderBracket();
+    renderPredictions();
   } catch (err) {
     console.error('Error cargando clasificación:', err);
   }
@@ -3392,6 +3573,403 @@ function setText(id, value) {
 
 function safeGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
 function safeSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+
+// ======= PREDICCIONES / PREDICTIONS (penca) =======
+// Cada jugador pronostica el ganador de cada partida (y, si quiere, la diferencia de tiempo).
+// Puntos por partida (maximo 8): ganador = 3, ganador que era el "underdog" (peor puesto en la
+// clasificatoria) = 5, ganador + diferencia de tiempo dentro de +-diffMargin segundos = 8.
+// Las partidas y los resultados salen de la hoja del calendario (SHEET_URLS.schedule), con estas
+// columnas opcionales ademas de Fecha | Grupo | Corredor 1 | Corredor 2 | Horario:
+//   Tiempo 1 | Tiempo 2   -> tiempo final de cada runner ("12:34" o "1:02:34"); al cargarlos se puntua solo
+//   Seed 1 | Seed 2       -> puesto de cada runner (menor = mejor); si no estan, se usa el orden de la hoja Qualifiers
+// Para fases eliminatorias, en "Fecha" se puede poner el nombre de la ronda (ej. "Octavos") en vez de un numero.
+//
+// Guardado: sin configurar Supabase, los pronosticos quedan solo en este navegador. Con la URL y la
+// clave publica de Supabase (ver supabase/predictions.sql) hay login con Discord y ranking compartido.
+const PRED_CONFIG = {
+  supabaseUrl: '',   // ej. 'https://abcdxyz.supabase.co'
+  supabaseKey: '',   // clave publica ("anon" / "publishable"), no la secreta
+  diffMargin: 15,    // segundos de margen para acertar la diferencia de tiempo
+  pts: { winner: 3, underdog: 5, diff: 8 },
+};
+const PRED_LS = 'dc-predictions';
+const predState = { sb: null, user: null, local: {}, remote: {}, board: null, boardErr: false, boardAt: 0, sub: 'picks', status: {} };
+
+function predSlug(s) { return String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
+
+// "45" -> 45 s, "1:15" -> 75 s, "1:02:34" -> 3754 s. Devuelve null si no se entiende.
+function parseRaceTime(str) {
+  const s = String(str == null ? '' : str).trim().replace(',', '.');
+  if (!s) return null;
+  const parts = s.split(':');
+  if (parts.length > 3 || parts.some(p => !/^\d+(\.\d+)?$/.test(p))) return null;
+  return parts.reduce((acc, p) => acc * 60 + parseFloat(p), 0);
+}
+function fmtRaceTime(sec) {
+  sec = Math.round(sec);
+  const h = Math.floor(sec / 3600), m = Math.floor(sec % 3600 / 60), s = sec % 60;
+  return h ? `${h}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}` : `${m}:${String(s).padStart(2, '0')}`;
+}
+
+// Puesto de un runner en la hoja Qualifiers (1 = mejor); null si no se sabe
+function predRank(name) {
+  const rows = lastStandingsRows;
+  if (!rows || !rows.length || !name) return null;
+  const col = pickKey(rows[0], ['Corredor', 'Runner', 'Nombre']) || Object.keys(rows[0])[1];
+  const i = rows.findIndex(r => String(r[col] || '').trim().toLowerCase() === String(name).trim().toLowerCase());
+  return i < 0 ? null : i + 1;
+}
+
+// Todas las partidas con los dos runners ya definidos
+function predMatches() {
+  const out = [];
+  (lastScheduleRows || []).forEach(r => {
+    const a = pickVal(r, ['Corredor 1', 'Runner 1', 'Corredor A']);
+    const b = pickVal(r, ['Corredor 2', 'Runner 2', 'Corredor B']);
+    if (!a || !b) return;
+    const rawMd = pickVal(r, ['Fecha', 'Matchday', 'Round', 'Ronda', 'Jornada']);
+    const md = parseInt(rawMd, 10) || 0;
+    const g = parseInt(pickVal(r, ['Grupo', 'Group']), 10) || 0;
+    const stage = pickVal(r, ['Fase', 'Stage']) || (md ? '' : rawMd);
+    const tA = parseRaceTime(pickVal(r, ['Tiempo 1', 'Time 1', 'Resultado 1']));
+    const tB = parseRaceTime(pickVal(r, ['Tiempo 2', 'Time 2', 'Resultado 2']));
+    const sA = parseInt(pickVal(r, ['Seed 1', 'Rank 1', 'Puesto 1']), 10);
+    const sB = parseInt(pickVal(r, ['Seed 2', 'Rank 2', 'Puesto 2']), 10);
+    out.push({
+      id: [rawMd, g, predSlug(a), predSlug(b)].join('|'),
+      md, g, stage, a, b,
+      when: parseScheduleTime(pickVal(r, ['Horario', 'Hora', 'Time', 'Date'])),
+      tA, tB,
+      seedA: isNaN(sA) ? null : sA, seedB: isNaN(sB) ? null : sB,
+    });
+  });
+  return out.sort((x, y) => (x.md || 99) - (y.md || 99) || (x.when || 0) - (y.when || 0) || x.g - y.g);
+}
+
+const predHasResult = m => m.tA != null && m.tB != null && m.tA !== m.tB;
+// Cerrada si ya empezo (o ya tiene resultado). Sin horario no se puede pronosticar.
+const predLocked = m => predHasResult(m) || (m.when ? Date.now() >= m.when.getTime() : true);
+
+function predUnderdog(m) {
+  const ra = m.seedA != null ? m.seedA : predRank(m.a);
+  const rb = m.seedB != null ? m.seedB : predRank(m.b);
+  if (ra == null || rb == null || ra === rb) return null;
+  return ra > rb ? 'a' : 'b';
+}
+
+// { pts, kind } o null si todavia no hay resultado
+function scorePrediction(pick, m) {
+  if (!predHasResult(m)) return null;
+  const winner = m.tA < m.tB ? 'a' : 'b';
+  if (!pick || pick.pick !== winner) return { pts: 0, kind: 'miss' };
+  if (pick.diff != null && Math.abs(Math.abs(m.tA - m.tB) - pick.diff) <= PRED_CONFIG.diffMargin) return { pts: PRED_CONFIG.pts.diff, kind: 'diff' };
+  if (predUnderdog(m) === winner) return { pts: PRED_CONFIG.pts.underdog, kind: 'underdog' };
+  return { pts: PRED_CONFIG.pts.winner, kind: 'winner' };
+}
+
+// ---- guardado ----
+function predLoadLocal() {
+  try { predState.local = JSON.parse(safeGet(PRED_LS) || '{}') || {}; } catch (e) { predState.local = {}; }
+}
+const predPicks = () => predState.user ? predState.remote : predState.local;
+function predSaveLocal() { safeSet(PRED_LS, JSON.stringify(predState.local)); }
+
+function predRow(m, p) {
+  return { user_id: predState.user.id, match_id: m.id, pick: p.pick, diff: p.diff == null ? null : Math.round(p.diff), start_at: m.when ? m.when.toISOString() : null };
+}
+
+async function predSave(m, pick, diff) {
+  if (predLocked(m)) return;
+  const picks = predPicks();
+  picks[m.id] = { pick, diff };
+  if (!predState.user) { predSaveLocal(); predSetStatus(m.id, 'saved'); return; }
+  predSetStatus(m.id, 'saving');
+  try {
+    const { error } = await predState.sb.from('predictions').upsert(predRow(m, picks[m.id]), { onConflict: 'user_id,match_id' });
+    if (error) throw error;
+    predSetStatus(m.id, 'saved');
+  } catch (e) {
+    console.error('No se pudo guardar el pronostico:', e);
+    predSetStatus(m.id, 'error');
+  }
+}
+
+function predSetStatus(id, st) {
+  predState.status[id] = st;
+  const el = document.querySelector(`.pred-match[data-id="${CSS.escape(id)}"] .pred-status`);
+  if (el) { el.textContent = st === 'saving' ? t('pred.saving') : st === 'saved' ? t('pred.saved') : st === 'error' ? t('pred.saveError') : ''; el.dataset.st = st; }
+}
+
+// ---- Supabase (login con Discord + ranking compartido) ----
+function predLoadScript(src) {
+  return new Promise((ok, fail) => {
+    const s = document.createElement('script');
+    s.src = src; s.onload = ok; s.onerror = () => fail(new Error('No se pudo cargar ' + src));
+    document.head.appendChild(s);
+  });
+}
+
+async function predInitBackend() {
+  if (!PRED_CONFIG.supabaseUrl || !PRED_CONFIG.supabaseKey) return;
+  try {
+    await predLoadScript('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js');
+    predState.sb = window.supabase.createClient(PRED_CONFIG.supabaseUrl, PRED_CONFIG.supabaseKey);
+    const { data } = await predState.sb.auth.getSession();
+    await predSetUser(data.session && data.session.user);
+    predState.sb.auth.onAuthStateChange((ev, session) => {
+      const u = session && session.user;
+      if ((u && u.id) !== (predState.user && predState.user.id)) predSetUser(u);
+    });
+    let back = null;
+    try { back = sessionStorage.getItem('dc-after-login'); sessionStorage.removeItem('dc-after-login'); } catch (e) {}
+    if (back && predState.user) { const b = document.querySelector(`.tab-btn[data-tab="${back}"]`); if (b) b.click(); }
+  } catch (e) {
+    console.error('Predicciones: no se pudo conectar con Supabase:', e);
+    predState.sb = null;
+  }
+  renderPredictions();
+}
+
+async function predSetUser(user) {
+  predState.user = user || null;
+  predState.remote = {};
+  if (user) {
+    const meta = user.user_metadata || {};
+    const name = (meta.custom_claims && meta.custom_claims.global_name) || meta.full_name || meta.name || meta.user_name || 'Player';
+    predState.name = name;
+    try {
+      await predState.sb.from('profiles').upsert({ user_id: user.id, name, avatar: meta.avatar_url || null }, { onConflict: 'user_id' });
+      const { data, error } = await predState.sb.from('predictions').select('match_id,pick,diff').eq('user_id', user.id);
+      if (error) throw error;
+      (data || []).forEach(r => { predState.remote[r.match_id] = { pick: r.pick, diff: r.diff }; });
+      // Lo pronosticado antes de loguearse en este navegador se sube (si la partida sigue abierta)
+      const rows = predMatches().filter(m => !predLocked(m) && predState.local[m.id] && !predState.remote[m.id])
+        .map(m => { predState.remote[m.id] = predState.local[m.id]; return predRow(m, predState.local[m.id]); });
+      if (rows.length) await predState.sb.from('predictions').upsert(rows, { onConflict: 'user_id,match_id' });
+    } catch (e) { console.error('No se pudieron cargar los pronosticos:', e); }
+  }
+  predState.board = null; predState.boardAt = 0;
+  renderPredictions();
+  predLoadBoard();
+}
+
+async function predLogin() {
+  if (!predState.sb) return;
+  try { sessionStorage.setItem('dc-after-login', 'predictions'); } catch (e) {}
+  await predState.sb.auth.signInWithOAuth({ provider: 'discord', options: { redirectTo: location.origin + location.pathname } });
+}
+async function predLogout() { if (predState.sb) await predState.sb.auth.signOut(); }
+
+async function predPageAll(table, cols) {
+  const all = [];
+  for (let from = 0; ; from += 1000) {
+    const { data, error } = await predState.sb.from(table).select(cols).order('user_id').order(table === 'profiles' ? 'user_id' : 'match_id').range(from, from + 999);
+    if (error) throw error;
+    all.push(...data);
+    if (data.length < 1000) break;
+  }
+  return all;
+}
+
+// Puntos de cada jugador: se cuentan solo los pronosticos guardados ANTES de que empiece la partida
+// (la fecha de guardado la pone el servidor, no se puede falsificar).
+function predComputeBoard(rows, profiles) {
+  const byId = {}; predMatches().forEach(m => { byId[m.id] = m; });
+  const prof = {}; profiles.forEach(p => { prof[p.user_id] = p; });
+  const users = {};
+  rows.forEach(r => {
+    const m = byId[r.match_id];
+    if (!m || !predHasResult(m) || !m.when || new Date(r.updated_at) >= m.when) return;
+    const sc = scorePrediction({ pick: r.pick, diff: r.diff }, m);
+    const u = users[r.user_id] || (users[r.user_id] = { id: r.user_id, name: (prof[r.user_id] || {}).name || 'Player', avatar: (prof[r.user_id] || {}).avatar, pts: 0, hits: 0, gaps: 0 });
+    u.pts += sc.pts;
+    if (sc.pts > 0) u.hits++;
+    if (sc.kind === 'diff') u.gaps++;
+  });
+  return Object.values(users).sort((x, y) => y.pts - x.pts || y.gaps - x.gaps || y.hits - x.hits || x.name.localeCompare(y.name));
+}
+
+async function predLoadBoard(force) {
+  if (!predState.sb) return;
+  if (!force && predState.board && Date.now() - predState.boardAt < 60000) return;
+  try {
+    const [rows, profiles] = await Promise.all([
+      predPageAll('predictions', 'user_id,match_id,pick,diff,updated_at'),
+      predPageAll('profiles', 'user_id,name,avatar'),
+    ]);
+    predState.board = predComputeBoard(rows, profiles);
+    predState.boardErr = false;
+  } catch (e) {
+    console.error('No se pudo cargar el ranking:', e);
+    predState.boardErr = true;
+  }
+  predState.boardAt = Date.now();
+  if (predState.sub === 'board') renderPredictions();
+  else renderPredSummary();
+}
+
+// ---- pantalla ----
+function predMine() {
+  let pts = 0, hits = 0;
+  predMatches().forEach(m => {
+    const sc = scorePrediction(predPicks()[m.id], m);
+    if (sc) { pts += sc.pts; if (sc.pts > 0) hits++; }
+  });
+  return { pts, hits };
+}
+
+function renderPredSummary() {
+  const el = document.getElementById('pred-summary');
+  if (!el) return;
+  const mine = predMine();
+  let rank = '—';
+  if (predState.board && predState.user) {
+    const i = predState.board.findIndex(u => u.id === predState.user.id);
+    if (i >= 0) rank = '#' + (i + 1);
+  }
+  el.innerHTML = `<span><b>${mine.pts}</b> ${esc(t('pred.myPts'))}</span><span><b>${mine.hits}</b> ${esc(t('pred.myHits'))}</span>${predState.sb ? `<span><b>${esc(rank)}</b> ${esc(t('pred.myRank'))}</span>` : ''}`;
+}
+
+function predMatchCard(m, fmtDay, fmtTime) {
+  const picks = predPicks(), p = picks[m.id] || null;
+  const locked = predLocked(m), has = predHasResult(m), under = predUnderdog(m);
+  const sc = scorePrediction(p, m);
+  const side = (k, name) => {
+    const cls = ['pred-side'];
+    if (p && p.pick === k) cls.push('is-picked');
+    if (has && (m.tA < m.tB ? 'a' : 'b') === k) cls.push('is-winner');
+    return `<button type="button" class="${cls.join(' ')}" data-side="${k}"${locked ? ' disabled' : ''}>
+      <span class="pred-name">${nameWithFlag(name)}</span>
+      ${under === k ? `<span class="pred-under" title="${esc(t('pred.underdogTip'))}">${esc(t('pred.underdog'))}</span>` : ''}
+      ${has ? `<span class="pred-time">${esc(fmtRaceTime(k === 'a' ? m.tA : m.tB))}</span>` : ''}
+    </button>`;
+  };
+  const when = m.when ? `${fmtDay.format(m.when)} · ${fmtTime.format(m.when)}` : t('pred.timeTbd');
+  const grp = m.g ? ` · ${t('group.word')} ${m.g}` : '';
+  let foot;
+  if (!locked) {
+    foot = `<label class="pred-diff">${esc(t('pred.diffLabel'))}
+        <input class="pred-diff-input" type="text" inputmode="numeric" autocomplete="off" placeholder="m:ss" value="${p && p.diff != null ? esc(fmtRaceTime(p.diff)) : ''}"${p ? '' : ' disabled'}>
+      </label><span class="pred-status" aria-live="polite"></span>`;
+  } else {
+    const mine = p ? t('pred.yourPick', { name: p.pick === 'a' ? m.a : m.b }) + (p.diff != null ? ' · ' + t('pred.gap', { d: fmtRaceTime(p.diff) }) : '') : t('pred.noPick');
+    foot = `<span class="pred-mine">${esc(mine)}</span>` + (has
+      ? `<span class="pred-gap">${esc(t('pred.gap', { d: fmtRaceTime(Math.abs(m.tA - m.tB)) }))}</span>` + (sc && p ? `<span class="pred-pts pred-${sc.kind}">${esc(t('pred.pts', { n: sc.pts }))} · ${esc(t('pred.kind.' + sc.kind))}</span>` : '')
+      : `<span class="pred-closed">${esc(t('pred.closed'))}</span>`);
+  }
+  return `<article class="pred-match${locked ? ' is-locked' : ''}" data-id="${esc(m.id)}">
+    <div class="pred-when">${esc(when)}${esc(grp)}</div>
+    <div class="pred-pair">${side('a', m.a)}<span class="pred-vs">${esc(t('sched.vs'))}</span>${side('b', m.b)}</div>
+    <div class="pred-foot">${foot}</div>
+  </article>`;
+}
+
+function renderPredictions() {
+  const root = document.getElementById('pred-root');
+  if (!root) return;
+  const ms = predMatches();
+  const loc = LOCALES[currentLang];
+  const fmtDay = new Intl.DateTimeFormat(loc, { weekday: 'short', day: 'numeric', month: 'short' });
+  const fmtTime = new Intl.DateTimeFormat(currentLang === 'id' || currentLang === 'ja' ? 'en-GB' : loc, { hour: '2-digit', minute: '2-digit', hour12: false });
+
+  const account = predState.sb
+    ? (predState.user
+      ? `<span class="pred-user">${esc(t('pred.hello', { name: predState.name || '' }))}</span><button type="button" class="pred-btn pred-btn-alt" data-act="logout">${esc(t('pred.logout'))}</button>`
+      : `<span class="pred-user">${esc(t('pred.needLogin'))}</span><button type="button" class="pred-btn" data-act="login"><svg class="ic" aria-hidden="true"><use href="#ic-discord"/></svg> ${esc(t('pred.login'))}</button>`)
+    : `<span class="pred-user">${esc(t('pred.local'))}</span>`;
+
+  const subs = ['picks', 'board', 'rules'].map(k =>
+    `<button type="button" class="pred-sub${predState.sub === k ? ' active' : ''}" data-sub="${k}">${esc(t('pred.sub.' + k))}</button>`).join('');
+
+  let body = '';
+  if (predState.sub === 'picks') {
+    if (!ms.length) body = `<p class="loading-msg">${esc(t('pred.noMatches'))}</p>`;
+    else {
+      const rounds = [];
+      ms.forEach(m => {
+        const key = m.md ? 'r' + m.md : 's' + m.stage;
+        let r = rounds.find(x => x.key === key);
+        if (!r) rounds.push(r = { key, label: m.md ? t('sched.round', { n: m.md }) : m.stage, list: [] });
+        r.list.push(m);
+      });
+      // Se abre la primera ronda que todavia tenga partidas por pronosticar
+      const openKey = (rounds.find(r => r.list.some(m => !predLocked(m))) || rounds[rounds.length - 1]).key;
+      body = rounds.map(r => `<details class="pred-round" data-key="${esc(r.key)}"${(predState.openSet ? predState.openSet.has(r.key) : r.key === openKey) ? ' open' : ''}>
+          <summary><span>${esc(r.label)}</span><span class="pred-round-n">${r.list.filter(m => !predLocked(m)).length}/${r.list.length}</span></summary>
+          <div class="pred-grid">${r.list.map(m => predMatchCard(m, fmtDay, fmtTime)).join('')}</div>
+        </details>`).join('');
+    }
+  } else if (predState.sub === 'board') {
+    if (!predState.sb) body = `<p class="loading-msg">${esc(t('pred.board.local'))}</p>`;
+    else if (predState.boardErr) body = `<p class="loading-msg">${esc(t('pred.board.error'))}</p>`;
+    else if (!predState.board) body = `<p class="loading-msg">${esc(t('pred.board.loading'))}</p>`;
+    else if (!predState.board.length) body = `<p class="loading-msg">${esc(t('pred.board.empty'))}</p>`;
+    else body = `<table class="pred-board"><thead><tr><th>#</th><th>${esc(t('pred.board.player'))}</th><th>${esc(t('pred.board.hits'))}</th><th>${esc(t('pred.board.pts'))}</th></tr></thead><tbody>${
+      predState.board.slice(0, 100).map((u, i) => `<tr${predState.user && u.id === predState.user.id ? ' class="is-me"' : ''}>
+        <td>${i + 1}</td>
+        <td><span class="pred-player">${u.avatar && /^https:\/\//.test(u.avatar) ? `<img src="${esc(u.avatar)}" alt="" loading="lazy" referrerpolicy="no-referrer">` : ''}${esc(u.name)}</span></td>
+        <td>${u.hits}</td><td class="pred-total">${u.pts}</td></tr>`).join('')}</tbody></table>`;
+  } else {
+    const P = PRED_CONFIG.pts, M = PRED_CONFIG.diffMargin;
+    body = `<ol class="pred-rules">
+      <li>${esc(t('pred.rules.1'))}</li>
+      <li>${esc(t('pred.rules.2', { n: P.winner }))}</li>
+      <li>${esc(t('pred.rules.3', { n: P.underdog }))}</li>
+      <li>${esc(t('pred.rules.4', { n: P.diff, s: M }))}</li>
+      <li>${esc(t('pred.rules.5', { n: P.diff }))}</li>
+    </ol>`;
+  }
+
+  root.innerHTML = `<div class="pred-bar">${account}</div>
+    <div class="pred-summary" id="pred-summary"></div>
+    <div class="pred-subs" role="tablist">${subs}</div>
+    <div class="pred-body">${body}</div>`;
+  renderPredSummary();
+  root.querySelectorAll('details.pred-round').forEach(d => d.addEventListener('toggle', () => {
+    predState.openSet = predState.openSet || new Set();
+    if (d.open) predState.openSet.add(d.dataset.key); else predState.openSet.delete(d.dataset.key);
+  }));
+}
+
+function initPredictions() {
+  predLoadLocal();
+  const root = document.getElementById('pred-root');
+  if (!root) return;
+  root.addEventListener('click', e => {
+    const sub = e.target.closest('[data-sub]');
+    if (sub) { predState.sub = sub.dataset.sub; if (predState.sub === 'board') predLoadBoard(true); renderPredictions(); return; }
+    const act = e.target.closest('[data-act]');
+    if (act) { act.dataset.act === 'login' ? predLogin() : predLogout(); return; }
+    const sideBtn = e.target.closest('.pred-side');
+    if (sideBtn && !sideBtn.disabled) {
+      const card = sideBtn.closest('.pred-match');
+      const m = predMatches().find(x => x.id === card.dataset.id);
+      if (!m) return;
+      const prev = predPicks()[m.id];
+      predSave(m, sideBtn.dataset.side, prev ? prev.diff : null);
+      card.querySelectorAll('.pred-side').forEach(b => b.classList.toggle('is-picked', b === sideBtn));
+      const inp = card.querySelector('.pred-diff-input'); if (inp) inp.disabled = false;
+      renderPredSummary();
+    }
+  });
+  root.addEventListener('change', e => {
+    const inp = e.target.closest('.pred-diff-input');
+    if (!inp) return;
+    const card = inp.closest('.pred-match');
+    const m = predMatches().find(x => x.id === card.dataset.id);
+    const prev = m && predPicks()[m.id];
+    if (!m || !prev) return;
+    const v = inp.value.trim() === '' ? null : parseRaceTime(inp.value);
+    inp.classList.toggle('is-invalid', inp.value.trim() !== '' && v == null);
+    if (inp.value.trim() !== '' && v == null) return;
+    predSave(m, prev.pick, v);
+    if (v != null) inp.value = fmtRaceTime(v);
+  });
+  const tab = document.querySelector('.tab-btn[data-tab="predictions"]');
+  if (tab) tab.addEventListener('click', () => { renderPredictions(); predLoadBoard(); });
+  renderPredictions();
+  predInitBackend();
+}
 
 // Tarjetas de la bienvenida del Home: llevan directo a cada pestaña
 document.addEventListener('DOMContentLoaded', () => {

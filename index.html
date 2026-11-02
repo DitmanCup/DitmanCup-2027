@@ -21,7 +21,7 @@
 <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png?v=7">
 <link rel="apple-touch-icon" href="assets/icons/icon-192.png?v=7">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/7.2.3/css/flag-icons.min.css">
-<link rel="stylesheet" href="css/style.css?v=20261102q">
+<link rel="stylesheet" href="css/style.css?v=20261102t">
 </head>
 <body data-tab="inicio">
 
@@ -61,6 +61,7 @@
           <button class="tab-btn" data-tab="simulations" data-i18n="nav.simulations">Simulations</button>
         </div>
       </div>
+      <button class="tab-btn" data-tab="predictions" data-i18n="nav.predictions">Predictions</button>
       <button class="tab-btn" data-tab="champions" data-i18n="nav.champions">Champions</button>
       <button class="tab-btn" data-tab="clips" data-i18n="nav.clips">Clips</button>
       <button class="tab-btn tab-live" data-tab="live"><span class="rec-dot" aria-hidden="true"></span><span data-i18n="nav.live">Live</span><span class="live-count" id="live-count" hidden></span></button>
@@ -268,6 +269,12 @@
     <p class="section-note sim-footnote" data-i18n="sim.footer">Simulation with placeholder data — meant to explain the format, not to predict real results.</p>
   </section>
 
+  <section id="predictions" class="tab-panel" tabindex="-1">
+    <h2 data-i18n="pred.title">Predictions</h2>
+    <p class="section-note" data-i18n="pred.intro">The Ditman Cup prediction game: pick the winner of every match and, if you dare, the time gap.</p>
+    <div id="pred-root" class="pred-root"></div>
+  </section>
+
   <section id="champions" class="tab-panel" tabindex="-1">
     <h2 data-i18n="champions.title">Champions</h2>
     <div id="champions-content"></div>
@@ -429,6 +436,6 @@
   </div>
 </div>
 
-<script src="js/script.js?v=20261102q"></script>
+<script src="js/script.js?v=20261102t"></script>
 </body>
 </html>
