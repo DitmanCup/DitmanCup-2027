@@ -249,7 +249,7 @@ const YOUTUBE_LIVE_CHANNELS = [
   { name: 'NETJU', url: 'https://www.youtube.com/@junetkhairulamri9336/live' },
   { name: 'aqbilghilman', url: 'https://www.youtube.com/@aqbilghilman30/live' },
   { name: 'Mrchampppt', url: 'https://www.youtube.com/@mrchampppt/live', tiktok: 'mrchampppt' },
-  { name: 'Zudinnn', id: 'UCkX2rtFOeywknZ0ibu-ajWA' },
+  { name: 'Zudinnn', id: 'UCkX2rtFOeywknZ0ibu-ajWA', tiktok: 'zudinnnnvls' },
   { name: 'VAL', url: 'https://www.youtube.com/@valyorleza/live', tiktok: 'valyorleza' },
   { name: 'Orchlon', url: 'https://www.youtube.com/@OrchlonSR/live', twitch: 'orchlon' },   // multistream: su tarjeta es la de Twitch, con boton de YouTube
   { name: 'JokerUY', url: 'https://www.youtube.com/@JokerUY/live', twitch: 'jokeruy' },
