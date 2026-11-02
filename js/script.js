@@ -258,6 +258,10 @@ const YOUTUBE_LIVE_CHANNELS = [
 // (en vivo, espectadores, juego) lo arma scripts/update-live-status.js en GitHub Actions.
 const KICK_LIVE_CHANNELS = ['chacoide'];
 
+// Runners que streamean en TikTok (sin @). TikTok bloquea las consultas automaticas (anti-bots),
+// asi que no se detecta si estan en vivo: la tarjeta lleva directo a @usuario/live.
+const TIKTOK_LIVE_CHANNELS = ['valyorleza'];
+
 // ======= TEXTOS BILINGÜES / BILINGUAL STRINGS =======
 const I18N = {
   es: {
@@ -2424,7 +2428,12 @@ async function renderLive() {
        <span class="live-name">${kickIcon}${esc(r.name)}</span><span class="live-status">${esc(t(r.live ? 'live.otherGame' : 'live.off'))}</span>
      </a>`);
 
-  const all = offCards.concat(kickCards, ytCards);
+  const tiktokCards = (TIKTOK_LIVE_CHANNELS || []).filter(Boolean).map(u =>
+    `<a class="live-card is-off is-tiktok" href="https://www.tiktok.com/@${encodeURIComponent(u)}/live" target="_blank" rel="noopener">
+       <span class="live-name"><svg class="ic" aria-hidden="true"><use href="#ic-tiktok"/></svg>${esc(u)}</span><span class="live-status">TikTok</span>
+     </a>`);
+
+  const all = offCards.concat(kickCards, ytCards, tiktokCards);
   if (all.length) html += `<div class="live-roster">${all.join('')}</div>`;
 
   host.innerHTML = html;

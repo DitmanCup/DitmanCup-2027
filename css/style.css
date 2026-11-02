@@ -1806,3 +1806,4 @@ body[data-tab="simulations"] main { max-width: min(1880px, 100%); }
 .live-meta a.live-watch-yt:hover { background: #ff0000; border-color: #ff0000; }
 .live-meta a.live-watch-kick { background: #53fc18; border-color: #53fc18; color: #0b1a05; }
 .live-meta a.live-watch-kick:hover { background: #7dff4a; border-color: #7dff4a; }
+.live-card.is-tiktok .ic { color: #25F4EE; flex: none; }
