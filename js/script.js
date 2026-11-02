@@ -242,7 +242,7 @@ const RE4_LIVE_CHANNELS = [
 // en vivo, así que el card lleva a youtube.com/.../live (YouTube redirige al
 // stream si están transmitiendo).
 const YOUTUBE_LIVE_CHANNELS = [
-  { name: 'seppp', id: 'UCeClRyYfzoODHyA7FJKcjvA' },
+  { name: 'seppp', url: 'https://www.youtube.com/@sepppx/live' },
   { name: 'Bang Gori', url: 'https://www.youtube.com/@banggori2.0/live' },
   { name: 'nyr9468', url: 'https://www.youtube.com/@nyr9468/live' },
   { name: 'Fedo_Ras', url: 'https://www.youtube.com/@Fedo_Ras/live' },

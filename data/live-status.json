@@ -1,14 +1,18 @@
 {
-  "updatedAt": "2026-11-02T16:18:49.253Z",
+  "updatedAt": "2026-11-02T16:19:28.061Z",
   "youtube": {
     "seppp": {
-      "live": false
+      "live": true,
+      "videoId": "5jvpCXTVqYw",
+      "title": "Speedrun RE4 OG | NG Pro PB Attempt",
+      "viewers": 7,
+      "embed": true
     },
     "Bang Gori": {
       "live": true,
       "videoId": "baXLFiJsQ2k",
       "title": "17 Hari Menuju... | Resident Evil 4 Speedrun Indonesia",
-      "viewers": 138,
+      "viewers": 158,
       "embed": true
     },
     "nyr9468": {
@@ -37,7 +41,7 @@
     "chacoide": {
       "name": "chacoide",
       "live": false,
-      "followers": "7768"
+      "followers": 7768
     }
   }
 }
