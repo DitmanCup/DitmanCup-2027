@@ -235,7 +235,7 @@ const RE4_LIVE_CHANNELS = [
   'abdou_mz', 'novi_fan', 'MineZowski', 'MikeWavRR', 'FrancoBv17', 'chanwii',
   'gabrielsinmarr', 'redshines', 'MrMuba', 'Ninazerotwo', 'Gallardd', 'iiLanceLM', 'nobu_22',
   'Neuroticc_', 'derekt21288', 'yuushi_1234', 'ezequiel_kazama', 'yisuseldragon', 'otakuterere',
-  'luis_sera', 'joydurnyup', 'M4tiuss_', 'orchlon', 'droprecks', 'spicee', 'thecarpenter', 'androschka02', 'vynzsaki', 'yayostrife',
+  'luis_sera', 'joydurnyup', 'M4tiuss_', 'orchlon', 'droprecks', 'spicee', 'thecarpenter', 'androschka02', 'vynzsaki', 'yayostrife', 'nanonsbz', 'alantecnologiaymas',
 ];
 
 // Runners que streamean en YouTube. No hay forma sin API key de saber si están
@@ -260,7 +260,7 @@ const KICK_LIVE_CHANNELS = ['chacoide'];
 
 // Runners que streamean en TikTok (sin @). TikTok bloquea las consultas automaticas (anti-bots),
 // asi que no se detecta si estan en vivo: la tarjeta lleva directo a @usuario/live.
-const TIKTOK_LIVE_CHANNELS = ['valyorleza'];
+const TIKTOK_LIVE_CHANNELS = ['valyorleza', 'mrchampppt'];
 
 // ======= TEXTOS BILINGÜES / BILINGUAL STRINGS =======
 const I18N = {
