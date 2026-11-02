@@ -263,6 +263,10 @@ const KICK_LIVE_CHANNELS = ['chacoide'];
 // asi que no se detecta si estan en vivo: la tarjeta lleva directo a @usuario/live.
 const TIKTOK_LIVE_CHANNELS = [];
 
+// Runners de Twitch que tambien streamean en TikTok: { 'canal de twitch en minusculas': 'usuario de tiktok' }.
+// Su boton de TikTok sale en la misma tarjeta, igual que en YOUTUBE_LIVE_CHANNELS.
+const TWITCH_TIKTOK = { 'ezequiel_kazama': 'ezequiel._.kazama' };
+
 // ======= TEXTOS BILINGÜES / BILINGUAL STRINGS =======
 const I18N = {
   es: {
@@ -2362,7 +2366,7 @@ async function renderLive() {
 
   // Todos los vivos juntos, de mas a menos espectadores
   const liveRows = rows.filter(isRE4)
-    .map(r => ({ kind: 'tw', ch: r.ch, name: r.name, viewers: (r.stream && r.stream.viewersCount) || 0 }))
+    .map(r => ({ kind: 'tw', ch: r.ch, name: r.name, tiktok: TWITCH_TIKTOK[r.ch.toLowerCase()], viewers: (r.stream && r.stream.viewersCount) || 0 }))
     .concat(ytLive.map(r => ({ ...r, viewers: r.viewers || 0 })))
     .concat(kickTop)
     .sort((a, b) => b.viewers - a.viewers);
@@ -2420,10 +2424,18 @@ async function renderLive() {
     html += `<p class="loading-msg">${esc(t('live.none'))}</p>`;
   }
 
-  const offCards = offRows.map(r =>
-    `<a class="live-card is-off" href="https://twitch.tv/${encodeURIComponent(r.ch)}" target="_blank" rel="noopener">
-       <span class="live-name">${twIcon}${esc(r.name)}</span><span class="live-status">${esc(t(r.live ? 'live.otherGame' : 'live.off'))}</span>
-     </a>`);
+  const offCards = offRows.map(r => {
+    const href = `https://twitch.tv/${encodeURIComponent(r.ch)}`;
+    const status = esc(t(r.live ? 'live.otherGame' : 'live.off'));
+    const tt = TWITCH_TIKTOK[r.ch.toLowerCase()];
+    if (tt) return `<div class="live-card is-off">
+       <a class="live-name" href="${href}" target="_blank" rel="noopener">${twIcon}${esc(r.name)}</a><span class="live-status">${status}</span>
+       <a class="live-tt" href="${esc(ttUrl(tt))}" target="_blank" rel="noopener">${ttIcon}TikTok</a>
+     </div>`;
+    return `<a class="live-card is-off" href="${href}" target="_blank" rel="noopener">
+       <span class="live-name">${twIcon}${esc(r.name)}</span><span class="live-status">${status}</span>
+     </a>`;
+  });
 
   // Los de YouTube que estan en vivo ya salieron arriba; el resto queda en el listado
   const ytCards = yt.filter(c => !(ytStatus[c.name] && ytStatus[c.name].live)).map(c => {
