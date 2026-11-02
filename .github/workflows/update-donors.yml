@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: '*/30 * * * *'
   workflow_dispatch:
+    inputs:
+      test_discord:
+        description: 'Mandar a Discord el mensaje con el prizepool actual (para probar el webhook)'
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -39,3 +44,9 @@ jobs:
         run: |
           git show HEAD~1:data/donors.json > "$RUNNER_TEMP/donors-old.json"
           node scripts/notify-discord-donation.js "$RUNNER_TEMP/donors-old.json" data/donors.json
+      # Solo a mano (Run workflow -> test_discord): sin archivo anterior, toda donacion cuenta como nueva
+      - name: Mensaje de prueba a Discord
+        if: ${{ github.event.inputs.test_discord == 'true' }}
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: node scripts/notify-discord-donation.js none data/donors.json
