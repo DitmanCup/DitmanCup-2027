@@ -1822,7 +1822,7 @@ body[data-tab="simulations"] main { max-width: min(1880px, 100%); }
 
 /* ===== Predicciones (penca) ===== */
 .pred-bar { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem 1.2rem; padding: .8rem 1rem; background: rgba(9, 8, 6, .9); border: 1px solid var(--border); }
-.pred-user { color: var(--text-dim); font-size: 1.08rem; flex: 1 1 18rem; }
+.pred-user { color: var(--text); font-family: var(--font-grunge); font-size: 1.28rem; text-transform: none; letter-spacing: normal; flex: 1 1 18rem; }
 .pred-btn { display: inline-flex; align-items: center; gap: .5rem; font-family: var(--font-title); letter-spacing: .06em; text-transform: uppercase; font-size: .95rem; color: #fff; background: #5865f2; border: 1px solid #5865f2; border-radius: 2px; padding: .5rem 1rem; cursor: pointer; }
 .pred-btn:hover { background: #7983f5; border-color: #7983f5; }
 .pred-btn .ic { width: 1.2em; height: 1.2em; }
@@ -1877,3 +1877,43 @@ body[data-tab="simulations"] main { max-width: min(1880px, 100%); }
 .pred-rules { margin: 0; padding-left: 1.4rem; display: grid; gap: .8rem; max-width: 62ch; font-size: 1.12rem; color: var(--text-dim); }
 .pred-rules li::marker { color: var(--gold); font-family: var(--font-grunge); }
 @media (max-width: 480px) { .pred-pair { grid-template-columns: 1fr; } .pred-vs { justify-self: center; } }
+
+/* Encabezado mas grande: logo, pestañas e idiomas */
+.brand-name { font-size: 1.45rem; }
+.tab-btn { font-size: 1.3rem; padding: .55rem .9rem; }
+.tab-btn.active::after, .tab-btn:hover::after, .tab-btn:focus-visible::after { left: 1rem; right: 1rem; }
+.nav-sub .tab-btn { padding: .7rem 1.1rem; }
+.rec-dot { width: .85rem; height: .85rem; }
+.live-count { min-width: 1.5rem; font-size: 1rem; line-height: 1.5rem; }
+.nav-toggle { font-size: 1.4rem; padding: .45rem .75rem; }
+@media (min-width: 481px) {
+  .lang-btn { font-size: 1.2rem; padding: .5rem .95rem; }
+  .lang-btn .fi { font-size: 1.5rem; }
+}
+@media (max-width: 480px) { .brand-name { font-size: 1.25rem; } }
+
+/* Predicciones: todo el texto en la fuente de los runners (mas legible) y mas grande */
+.pred-bar, .pred-summary, .pred-sub, .pred-round > summary, .pred-round-n, .pred-when, .pred-vs, .pred-foot, .pred-diff, .pred-status,
+.pred-board th, .pred-board td, .pred-player, .pred-rules, .pred-body .loading-msg, .pred-side, .pred-pts, .pred-under, .pred-diff-input { font-family: var(--font-grunge); text-transform: none; letter-spacing: normal; }
+.pred-summary { font-size: 1.3rem; }
+.pred-summary b { font-size: 2rem; }
+.pred-sub { font-size: 1.3rem; padding: .6rem 1.2rem; }
+.pred-round > summary { font-size: 1.5rem; }
+.pred-round-n { font-size: 1.25rem; }
+.pred-when { font-size: 1.2rem; text-transform: capitalize; }
+.pred-side { font-size: 1.5rem; }
+.pred-vs { font-size: 1.15rem; }
+.pred-time { font-size: 1.35rem; }
+.pred-under { font-size: .95rem; padding: .05rem .5rem; }
+.pred-foot { font-size: 1.25rem; }
+.pred-diff { font-size: 1.25rem; }
+.pred-diff-input { font-size: 1.25rem; width: 6.2rem; }
+.pred-status { font-size: 1.15rem; }
+.pred-pts { font-size: 1.2rem; }
+.pred-board th { font-size: 1.15rem; }
+.pred-board td { font-size: 1.35rem; }
+.pred-total { font-size: 1.7rem; }
+.pred-rules { font-size: 1.45rem; line-height: 1.45; max-width: 52ch; }
+.pred-body .loading-msg { font-size: 1.35rem; }
+.pred-btn { font-family: var(--font-grunge); font-size: 1.25rem; letter-spacing: .02em; text-transform: none; padding: .55rem 1.2rem; }
+.pred-user { font-size: 1.45rem; }
