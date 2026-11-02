@@ -3587,8 +3587,8 @@ function safeSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
 // Guardado: sin configurar Supabase, los pronosticos quedan solo en este navegador. Con la URL y la
 // clave publica de Supabase (ver supabase/predictions.sql) hay login con Discord y ranking compartido.
 const PRED_CONFIG = {
-  supabaseUrl: '',   // ej. 'https://abcdxyz.supabase.co'
-  supabaseKey: '',   // clave publica ("anon" / "publishable"), no la secreta
+  supabaseUrl: 'https://ybolqwigdwehyptgruuw.supabase.co',
+  supabaseKey: 'sb_publishable_Eyx8H_UPJ6W0SxGk4rNX4g_MayNklbC',   // clave publica (publishable): es publica por diseno, la seguridad la dan las reglas de supabase/predictions.sql
   diffMargin: 15,    // segundos de margen para acertar la diferencia de tiempo
   pts: { winner: 3, underdog: 5, diff: 8 },
 };
