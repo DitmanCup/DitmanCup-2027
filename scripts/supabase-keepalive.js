@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 
 const src = fs.readFileSync(path.join(__dirname, '..', 'js', 'script.js'), 'utf8');
-const pick = k => (src.match(new RegExp(k + ":\s*'([^']+)'")) || [])[1];
+const pick = k => (src.match(new RegExp(k + ":\\s*'([^']+)'")) || [])[1];
 const url = pick('supabaseUrl'), key = pick('supabaseKey');
 if (!url || !key) { console.log('Supabase no esta configurado en PRED_CONFIG: nada que hacer.'); process.exit(0); }
 
