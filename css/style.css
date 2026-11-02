@@ -1817,3 +1817,5 @@ body[data-tab="simulations"] main { max-width: min(1880px, 100%); }
 .live-card.is-off > a.live-name { color: inherit; text-decoration: none; }
 .live-btns { display: flex; flex-wrap: wrap; gap: .4rem; margin-left: auto; justify-content: flex-end; }
 .live-btns a.live-watch { margin-left: 0; }
+.live-tt-yt { border-color: #cc0000; margin-right: .35rem; }
+.live-tt-yt .ic { color: #ff0000; }
