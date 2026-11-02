@@ -1,11 +1,15 @@
 {
-  "updatedAt": "2026-11-02T11:42:19.778Z",
+  "updatedAt": "2026-11-02T16:18:49.253Z",
   "youtube": {
     "seppp": {
       "live": false
     },
     "Bang Gori": {
-      "live": false
+      "live": true,
+      "videoId": "baXLFiJsQ2k",
+      "title": "17 Hari Menuju... | Resident Evil 4 Speedrun Indonesia",
+      "viewers": 138,
+      "embed": true
     },
     "nyr9468": {
       "live": false
@@ -33,7 +37,7 @@
     "chacoide": {
       "name": "chacoide",
       "live": false,
-      "followers": 7768
+      "followers": "7768"
     }
   }
 }

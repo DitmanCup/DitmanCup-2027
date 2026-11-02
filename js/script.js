@@ -243,7 +243,7 @@ const RE4_LIVE_CHANNELS = [
 // stream si están transmitiendo).
 const YOUTUBE_LIVE_CHANNELS = [
   { name: 'seppp', id: 'UCeClRyYfzoODHyA7FJKcjvA' },
-  { name: 'Bang Gori', id: 'UCMnXQX5GWrrcfSVZrOIaJUA' },
+  { name: 'Bang Gori', url: 'https://www.youtube.com/@banggori2.0/live' },
   { name: 'nyr9468', url: 'https://www.youtube.com/@nyr9468/live' },
   { name: 'Fedo_Ras', url: 'https://www.youtube.com/@Fedo_Ras/live' },
   { name: 'NETJU', url: 'https://www.youtube.com/@junetkhairulamri9336/live' },
