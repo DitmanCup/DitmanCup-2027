@@ -21,6 +21,7 @@ jobs:
         shell: pwsh
         run: ./scripts/update-donors.ps1
       - name: Commit si cambio algo
+        id: commit
         run: |
           if [ -n "$(git status --porcelain data/donors.json)" ]; then
             git config user.name "github-actions[bot]"
@@ -28,4 +29,13 @@ jobs:
             git add data/donors.json
             git commit -m "Actualizar donadores de Matcherino"
             git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
+      # Despues del push (si fallara, no se avisa dos veces). Sin el secreto DISCORD_WEBHOOK_URL no hace nada.
+      - name: Avisar en Discord si hay donaciones nuevas
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          git show HEAD~1:data/donors.json > "$RUNNER_TEMP/donors-old.json"
+          node scripts/notify-discord-donation.js "$RUNNER_TEMP/donors-old.json" data/donors.json
