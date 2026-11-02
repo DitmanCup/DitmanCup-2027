@@ -1,18 +1,18 @@
 {
-  "updatedAt": "2026-11-02T16:32:53.524Z",
+  "updatedAt": "2026-11-02T16:58:27.902Z",
   "youtube": {
     "seppp": {
       "live": true,
       "videoId": "5jvpCXTVqYw",
       "title": "Speedrun RE4 OG | NG Pro PB Attempt",
-      "viewers": 17,
+      "viewers": 34,
       "embed": true
     },
     "Bang Gori": {
       "live": true,
       "videoId": "baXLFiJsQ2k",
       "title": "17 Hari Menuju... | Resident Evil 4 Speedrun Indonesia",
-      "viewers": 142,
+      "viewers": 138,
       "embed": true
     },
     "nyr9468": {
@@ -40,10 +40,13 @@
       "live": true,
       "videoId": "GgY2PExI_Jk",
       "title": "[Live] Resident Evil 4 (OG) Professional Speedruns",
-      "viewers": 92,
+      "viewers": 95,
       "embed": true
     },
     "JokerUY": {
+      "live": false
+    },
+    "ryllmen": {
       "live": false
     }
   },
@@ -51,7 +54,7 @@
     "chacoide": {
       "name": "chacoide",
       "live": false,
-      "followers": "7768"
+      "followers": 7768
     }
   }
 }
