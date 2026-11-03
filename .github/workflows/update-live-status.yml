@@ -1,7 +1,7 @@
 name: Actualizar vivos (YouTube y Kick)
 
 # GitHub casi no respeta los cron frecuentes en repos poco activos (corre cada ~8 h en vez de cada 5 min),
-# asi que cada corrida se queda ~5 h 40 min chequeando cada 3 min y al terminar se vuelve a lanzar sola.
+# asi que cada corrida se queda ~5 h 40 min chequeando cada 10 min y al terminar se vuelve a lanzar sola.
 # El cron de cada hora queda de respaldo por si la cadena se corta.
 on:
   schedule:
@@ -25,7 +25,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Ver quien esta en vivo en YouTube y Kick (cada 3 min)
+      - name: Ver quien esta en vivo en YouTube y Kick (cada 10 min)
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -41,7 +41,7 @@ jobs:
                 git fetch origin main && git reset --hard origin/main
               fi
             fi
-            sleep 180
+            sleep 600
           done
       - name: Lanzar la siguiente tanda
         env:
