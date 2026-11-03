@@ -264,10 +264,12 @@ const KICK_LIVE_CHANNELS = ['chacoide'];
 // Runners que streamean SOLO en TikTok (sin @); los que tambien estan en YouTube llevan `tiktok: 'usuario'`
 // en YOUTUBE_LIVE_CHANNELS y su boton sale en la misma tarjeta. TikTok bloquea las consultas automaticas (anti-bots),
 // asi que no se detecta si estan en vivo: la tarjeta lleva directo a @usuario/live.
+// Cada uno es 'usuario' o { tiktok: 'usuario', name: 'Como se muestra' }.
 const TIKTOK_LIVE_CHANNELS = [
-  'layhan301',   // HannNrY
+  { tiktok: 'layhan301', name: 'HannNrY' },
   'jokeruy_',    // JokerUY (para probar el panel de marcarse en vivo)
 ];
+const ttEntry = e => typeof e === 'string' ? { tiktok: e, name: e } : { tiktok: e.tiktok, name: e.name || e.tiktok };
 
 // Runners de Twitch que tambien streamean en TikTok: { 'canal de twitch en minusculas': 'usuario de tiktok' }.
 // Su boton de TikTok sale en la misma tarjeta, igual que en YOUTUBE_LIVE_CHANNELS.
@@ -2604,7 +2606,7 @@ function ttHandles() {
   // Los de TWITCH_TIKTOK (multistream Twitch + TikTok) no estan: su Twitch se detecta solo, no necesitan marcarse.
   // `noMark`: igual para los que transmiten a la vez en YouTube y TikTok (su YouTube se detecta solo)
   (YOUTUBE_LIVE_CHANNELS || []).forEach(c => { if (c && c.tiktok && !c.noMark) m.set(c.tiktok.toLowerCase(), c.name); });
-  (TIKTOK_LIVE_CHANNELS || []).forEach(h => { if (h) m.set(h.toLowerCase(), h); });
+  (TIKTOK_LIVE_CHANNELS || []).filter(Boolean).map(ttEntry).forEach(e => m.set(e.tiktok.toLowerCase(), e.name));
   return m;
 }
 
@@ -2851,9 +2853,9 @@ async function renderLive() {
        <span class="live-name">${kickIcon}${esc(r.name)}</span><span class="live-status">${esc(t(r.live ? 'live.otherGame' : 'live.off'))}</span>
      </a>`);
 
-  const tiktokCards = (TIKTOK_LIVE_CHANNELS || []).filter(Boolean).map(u =>
-    `<a class="live-card is-off is-tiktok" href="${esc(ttUrl(u))}" target="_blank" rel="noopener">
-       <span class="live-name">${ttIcon}${esc(u)}</span><span class="live-status">TikTok</span>
+  const tiktokCards = (TIKTOK_LIVE_CHANNELS || []).filter(Boolean).map(ttEntry).map(e =>
+    `<a class="live-card is-off is-tiktok" href="${esc(ttUrl(e.tiktok))}" target="_blank" rel="noopener">
+       <span class="live-name">${ttIcon}${esc(e.name)}</span><span class="live-status">TikTok</span>
      </a>`);
 
   const all = offCards.concat(kickCards, ytCards, tiktokCards);
