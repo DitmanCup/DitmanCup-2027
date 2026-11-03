@@ -1930,6 +1930,7 @@ body[data-tab="simulations"] main { max-width: min(1880px, 100%); }
 .live-ttbtn { font-family: var(--font-grunge); letter-spacing: .04em; text-transform: uppercase; font-size: 1.35rem; color: #fff; background: #000; border: 1px solid #25f4ee; box-shadow: -3px 0 0 #fe2c55; border-radius: 2px; padding: .7rem 1.3rem; cursor: pointer; }
 .live-ttbtn:hover:not(:disabled) { border-color: #fff; }
 .live-ttbtn:disabled { opacity: .5; cursor: wait; }
+.live-ttbtn-alt { border-color: #777; box-shadow: none; background: transparent; }
 .live-ttmine { font-size: 1.45rem; }
 .live-tterr { margin: .7rem 0 0; color: #ff6b6b; font-size: 1.25rem; }
 .live-ttclaimed-h { margin-top: 1.4rem; }
