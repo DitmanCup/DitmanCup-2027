@@ -1,5 +1,5 @@
 -- Cada cuenta de Discord elige UN TikTok y, mientras lo tenga, nadie mas puede usarlo y solo su dueno
--- puede marcarse en vivo con el. Lo suelta cuando quiere (boton "Soltar mi TikTok") o al cerrar sesion.
+-- puede marcarse en vivo con el. Lo suelta cuando quiere (boton "Soltar mi TikTok").
 -- Se corre despues de tiktok-live.sql; se puede repetir sin problema.
 --
 -- PASO: Supabase -> SQL Editor -> pegar TODO este archivo -> Run.
@@ -16,7 +16,7 @@ create table if not exists public.tiktok_claims (
 alter table public.tiktok_claims enable row level security;
 
 -- Todos ven quien tiene cada TikTok (para sacarlo de la lista). Cada uno elige solo para si mismo y lo
--- puede soltar cuando quiera (boton de la pagina o al cerrar sesion). No hay update: para cambiar, se suelta y se elige otro.
+-- puede soltar cuando quiera (boton de la pagina). No hay update: para cambiar, se suelta y se elige otro.
 drop policy if exists tiktok_claims_read   on public.tiktok_claims;
 drop policy if exists tiktok_claims_insert on public.tiktok_claims;
 drop policy if exists tiktok_claims_delete on public.tiktok_claims;

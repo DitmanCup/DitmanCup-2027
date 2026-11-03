@@ -456,8 +456,8 @@ const I18N = {
     'live.ttBusy': 'Ese TikTok ya lo eligio otra persona. Si es tuyo, avisale a Joker.',
     'live.ttYours': 'Tu TikTok: @{name}',
     'live.ttClaim': 'Elegir este TikTok',
-    'live.ttLockNote': 'Elegi tu TikTok. Mientras lo tengas, nadie mas puede usarlo. Lo soltas cuando quieras o al cerrar sesion.',
-    'live.ttConfirm': 'Elegir @{name}? Nadie mas podra usarlo hasta que lo sueltes o cierres sesion.',
+    'live.ttLockNote': 'Elegi tu TikTok. Mientras lo tengas, nadie mas puede usarlo. Lo podes soltar cuando quieras.',
+    'live.ttConfirm': 'Elegir @{name}? Nadie mas podra usarlo hasta que lo sueltes.',
     'live.ttRelease': 'Soltar mi TikTok',
     'live.ttClaimed': 'TikToks ya elegidos. Si alguno no es de quien lo eligio, avisale a Joker:',
     'live.ttBy': 'elegido por {name}',
@@ -774,8 +774,8 @@ const I18N = {
     'live.ttBusy': 'That TikTok was already chosen by someone else. If it is yours, tell Joker.',
     'live.ttYours': 'Your TikTok: @{name}',
     'live.ttClaim': 'Choose this TikTok',
-    'live.ttLockNote': 'Choose your TikTok. While you have it, nobody else can use it. Release it any time, or it is released when you log out.',
-    'live.ttConfirm': 'Choose @{name}? Nobody else can use it until you release it or log out.',
+    'live.ttLockNote': 'Choose your TikTok. While you have it, nobody else can use it. You can release it any time.',
+    'live.ttConfirm': 'Choose @{name}? Nobody else can use it until you release it.',
     'live.ttRelease': 'Release my TikTok',
     'live.ttClaimed': 'TikToks already chosen. If one does not belong to who chose it, tell Joker:',
     'live.ttBy': 'chosen by {name}',
@@ -1092,8 +1092,8 @@ const I18N = {
     'live.ttBusy': 'TikTok itu sudah dipilih orang lain. Kalau itu milikmu, kabari Joker.',
     'live.ttYours': 'TikTok kamu: @{name}',
     'live.ttClaim': 'Pilih TikTok ini',
-    'live.ttLockNote': 'Pilih TikTok kamu. Selama kamu memilikinya, tidak ada orang lain yang bisa memakainya. Lepaskan kapan saja, atau otomatis saat kamu keluar.',
-    'live.ttConfirm': 'Pilih @{name}? Tidak ada orang lain yang bisa memakainya sampai kamu melepaskannya atau keluar.',
+    'live.ttLockNote': 'Pilih TikTok kamu. Selama kamu memilikinya, tidak ada orang lain yang bisa memakainya. Kamu bisa melepaskannya kapan saja.',
+    'live.ttConfirm': 'Pilih @{name}? Tidak ada orang lain yang bisa memakainya sampai kamu melepaskannya.',
     'live.ttRelease': 'Lepaskan TikTok saya',
     'live.ttClaimed': 'TikTok yang sudah dipilih. Kalau ada yang bukan milik pemilihnya, kabari Joker:',
     'live.ttBy': 'dipilih oleh {name}',
@@ -1410,8 +1410,8 @@ const I18N = {
     'live.ttBusy': 'そのTikTokはすでに他の人が選択しています。あなたのものならJokerに連絡してください。',
     'live.ttYours': 'あなたのTikTok: @{name}',
     'live.ttClaim': 'このTikTokを選ぶ',
-    'live.ttLockNote': 'あなたのTikTokを選んでください。持っている間は他の人は使えません。いつでも解除でき、ログアウトでも解除されます。',
-    'live.ttConfirm': '@{name} を選びますか？解除するかログアウトするまで、他の人は使えません。',
+    'live.ttLockNote': 'あなたのTikTokを選んでください。持っている間は他の人は使えません。いつでも解除できます。',
+    'live.ttConfirm': '@{name} を選びますか？解除するまで、他の人は使えません。',
     'live.ttRelease': 'TikTokを解除',
     'live.ttClaimed': '選択済みのTikTok。選んだ本人のものでない場合はJokerに連絡してください:',
     'live.ttBy': '{name} が選択',
@@ -3990,17 +3990,7 @@ async function predLogin(backTab = 'predictions') {
   try { sessionStorage.setItem('dc-after-login', backTab); } catch (e) {}
   await predState.sb.auth.signInWithOAuth({ provider: 'discord', options: { redirectTo: location.origin + location.pathname } });
 }
-async function predLogout() {
-  if (!predState.sb) return;
-  // Al cerrar sesion se suelta el TikTok elegido (la base apaga tambien su "en vivo")
-  const u = predState.user;
-  if (u) {
-    try { await predState.sb.from('tiktok_claims').delete().eq('user_id', u.id); } catch (e) { console.error(e); }
-    ttState.claims = ttState.claims.filter(c => c.user_id !== u.id);
-    ttState.rows = ttState.rows.filter(r => r.user_id !== u.id);
-  }
-  await predState.sb.auth.signOut();
-}
+async function predLogout() { if (predState.sb) await predState.sb.auth.signOut(); }
 
 async function predPageAll(table, cols) {
   const all = [];
