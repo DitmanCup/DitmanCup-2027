@@ -267,7 +267,6 @@ const KICK_LIVE_CHANNELS = ['chacoide'];
 // Cada uno es 'usuario' o { tiktok: 'usuario', name: 'Como se muestra' }.
 const TIKTOK_LIVE_CHANNELS = [
   { tiktok: 'layhan301', name: 'HannNrY' },
-  'jokeruy_',    // JokerUY (para probar el panel de marcarse en vivo)
 ];
 const ttEntry = e => typeof e === 'string' ? { tiktok: e, name: e } : { tiktok: e.tiktok, name: e.name || e.tiktok };
 
