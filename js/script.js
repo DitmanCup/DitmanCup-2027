@@ -2632,6 +2632,23 @@ async function ttSetLive(handle) {
   renderLive();
 }
 
+// Admin (JokerUY): apagar el "en vivo" de cualquier TikTok. La base solo lo deja a esta cuenta (supabase/tiktok-claims.sql).
+const TT_ADMIN_ID = '27e68739-f0d9-414e-a63f-f58ed15538d6';
+async function ttAdminOff(handle) {
+  const sb = predState.sb, u = predState.user;
+  if (!sb || !u || u.id !== TT_ADMIN_ID || ttState.busy) return;
+  ttState.busy = true; ttState.err = ''; renderTtBox();
+  try {
+    const { error } = await sb.from('tiktok_live').delete().eq('handle', handle);
+    if (error) throw error;
+  } catch (e) {
+    console.error('No se pudo apagar el TikTok:', e);
+    ttState.err = 'live.ttErr';
+  }
+  ttState.busy = false;
+  renderLive();
+}
+
 // Soltar el TikTok propio (y apagar su "en vivo"): queda libre para que otro lo elija
 async function ttRelease() {
   const sb = predState.sb, u = predState.user;
@@ -2696,6 +2713,12 @@ function renderTtBox() {
     }
     if (u) html += `<div class="live-ttrow live-ttuser"><span>${esc(t('pred.hello', { name: predState.name || '' }))}</span>
       <button class="live-ttbtn live-ttbtn-alt" type="button" data-tt="logout">${esc(t('pred.logout'))}</button></div>`;
+    if (u && u.id === TT_ADMIN_ID && ttState.rows.length) {
+      const names = ttHandles();
+      html += `<p class="live-ttnote live-ttclaimed-h">Admin: TikToks marcados en vivo</p>` + ttState.rows.map(r =>
+        `<div class="live-ttrow"><span class="live-ttmine">${esc(names.get(r.handle) || r.handle)} (@${esc(r.handle)})</span>
+        <button class="live-ttbtn" type="button" data-tt="adminoff" data-handle="${esc(r.handle)}"${dis}>Apagar</button></div>`).join('');
+    }
     if (ttState.err) html += `<p class="live-tterr">${esc(t(ttState.err))}</p>`;
     // Publico: quien eligio cada TikTok, para que se note si alguien eligio uno que no es suyo
     if (ttState.claims.length) {
@@ -2713,6 +2736,7 @@ function renderTtBox() {
     else if (a === 'release') ttRelease();
     else if (a === 'logout') predLogout();
     else if (a === 'go') ttSetLive(b.dataset.handle);
+    else if (a === 'adminoff') ttAdminOff(b.dataset.handle);
     else if (a === 'claim') {
       const s = box.querySelector('#live-tt-pick');
       if (s && s.value && confirm(t('live.ttConfirm', { name: s.value }))) ttClaim(s.value);

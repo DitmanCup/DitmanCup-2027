@@ -36,6 +36,12 @@ drop trigger if exists tiktok_claims_release on public.tiktok_claims;
 create trigger tiktok_claims_release after delete on public.tiktok_claims
   for each row execute function public.tiktok_claims_release();
 
+-- Admin (JokerUY): puede apagar el "en vivo" de cualquier TikTok (boton "Apagar" en la pestaña Live).
+drop policy if exists tiktok_live_delete on public.tiktok_live;
+create policy tiktok_live_delete on public.tiktok_live for delete using (
+  auth.uid() = user_id or auth.uid() = '27e68739-f0d9-414e-a63f-f58ed15538d6'::uuid
+);
+
 -- Marcarse en vivo ahora exige ser el dueno del TikTok.
 drop policy if exists tiktok_live_insert on public.tiktok_live;
 drop policy if exists tiktok_live_update on public.tiktok_live;
