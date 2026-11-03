@@ -514,6 +514,7 @@ const I18N = {
     'wg.needLogin': 'Entrá con Discord para jugar y juntar PTAS.',
     'wg.daily': 'Cobrar {n} PTAS de hoy',
     'wg.dailyDone': 'Ya cobraste hoy',
+    'wg.sound': 'Sonido y música',
     'wg.dailySoon': 'Bono diario: desde que empiece el torneo',
     'wg.sub.bets': 'Apuestas',
     'wg.sub.mine': 'Mis apuestas',
@@ -899,6 +900,7 @@ const I18N = {
     'wg.needLogin': 'Log in with Discord to play and earn PTAS.',
     'wg.daily': 'Claim today\'s {n} PTAS',
     'wg.dailyDone': 'Already claimed today',
+    'wg.sound': 'Sound and music',
     'wg.dailySoon': 'Daily bonus: starts with the tournament',
     'wg.sub.bets': 'Bets',
     'wg.sub.mine': 'My bets',
@@ -1893,6 +1895,7 @@ function initTabs() {
     closeDrop();
     tabs.classList.remove('open');
     toggle.setAttribute('aria-expanded', 'false');
+    wgAudioTab(btn.dataset.tab);
     if (focusPanel) panel.focus();
   }
 
@@ -4707,6 +4710,7 @@ function renderWager() {
 
 function initWager() {
   initUserChip();
+  initWagerSound();
   const root = document.getElementById('wg-root');
   if (!root) return;
   root.addEventListener('click', e => {
@@ -4751,6 +4755,78 @@ function initWager() {
   if (hud) hud.addEventListener('click', () => { if (tab) tab.click(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
   renderWager();
   setInterval(() => { if (wgAdmin() && wg.ok) wgAdminSync(); }, 5 * 60 * 1000);
+}
+
+// ---- Sonido de Merchant's Wager: saludo del Mercader al entrar + musica ambiente de fondo (con boton para silenciar) ----
+const WG_MUTE_LS = 'dc-wg-mute';
+const WG_MUSIC_VOL = 0.22;
+const wgSnd = { welcome: null, music: null, on: false, fade: 0, lastWelcome: 0 };
+const wgMuted = () => safeGet(WG_MUTE_LS) === '1';
+
+function wgSndInit() {
+  if (wgSnd.music) return;
+  wgSnd.welcome = new Audio('assets/audio/merchant-welcome.mp3');
+  wgSnd.welcome.volume = 0.7;
+  wgSnd.music = new Audio('assets/audio/merchant-ambient.mp3');
+  wgSnd.music.loop = true;
+  wgSnd.music.volume = WG_MUSIC_VOL;
+}
+function wgSndPlay(withWelcome) {
+  if (wgMuted()) return;
+  wgSndInit();
+  clearInterval(wgSnd.fade);
+  wgSnd.music.volume = WG_MUSIC_VOL;
+  wgSnd.music.play().catch(() => {});
+  if (withWelcome && Date.now() - wgSnd.lastWelcome > 20000) {
+    wgSnd.lastWelcome = Date.now();
+    wgSnd.welcome.currentTime = 0;
+    wgSnd.welcome.play().catch(() => {});
+  }
+}
+function wgSndStop(now) {
+  if (!wgSnd.music) return;
+  clearInterval(wgSnd.fade);
+  wgSnd.welcome.pause();
+  if (now) { wgSnd.music.pause(); wgSnd.music.volume = WG_MUSIC_VOL; return; }
+  wgSnd.fade = setInterval(() => {   // se apaga de a poco al salir de la pestaña
+    const v = wgSnd.music.volume - 0.03;
+    if (v <= 0.01) { clearInterval(wgSnd.fade); wgSnd.music.pause(); wgSnd.music.volume = WG_MUSIC_VOL; }
+    else wgSnd.music.volume = v;
+  }, 60);
+}
+// Video de fondo en loop (se descarga recien la primera vez que se entra; con "reducir movimiento" o ahorro de datos queda la foto)
+function wgVideoTab(here) {
+  const v = document.getElementById('wg-bgvideo');
+  if (!v) return;
+  if (!here) { v.pause(); return; }
+  const calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (calm || (navigator.connection && navigator.connection.saveData)) return;
+  if (!v.getAttribute('src')) v.src = 'assets/wager-bg.mp4';
+  v.play().catch(() => {});
+}
+
+function wgAudioTab(tab) {
+  const here = tab === 'wager';
+  if (here === wgSnd.on) return;
+  wgSnd.on = here;
+  wgVideoTab(here);
+  if (here) wgSndPlay(true); else wgSndStop(false);
+}
+function initWagerSound() {
+  const btn = document.getElementById('wg-sound');
+  if (!btn) return;
+  const paint = () => btn.setAttribute('aria-pressed', String(!wgMuted()));
+  paint();
+  btn.addEventListener('click', () => {
+    safeSet(WG_MUTE_LS, wgMuted() ? '0' : '1');
+    paint();
+    if (wgMuted()) wgSndStop(true); else if (wgSnd.on) wgSndPlay(false);
+  });
+  document.addEventListener('visibilitychange', () => {   // en segundo plano no suena
+    if (!wgSnd.music) return;
+    if (document.hidden) wgSnd.music.pause();
+    else if (wgSnd.on && !wgMuted()) wgSnd.music.play().catch(() => {});
+  });
 }
 
 // Actualiza "Ganarias X PTAS" sin volver a dibujar la tarjeta (para no perder el foco del input)
