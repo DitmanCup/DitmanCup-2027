@@ -251,6 +251,7 @@ const YOUTUBE_LIVE_CHANNELS = [
   { name: 'Mrchampppt', url: 'https://www.youtube.com/@mrchampppt/live', tiktok: 'mrchampppt' },
   { name: 'Zudinnn', id: 'UCkX2rtFOeywknZ0ibu-ajWA', tiktok: 'zudinnnnvls' },
   { name: 'VAL', url: 'https://www.youtube.com/@valyorleza/live', tiktok: 'valyorleza' },
+  { name: 'HannNrY', url: 'https://www.youtube.com/@HannNrY/live', tiktok: 'layhan301' },
   { name: 'Orchlon', url: 'https://www.youtube.com/@OrchlonSR/live', twitch: 'orchlon' },   // multistream: su tarjeta es la de Twitch, con boton de YouTube
   { name: 'JokerUY', url: 'https://www.youtube.com/@JokerUY/live', twitch: 'jokeruy' },
   { name: 'ryllmen', url: 'https://www.youtube.com/@ryllmen/live', tiktok: 'ryllmen' },   // Beryl
@@ -265,9 +266,7 @@ const KICK_LIVE_CHANNELS = ['chacoide'];
 // en YOUTUBE_LIVE_CHANNELS y su boton sale en la misma tarjeta. TikTok bloquea las consultas automaticas (anti-bots),
 // asi que no se detecta si estan en vivo: la tarjeta lleva directo a @usuario/live.
 // Cada uno es 'usuario' o { tiktok: 'usuario', name: 'Como se muestra' }.
-const TIKTOK_LIVE_CHANNELS = [
-  { tiktok: 'layhan301', name: 'HannNrY' },
-];
+const TIKTOK_LIVE_CHANNELS = [];
 const ttEntry = e => typeof e === 'string' ? { tiktok: e, name: e } : { tiktok: e.tiktok, name: e.name || e.tiktok };
 
 // Runners de Twitch que tambien streamean en TikTok: { 'canal de twitch en minusculas': 'usuario de tiktok' }.
