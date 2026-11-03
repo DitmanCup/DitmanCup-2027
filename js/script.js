@@ -4767,7 +4767,7 @@ function wgSndInit() {
   if (wgSnd.music) return;
   wgSnd.welcome = new Audio('assets/audio/merchant-welcome.mp3');
   wgSnd.welcome.volume = 0.7;
-  wgSnd.music = new Audio('assets/audio/merchant-ambient.mp3');
+  wgSnd.music = new Audio('assets/audio/merchant-ambient.mp3?v=2');
   wgSnd.music.loop = true;
   wgSnd.music.volume = WG_MUSIC_VOL;
 }
@@ -4801,7 +4801,7 @@ function wgVideoTab(here) {
   if (!here) { v.pause(); return; }
   const calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (calm || (navigator.connection && navigator.connection.saveData)) return;
-  if (!v.getAttribute('src')) v.src = 'assets/wager-bg.mp4';
+  if (!v.getAttribute('src')) v.src = 'assets/wager-bg.mp4?v=2';
   v.play().catch(() => {});
 }
 

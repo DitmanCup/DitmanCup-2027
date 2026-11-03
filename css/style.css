@@ -2027,7 +2027,7 @@ body[data-tab="simulations"] main { max-width: min(1880px, 100%); }
 body[data-tab="wager"] {
   background-image:
     linear-gradient(rgba(10, 9, 8, 0.4), rgba(10, 9, 8, 0.86)),
-    url('../assets/wager-bg.jpg');
+    url('../assets/wager-bg-poster.jpg');
 }
 
 .wg-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
