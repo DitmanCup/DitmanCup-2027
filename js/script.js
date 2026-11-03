@@ -454,6 +454,8 @@ const I18N = {
     'live.ttClaim': 'Elegir este TikTok',
     'live.ttLockNote': 'Elegi tu TikTok. Queda fijo en tu cuenta y nadie mas puede usarlo.',
     'live.ttConfirm': 'Elegir @{name}? Queda fijo en tu cuenta y no se puede cambiar.',
+    'live.ttClaimed': 'TikToks ya elegidos. Si alguno no es de quien lo eligio, avisale a Joker:',
+    'live.ttBy': 'elegido por {name}',
     'live.ttErr': 'No se pudo guardar. Proba de nuevo.',
     'nav.predictions': 'Predicciones',
     'pred.title': 'Predicciones',
@@ -769,6 +771,8 @@ const I18N = {
     'live.ttClaim': 'Choose this TikTok',
     'live.ttLockNote': 'Choose your TikTok. It gets locked to your account and nobody else can use it.',
     'live.ttConfirm': 'Choose @{name}? It gets locked to your account and cannot be changed.',
+    'live.ttClaimed': 'TikToks already chosen. If one does not belong to who chose it, tell Joker:',
+    'live.ttBy': 'chosen by {name}',
     'live.ttErr': 'Could not save. Please try again.',
     'nav.predictions': 'Predictions',
     'pred.title': 'Predictions',
@@ -1084,6 +1088,8 @@ const I18N = {
     'live.ttClaim': 'Pilih TikTok ini',
     'live.ttLockNote': 'Pilih TikTok kamu. Akan terkunci ke akunmu dan tidak bisa dipakai orang lain.',
     'live.ttConfirm': 'Pilih @{name}? Akan terkunci ke akunmu dan tidak bisa diubah.',
+    'live.ttClaimed': 'TikTok yang sudah dipilih. Kalau ada yang bukan milik pemilihnya, kabari Joker:',
+    'live.ttBy': 'dipilih oleh {name}',
     'live.ttErr': 'Gagal menyimpan. Coba lagi.',
     'nav.predictions': 'Prediksi',
     'pred.title': 'Prediksi',
@@ -1399,6 +1405,8 @@ const I18N = {
     'live.ttClaim': 'このTikTokを選ぶ',
     'live.ttLockNote': 'あなたのTikTokを選んでください。アカウントに固定され、他の人は使えません。',
     'live.ttConfirm': '@{name} を選びますか？アカウントに固定され、変更できません。',
+    'live.ttClaimed': '選択済みのTikTok。選んだ本人のものでない場合はJokerに連絡してください:',
+    'live.ttBy': '{name} が選択',
     'live.ttErr': '保存できませんでした。もう一度お試しください。',
     'nav.predictions': '予想',
     'pred.title': '予想',
@@ -2557,7 +2565,7 @@ async function liveStatusData() {
 // tiktok_live de Supabase (supabase/tiktok-live.sql) con su login de Discord. Vence solo.
 // Cada cuenta elige un TikTok una sola vez (tiktok_claims, supabase/tiktok-claims.sql) y queda fijo:
 // solo su dueno puede marcarse en vivo con el.
-const ttState = { rows: [], claims: [], ok: false, busy: false, err: '' };
+const ttState = { rows: [], claims: [], names: {}, ok: false, busy: false, err: '' };
 const TT_LIVE_HOURS = 6;
 
 async function ttLoadLive() {
@@ -2572,6 +2580,14 @@ async function ttLoadLive() {
       get(`tiktok_live?select=handle,user_id,live_until&live_until=gt.${encodeURIComponent(new Date().toISOString())}`),
       get('tiktok_claims?select=handle,user_id'),
     ]);
+    // Nombre de Discord de quien eligio cada TikTok (los perfiles son publicos); si falla, se muestra sin nombre
+    ttState.names = {};
+    if (ttState.claims.length) {
+      try {
+        const ps = await get(`profiles?select=user_id,name&user_id=in.(${ttState.claims.map(c => c.user_id).join(',')})`);
+        ps.forEach(p => { ttState.names[p.user_id] = p.name; });
+      } catch (e) { console.error('No se pudieron leer los nombres de los TikToks elegidos:', e); }
+    }
     ttState.ok = true;
   } catch (e) {
     console.error('TikTok live check falló:', e);
@@ -2652,6 +2668,13 @@ function renderTtBox() {
         <button class="live-ttbtn" type="button" data-tt="claim"${dis}>${esc(t('live.ttClaim'))}</button></div>`;
     }
     if (ttState.err) html += `<p class="live-tterr">${esc(t(ttState.err))}</p>`;
+    // Publico: quien eligio cada TikTok, para que se note si alguien eligio uno que no es suyo
+    if (ttState.claims.length) {
+      const names = ttHandles();
+      html += `<p class="live-ttnote live-ttclaimed-h">${esc(t('live.ttClaimed'))}</p><ul class="live-ttclaimed">` +
+        ttState.claims.slice().sort((a, b) => a.handle.localeCompare(b.handle))
+          .map(c => `<li><a href="https://www.tiktok.com/@${encodeURIComponent(c.handle)}" target="_blank" rel="noopener">${esc(names.get(c.handle) || c.handle)} (@${esc(c.handle)})</a> <span>${esc(t('live.ttBy', { name: ttState.names[c.user_id] || '?' }))}</span></li>`).join('') + '</ul>';
+    }
   }
   box.innerHTML = html;
   box.querySelectorAll('[data-tt]').forEach(b => b.addEventListener('click', () => {

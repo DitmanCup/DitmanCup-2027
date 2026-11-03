@@ -1932,3 +1932,8 @@ body[data-tab="simulations"] main { max-width: min(1880px, 100%); }
 .live-ttbtn:disabled { opacity: .5; cursor: wait; }
 .live-ttmine { font-size: 1.45rem; }
 .live-tterr { margin: .7rem 0 0; color: #ff6b6b; font-size: 1.25rem; }
+.live-ttclaimed-h { margin-top: 1.4rem; }
+.live-ttclaimed { list-style: none; margin: 0; padding: 0; display: grid; gap: .4rem; font-size: 1.25rem; }
+.live-ttclaimed a { color: var(--text); text-decoration: none; border-bottom: 1px solid #25f4ee; }
+.live-ttclaimed a:hover { border-bottom-color: #fff; }
+.live-ttclaimed span { opacity: .85; margin-left: .4rem; }
