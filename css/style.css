@@ -1982,3 +1982,11 @@ body[data-tab="simulations"] main { max-width: min(1880px, 100%); }
 .wg-item-icon .ic { width: 2.6rem; height: 2.6rem; }
 .wg-ic-discord_role { color: #5865f2; }
 .wg-ic-twitch_vip { color: #e005b9; }
+
+/* Recuadro de usuario: a la derecha de las pestañas (PTAS a la izquierda, foto de perfil a la derecha) */
+.tabs { width: 100%; align-items: center; }
+.user-chip { display: flex; align-items: center; gap: .6rem; margin-left: auto; }
+.user-chip[hidden] { display: none; }
+.user-avatar { display: inline-flex; width: 34px; height: 34px; border-radius: 50%; overflow: hidden; border: 1px solid var(--frame); background: var(--surface-alt); flex: none; align-items: center; justify-content: center; font-family: var(--font-title); color: var(--text); }
+.user-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+@media (max-width: 1200px) { .topbar-inner > .user-chip { margin-left: auto; } }

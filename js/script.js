@@ -280,6 +280,8 @@ const I18N = {
     'nav.home': 'Ir al inicio',
     'nav.sorteo': 'Calendario',
     'nav.torneo': 'Torneo',
+    'nav.jugar': 'Jugar',
+    'nav.comunidad': 'Comunidad',
     'intro.t1': 'Calendario',
     'nav.grupos': 'Grupos',
     'nav.brackets': 'Brackets',
@@ -512,6 +514,7 @@ const I18N = {
     'wg.needLogin': 'Entrá con Discord para jugar y juntar PTAS.',
     'wg.daily': 'Cobrar {n} PTAS de hoy',
     'wg.dailyDone': 'Ya cobraste hoy',
+    'wg.dailySoon': 'Bono diario: desde que empiece el torneo',
     'wg.sub.bets': 'Apuestas',
     'wg.sub.mine': 'Mis apuestas',
     'wg.sub.shop': 'Tienda',
@@ -542,13 +545,13 @@ const I18N = {
     'wg.shop.kind.badge': 'Badge de la página',
     'wg.shop.kind.discord_role': 'Rol de Discord',
     'wg.shop.kind.twitch_vip': 'VIP de Twitch',
-    'wg.rules.1': 'Cada día podés cobrar {n} PTAS (una vez por día, hora de Uruguay). Si no cobrás, no se acumula.',
+    'wg.rules.1': 'Desde que empiece el torneo podés cobrar {n} PTAS por día (una vez por día, hora de Uruguay). Si no cobrás, no se acumula.',
     'wg.rules.2': 'En cada partida elegís un runner y cuántas PTAS apostar (mínimo {m}). Se descuentan en el momento y solo podés apostar una vez por partida, antes de que empiece.',
     'wg.rules.3': 'La cuota sale de los tiempos de clasificatoria: cuanto más rápido fue un runner, más probable es que gane y menos paga; el sorpresa paga más. La cuota que ves al apostar queda fija.',
     'wg.rules.4': 'Si acertás, recibís lo apostado multiplicado por la cuota. Si fallás, perdés lo apostado. Si una partida se anula, se devuelve todo.',
     'wg.rules.5': 'Con las PTAS comprás en la tienda: badges para tu nombre, un rol en el Discord o el VIP de Twitch. Los roles y el VIP los entrega Joker a mano.',
     'wg.rules.6': 'Las PTAS son solo de juego: no se compran, no se cambian por dinero ni se pueden pasar a otra persona. Una cuenta de Discord, una billetera.',
-    'wg.err.funds': 'No te alcanzan las PTAS.',
+    'wg.err.daily_off': 'El bono diario todavía no está activo: arranca con el torneo.', 'wg.err.funds': 'No te alcanzan las PTAS.',
     'wg.err.closed': 'Esa partida ya está cerrada.',
     'wg.err.already_bet': 'Ya apostaste en esa partida.',
     'wg.err.min_bet': 'La apuesta mínima es {n} PTAS.',
@@ -662,6 +665,8 @@ const I18N = {
     'nav.home': 'Go to home',
     'nav.sorteo': 'Schedule',
     'nav.torneo': 'Tournament',
+    'nav.jugar': 'Play',
+    'nav.comunidad': 'Community',
     'intro.t1': 'Schedule',
     'nav.grupos': 'Groups',
     'nav.brackets': 'Bracket',
@@ -894,6 +899,7 @@ const I18N = {
     'wg.needLogin': 'Log in with Discord to play and earn PTAS.',
     'wg.daily': 'Claim today\'s {n} PTAS',
     'wg.dailyDone': 'Already claimed today',
+    'wg.dailySoon': 'Daily bonus: starts with the tournament',
     'wg.sub.bets': 'Bets',
     'wg.sub.mine': 'My bets',
     'wg.sub.shop': 'Shop',
@@ -924,13 +930,13 @@ const I18N = {
     'wg.shop.kind.badge': 'Site badge',
     'wg.shop.kind.discord_role': 'Discord role',
     'wg.shop.kind.twitch_vip': 'Twitch VIP',
-    'wg.rules.1': 'Every day you can claim {n} PTAS (once a day, Uruguay time). If you skip a day it does not stack.',
+    'wg.rules.1': 'Once the tournament starts you can claim {n} PTAS every day (once a day, Uruguay time). If you skip a day it does not stack.',
     'wg.rules.2': 'On each match you pick a runner and how many PTAS to bet (minimum {m}). They are deducted right away and you can bet only once per match, before it starts.',
     'wg.rules.3': 'Odds come from the qualifier times: the faster a runner was, the more likely they win and the less they pay; the underdog pays more. The odds you see when betting are locked in.',
     'wg.rules.4': 'If you are right you get your stake times the odds. If you are wrong you lose the stake. If a match is voided, everything is refunded.',
     'wg.rules.5': 'Spend PTAS in the shop: badges next to your name, a Discord role or Twitch VIP. Roles and VIP are delivered by Joker by hand.',
     'wg.rules.6': 'PTAS are play money only: they cannot be bought, cashed out or sent to someone else. One Discord account, one wallet.',
-    'wg.err.funds': 'Not enough PTAS.',
+    'wg.err.daily_off': 'The daily bonus is not active yet: it starts with the tournament.', 'wg.err.funds': 'Not enough PTAS.',
     'wg.err.closed': 'That match is already closed.',
     'wg.err.already_bet': 'You already bet on that match.',
     'wg.err.min_bet': 'The minimum bet is {n} PTAS.',
@@ -1852,15 +1858,17 @@ function showTestBanner() {
 // ======= NAVEGACIÓN POR PESTAÑAS / TABS =======
 function initTabs() {
   const buttons = Array.from(document.querySelectorAll('.tab-btn[data-tab]'));
-  const drop = document.getElementById('nav-drop-btn');
-  const sub = document.getElementById('nav-sub');
+  const groups = Array.from(document.querySelectorAll('.nav-group'));
   const panels = document.querySelectorAll('.tab-panel');
   const toggle = document.getElementById('nav-toggle');
   const tabs = document.getElementById('tabs');
 
-  function closeDrop() {
-    sub.classList.remove('open');
-    drop.setAttribute('aria-expanded', 'false');
+  function closeDrop(except) {
+    groups.forEach(g => {
+      if (g === except) return;
+      g.querySelector('.nav-sub').classList.remove('open');
+      g.querySelector('.nav-drop-btn').setAttribute('aria-expanded', 'false');
+    });
   }
 
   function activate(btn, focusPanel) {
@@ -1881,7 +1889,7 @@ function initTabs() {
     if (trailer && btn.dataset.tab !== 'inicio') trailer.pause();
     document.body.dataset.tab = btn.dataset.tab;
     if (btn.dataset.tab === 'brackets' || btn.dataset.tab === 'simulations') { drawAllBracketLines(); requestAnimationFrame(drawAllBracketLines); }
-    drop.classList.toggle('active', !!btn.closest('.nav-sub'));
+    groups.forEach(g => g.querySelector('.nav-drop-btn').classList.toggle('active', g.contains(btn)));
     closeDrop();
     tabs.classList.remove('open');
     toggle.setAttribute('aria-expanded', 'false');
@@ -1913,10 +1921,14 @@ function initTabs() {
     });
   });
 
-  drop.addEventListener('click', e => {
-    e.stopPropagation();
-    const open = sub.classList.toggle('open');
-    drop.setAttribute('aria-expanded', String(open));
+  groups.forEach(g => {
+    const drop = g.querySelector('.nav-drop-btn'), sub = g.querySelector('.nav-sub');
+    drop.addEventListener('click', e => {
+      e.stopPropagation();
+      closeDrop(g);
+      const open = sub.classList.toggle('open');
+      drop.setAttribute('aria-expanded', String(open));
+    });
   });
   document.addEventListener('click', e => { if (!e.target.closest('.nav-group')) closeDrop(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrop(); });
@@ -4123,6 +4135,7 @@ async function predSetUser(user) {
     const meta = user.user_metadata || {};
     const name = (meta.custom_claims && meta.custom_claims.global_name) || meta.full_name || meta.name || meta.user_name || 'Player';
     predState.name = name;
+    predState.avatar = meta.avatar_url || null;
     try {
       await predState.sb.from('profiles').upsert({ user_id: user.id, name, avatar: meta.avatar_url || null }, { onConflict: 'user_id' });
       const { data, error } = await predState.sb.from('predictions').select('match_id,pick,diff').eq('user_id', user.id);
@@ -4135,6 +4148,7 @@ async function predSetUser(user) {
     } catch (e) { console.error('No se pudieron cargar los pronosticos:', e); }
   }
   predState.board = null; predState.boardAt = 0;
+  renderUserChip();
   renderPredictions();
   renderTtBox();
   predLoadBoard();
@@ -4366,7 +4380,7 @@ function initPredictions() {
 // PTAS son una moneda de juego: no se compran ni se canjean por dinero.
 const WG_K = 40;                              // pendiente de la curva: p(gana el mas rapido) = 1 / (1 + e^(-K * d))
 const WG_ODDS_MIN = 1.05, WG_ODDS_MAX = 30;   // tope de la cuota para que ni el favorito pague nada ni el sorpresa pague mil veces
-const WG_ERRORS = ['funds', 'closed', 'already_bet', 'min_bet', 'inactive', 'already_claimed', 'already_owned', 'login', 'no_market', 'no_item'];
+const WG_ERRORS = ['daily_off', 'funds', 'closed', 'already_bet', 'min_bet', 'inactive', 'already_claimed', 'already_owned', 'login', 'no_market', 'no_item'];
 const wg = { ok: false, cfg: null, wallet: null, markets: [], bets: {}, shop: [], buys: [], badges: {}, pending: [], names: {},
   board: null, boardErr: false, sub: 'bets', sel: {}, busy: false, err: '', msg: '', syncAt: 0, syncing: false };
 const wgAdmin = () => !!(predState.user && predState.user.id === TT_ADMIN_ID);
@@ -4403,7 +4417,7 @@ async function wgLoad(skipSync) {
   try {
     const none = Promise.resolve({ data: null, error: null });
     const [cfg, mk, shop, buys, wal, bets] = await Promise.all([
-      sb.from('wager_config').select('active,daily,min_bet').eq('id', 1).maybeSingle(),
+      sb.from('wager_config').select('*').eq('id', 1).maybeSingle(),
       sb.from('wager_markets').select('*').order('start_at'),
       sb.from('shop_items').select('*').order('sort'),
       sb.from('shop_purchases').select('id,user_id,item_id,fulfilled,created_at'),   // la base deja: las propias, los badges de todos y (admin) todas
@@ -4440,13 +4454,42 @@ function wgUpdateTab() {
   const show = wg.ok && (wg.cfg.active || wgAdmin());
   const tab = document.querySelector('.tab-btn[data-tab="wager"]');
   if (tab) tab.hidden = !show;
-  // Recuadro de arriba a la derecha con las PTAS de la cuenta (solo logueado)
+  renderUserChip();
+}
+
+// Arriba a la derecha de las pestañas: las PTAS de la cuenta y la foto de perfil de Discord (solo logueado)
+function renderUserChip() {
+  const chip = document.getElementById('user-chip');
+  if (!chip) return;
+  const u = predState.user;
+  chip.hidden = !u;
   const hud = document.getElementById('wg-hud');
   if (hud) {
-    hud.hidden = !(show && predState.user);
+    hud.hidden = !(u && wg.ok && (wg.cfg.active || wgAdmin()));
     const n = document.getElementById('wg-hud-n');
     if (n) n.textContent = wgFmt(wg.wallet ? wg.wallet.balance : 0);
   }
+  const av = document.getElementById('user-avatar');
+  if (av && u) {
+    const name = predState.name || '';
+    av.title = name;
+    av.innerHTML = predState.avatar && /^https:///.test(predState.avatar)
+      ? `<img src="${esc(predState.avatar)}" alt="${esc(name)}" referrerpolicy="no-referrer">`
+      : `<span>${esc((name || '?').charAt(0).toUpperCase())}</span>`;
+  }
+}
+
+// En pantallas chicas las pestañas se esconden tras el menú: el recuadro pasa a la fila del logo para seguir visible
+function initUserChip() {
+  const chip = document.getElementById('user-chip');
+  if (!chip || !window.matchMedia) return;
+  const mq = window.matchMedia('(max-width: 1200px)');
+  const place = () => {
+    if (mq.matches) document.querySelector('.topbar-inner').insertBefore(chip, document.querySelector('.topbar-actions'));
+    else document.getElementById('tabs').appendChild(chip);
+  };
+  place();
+  mq.addEventListener ? mq.addEventListener('change', place) : mq.addListener(place);
 }
 
 // Logo de cada articulo: Discord y VIP de Twitch con su simbolo; los badges, su emoji
@@ -4588,7 +4631,7 @@ function renderWager() {
   const claimed = user && wg.wallet && wg.wallet.last_daily === wgToday();
   const bar = user
     ? `<div class="wg-wallet"><span class="wg-bal">${wgFmt(wg.wallet.balance)}</span><span class="wg-cur">PTAS</span></div>
-       <button type="button" class="pred-btn wg-daily" data-wg="daily"${claimed || wg.busy || !cfg.active ? ' disabled' : ''}>${esc(claimed ? t('wg.dailyDone') : t('wg.daily', { n: wgFmt(cfg.daily) }))}</button>
+       <button type="button" class="pred-btn wg-daily" data-wg="daily"${claimed || wg.busy || !cfg.active || !cfg.daily_enabled ? ' disabled' : ''}>${esc(!cfg.daily_enabled ? t('wg.dailySoon') : claimed ? t('wg.dailyDone') : t('wg.daily', { n: wgFmt(cfg.daily) }))}</button>
        <span class="pred-user">${esc(t('pred.hello', { name: predState.name || '' }))}${wgBadgeHtml(user.id)}</span>
        <button type="button" class="pred-btn pred-btn-alt" data-wg="logout">${esc(t('pred.logout'))}</button>`
     : `<span class="pred-user">${esc(t('wg.needLogin'))}</span>
@@ -4651,6 +4694,7 @@ function renderWager() {
 }
 
 function initWager() {
+  initUserChip();
   const root = document.getElementById('wg-root');
   if (!root) return;
   root.addEventListener('click', e => {

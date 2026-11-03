@@ -15,6 +15,8 @@ create table if not exists public.wager_config (
   daily   int not null default 1000 check (daily >= 0),   -- PTAS del bono diario
   min_bet int not null default 10 check (min_bet >= 1)
 );
+-- El bono diario arranca APAGADO: se activa a mano cuando empieza el torneo (update public.wager_config set daily_enabled = true;)
+alter table public.wager_config add column if not exists daily_enabled boolean not null default false;
 insert into public.wager_config (id, active) values (1, true) on conflict (id) do update set active = true;   -- activo para todos
 
 create table if not exists public.wallets (
@@ -118,6 +120,7 @@ begin
   if auth.uid() is null then raise exception 'login'; end if;
   select * into cfg from public.wager_config where id = 1;
   if not cfg.active then raise exception 'inactive'; end if;
+  if not cfg.daily_enabled then raise exception 'daily_off'; end if;
   insert into public.wallets (user_id) values (auth.uid()) on conflict do nothing;
   select * into w from public.wallets where user_id = auth.uid() for update;
   if w.last_daily = today then raise exception 'already_claimed'; end if;
