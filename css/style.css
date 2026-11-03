@@ -1923,11 +1923,12 @@ body[data-tab="simulations"] main { max-width: min(1880px, 100%); }
 .live-card.is-tiktok .live-play-tt .ic { width: 3rem; height: 3rem; color: #25f4ee; filter: drop-shadow(-2px 0 0 #fe2c55); }
 .live-card.is-tiktok .live-play-tt:hover { background: radial-gradient(circle at 30% 30%, #1b5558, #000 70%); }
 .live-ttbox { margin-top: 1.25rem; }
-.live-ttnote { margin: 0 0 .6rem; font-size: .95rem; opacity: .8; }
-.live-ttrow { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; }
-.live-ttrow select { min-width: 0; max-width: 100%; padding: .45rem .6rem; background: var(--bg-card, #111); color: var(--text); border: 1px solid #25f4ee; border-radius: 2px; font: inherit; }
-.live-ttbtn { font-family: var(--font-title); letter-spacing: .06em; text-transform: uppercase; font-size: .9rem; color: #fff; background: #000; border: 1px solid #25f4ee; box-shadow: -2px 0 0 #fe2c55; border-radius: 2px; padding: .45rem .9rem; cursor: pointer; }
+.live-ttbox { font-family: var(--font-grunge); }
+.live-ttnote { margin: 0 0 .9rem; font-size: 1.3rem; line-height: 1.35; opacity: .95; }
+.live-ttrow { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem; }
+.live-ttrow select { min-width: 0; max-width: 100%; padding: .7rem .9rem; background: var(--bg-card, #111); color: var(--text); border: 1px solid #25f4ee; border-radius: 2px; font-family: var(--font-grunge); font-size: 1.35rem; }
+.live-ttbtn { font-family: var(--font-grunge); letter-spacing: .04em; text-transform: uppercase; font-size: 1.35rem; color: #fff; background: #000; border: 1px solid #25f4ee; box-shadow: -3px 0 0 #fe2c55; border-radius: 2px; padding: .7rem 1.3rem; cursor: pointer; }
 .live-ttbtn:hover:not(:disabled) { border-color: #fff; }
 .live-ttbtn:disabled { opacity: .5; cursor: wait; }
-.live-ttmine { font-weight: 600; }
-.live-tterr { margin: .5rem 0 0; color: #ff6b6b; font-size: .9rem; }
+.live-ttmine { font-size: 1.45rem; }
+.live-tterr { margin: .7rem 0 0; color: #ff6b6b; font-size: 1.25rem; }
