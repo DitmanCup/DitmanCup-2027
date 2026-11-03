@@ -2004,12 +2004,24 @@ body[data-tab="simulations"] main { max-width: min(1880px, 100%); }
 .user-login .ic { width: 1.2em; height: 1.2em; }
 @media (max-width: 560px) { .user-login span { display: none; } .user-menu { right: 0; } }
 
-/* Donations: pestaña principal resaltada (dorado, como el boton de donar) */
-.tab-donate { color: #1a1408; background: linear-gradient(#e0b04a, #c9a24b); border: 1px solid #e8c36a; border-radius: 3px; font-weight: 600; }
+/* Donations: boton verde con texto blanco */
+.tab-donate { color: #fff; background: linear-gradient(#2f9e4f, #1f7a3a); border: 1px solid #47c26b; border-radius: 3px; font-weight: 600; }
 .tab-donate::after { display: none; }
-.tab-donate:hover, .tab-donate:focus-visible { background: linear-gradient(#f0c35e, #d8b055); color: #1a1408; }
-.tab-donate.active { box-shadow: 0 0 14px rgba(232, 195, 106, .55); color: #1a1408; }
+.tab-donate:hover, .tab-donate:focus-visible { background: linear-gradient(#38b35b, #258a43); color: #fff; }
+.tab-donate.active { box-shadow: 0 0 14px rgba(71, 194, 107, .55); color: #fff; }
 @media (max-width: 960px) { .tab-donate { align-self: flex-start; } }
+
+/* Play: letrero de arcade (neon que parpadea) */
+.tab-play { color: #fff; border: 1px solid #ff3df2; border-radius: 3px; background: linear-gradient(rgba(255, 61, 242, .22), rgba(0, 229, 255, .12)); text-shadow: 0 0 6px #ff3df2; animation: arcade-neon 1.1s steps(1, end) infinite; }
+.tab-play:hover, .tab-play:focus-visible, .tab-play[aria-expanded="true"] { color: #fff; background: linear-gradient(rgba(255, 61, 242, .4), rgba(0, 229, 255, .25)); }
+.tab-play.active { color: #fff; }
+.tab-play::before { content: '\25B6'; display: inline-block; font-size: .7em; margin-right: .4rem; color: #00e5ff; text-shadow: 0 0 6px #00e5ff; animation: arcade-blink 1.1s steps(1, end) infinite; }
+@keyframes arcade-neon {
+  0%, 100% { border-color: #ff3df2; box-shadow: 0 0 8px rgba(255, 61, 242, .7), inset 0 0 6px rgba(255, 61, 242, .35); text-shadow: 0 0 6px #ff3df2; }
+  50% { border-color: #00e5ff; box-shadow: 0 0 8px rgba(0, 229, 255, .7), inset 0 0 6px rgba(0, 229, 255, .35); text-shadow: 0 0 6px #00e5ff; }
+}
+@keyframes arcade-blink { 0%, 100% { opacity: 1; } 50% { opacity: .15; } }
+@media (prefers-reduced-motion: reduce) { .tab-play, .tab-play::before { animation: none; box-shadow: 0 0 8px rgba(255, 61, 242, .6); } }
 
 /* Fondo propio de Merchant's Wager (foto del Mercader, overlay para que se lea el contenido) */
 body[data-tab="wager"] {
