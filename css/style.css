@@ -2038,7 +2038,7 @@ body[data-tab="wager"] {
 .wg-sound-btn:hover { color: #fff; }
 .wg-sound-btn svg { width: 1.3rem; height: 1.3rem; }
 .wg-sound[data-level="off"] .wg-sound-on, .wg-sound:not([data-level="off"]) .wg-sound-off { display: none; }
-.wg-vol { --fill: 45%; -webkit-appearance: none; appearance: none; width: 7rem; height: 4px; border-radius: 2px; cursor: pointer; background: linear-gradient(to right, var(--gold) var(--fill), var(--border) var(--fill)); }
+.wg-vol { --fill: 25%; -webkit-appearance: none; appearance: none; width: 7rem; height: 4px; border-radius: 2px; cursor: pointer; background: linear-gradient(to right, var(--gold) var(--fill), var(--border) var(--fill)); }
 .wg-vol::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 14px; height: 14px; border-radius: 50%; background: var(--text); border: 1px solid var(--gold); }
 .wg-vol::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: var(--text); border: 1px solid var(--gold); }
 .wg-vol::-moz-range-track { height: 4px; background: var(--border); }

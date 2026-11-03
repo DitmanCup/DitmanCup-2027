@@ -4922,7 +4922,7 @@ function initWager() {
 // ---- Sonido de Merchant's Wager: saludo del Mercader al entrar + musica ambiente de fondo, con control de volumen ----
 // El volumen general (0 a 1) lo elige la persona con la barra; la musica y el saludo salen a una fraccion fija de ese valor.
 const WG_VOL_LS = 'dc-wg-vol', WG_VOL_LAST_LS = 'dc-wg-vol-last';
-const WG_VOL_DEFAULT = 0.45;
+const WG_VOL_DEFAULT = 0.25;   // un cuarto de la barra: arranca bajito
 const WG_WELCOME_SS = 'dc-wg-welcomed';
 const wgSnd = { welcome: null, music: null, on: false, fade: 0, welcomed: false };
 function wgVol() {
