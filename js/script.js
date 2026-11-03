@@ -264,7 +264,9 @@ const KICK_LIVE_CHANNELS = ['chacoide'];
 // Runners que streamean SOLO en TikTok (sin @); los que tambien estan en YouTube llevan `tiktok: 'usuario'`
 // en YOUTUBE_LIVE_CHANNELS y su boton sale en la misma tarjeta. TikTok bloquea las consultas automaticas (anti-bots),
 // asi que no se detecta si estan en vivo: la tarjeta lleva directo a @usuario/live.
-const TIKTOK_LIVE_CHANNELS = [];
+const TIKTOK_LIVE_CHANNELS = [
+  'layhan301',   // HannNrY
+];
 
 // Runners de Twitch que tambien streamean en TikTok: { 'canal de twitch en minusculas': 'usuario de tiktok' }.
 // Su boton de TikTok sale en la misma tarjeta, igual que en YOUTUBE_LIVE_CHANNELS.
