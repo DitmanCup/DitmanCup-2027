@@ -1,15 +1,15 @@
 {
   "currency": "USD",
-  "total": 2698.0,
-  "donorCount": 35,
+  "total": 2798.0,
+  "donorCount": 36,
   "sources": [
     {
       "id": 222380,
       "title": "Ditman Cup 2027",
       "startAt": "2027-01-17T18:15:00Z",
       "status": "ready",
-      "raised": 130.0,
-      "donorCount": 3,
+      "raised": 230.0,
+      "donorCount": 4,
       "donors": [
         {
           "name": "JokerUY",
@@ -18,6 +18,17 @@
           "donations": [
             {
               "date": "2026-11-01T00:21:01Z",
+              "amount": 100.0
+            }
+          ]
+        },
+        {
+          "name": "thegaryg",
+          "total": 100.0,
+          "count": 1,
+          "donations": [
+            {
+              "date": "2026-11-03T21:52:36Z",
               "amount": 100.0
             }
           ]
@@ -582,6 +593,11 @@
       "count": 1
     },
     {
+      "name": "thegaryg",
+      "total": 100.0,
+      "count": 1
+    },
+    {
       "name": "Waifu",
       "total": 100.0,
       "count": 1
@@ -712,5 +728,5 @@
       "count": 1
     }
   ],
-  "updatedAt": "2026-11-02T01:44:05Z"
+  "updatedAt": "2026-11-03T22:03:58Z"
 }
