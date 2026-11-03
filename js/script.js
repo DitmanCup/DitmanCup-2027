@@ -4760,13 +4760,16 @@ function initWager() {
 // ---- Sonido de Merchant's Wager: saludo del Mercader al entrar + musica ambiente de fondo (con boton para silenciar) ----
 const WG_MUTE_LS = 'dc-wg-mute';
 const WG_MUSIC_VOL = 0.22;
-const wgSnd = { welcome: null, music: null, on: false, fade: 0, lastWelcome: 0 };
+const WG_WELCOME_SS = 'dc-wg-welcomed';
+const WG_WELCOME_VOL = 0.25;
+const wgSnd = { welcome: null, music: null, on: false, fade: 0, welcomed: false };
 const wgMuted = () => safeGet(WG_MUTE_LS) === '1';
 
 function wgSndInit() {
   if (wgSnd.music) return;
+  try { wgSnd.welcomed = sessionStorage.getItem(WG_WELCOME_SS) === '1'; } catch (e) {}
   wgSnd.welcome = new Audio('assets/audio/merchant-welcome.mp3');
-  wgSnd.welcome.volume = 0.7;
+  wgSnd.welcome.volume = WG_WELCOME_VOL;
   wgSnd.music = new Audio('assets/audio/merchant-ambient.mp3?v=2');
   wgSnd.music.loop = true;
   wgSnd.music.volume = WG_MUSIC_VOL;
@@ -4777,8 +4780,10 @@ function wgSndPlay(withWelcome) {
   clearInterval(wgSnd.fade);
   wgSnd.music.volume = WG_MUSIC_VOL;
   wgSnd.music.play().catch(() => {});
-  if (withWelcome && Date.now() - wgSnd.lastWelcome > 20000) {
-    wgSnd.lastWelcome = Date.now();
+  // El saludo suena una sola vez por visita (no al volver a entrar a la pestaña ni al recargar)
+  if (withWelcome && !wgSnd.welcomed) {
+    wgSnd.welcomed = true;
+    try { sessionStorage.setItem(WG_WELCOME_SS, '1'); } catch (e) {}
     wgSnd.welcome.currentTime = 0;
     wgSnd.welcome.play().catch(() => {});
   }
