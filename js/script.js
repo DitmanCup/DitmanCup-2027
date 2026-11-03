@@ -4437,8 +4437,16 @@ async function wgLoad(skipSync) {
 
 // La pestaña solo se ve cuando el admin activa el sistema (o para el admin, para probarlo)
 function wgUpdateTab() {
+  const show = wg.ok && (wg.cfg.active || wgAdmin());
   const tab = document.querySelector('.tab-btn[data-tab="wager"]');
-  if (tab) tab.hidden = !(wg.ok && (wg.cfg.active || wgAdmin()));
+  if (tab) tab.hidden = !show;
+  // Recuadro de arriba a la derecha con las PTAS de la cuenta (solo logueado)
+  const hud = document.getElementById('wg-hud');
+  if (hud) {
+    hud.hidden = !(show && predState.user);
+    const n = document.getElementById('wg-hud-n');
+    if (n) n.textContent = wgFmt(wg.wallet ? wg.wallet.balance : 0);
+  }
 }
 
 function wgBadgeHtml(userId) {
@@ -4676,6 +4684,8 @@ function initWager() {
   });
   const tab = document.querySelector('.tab-btn[data-tab="wager"]');
   if (tab) tab.addEventListener('click', () => { wgLoad(); });
+  const hud = document.getElementById('wg-hud');
+  if (hud) hud.addEventListener('click', () => { if (tab) tab.click(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
   renderWager();
   setInterval(() => { if (wgAdmin() && wg.ok) wgAdminSync(); }, 5 * 60 * 1000);
 }
