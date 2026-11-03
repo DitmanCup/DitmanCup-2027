@@ -4412,7 +4412,7 @@ async function wgLoad(skipSync) {
     ]);
     for (const r of [cfg, mk, shop, buys, wal, bets]) if (r.error) throw r.error;
     if (!cfg.data) throw new Error('sin configuracion');
-    wg.cfg = cfg.data; wg.markets = mk.data || []; wg.shop = shop.data || [];
+    wg.cfg = cfg.data; wg.markets = mk.data || []; wg.shop = (shop.data || []).filter(i => i.active);
     wg.wallet = wal.data || { balance: 0, last_daily: null };
     wg.bets = {}; (bets.data || []).forEach(b => { wg.bets[b.match_id] = b; });
     const kind = {}; wg.shop.forEach(i => { kind[i.id] = i; });
@@ -4447,6 +4447,13 @@ function wgUpdateTab() {
     const n = document.getElementById('wg-hud-n');
     if (n) n.textContent = wgFmt(wg.wallet ? wg.wallet.balance : 0);
   }
+}
+
+// Logo de cada articulo: Discord y VIP de Twitch con su simbolo; los badges, su emoji
+function wgIcon(it) {
+  if (it.kind === 'discord_role') return '<svg class="ic" aria-hidden="true"><use href="#ic-discord"/></svg>';
+  if (it.kind === 'twitch_vip') return '<svg class="ic" aria-hidden="true"><use href="#ic-vip"/></svg>';
+  return esc(it.icon || '🎁');
 }
 
 function wgBadgeHtml(userId) {
@@ -4611,7 +4618,7 @@ function renderWager() {
       const act = own
         ? `<span class="wg-owned">${esc(it.kind === 'badge' ? t('wg.shop.owned') : own.fulfilled ? t('wg.shop.delivered') : t('wg.shop.pending'))}</span>`
         : `<button type="button" class="pred-btn wg-buy" data-wg="buy" data-id="${esc(it.id)}"${!user || !afford || wg.busy || !cfg.active ? ' disabled' : ''}>${esc(t('wg.shop.buy', { n: wgFmt(it.price) }))}</button>`;
-      return `<article class="wg-item"><div class="wg-item-icon" aria-hidden="true">${esc(it.icon || '🎁')}</div>
+      return `<article class="wg-item"><div class="wg-item-icon wg-ic-${esc(it.kind)}" aria-hidden="true">${wgIcon(it)}</div>
         <div class="wg-item-body"><h4>${esc(it.name)}</h4><span class="wg-item-kind">${esc(t('wg.shop.kind.' + it.kind))}</span><p>${esc(it.description)}</p></div>
         <div class="wg-item-act">${act}</div></article>`;
     }).join('')}</div>`;

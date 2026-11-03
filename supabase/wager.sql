@@ -230,9 +230,9 @@ grant execute on function public.wager_claim_daily(), public.wager_place_bet(tex
 
 -- Tienda inicial (precios y textos se cambian aca sin tocar la pagina; "active = false" oculta un articulo).
 insert into public.shop_items (id, kind, name, description, price, icon, sort) values
-  ('badge-ptas',     'badge',        'Merchant''s Friend', 'Badge junto a tu nombre en los rankings.',         2000,  '🪙', 10),
-  ('badge-gold',     'badge',        'Golden Gun',         'Badge dorado, para los que apuestan fuerte.',      5000,  '🔫', 20),
-  ('badge-ganado',   'badge',        'Las Plagas',         'Badge rojo para los que sobreviven a las rondas.', 8000,  '🦠', 30),
-  ('discord-role',   'discord_role', 'Rol de Discord',     'Rol exclusivo en el servidor de Discord.',         15000, '🎖️', 40),
-  ('twitch-vip',     'twitch_vip',   'VIP en Twitch',      'VIP en el canal de Twitch.',                       30000, '💎', 50)
+  ('discord-role', 'discord_role', 'Rol de Discord', 'Rol exclusivo en el servidor de Discord.', 15000, '', 40),
+  ('twitch-vip',   'twitch_vip',   'VIP en Twitch',  'VIP en el canal de Twitch.',               30000, '', 50)
 on conflict (id) do nothing;
+
+-- Por ahora la tienda tiene solo el rol de Discord y el VIP de Twitch: los badges quedan ocultos (se pueden reactivar con active = true).
+update public.shop_items set active = false where kind = 'badge';
