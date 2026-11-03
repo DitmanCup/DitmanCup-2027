@@ -1942,7 +1942,7 @@ body[data-tab="simulations"] main { max-width: min(1880px, 100%); }
 /* ===== Merchant's Wager (PTAS, apuestas y tienda) ===== */
 .tab-btn[hidden] { display: none; }
 .wg-title { display: flex; align-items: center; gap: .9rem; }
-.wg-chest { width: 84px; height: auto; mix-blend-mode: screen; flex: none; }
+.wg-logo { height: 120px; width: auto; flex: none; }
 .wg-bar { gap: .8rem 1.4rem; }
 .wg-wallet { display: flex; align-items: baseline; gap: .5rem; }
 .wg-bal { font-family: var(--font-grunge); font-size: 2.4rem; color: var(--gold); line-height: 1; }
