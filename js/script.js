@@ -242,8 +242,8 @@ const RE4_LIVE_CHANNELS = [
 // en vivo, así que el card lleva a youtube.com/.../live (YouTube redirige al
 // stream si están transmitiendo).
 const YOUTUBE_LIVE_CHANNELS = [
-  { name: 'seppp', url: 'https://www.youtube.com/@sepppx/live', tiktok: 'seppvlr' },
-  { name: 'Bang Gori', url: 'https://www.youtube.com/@banggori2.0/live', tiktok: 'bang_gori2.0' },
+  { name: 'seppp', url: 'https://www.youtube.com/@sepppx/live', tiktok: 'seppvlr', noMark: true },
+  { name: 'Bang Gori', url: 'https://www.youtube.com/@banggori2.0/live', tiktok: 'bang_gori2.0', noMark: true },
   { name: 'nyr9468', url: 'https://www.youtube.com/@nyr9468/live' },
   { name: 'Fedo_Ras', url: 'https://www.youtube.com/@Fedo_Ras/live' },
   { name: 'NETJU', url: 'https://www.youtube.com/@junetkhairulamri9336/live' },
@@ -2598,8 +2598,9 @@ async function ttLoadLive() {
 // usuario de TikTok (minusculas) -> nombre para mostrar, de todos los canales de la lista que tienen TikTok
 function ttHandles() {
   const m = new Map();
-  Object.entries(TWITCH_TIKTOK).forEach(([ch, h]) => m.set(h.toLowerCase(), ch));
-  (YOUTUBE_LIVE_CHANNELS || []).forEach(c => { if (c && c.tiktok) m.set(c.tiktok.toLowerCase(), c.name); });
+  // Los de TWITCH_TIKTOK (multistream Twitch + TikTok) no estan: su Twitch se detecta solo, no necesitan marcarse.
+  // `noMark`: igual para los que transmiten a la vez en YouTube y TikTok (su YouTube se detecta solo)
+  (YOUTUBE_LIVE_CHANNELS || []).forEach(c => { if (c && c.tiktok && !c.noMark) m.set(c.tiktok.toLowerCase(), c.name); });
   (TIKTOK_LIVE_CHANNELS || []).forEach(h => { if (h) m.set(h.toLowerCase(), h); });
   return m;
 }
