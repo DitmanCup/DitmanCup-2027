@@ -4794,13 +4794,13 @@ function wgSndStop(now) {
     else wgSnd.music.volume = v;
   }, 60);
 }
-// Video de fondo en loop (se descarga recien la primera vez que se entra; con "reducir movimiento" o ahorro de datos queda la foto)
+// Video de fondo en loop, mudo (se descarga recien la primera vez que se entra; solo se omite con ahorro de datos, y queda la foto).
+// No se bloquea por "reducir movimiento": es un fondo ambiental lento y muchos Windows tienen las animaciones apagadas.
 function wgVideoTab(here) {
   const v = document.getElementById('wg-bgvideo');
   if (!v) return;
   if (!here) { v.pause(); return; }
-  const calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (calm || (navigator.connection && navigator.connection.saveData)) return;
+  if (navigator.connection && navigator.connection.saveData) return;
   if (!v.getAttribute('src')) v.src = 'assets/wager-bg.mp4?v=2';
   v.play().catch(() => {});
 }
