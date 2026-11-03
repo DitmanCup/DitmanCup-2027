@@ -449,7 +449,11 @@ const I18N = {
     'live.ttGo': 'Estoy en vivo en TikTok',
     'live.ttMine': 'Marcado en vivo como @{name} hasta las {time}',
     'live.ttEnd': 'Ya termine',
-    'live.ttBusy': 'Ese TikTok ya lo marco otra persona. Si es tuyo, avisale a Joker.',
+    'live.ttBusy': 'Ese TikTok ya lo eligio otra persona. Si es tuyo, avisale a Joker.',
+    'live.ttYours': 'Tu TikTok: @{name}',
+    'live.ttClaim': 'Elegir este TikTok',
+    'live.ttLockNote': 'Elegi tu TikTok. Queda fijo en tu cuenta y nadie mas puede usarlo.',
+    'live.ttConfirm': 'Elegir @{name}? Queda fijo en tu cuenta y no se puede cambiar.',
     'live.ttErr': 'No se pudo guardar. Proba de nuevo.',
     'nav.predictions': 'Predicciones',
     'pred.title': 'Predicciones',
@@ -760,7 +764,11 @@ const I18N = {
     'live.ttGo': "I'm live on TikTok",
     'live.ttMine': 'Marked live as @{name} until {time}',
     'live.ttEnd': "I'm done",
-    'live.ttBusy': 'That TikTok was already marked by someone else. If it is yours, tell Joker.',
+    'live.ttBusy': 'That TikTok was already chosen by someone else. If it is yours, tell Joker.',
+    'live.ttYours': 'Your TikTok: @{name}',
+    'live.ttClaim': 'Choose this TikTok',
+    'live.ttLockNote': 'Choose your TikTok. It gets locked to your account and nobody else can use it.',
+    'live.ttConfirm': 'Choose @{name}? It gets locked to your account and cannot be changed.',
     'live.ttErr': 'Could not save. Please try again.',
     'nav.predictions': 'Predictions',
     'pred.title': 'Predictions',
@@ -1071,7 +1079,11 @@ const I18N = {
     'live.ttGo': 'Saya live di TikTok',
     'live.ttMine': 'Ditandai live sebagai @{name} sampai {time}',
     'live.ttEnd': 'Sudah selesai',
-    'live.ttBusy': 'TikTok itu sudah ditandai orang lain. Kalau itu milikmu, kabari Joker.',
+    'live.ttBusy': 'TikTok itu sudah dipilih orang lain. Kalau itu milikmu, kabari Joker.',
+    'live.ttYours': 'TikTok kamu: @{name}',
+    'live.ttClaim': 'Pilih TikTok ini',
+    'live.ttLockNote': 'Pilih TikTok kamu. Akan terkunci ke akunmu dan tidak bisa dipakai orang lain.',
+    'live.ttConfirm': 'Pilih @{name}? Akan terkunci ke akunmu dan tidak bisa diubah.',
     'live.ttErr': 'Gagal menyimpan. Coba lagi.',
     'nav.predictions': 'Prediksi',
     'pred.title': 'Prediksi',
@@ -1382,7 +1394,11 @@ const I18N = {
     'live.ttGo': 'TikTokで配信中',
     'live.ttMine': '@{name} として {time} まで配信中に設定済み',
     'live.ttEnd': '配信終了',
-    'live.ttBusy': 'そのTikTokはすでに他の人が設定しています。あなたのものならJokerに連絡してください。',
+    'live.ttBusy': 'そのTikTokはすでに他の人が選択しています。あなたのものならJokerに連絡してください。',
+    'live.ttYours': 'あなたのTikTok: @{name}',
+    'live.ttClaim': 'このTikTokを選ぶ',
+    'live.ttLockNote': 'あなたのTikTokを選んでください。アカウントに固定され、他の人は使えません。',
+    'live.ttConfirm': '@{name} を選びますか？アカウントに固定され、変更できません。',
     'live.ttErr': '保存できませんでした。もう一度お試しください。',
     'nav.predictions': '予想',
     'pred.title': '予想',
@@ -2539,20 +2555,27 @@ async function liveStatusData() {
 
 // ---- Vivos de TikTok: no se pueden detectar solos, asi que cada streamer se marca en la tabla
 // tiktok_live de Supabase (supabase/tiktok-live.sql) con su login de Discord. Vence solo.
-const ttState = { rows: [], ok: false, busy: false, err: '' };
+// Cada cuenta elige un TikTok una sola vez (tiktok_claims, supabase/tiktok-claims.sql) y queda fijo:
+// solo su dueno puede marcarse en vivo con el.
+const ttState = { rows: [], claims: [], ok: false, busy: false, err: '' };
 const TT_LIVE_HOURS = 6;
 
 async function ttLoadLive() {
-  if (!PRED_CONFIG.supabaseUrl || !PRED_CONFIG.supabaseKey) { ttState.rows = []; ttState.ok = false; return; }
-  try {
-    const url = `${PRED_CONFIG.supabaseUrl}/rest/v1/tiktok_live?select=handle,user_id,live_until&live_until=gt.${encodeURIComponent(new Date().toISOString())}`;
-    const res = await fetch(url, { headers: { apikey: PRED_CONFIG.supabaseKey, Authorization: 'Bearer ' + PRED_CONFIG.supabaseKey }, cache: 'no-store' });
+  if (!PRED_CONFIG.supabaseUrl || !PRED_CONFIG.supabaseKey) { ttState.rows = []; ttState.claims = []; ttState.ok = false; return; }
+  const get = async q => {
+    const res = await fetch(`${PRED_CONFIG.supabaseUrl}/rest/v1/${q}`, { headers: { apikey: PRED_CONFIG.supabaseKey, Authorization: 'Bearer ' + PRED_CONFIG.supabaseKey }, cache: 'no-store' });
     if (!res.ok) throw new Error('HTTP ' + res.status);
-    ttState.rows = await res.json();
+    return res.json();
+  };
+  try {
+    [ttState.rows, ttState.claims] = await Promise.all([
+      get(`tiktok_live?select=handle,user_id,live_until&live_until=gt.${encodeURIComponent(new Date().toISOString())}`),
+      get('tiktok_claims?select=handle,user_id'),
+    ]);
     ttState.ok = true;
   } catch (e) {
     console.error('TikTok live check falló:', e);
-    ttState.rows = []; ttState.ok = false;
+    ttState.rows = []; ttState.claims = []; ttState.ok = false;
   }
 }
 
@@ -2571,8 +2594,6 @@ async function ttSetLive(handle) {
   ttState.busy = true; ttState.err = ''; renderTtBox();
   try {
     if (handle) {
-      // Un usuario, un TikTok a la vez: se suelta el anterior si cambia de cuenta
-      await sb.from('tiktok_live').delete().eq('user_id', u.id).neq('handle', handle);
       const { error } = await sb.from('tiktok_live').upsert({ handle, user_id: u.id, live_until: new Date(Date.now() + TT_LIVE_HOURS * 3600e3).toISOString() }, { onConflict: 'handle' });
       if (error) throw error;
     } else {
@@ -2581,6 +2602,22 @@ async function ttSetLive(handle) {
     }
   } catch (e) {
     console.error('No se pudo marcar el vivo de TikTok:', e);
+    ttState.err = 'live.ttErr';
+  }
+  ttState.busy = false;
+  renderLive();
+}
+
+// Elegir el TikTok propio: queda fijo para la cuenta (la base rechaza si ya lo tiene otra o si ya elegiste uno)
+async function ttClaim(handle) {
+  const sb = predState.sb, u = predState.user;
+  if (!sb || !u || ttState.busy) return;
+  ttState.busy = true; ttState.err = ''; renderTtBox();
+  try {
+    const { error } = await sb.from('tiktok_claims').insert({ handle, user_id: u.id });
+    if (error) throw error;
+  } catch (e) {
+    console.error('No se pudo elegir el TikTok:', e);
     ttState.err = e && (e.code === '42501' || e.code === '23505') ? 'live.ttBusy' : 'live.ttErr';
   }
   ttState.busy = false;
@@ -2594,18 +2631,25 @@ function renderTtBox() {
   const u = predState.user;
   if (ttState.ok && predState.sb) {
     const dis = ttState.busy ? ' disabled' : '';
-    const mine = u && ttState.rows.find(r => r.user_id === u.id);
+    const claim = u && ttState.claims.find(c => c.user_id === u.id);
+    const live = u && ttState.rows.find(r => r.user_id === u.id);
     if (!u) {
       html += `<div class="live-ttrow"><button class="live-ttbtn" type="button" data-tt="login">${esc(t('live.ttLogin'))}</button></div>`;
-    } else if (mine) {
-      const time = new Date(mine.live_until).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-      html += `<div class="live-ttrow"><span class="live-ttmine">${esc(t('live.ttMine', { name: mine.handle, time }))}</span>
+    } else if (live) {
+      const time = new Date(live.live_until).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      html += `<div class="live-ttrow"><span class="live-ttmine">${esc(t('live.ttMine', { name: live.handle, time }))}</span>
         <button class="live-ttbtn" type="button" data-tt="end"${dis}>${esc(t('live.ttEnd'))}</button></div>`;
+    } else if (claim) {
+      html += `<div class="live-ttrow"><span class="live-ttmine">${esc(t('live.ttYours', { name: claim.handle }))}</span>
+        <button class="live-ttbtn" type="button" data-tt="go" data-handle="${esc(claim.handle)}"${dis}>${esc(t('live.ttGo'))}</button></div>`;
     } else {
-      const opts = [...ttHandles()].sort((a, b) => a[1].localeCompare(b[1], undefined, { sensitivity: 'base' }))
+      const taken = new Set(ttState.claims.map(c => c.handle));
+      const opts = [...ttHandles()].filter(([h]) => !taken.has(h))
+        .sort((a, b) => a[1].localeCompare(b[1], undefined, { sensitivity: 'base' }))
         .map(([h, name]) => `<option value="${esc(h)}">${esc(name)} (@${esc(h)})</option>`).join('');
-      html += `<div class="live-ttrow"><select id="live-tt-pick" aria-label="${esc(t('live.ttPick'))}">${opts}</select>
-        <button class="live-ttbtn" type="button" data-tt="go"${dis}>${esc(t('live.ttGo'))}</button></div>`;
+      if (opts) html += `<p class="live-ttnote">${esc(t('live.ttLockNote'))}</p>
+        <div class="live-ttrow"><select id="live-tt-pick" aria-label="${esc(t('live.ttPick'))}">${opts}</select>
+        <button class="live-ttbtn" type="button" data-tt="claim"${dis}>${esc(t('live.ttClaim'))}</button></div>`;
     }
     if (ttState.err) html += `<p class="live-tterr">${esc(t(ttState.err))}</p>`;
   }
@@ -2614,7 +2658,11 @@ function renderTtBox() {
     const a = b.dataset.tt;
     if (a === 'login') predLogin('live');
     else if (a === 'end') ttSetLive(null);
-    else if (a === 'go') { const s = box.querySelector('#live-tt-pick'); if (s && s.value) ttSetLive(s.value); }
+    else if (a === 'go') ttSetLive(b.dataset.handle);
+    else if (a === 'claim') {
+      const s = box.querySelector('#live-tt-pick');
+      if (s && s.value && confirm(t('live.ttConfirm', { name: s.value }))) ttClaim(s.value);
+    }
   }));
 }
 
