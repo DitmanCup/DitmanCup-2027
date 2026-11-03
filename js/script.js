@@ -443,6 +443,14 @@ const I18N = {
     'live.watchYt': 'Ver en YouTube',
     'live.watchKick': 'Ver en Kick',
     'live.watchTt': 'Ver en TikTok',
+    'live.ttNote': 'TikTok no permite detectar los vivos automaticamente: los que transmiten por TikTok se marcan solos aca, y solo cuando juegan Resident Evil 4.',
+    'live.ttLogin': 'Entrar con Discord',
+    'live.ttPick': 'Tu TikTok',
+    'live.ttGo': 'Estoy en vivo en TikTok',
+    'live.ttMine': 'Marcado en vivo como @{name} hasta las {time}',
+    'live.ttEnd': 'Ya termine',
+    'live.ttBusy': 'Ese TikTok ya lo marco otra persona. Si es tuyo, avisale a Joker.',
+    'live.ttErr': 'No se pudo guardar. Proba de nuevo.',
     'nav.predictions': 'Predicciones',
     'pred.title': 'Predicciones',
     'pred.intro': 'La penca de la Ditman Cup: pronosticá el ganador de cada partida y, si te animás, la diferencia de tiempo. Sumá puntos y subí en el ranking.',
@@ -746,6 +754,14 @@ const I18N = {
     'live.watchYt': 'Watch on YouTube',
     'live.watchKick': 'Watch on Kick',
     'live.watchTt': 'Watch on TikTok',
+    'live.ttNote': 'TikTok does not allow live streams to be detected automatically: streamers on TikTok mark themselves live here, only while playing Resident Evil 4.',
+    'live.ttLogin': 'Log in with Discord',
+    'live.ttPick': 'Your TikTok',
+    'live.ttGo': "I'm live on TikTok",
+    'live.ttMine': 'Marked live as @{name} until {time}',
+    'live.ttEnd': "I'm done",
+    'live.ttBusy': 'That TikTok was already marked by someone else. If it is yours, tell Joker.',
+    'live.ttErr': 'Could not save. Please try again.',
     'nav.predictions': 'Predictions',
     'pred.title': 'Predictions',
     'pred.intro': 'The Ditman Cup prediction game: pick the winner of every match and, if you dare, the time gap. Earn points and climb the leaderboard.',
@@ -1049,6 +1065,14 @@ const I18N = {
     'live.watchYt': 'Tonton di YouTube',
     'live.watchKick': 'Tonton di Kick',
     'live.watchTt': 'Tonton di TikTok',
+    'live.ttNote': 'TikTok tidak mengizinkan deteksi live otomatis: streamer TikTok menandai dirinya sendiri di sini, hanya saat bermain Resident Evil 4.',
+    'live.ttLogin': 'Masuk dengan Discord',
+    'live.ttPick': 'TikTok kamu',
+    'live.ttGo': 'Saya live di TikTok',
+    'live.ttMine': 'Ditandai live sebagai @{name} sampai {time}',
+    'live.ttEnd': 'Sudah selesai',
+    'live.ttBusy': 'TikTok itu sudah ditandai orang lain. Kalau itu milikmu, kabari Joker.',
+    'live.ttErr': 'Gagal menyimpan. Coba lagi.',
     'nav.predictions': 'Prediksi',
     'pred.title': 'Prediksi',
     'pred.intro': 'Game tebak-tebakan Ditman Cup: pilih pemenang setiap match dan, kalau berani, selisih waktunya. Kumpulkan poin dan naik di leaderboard.',
@@ -1352,6 +1376,14 @@ const I18N = {
     'live.watchYt': 'YouTubeで見る',
     'live.watchKick': 'Kickで見る',
     'live.watchTt': 'TikTokで見る',
+    'live.ttNote': 'TikTokのライブは自動で検出できないため、TikTokで配信する人はバイオハザード4をプレイ中のみ、ここで自分で「配信中」に設定します。',
+    'live.ttLogin': 'Discordでログイン',
+    'live.ttPick': 'あなたのTikTok',
+    'live.ttGo': 'TikTokで配信中',
+    'live.ttMine': '@{name} として {time} まで配信中に設定済み',
+    'live.ttEnd': '配信終了',
+    'live.ttBusy': 'そのTikTokはすでに他の人が設定しています。あなたのものならJokerに連絡してください。',
+    'live.ttErr': '保存できませんでした。もう一度お試しください。',
     'nav.predictions': '予想',
     'pred.title': '予想',
     'pred.intro': 'Ditman Cup の勝敗予想ゲーム。各マッチの勝者と、自信があればタイム差も予想しよう。ポイントを稼いでリーダーボードを駆け上がろう。',
@@ -2505,6 +2537,87 @@ async function liveStatusData() {
   }
 }
 
+// ---- Vivos de TikTok: no se pueden detectar solos, asi que cada streamer se marca en la tabla
+// tiktok_live de Supabase (supabase/tiktok-live.sql) con su login de Discord. Vence solo.
+const ttState = { rows: [], ok: false, busy: false, err: '' };
+const TT_LIVE_HOURS = 6;
+
+async function ttLoadLive() {
+  if (!PRED_CONFIG.supabaseUrl || !PRED_CONFIG.supabaseKey) { ttState.rows = []; ttState.ok = false; return; }
+  try {
+    const url = `${PRED_CONFIG.supabaseUrl}/rest/v1/tiktok_live?select=handle,user_id,live_until&live_until=gt.${encodeURIComponent(new Date().toISOString())}`;
+    const res = await fetch(url, { headers: { apikey: PRED_CONFIG.supabaseKey, Authorization: 'Bearer ' + PRED_CONFIG.supabaseKey }, cache: 'no-store' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    ttState.rows = await res.json();
+    ttState.ok = true;
+  } catch (e) {
+    console.error('TikTok live check falló:', e);
+    ttState.rows = []; ttState.ok = false;
+  }
+}
+
+// usuario de TikTok (minusculas) -> nombre para mostrar, de todos los canales de la lista que tienen TikTok
+function ttHandles() {
+  const m = new Map();
+  Object.entries(TWITCH_TIKTOK).forEach(([ch, h]) => m.set(h.toLowerCase(), ch));
+  (YOUTUBE_LIVE_CHANNELS || []).forEach(c => { if (c && c.tiktok) m.set(c.tiktok.toLowerCase(), c.name); });
+  (TIKTOK_LIVE_CHANNELS || []).forEach(h => { if (h) m.set(h.toLowerCase(), h); });
+  return m;
+}
+
+async function ttSetLive(handle) {
+  const sb = predState.sb, u = predState.user;
+  if (!sb || !u || ttState.busy) return;
+  ttState.busy = true; ttState.err = ''; renderTtBox();
+  try {
+    if (handle) {
+      // Un usuario, un TikTok a la vez: se suelta el anterior si cambia de cuenta
+      await sb.from('tiktok_live').delete().eq('user_id', u.id).neq('handle', handle);
+      const { error } = await sb.from('tiktok_live').upsert({ handle, user_id: u.id, live_until: new Date(Date.now() + TT_LIVE_HOURS * 3600e3).toISOString() }, { onConflict: 'handle' });
+      if (error) throw error;
+    } else {
+      const { error } = await sb.from('tiktok_live').delete().eq('user_id', u.id);
+      if (error) throw error;
+    }
+  } catch (e) {
+    console.error('No se pudo marcar el vivo de TikTok:', e);
+    ttState.err = e && (e.code === '42501' || e.code === '23505') ? 'live.ttBusy' : 'live.ttErr';
+  }
+  ttState.busy = false;
+  renderLive();
+}
+
+function renderTtBox() {
+  const box = document.getElementById('live-tt-box');
+  if (!box) return;
+  let html = `<p class="live-ttnote">${esc(t('live.ttNote'))}</p>`;
+  const u = predState.user;
+  if (ttState.ok && predState.sb) {
+    const dis = ttState.busy ? ' disabled' : '';
+    const mine = u && ttState.rows.find(r => r.user_id === u.id);
+    if (!u) {
+      html += `<div class="live-ttrow"><button class="live-ttbtn" type="button" data-tt="login">${esc(t('live.ttLogin'))}</button></div>`;
+    } else if (mine) {
+      const time = new Date(mine.live_until).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      html += `<div class="live-ttrow"><span class="live-ttmine">${esc(t('live.ttMine', { name: mine.handle, time }))}</span>
+        <button class="live-ttbtn" type="button" data-tt="end"${dis}>${esc(t('live.ttEnd'))}</button></div>`;
+    } else {
+      const opts = [...ttHandles()].sort((a, b) => a[1].localeCompare(b[1], undefined, { sensitivity: 'base' }))
+        .map(([h, name]) => `<option value="${esc(h)}">${esc(name)} (@${esc(h)})</option>`).join('');
+      html += `<div class="live-ttrow"><select id="live-tt-pick" aria-label="${esc(t('live.ttPick'))}">${opts}</select>
+        <button class="live-ttbtn" type="button" data-tt="go"${dis}>${esc(t('live.ttGo'))}</button></div>`;
+    }
+    if (ttState.err) html += `<p class="live-tterr">${esc(t(ttState.err))}</p>`;
+  }
+  box.innerHTML = html;
+  box.querySelectorAll('[data-tt]').forEach(b => b.addEventListener('click', () => {
+    const a = b.dataset.tt;
+    if (a === 'login') predLogin('live');
+    else if (a === 'end') ttSetLive(null);
+    else if (a === 'go') { const s = box.querySelector('#live-tt-pick'); if (s && s.value) ttSetLive(s.value); }
+  }));
+}
+
 async function renderLive() {
   const host = document.getElementById('live-grid');
   if (!host) return;
@@ -2519,7 +2632,9 @@ async function renderLive() {
   const [status, extra] = await Promise.all([
     twitchLiveStatus(tw).catch(e => { console.error('Twitch live check falló:', e); return {}; }),
     liveStatusData(),
+    ttLoadLive(),
   ]);
+  renderTtBox();
   const ytStatus = extra.youtube;
 
   const rows = tw.map(ch => {
@@ -2558,6 +2673,12 @@ async function renderLive() {
     .concat(ytLive.map(r => ({ ...r, viewers: r.viewers || 0 })))
     .concat(kickTop)
     .sort((a, b) => b.viewers - a.viewers);
+  // Los que se marcaron en vivo en TikTok (sin espectadores conocidos, van al final); si ya salen arriba
+  // por otra plataforma, su TikTok es un boton de esa tarjeta
+  const ttNames = ttHandles();
+  const ttShown = new Set(liveRows.map(r => r.tiktok && r.tiktok.toLowerCase()).filter(Boolean));
+  ttState.rows.filter(r => ttNames.has(r.handle) && !ttShown.has(r.handle))
+    .forEach(r => liveRows.push({ kind: 'tt', handle: r.handle, name: ttNames.get(r.handle), viewers: 0 }));
 
   // Cantidad de vivos de Resident Evil 4 junto a la pestaña Live del menu
   const liveBadge = document.getElementById('live-count');
@@ -2596,7 +2717,17 @@ async function renderLive() {
       if (r.kind === 'yt' && r.embed === false) return `<a class="live-play" href="${esc(pageUrl(r))}" target="_blank" rel="noopener" aria-label="${label}">${inner}</a>`;
       return `<button class="live-play" type="button" data-src="${esc(playerSrc(r))}" data-name="${esc(r.name)}" aria-label="${label}">${inner}</button>`;
     };
-    html += `<div class="live-live">` + liveRows.map(r => `
+    // TikTok no se puede embeber: la tarjeta lleva a su live
+    const ttCard = r => `
+      <div class="live-card is-live is-tiktok">
+        <div class="live-frame"><a class="live-play live-play-tt" href="${esc(ttUrl(r.handle))}" target="_blank" rel="noopener" aria-label="${esc(t('live.watchTt') + ' ' + r.name)}">${ttIcon}<span>${esc(t('live.watchTt'))}</span></a></div>
+        <div class="live-meta">
+          <span class="live-badge">● ${esc(t('live.on'))}</span>
+          <a href="${esc(ttUrl(r.handle))}" target="_blank" rel="noopener">${ttIcon}${esc(r.name)}</a>
+          <span class="live-btns"><a class="live-watch live-watch-tt" href="${esc(ttUrl(r.handle))}" target="_blank" rel="noopener">${ttIcon}<span>${esc(t('live.watchTt'))}</span></a></span>
+        </div>
+      </div>`;
+    html += `<div class="live-live">` + liveRows.map(r => r.kind === 'tt' ? ttCard(r) : `
       <div class="live-card is-live">
         <div class="live-frame">${playBtn(r)}</div>
         <div class="live-meta">
@@ -3750,12 +3881,13 @@ async function predSetUser(user) {
   }
   predState.board = null; predState.boardAt = 0;
   renderPredictions();
+  renderTtBox();
   predLoadBoard();
 }
 
-async function predLogin() {
+async function predLogin(backTab = 'predictions') {
   if (!predState.sb) return;
-  try { sessionStorage.setItem('dc-after-login', 'predictions'); } catch (e) {}
+  try { sessionStorage.setItem('dc-after-login', backTab); } catch (e) {}
   await predState.sb.auth.signInWithOAuth({ provider: 'discord', options: { redirectTo: location.origin + location.pathname } });
 }
 async function predLogout() { if (predState.sb) await predState.sb.auth.signOut(); }

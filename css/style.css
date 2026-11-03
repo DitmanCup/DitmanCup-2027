@@ -1917,3 +1917,17 @@ body[data-tab="simulations"] main { max-width: min(1880px, 100%); }
 .pred-body .loading-msg { font-size: 1.35rem; }
 .pred-btn { font-family: var(--font-grunge); font-size: 1.25rem; letter-spacing: .02em; text-transform: none; padding: .55rem 1.2rem; }
 .pred-user { font-size: 1.45rem; }
+
+/* Vivos de TikTok: aviso y panel para marcarse en vivo */
+.live-card.is-tiktok .live-play-tt { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .6rem; text-decoration: none; color: #fff; font-family: var(--font-title); letter-spacing: .08em; text-transform: uppercase; background: radial-gradient(circle at 30% 30%, #12383a, #000 70%); }
+.live-card.is-tiktok .live-play-tt .ic { width: 3rem; height: 3rem; color: #25f4ee; filter: drop-shadow(-2px 0 0 #fe2c55); }
+.live-card.is-tiktok .live-play-tt:hover { background: radial-gradient(circle at 30% 30%, #1b5558, #000 70%); }
+.live-ttbox { margin-top: 1.25rem; }
+.live-ttnote { margin: 0 0 .6rem; font-size: .95rem; opacity: .8; }
+.live-ttrow { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; }
+.live-ttrow select { min-width: 0; max-width: 100%; padding: .45rem .6rem; background: var(--bg-card, #111); color: var(--text); border: 1px solid #25f4ee; border-radius: 2px; font: inherit; }
+.live-ttbtn { font-family: var(--font-title); letter-spacing: .06em; text-transform: uppercase; font-size: .9rem; color: #fff; background: #000; border: 1px solid #25f4ee; box-shadow: -2px 0 0 #fe2c55; border-radius: 2px; padding: .45rem .9rem; cursor: pointer; }
+.live-ttbtn:hover:not(:disabled) { border-color: #fff; }
+.live-ttbtn:disabled { opacity: .5; cursor: wait; }
+.live-ttmine { font-weight: 600; }
+.live-tterr { margin: .5rem 0 0; color: #ff6b6b; font-size: .9rem; }
