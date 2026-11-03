@@ -1,34 +1,49 @@
 name: Actualizar vivos (YouTube y Kick)
 
+# GitHub casi no respeta los cron frecuentes en repos poco activos (corre cada ~8 h en vez de cada 5 min),
+# asi que cada corrida se queda ~5 h 40 min chequeando cada 3 min y al terminar se vuelve a lanzar sola.
+# El cron de cada hora queda de respaldo por si la cadena se corta.
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '17 * * * *'
   workflow_dispatch:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
-  group: update-data
+  group: live-loop
   cancel-in-progress: false
 
 jobs:
   update:
     runs-on: ubuntu-latest
+    timeout-minutes: 355
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Ver quien esta en vivo en YouTube y Kick
-        run: node scripts/update-live-status.js
-      - name: Commit si cambio algo
+      - name: Ver quien esta en vivo en YouTube y Kick (cada 3 min)
         run: |
-          if [ -n "$(git status --porcelain data/live-status.json)" ]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add data/live-status.json
-            git commit -m "Actualizar vivos de YouTube y Kick"
-            git pull --rebase origin main
-            git push
-          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          end=$(( $(date +%s) + 340 * 60 ))
+          while [ "$(date +%s)" -lt "$end" ]; do
+            node scripts/update-live-status.js || true
+            if [ -n "$(git status --porcelain data/live-status.json)" ]; then
+              git add data/live-status.json
+              git commit -m "Actualizar vivos de YouTube y Kick"
+              if ! { git pull --rebase origin main && git push; }; then
+                # otro bot empujo a la vez: se descarta este intento y la proxima vuelta lo rehace
+                git rebase --abort 2>/dev/null || true
+                git fetch origin main && git reset --hard origin/main
+              fi
+            fi
+            sleep 180
+          done
+      - name: Lanzar la siguiente tanda
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run update-live-status.yml --ref main
