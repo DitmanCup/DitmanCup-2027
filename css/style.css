@@ -1931,6 +1931,7 @@ body[data-tab="simulations"] main { max-width: min(1880px, 100%); }
 .live-ttbtn:hover:not(:disabled) { border-color: #fff; }
 .live-ttbtn:disabled { opacity: .5; cursor: wait; }
 .live-ttbtn-alt { border-color: #777; box-shadow: none; background: transparent; }
+.live-ttuser { margin-top: .9rem; font-size: 1.15rem; opacity: .9; }
 .live-ttmine { font-size: 1.45rem; }
 .live-tterr { margin: .7rem 0 0; color: #ff6b6b; font-size: 1.25rem; }
 .live-ttclaimed-h { margin-top: 1.4rem; }

@@ -2695,6 +2695,8 @@ function renderTtBox() {
         <div class="live-ttrow"><select id="live-tt-pick" aria-label="${esc(t('live.ttPick'))}">${opts}</select>
         <button class="live-ttbtn" type="button" data-tt="claim"${dis}>${esc(t('live.ttClaim'))}</button></div>`;
     }
+    if (u) html += `<div class="live-ttrow live-ttuser"><span>${esc(t('pred.hello', { name: predState.name || '' }))}</span>
+      <button class="live-ttbtn live-ttbtn-alt" type="button" data-tt="logout">${esc(t('pred.logout'))}</button></div>`;
     if (ttState.err) html += `<p class="live-tterr">${esc(t(ttState.err))}</p>`;
     // Publico: quien eligio cada TikTok, para que se note si alguien eligio uno que no es suyo
     if (ttState.claims.length) {
@@ -2710,6 +2712,7 @@ function renderTtBox() {
     if (a === 'login') predLogin('live');
     else if (a === 'end') ttSetLive(null);
     else if (a === 'release') ttRelease();
+    else if (a === 'logout') predLogout();
     else if (a === 'go') ttSetLive(b.dataset.handle);
     else if (a === 'claim') {
       const s = box.querySelector('#live-tt-pick');
