@@ -4457,32 +4457,44 @@ function wgUpdateTab() {
   renderUserChip();
 }
 
-// Arriba a la derecha de las pestañas: las PTAS de la cuenta y la foto de perfil de Discord (solo logueado)
+// Arriba a la derecha de las pestañas: las PTAS de la cuenta y la foto de perfil de Discord (con menu para cerrar sesion);
+// sin sesion, el boton para entrar con Discord
 function renderUserChip() {
   const chip = document.getElementById('user-chip');
   if (!chip) return;
   const u = predState.user;
-  chip.hidden = !u;
+  chip.hidden = !predState.sb;
   const hud = document.getElementById('wg-hud');
   if (hud) {
     hud.hidden = !(u && wg.ok && (wg.cfg.active || wgAdmin()));
     const n = document.getElementById('wg-hud-n');
     if (n) n.textContent = wgFmt(wg.wallet ? wg.wallet.balance : 0);
   }
-  const av = document.getElementById('user-avatar');
-  if (av && u) {
-    const name = predState.name || '';
-    av.title = name;
-    av.innerHTML = predState.avatar && /^https:///.test(predState.avatar)
-      ? `<img src="${esc(predState.avatar)}" alt="${esc(name)}" referrerpolicy="no-referrer">`
-      : `<span>${esc((name || '?').charAt(0).toUpperCase())}</span>`;
-  }
+  const av = document.getElementById('user-avatar'), login = document.getElementById('user-login'), menu = document.getElementById('user-menu');
+  if (login) login.hidden = !!u;
+  if (av) av.hidden = !u;
+  if (!u) { if (menu) menu.hidden = true; return; }
+  const name = predState.name || '';
+  av.title = name;
+  av.innerHTML = predState.avatar && /^https:///.test(predState.avatar)
+    ? `<img src="${esc(predState.avatar)}" alt="${esc(name)}" referrerpolicy="no-referrer">`
+    : `<span>${esc((name || '?').charAt(0).toUpperCase())}</span>`;
+  const nm = document.getElementById('user-menu-name');
+  if (nm) nm.textContent = name;
 }
 
 // En pantallas chicas las pestañas se esconden tras el menú: el recuadro pasa a la fila del logo para seguir visible
 function initUserChip() {
   const chip = document.getElementById('user-chip');
-  if (!chip || !window.matchMedia) return;
+  if (!chip) return;
+  const av = document.getElementById('user-avatar'), menu = document.getElementById('user-menu');
+  const closeMenu = () => { menu.hidden = true; av.setAttribute('aria-expanded', 'false'); };
+  av.addEventListener('click', e => { e.stopPropagation(); menu.hidden = !menu.hidden; av.setAttribute('aria-expanded', String(!menu.hidden)); });
+  document.getElementById('user-logout').addEventListener('click', () => { closeMenu(); predLogout(); });
+  document.getElementById('user-login').addEventListener('click', () => predLogin(document.body.dataset.tab || 'predictions'));
+  document.addEventListener('click', e => { if (!e.target.closest('.user-menu-wrap')) closeMenu(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+  if (!window.matchMedia) return;
   const mq = window.matchMedia('(max-width: 1200px)');
   const place = () => {
     if (mq.matches) document.querySelector('.topbar-inner').insertBefore(chip, document.querySelector('.topbar-actions'));

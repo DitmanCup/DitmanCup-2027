@@ -21,7 +21,7 @@
 <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png?v=7">
 <link rel="apple-touch-icon" href="assets/icons/icon-192.png?v=7">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/7.2.3/css/flag-icons.min.css">
-<link rel="stylesheet" href="css/style.css?v=20261103s">
+<link rel="stylesheet" href="css/style.css?v=20261103t">
 </head>
 <body data-tab="inicio">
 
@@ -71,17 +71,24 @@
       </div>
       <button class="tab-btn" data-tab="clips" data-i18n="nav.clips">Clips</button>
       <button class="tab-btn tab-live" data-tab="live"><span class="rec-dot" aria-hidden="true"></span><span data-i18n="nav.live">Live</span><span class="live-count" id="live-count" hidden></span></button>
+      <button class="tab-btn tab-donate" data-tab="donaciones" data-i18n="nav.donaciones">Donations</button>
       <div class="nav-group">
         <button class="tab-btn nav-drop-btn" type="button" aria-haspopup="true" aria-expanded="false"><span data-i18n="nav.comunidad">Community</span> <span class="nav-caret" aria-hidden="true">&#9662;</span></button>
         <div class="nav-sub">
           <button class="tab-btn" data-tab="champions" data-i18n="nav.champions">History</button>
-          <button class="tab-btn" data-tab="donaciones" data-i18n="nav.donaciones">Donations</button>
           <button class="tab-btn" data-tab="organizadores" data-i18n="nav.organizadores">Organizers</button>
         </div>
       </div>
       <div class="user-chip" id="user-chip" hidden>
         <button class="wg-hud" id="wg-hud" type="button" hidden data-i18n-attr="title:wg.title"><img src="assets/wager-chest.png" alt="" width="34" height="27"><span class="wg-hud-n" id="wg-hud-n">0</span><span class="wg-hud-c">PTAS</span></button>
-        <span class="user-avatar" id="user-avatar"></span>
+        <div class="user-menu-wrap">
+          <button class="user-avatar" id="user-avatar" type="button" aria-haspopup="true" aria-expanded="false" hidden></button>
+          <div class="user-menu" id="user-menu" hidden>
+            <span class="user-menu-name" id="user-menu-name"></span>
+            <button class="user-menu-btn" id="user-logout" type="button" data-i18n="pred.logout">Log out</button>
+          </div>
+        </div>
+        <button class="user-login" id="user-login" type="button" hidden><svg class="ic" aria-hidden="true"><use href="#ic-discord"/></svg> <span data-i18n="pred.login">Log in with Discord</span></button>
       </div>
     </nav>
   </div>
@@ -459,6 +466,6 @@
   </div>
 </div>
 
-<script src="js/script.js?v=20261103s"></script>
+<script src="js/script.js?v=20261103t"></script>
 </body>
 </html>
