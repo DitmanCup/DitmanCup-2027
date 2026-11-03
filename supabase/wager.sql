@@ -4,9 +4,7 @@
 -- PASO (una sola vez): Supabase -> SQL Editor -> pegar TODO este archivo -> Run. Se puede repetir sin problema.
 -- Hace falta haber corrido antes predictions.sql (mismo login y mismo proyecto).
 --
--- La pagina NO muestra la pestaña (salvo a JokerUY) hasta que se active:
---   update public.wager_config set active = true;
--- Para pausar:  update public.wager_config set active = false;
+-- Al correrlo queda ACTIVO para todos. Para pausar:  update public.wager_config set active = false;
 --
 -- Todo el dinero se mueve SOLO dentro de las funciones de abajo (security definer): desde el navegador no se puede
 -- escribir en wallets, apuestas ni compras, asi que nadie puede regalarse PTAS ni cambiar las cuotas.
@@ -17,7 +15,7 @@ create table if not exists public.wager_config (
   daily   int not null default 1000 check (daily >= 0),   -- PTAS del bono diario
   min_bet int not null default 10 check (min_bet >= 1)
 );
-insert into public.wager_config (id) values (1) on conflict do nothing;
+insert into public.wager_config (id, active) values (1, true) on conflict (id) do update set active = true;   -- activo para todos
 
 create table if not exists public.wallets (
   user_id    uuid primary key references auth.users(id) on delete cascade,
