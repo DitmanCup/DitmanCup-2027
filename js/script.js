@@ -504,6 +504,70 @@ const I18N = {
     'pred.rules.3': 'Acertás el ganador y era el underdog (el runner con peor puesto en la clasificatoria): {n} pts.',
     'pred.rules.4': 'Acertás el ganador y además la diferencia de tiempo (la carrera termina con una diferencia de hasta {s} segundos más o menos de la que pusiste): {n} pts.',
     'pred.rules.5': 'El máximo por partida es {n} pts y los puntos no se suman entre sí. La diferencia de tiempo es opcional.',
+    'nav.wager': 'Merchant\'s Wager',
+    'wg.title': 'Merchant\'s Wager',
+    'wg.intro': 'Apostá tus Pesetas (PTAS) a las partidas, cobrá el bono de cada día y gastalas en la tienda del Mercader.',
+    'wg.soon': 'El Mercader todavía no abrió su tienda. Volvé pronto.',
+    'wg.inactive': 'Solo lo ves vos (admin): todavía no está activo para el resto.',
+    'wg.needLogin': 'Entrá con Discord para jugar y juntar PTAS.',
+    'wg.daily': 'Cobrar {n} PTAS de hoy',
+    'wg.dailyDone': 'Ya cobraste hoy',
+    'wg.sub.bets': 'Apuestas',
+    'wg.sub.mine': 'Mis apuestas',
+    'wg.sub.shop': 'Tienda',
+    'wg.sub.board': 'Ranking',
+    'wg.sub.rules': 'Reglas',
+    'wg.sub.admin': 'Admin',
+    'wg.noMarkets': 'Todavía no hay partidas para apostar. Aparecen cuando se anuncia el calendario.',
+    'wg.noBets': 'Todavía no apostaste en ninguna partida.',
+    'wg.odds': 'x{n}',
+    'wg.stake': 'PTAS',
+    'wg.all': 'Todo',
+    'wg.win': 'Ganarías {n} PTAS',
+    'wg.pickFirst': 'Elegí un runner y cuánto apostar',
+    'wg.bet': 'Apostar',
+    'wg.yourBet': 'Apostaste {n} PTAS a {name} (x{odds})',
+    'wg.status.open': 'En juego',
+    'wg.status.won': 'Ganada: +{n} PTAS',
+    'wg.status.lost': 'Perdida',
+    'wg.status.void': 'Anulada: te devolvimos las PTAS',
+    'wg.closed': 'Cerrada: la partida ya empezó',
+    'wg.ended': 'Partida terminada',
+    'wg.shop.empty': 'La tienda está vacía por ahora.',
+    'wg.shop.buy': 'Comprar · {n} PTAS',
+    'wg.shop.owned': 'Ya es tuyo',
+    'wg.shop.pending': 'Comprado: lo entregamos pronto',
+    'wg.shop.delivered': 'Entregado',
+    'wg.shop.confirm': '¿Comprar "{name}" por {n} PTAS?',
+    'wg.shop.kind.badge': 'Badge de la página',
+    'wg.shop.kind.discord_role': 'Rol de Discord',
+    'wg.shop.kind.twitch_vip': 'VIP de Twitch',
+    'wg.rules.1': 'Cada día podés cobrar {n} PTAS (una vez por día, hora de Uruguay). Si no cobrás, no se acumula.',
+    'wg.rules.2': 'En cada partida elegís un runner y cuántas PTAS apostar (mínimo {m}). Se descuentan en el momento y solo podés apostar una vez por partida, antes de que empiece.',
+    'wg.rules.3': 'La cuota sale de los tiempos de clasificatoria: cuanto más rápido fue un runner, más probable es que gane y menos paga; el sorpresa paga más. La cuota que ves al apostar queda fija.',
+    'wg.rules.4': 'Si acertás, recibís lo apostado multiplicado por la cuota. Si fallás, perdés lo apostado. Si una partida se anula, se devuelve todo.',
+    'wg.rules.5': 'Con las PTAS comprás en la tienda: badges para tu nombre, un rol en el Discord o el VIP de Twitch. Los roles y el VIP los entrega Joker a mano.',
+    'wg.rules.6': 'Las PTAS son solo de juego: no se compran, no se cambian por dinero ni se pueden pasar a otra persona. Una cuenta de Discord, una billetera.',
+    'wg.err.funds': 'No te alcanzan las PTAS.',
+    'wg.err.closed': 'Esa partida ya está cerrada.',
+    'wg.err.already_bet': 'Ya apostaste en esa partida.',
+    'wg.err.min_bet': 'La apuesta mínima es {n} PTAS.',
+    'wg.err.inactive': 'Todavía no está activo.',
+    'wg.err.already_claimed': 'Ya cobraste hoy: volvé mañana.',
+    'wg.err.already_owned': 'Ya lo tenés.',
+    'wg.err.login': 'Tenés que entrar con Discord.',
+    'wg.err.no_market': 'Esa partida no está habilitada para apostar.',
+    'wg.err.no_item': 'Ese artículo ya no está.',
+    'wg.err.pick': 'Primero elegí un runner.',
+    'wg.err.generic': 'No se pudo. Probá de nuevo en un momento.',
+    'wg.admin.on': 'El sistema está ACTIVO para todos.',
+    'wg.admin.off': 'El sistema está apagado para el público. Para activarlo: update public.wager_config set active = true;',
+    'wg.admin.sync': 'Sincronizar partidas y resultados',
+    'wg.admin.synced': 'Sincronizado: {up} partidas publicadas o actualizadas, {st} liquidadas.',
+    'wg.admin.markets': '{n} partidas publicadas',
+    'wg.admin.pending': 'Compras por entregar (rol de Discord / VIP de Twitch)',
+    'wg.admin.none': 'No hay compras pendientes.',
+    'wg.admin.done': 'Entregado',
     'live.checking': 'Chequeando canales…',
 
     'footer.text': 'Ditman Cup 2027 · Hecho para la comunidad',
@@ -822,6 +886,70 @@ const I18N = {
     'pred.rules.3': 'Correct winner and it was the underdog (the runner with the worse qualifier ranking): {n} pts.',
     'pred.rules.4': 'Correct winner and the time gap too (the race ends with a gap within {s} seconds, plus or minus, of the one you entered): {n} pts.',
     'pred.rules.5': 'The maximum per match is {n} pts and points do not stack. The time gap is optional.',
+    'nav.wager': 'Merchant\'s Wager',
+    'wg.title': 'Merchant\'s Wager',
+    'wg.intro': 'Bet your Pesetas (PTAS) on the matches, claim the daily bonus and spend them at the Merchant\'s shop.',
+    'wg.soon': 'The Merchant has not opened his shop yet. Come back soon.',
+    'wg.inactive': 'Only you (admin) can see this: it is not active for everyone else yet.',
+    'wg.needLogin': 'Log in with Discord to play and earn PTAS.',
+    'wg.daily': 'Claim today\'s {n} PTAS',
+    'wg.dailyDone': 'Already claimed today',
+    'wg.sub.bets': 'Bets',
+    'wg.sub.mine': 'My bets',
+    'wg.sub.shop': 'Shop',
+    'wg.sub.board': 'Leaderboard',
+    'wg.sub.rules': 'Rules',
+    'wg.sub.admin': 'Admin',
+    'wg.noMarkets': 'No matches to bet on yet. They show up once the schedule is announced.',
+    'wg.noBets': 'You have not bet on any match yet.',
+    'wg.odds': 'x{n}',
+    'wg.stake': 'PTAS',
+    'wg.all': 'All',
+    'wg.win': 'You would win {n} PTAS',
+    'wg.pickFirst': 'Pick a runner and an amount',
+    'wg.bet': 'Place bet',
+    'wg.yourBet': 'You bet {n} PTAS on {name} (x{odds})',
+    'wg.status.open': 'In play',
+    'wg.status.won': 'Won: +{n} PTAS',
+    'wg.status.lost': 'Lost',
+    'wg.status.void': 'Void: your PTAS were refunded',
+    'wg.closed': 'Closed: the match already started',
+    'wg.ended': 'Match finished',
+    'wg.shop.empty': 'The shop is empty for now.',
+    'wg.shop.buy': 'Buy · {n} PTAS',
+    'wg.shop.owned': 'You own this',
+    'wg.shop.pending': 'Bought: delivered soon',
+    'wg.shop.delivered': 'Delivered',
+    'wg.shop.confirm': 'Buy "{name}" for {n} PTAS?',
+    'wg.shop.kind.badge': 'Site badge',
+    'wg.shop.kind.discord_role': 'Discord role',
+    'wg.shop.kind.twitch_vip': 'Twitch VIP',
+    'wg.rules.1': 'Every day you can claim {n} PTAS (once a day, Uruguay time). If you skip a day it does not stack.',
+    'wg.rules.2': 'On each match you pick a runner and how many PTAS to bet (minimum {m}). They are deducted right away and you can bet only once per match, before it starts.',
+    'wg.rules.3': 'Odds come from the qualifier times: the faster a runner was, the more likely they win and the less they pay; the underdog pays more. The odds you see when betting are locked in.',
+    'wg.rules.4': 'If you are right you get your stake times the odds. If you are wrong you lose the stake. If a match is voided, everything is refunded.',
+    'wg.rules.5': 'Spend PTAS in the shop: badges next to your name, a Discord role or Twitch VIP. Roles and VIP are delivered by Joker by hand.',
+    'wg.rules.6': 'PTAS are play money only: they cannot be bought, cashed out or sent to someone else. One Discord account, one wallet.',
+    'wg.err.funds': 'Not enough PTAS.',
+    'wg.err.closed': 'That match is already closed.',
+    'wg.err.already_bet': 'You already bet on that match.',
+    'wg.err.min_bet': 'The minimum bet is {n} PTAS.',
+    'wg.err.inactive': 'Not active yet.',
+    'wg.err.already_claimed': 'Already claimed today: come back tomorrow.',
+    'wg.err.already_owned': 'You already own it.',
+    'wg.err.login': 'You need to log in with Discord.',
+    'wg.err.no_market': 'That match is not open for betting.',
+    'wg.err.no_item': 'That item is gone.',
+    'wg.err.pick': 'Pick a runner first.',
+    'wg.err.generic': 'Something went wrong. Try again in a moment.',
+    'wg.admin.on': 'The system is ACTIVE for everyone.',
+    'wg.admin.off': 'The system is off for the public. To turn it on: update public.wager_config set active = true;',
+    'wg.admin.sync': 'Sync matches and results',
+    'wg.admin.synced': 'Synced: {up} matches published or updated, {st} settled.',
+    'wg.admin.markets': '{n} matches published',
+    'wg.admin.pending': 'Purchases to deliver (Discord role / Twitch VIP)',
+    'wg.admin.none': 'No pending purchases.',
+    'wg.admin.done': 'Delivered',
     'live.checking': 'Checking channels…',
 
     'footer.text': 'Ditman Cup 2027 · Made for the community',
@@ -1642,6 +1770,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCountdown();
   initSheetModal();
   initPredictions();
+  initWager();
   if (isMock()) showTestBanner();
   loadGroups();
   loadStandings();
@@ -4009,6 +4138,7 @@ async function predSetUser(user) {
   renderPredictions();
   renderTtBox();
   predLoadBoard();
+  wgLoad();
 }
 
 async function predLogin(backTab = 'predictions') {
@@ -4227,6 +4357,336 @@ function initPredictions() {
   if (tab) tab.addEventListener('click', () => { renderPredictions(); predLoadBoard(); });
   renderPredictions();
   predInitBackend();
+}
+
+// ======= MERCHANT'S WAGER: PTAS, apuestas a las partidas y tienda =======
+// Todo el dinero vive en Supabase (supabase/wager.sql): la pagina solo muestra y pide operaciones, y las
+// funciones de la base validan saldo, horario y cuota. La cuota de cada partida la publica el admin (JokerUY)
+// al abrir la pagina, calculada con los tiempos de clasificatoria; tambien es quien liquida con el resultado de la hoja.
+// PTAS son una moneda de juego: no se compran ni se canjean por dinero.
+const WG_K = 40;                              // pendiente de la curva: p(gana el mas rapido) = 1 / (1 + e^(-K * d))
+const WG_ODDS_MIN = 1.05, WG_ODDS_MAX = 30;   // tope de la cuota para que ni el favorito pague nada ni el sorpresa pague mil veces
+const WG_ERRORS = ['funds', 'closed', 'already_bet', 'min_bet', 'inactive', 'already_claimed', 'already_owned', 'login', 'no_market', 'no_item'];
+const wg = { ok: false, cfg: null, wallet: null, markets: [], bets: {}, shop: [], buys: [], badges: {}, pending: [], names: {},
+  board: null, boardErr: false, sub: 'bets', sel: {}, busy: false, err: '', msg: '', syncAt: 0, syncing: false };
+const wgAdmin = () => !!(predState.user && predState.user.id === TT_ADMIN_ID);
+const wgFmt = n => Number(n || 0).toLocaleString(LOCALES[currentLang] || 'en-US');
+const wgToday = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Montevideo' }).format(new Date());   // mismo dia que usa la base
+
+// Tiempo de clasificatoria (segundos) de un runner, de la hoja Qualifiers; null si no esta
+function wgQualTime(name) {
+  const rows = lastStandingsRows;
+  if (!rows || !rows.length || !name) return null;
+  const head = rows[0];
+  const rCol = pickKey(head, ['Corredor', 'Runner', 'Nombre']) || Object.keys(head)[1];
+  const row = rows.find(r => String(r[rCol] || '').trim().toLowerCase() === String(name).trim().toLowerCase());
+  if (!row) return null;
+  const tCol = pickKey(head, [t('clas.col.time'), 'Mejor tiempo', 'Best time', 'Tiempo', 'Time', 'Qualifier time'])
+    || Object.keys(head).find(k => k !== rCol && /[:.]/.test(row[k] || '') && parseRaceTime(row[k]) != null);
+  return tCol ? parseRaceTime(row[tCol]) : null;
+}
+
+// Cuotas (multiplicador de lo apostado) a partir de los tiempos de clasificatoria; null si falta alguno.
+// d = (tiempo del mas lento - tiempo del mas rapido) / tiempo del mas rapido; cuota justa = 1 / probabilidad.
+function wgOdds(tA, tB) {
+  if (!(tA > 0 && tB > 0)) return null;
+  const fast = Math.min(tA, tB), d = (Math.max(tA, tB) - fast) / fast;
+  const pFast = 1 / (1 + Math.exp(-WG_K * d));
+  const cl = p => Math.round(Math.min(WG_ODDS_MAX, Math.max(WG_ODDS_MIN, 1 / p)) * 100) / 100;
+  const f = cl(pFast), s = cl(1 - pFast);
+  return tA <= tB ? { a: f, b: s } : { a: s, b: f };
+}
+
+async function wgLoad(skipSync) {
+  const sb = predState.sb, u = predState.user;
+  if (!sb) return;
+  try {
+    const none = Promise.resolve({ data: null, error: null });
+    const [cfg, mk, shop, buys, wal, bets] = await Promise.all([
+      sb.from('wager_config').select('active,daily,min_bet').eq('id', 1).maybeSingle(),
+      sb.from('wager_markets').select('*').order('start_at'),
+      sb.from('shop_items').select('*').order('sort'),
+      sb.from('shop_purchases').select('id,user_id,item_id,fulfilled,created_at'),   // la base deja: las propias, los badges de todos y (admin) todas
+      u ? sb.from('wallets').select('balance,last_daily').eq('user_id', u.id).maybeSingle() : none,
+      u ? sb.from('wager_bets').select('*').eq('user_id', u.id) : none,
+    ]);
+    for (const r of [cfg, mk, shop, buys, wal, bets]) if (r.error) throw r.error;
+    if (!cfg.data) throw new Error('sin configuracion');
+    wg.cfg = cfg.data; wg.markets = mk.data || []; wg.shop = shop.data || [];
+    wg.wallet = wal.data || { balance: 0, last_daily: null };
+    wg.bets = {}; (bets.data || []).forEach(b => { wg.bets[b.match_id] = b; });
+    const kind = {}; wg.shop.forEach(i => { kind[i.id] = i; });
+    wg.buys = u ? (buys.data || []).filter(p => p.user_id === u.id) : [];
+    wg.badges = {};
+    (buys.data || []).forEach(p => { const it = kind[p.item_id]; if (it && it.kind === 'badge' && it.icon) (wg.badges[p.user_id] = wg.badges[p.user_id] || []).push(it.icon); });
+    wg.pending = wgAdmin() ? (buys.data || []).filter(p => !p.fulfilled) : [];
+    if (wg.pending.length) {
+      const ids = [...new Set(wg.pending.map(p => p.user_id))];
+      const { data } = await sb.from('profiles').select('user_id,name').in('user_id', ids);
+      (data || []).forEach(p => { wg.names[p.user_id] = p.name; });
+    }
+    wg.ok = true;
+  } catch (e) {
+    console.error('Merchant\'s Wager: no se pudo cargar (¿falta correr supabase/wager.sql?):', e);
+    wg.ok = false;
+  }
+  wgUpdateTab();
+  renderWager();
+  if (wg.ok && !skipSync && wgAdmin() && Date.now() - wg.syncAt > 60000) wgAdminSync();
+}
+
+// La pestaña solo se ve cuando el admin activa el sistema (o para el admin, para probarlo)
+function wgUpdateTab() {
+  const tab = document.querySelector('.tab-btn[data-tab="wager"]');
+  if (tab) tab.hidden = !(wg.ok && (wg.cfg.active || wgAdmin()));
+}
+
+function wgBadgeHtml(userId) {
+  const b = wg.badges[userId];
+  return b && b.length ? ` <span class="wg-badges">${b.map(esc).join('')}</span>` : '';
+}
+
+async function wgRpc(fn, args) {
+  const sb = predState.sb;
+  if (!sb || !predState.user || wg.busy) return false;
+  wg.busy = true; wg.err = ''; wg.msg = ''; renderWager();
+  let ok = false;
+  try {
+    const { error } = await sb.rpc(fn, args);
+    if (error) throw error;
+    ok = true;
+  } catch (e) {
+    const code = WG_ERRORS.find(c => String((e && e.message) || '').includes(c));
+    if (!code) console.error('Merchant\'s Wager:', e);
+    wg.err = code || 'generic';
+  }
+  wg.busy = false;
+  await wgLoad(true);
+  return ok;
+}
+
+// ADMIN: publica las cuotas de las partidas nuevas y liquida las que ya tienen resultado en la hoja
+async function wgAdminSync(manual) {
+  const sb = predState.sb;
+  if (!sb || !wgAdmin() || !wg.ok || wg.syncing) return;
+  wg.syncing = true; wg.syncAt = Date.now();
+  let up = 0, st = 0;
+  try {
+    const byId = new Map(wg.markets.map(m => [m.match_id, m]));
+    for (const m of predMatches()) {
+      const mk = byId.get(m.id);
+      if (mk && mk.winner == null && predHasResult(m)) {
+        const { error } = await sb.rpc('wager_admin_settle', { p_match: m.id, p_winner: m.tA < m.tB ? 'a' : 'b' });
+        if (error) throw error;
+        st++;
+      } else if (!predLocked(m) && m.when) {
+        const o = wgOdds(wgQualTime(m.a), wgQualTime(m.b));
+        if (o && (!mk || mk.odds_a !== o.a || mk.odds_b !== o.b || mk.a !== m.a || mk.b !== m.b || new Date(mk.start_at).getTime() !== m.when.getTime())) {
+          const { error } = await sb.rpc('wager_admin_upsert_market', { p_match: m.id, p_a: m.a, p_b: m.b, p_odds_a: o.a, p_odds_b: o.b, p_start: m.when.toISOString() });
+          if (error) throw error;
+          up++;
+        }
+      }
+    }
+    wg.msg = t('wg.admin.synced', { up, st });
+  } catch (e) {
+    console.error('Merchant\'s Wager: fallo la sincronizacion:', e);
+    wg.err = 'generic';
+  }
+  wg.syncing = false;
+  if (up || st) await wgLoad(true); else if (manual) renderWager();
+}
+
+async function wgLoadBoard() {
+  const sb = predState.sb;
+  if (!sb) return;
+  try {
+    const { data: ws, error } = await sb.from('wallets').select('user_id,balance').order('balance', { ascending: false }).limit(50);
+    if (error) throw error;
+    const ids = (ws || []).map(w => w.user_id);
+    const { data: ps } = ids.length ? await sb.from('profiles').select('user_id,name,avatar').in('user_id', ids) : { data: [] };
+    const prof = {}; (ps || []).forEach(p => { prof[p.user_id] = p; });
+    wg.board = (ws || []).map(w => ({ id: w.user_id, bal: w.balance, name: (prof[w.user_id] || {}).name || 'Player', avatar: (prof[w.user_id] || {}).avatar }));
+    wg.boardErr = false;
+  } catch (e) {
+    console.error('Merchant\'s Wager: no se pudo cargar el ranking:', e);
+    wg.boardErr = true;
+  }
+  if (wg.sub === 'board') renderWager();
+}
+
+function wgMarketCard(mk, fmtDay, fmtTime) {
+  const bet = wg.bets[mk.match_id], sel = wg.sel[mk.match_id] || {};
+  const start = new Date(mk.start_at);
+  const closed = mk.winner != null || start <= new Date();
+  const user = predState.user;
+  const side = (k, name) => {
+    const cls = ['pred-side', 'wg-side'];
+    if (bet ? bet.pick === k : sel.pick === k) cls.push('is-picked');
+    if (mk.winner === k) cls.push('is-winner');
+    return `<button type="button" class="${cls.join(' ')}" data-wg="pick" data-side="${k}"${closed || bet || !user || wg.busy ? ' disabled' : ''}>
+      <span class="pred-name">${nameWithFlag(name)}</span>
+      <span class="wg-odds">${esc(t('wg.odds', { n: Number(k === 'a' ? mk.odds_a : mk.odds_b).toFixed(2) }))}</span>
+    </button>`;
+  };
+  let foot;
+  if (bet) {
+    const who = bet.pick === 'a' ? mk.a : mk.b;
+    const st = bet.status === 'won' ? t('wg.status.won', { n: wgFmt(bet.payout) }) : t('wg.status.' + bet.status);
+    foot = `<span class="pred-mine">${esc(t('wg.yourBet', { n: wgFmt(bet.stake), name: who, odds: Number(bet.odds).toFixed(2) }))}</span>
+      <span class="pred-pts wg-st-${bet.status}">${esc(st)}</span>`;
+  } else if (closed) {
+    foot = `<span class="pred-closed">${esc(mk.winner ? t('wg.ended') : t('wg.closed'))}</span>`;
+  } else if (!user) {
+    foot = `<span class="pred-closed">${esc(t('wg.needLogin'))}</span>`;
+  } else {
+    const min = (wg.cfg && wg.cfg.min_bet) || 10;
+    const stake = sel.stake || '';
+    const win = sel.pick && stake ? Math.floor(stake * Number(sel.pick === 'a' ? mk.odds_a : mk.odds_b)) : 0;
+    foot = `<div class="wg-bet">
+        <input class="wg-stake" type="number" inputmode="numeric" min="${min}" step="1" placeholder="${esc(t('wg.stake'))}" value="${stake}"${wg.busy ? ' disabled' : ''}>
+        <button type="button" class="wg-preset" data-wg="preset" data-v="${min}">${min}</button>
+        <button type="button" class="wg-preset" data-wg="preset" data-v="100">100</button>
+        <button type="button" class="wg-preset" data-wg="preset" data-v="500">500</button>
+        <button type="button" class="wg-preset" data-wg="preset" data-v="all">${esc(t('wg.all'))}</button>
+      </div>
+      <span class="wg-win">${win ? esc(t('wg.win', { n: wgFmt(win) })) : esc(t('wg.pickFirst'))}</span>
+      <button type="button" class="pred-btn wg-go" data-wg="bet"${wg.busy ? ' disabled' : ''}>${esc(t('wg.bet'))}</button>`;
+  }
+  return `<article class="pred-match wg-match${closed ? ' is-locked' : ''}" data-id="${esc(mk.match_id)}">
+    <div class="pred-when">${esc(fmtDay.format(start))} · ${esc(fmtTime.format(start))}</div>
+    <div class="pred-pair">${side('a', mk.a)}<span class="pred-vs">${esc(t('sched.vs'))}</span>${side('b', mk.b)}</div>
+    <div class="pred-foot wg-foot">${foot}</div>
+  </article>`;
+}
+
+function renderWager() {
+  const root = document.getElementById('wg-root');
+  if (!root) return;
+  if (!predState.sb) { root.innerHTML = `<p class="loading-msg">${esc(t('pred.local'))}</p>`; return; }
+  if (!wg.ok) { root.innerHTML = `<p class="loading-msg">${esc(t('wg.soon'))}</p>`; return; }
+  const user = predState.user, admin = wgAdmin(), cfg = wg.cfg;
+  const loc = LOCALES[currentLang];
+  const fmtDay = new Intl.DateTimeFormat(loc, { weekday: 'short', day: 'numeric', month: 'short' });
+  const fmtTime = new Intl.DateTimeFormat(currentLang === 'id' || currentLang === 'ja' ? 'en-GB' : loc, { hour: '2-digit', minute: '2-digit', hour12: false });
+
+  const claimed = user && wg.wallet && wg.wallet.last_daily === wgToday();
+  const bar = user
+    ? `<div class="wg-wallet"><span class="wg-bal">${wgFmt(wg.wallet.balance)}</span><span class="wg-cur">PTAS</span></div>
+       <button type="button" class="pred-btn wg-daily" data-wg="daily"${claimed || wg.busy || !cfg.active ? ' disabled' : ''}>${esc(claimed ? t('wg.dailyDone') : t('wg.daily', { n: wgFmt(cfg.daily) }))}</button>
+       <span class="pred-user">${esc(t('pred.hello', { name: predState.name || '' }))}${wgBadgeHtml(user.id)}</span>
+       <button type="button" class="pred-btn pred-btn-alt" data-wg="logout">${esc(t('pred.logout'))}</button>`
+    : `<span class="pred-user">${esc(t('wg.needLogin'))}</span>
+       <button type="button" class="pred-btn" data-wg="login"><svg class="ic" aria-hidden="true"><use href="#ic-discord"/></svg> ${esc(t('pred.login'))}</button>`;
+
+  const tabs = ['bets', 'mine', 'shop', 'board', 'rules'].concat(admin ? ['admin'] : []);
+  const subs = tabs.map(k => `<button type="button" class="pred-sub${wg.sub === k ? ' active' : ''}" data-wg="sub" data-sub="${k}">${esc(t('wg.sub.' + k))}</button>`).join('');
+
+  let body = '';
+  if (wg.sub === 'bets') {
+    const now = Date.now();
+    const open = wg.markets.filter(m => m.winner == null && new Date(m.start_at) > now);
+    const rest = wg.markets.filter(m => !open.includes(m)).sort((a, b) => new Date(b.start_at) - new Date(a.start_at)).slice(0, 30);
+    body = !wg.markets.length ? `<p class="loading-msg">${esc(t('wg.noMarkets'))}</p>`
+      : `<div class="pred-grid wg-grid">${open.concat(rest).map(m => wgMarketCard(m, fmtDay, fmtTime)).join('')}</div>`;
+  } else if (wg.sub === 'mine') {
+    const mk = {}; wg.markets.forEach(m => { mk[m.match_id] = m; });
+    const list = Object.values(wg.bets).filter(b => mk[b.match_id]).sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    body = !user ? `<p class="loading-msg">${esc(t('wg.needLogin'))}</p>`
+      : !list.length ? `<p class="loading-msg">${esc(t('wg.noBets'))}</p>`
+      : `<div class="pred-grid wg-grid">${list.map(b => wgMarketCard(mk[b.match_id], fmtDay, fmtTime)).join('')}</div>`;
+  } else if (wg.sub === 'shop') {
+    const mine = new Map(wg.buys.map(p => [p.item_id, p]));
+    body = !wg.shop.length ? `<p class="loading-msg">${esc(t('wg.shop.empty'))}</p>` : `<div class="wg-shop">${wg.shop.map(it => {
+      const own = mine.get(it.id);
+      const afford = user && wg.wallet.balance >= it.price;
+      const act = own
+        ? `<span class="wg-owned">${esc(it.kind === 'badge' ? t('wg.shop.owned') : own.fulfilled ? t('wg.shop.delivered') : t('wg.shop.pending'))}</span>`
+        : `<button type="button" class="pred-btn wg-buy" data-wg="buy" data-id="${esc(it.id)}"${!user || !afford || wg.busy || !cfg.active ? ' disabled' : ''}>${esc(t('wg.shop.buy', { n: wgFmt(it.price) }))}</button>`;
+      return `<article class="wg-item"><div class="wg-item-icon" aria-hidden="true">${esc(it.icon || '🎁')}</div>
+        <div class="wg-item-body"><h4>${esc(it.name)}</h4><span class="wg-item-kind">${esc(t('wg.shop.kind.' + it.kind))}</span><p>${esc(it.description)}</p></div>
+        <div class="wg-item-act">${act}</div></article>`;
+    }).join('')}</div>`;
+  } else if (wg.sub === 'board') {
+    if (wg.boardErr) body = `<p class="loading-msg">${esc(t('pred.board.error'))}</p>`;
+    else if (!wg.board) body = `<p class="loading-msg">${esc(t('pred.board.loading'))}</p>`;
+    else if (!wg.board.length) body = `<p class="loading-msg">${esc(t('pred.board.empty'))}</p>`;
+    else body = `<table class="pred-board"><thead><tr><th>#</th><th>${esc(t('pred.board.player'))}</th><th>PTAS</th></tr></thead><tbody>${
+      wg.board.map((u, i) => `<tr${user && u.id === user.id ? ' class="is-me"' : ''}><td>${i + 1}</td>
+        <td><span class="pred-player">${u.avatar && /^https:\/\//.test(u.avatar) ? `<img src="${esc(u.avatar)}" alt="" loading="lazy" referrerpolicy="no-referrer">` : ''}${esc(u.name)}${wgBadgeHtml(u.id)}</span></td>
+        <td class="pred-total">${wgFmt(u.bal)}</td></tr>`).join('')}</tbody></table>`;
+  } else if (wg.sub === 'rules') {
+    body = `<ol class="pred-rules">${[1, 2, 3, 4, 5, 6].map(i => `<li>${esc(t('wg.rules.' + i, { n: cfg.daily, m: cfg.min_bet }))}</li>`).join('')}</ol>`;
+  } else {
+    body = `<div class="wg-admin"><p class="pred-user">${esc(cfg.active ? t('wg.admin.on') : t('wg.admin.off'))}</p>
+      <div class="wg-adminrow"><button type="button" class="pred-btn" data-wg="sync"${wg.syncing ? ' disabled' : ''}>${esc(t('wg.admin.sync'))}</button>
+      <span class="pred-user">${esc(t('wg.admin.markets', { n: wg.markets.length }))}</span></div>
+      <h4 class="wg-h">${esc(t('wg.admin.pending'))}</h4>` + (wg.pending.length
+      ? wg.pending.map(p => { const it = wg.shop.find(i => i.id === p.item_id) || { name: p.item_id, kind: '' };
+          return `<div class="wg-adminrow"><span class="pred-user">${esc(wg.names[p.user_id] || p.user_id)} — ${esc(it.name)}</span>
+            <button type="button" class="pred-btn pred-btn-alt" data-wg="fulfill" data-id="${p.id}">${esc(t('wg.admin.done'))}</button></div>`; }).join('')
+      : `<p class="loading-msg">${esc(t('wg.admin.none'))}</p>`) + `</div>`;
+  }
+
+  const err = wg.err ? `<p class="live-tterr">${esc(t('wg.err.' + wg.err, { n: cfg.min_bet }))}</p>` : '';
+  const msg = wg.msg ? `<p class="live-ttnote">${esc(wg.msg)}</p>` : '';
+  const off = !cfg.active ? `<p class="live-tterr">${esc(t('wg.inactive'))}</p>` : '';
+  root.innerHTML = `${off}<div class="pred-bar wg-bar">${bar}</div>${err}${msg}
+    <div class="pred-subs" role="tablist">${subs}</div><div class="pred-body">${body}</div>`;
+}
+
+function initWager() {
+  const root = document.getElementById('wg-root');
+  if (!root) return;
+  root.addEventListener('click', e => {
+    const b = e.target.closest('[data-wg]');
+    if (!b || b.disabled) return;
+    const a = b.dataset.wg, card = b.closest('.wg-match');
+    if (a === 'sub') { wg.sub = b.dataset.sub; if (wg.sub === 'board') wgLoadBoard(); renderWager(); }
+    else if (a === 'login') predLogin('wager');
+    else if (a === 'logout') predLogout();
+    else if (a === 'daily') wgRpc('wager_claim_daily', {});
+    else if (a === 'sync') wgAdminSync(true);
+    else if (a === 'fulfill') wgRpc('wager_admin_fulfill', { p_id: Number(b.dataset.id) });
+    else if (a === 'buy') {
+      const it = wg.shop.find(i => i.id === b.dataset.id);
+      if (it && confirm(t('wg.shop.confirm', { name: it.name, n: wgFmt(it.price) }))) wgRpc('wager_buy', { p_item: it.id });
+    } else if (a === 'pick' && card) {
+      const id = card.dataset.id, s = wg.sel[id] = wg.sel[id] || {};
+      s.pick = b.dataset.side;
+      card.querySelectorAll('.wg-side').forEach(x => x.classList.toggle('is-picked', x === b));
+      wgUpdateWin(card);
+    } else if (a === 'preset' && card) {
+      const inp = card.querySelector('.wg-stake');
+      inp.value = b.dataset.v === 'all' ? wg.wallet.balance : b.dataset.v;
+      inp.dispatchEvent(new Event('input', { bubbles: true }));
+    } else if (a === 'bet' && card) {
+      const id = card.dataset.id, s = wg.sel[id] || {};
+      if (!s.pick) { wg.err = 'pick'; wg.msg = ''; renderWager(); return; }
+      wgRpc('wager_place_bet', { p_match: id, p_pick: s.pick, p_stake: Math.floor(Number(s.stake) || 0) }).then(ok => { if (ok) delete wg.sel[id]; });
+    }
+  });
+  root.addEventListener('input', e => {
+    const inp = e.target.closest('.wg-stake');
+    if (!inp) return;
+    const card = inp.closest('.wg-match');
+    const s = wg.sel[card.dataset.id] = wg.sel[card.dataset.id] || {};
+    s.stake = Math.floor(Number(inp.value) || 0) || '';
+    wgUpdateWin(card);
+  });
+  const tab = document.querySelector('.tab-btn[data-tab="wager"]');
+  if (tab) tab.addEventListener('click', () => { wgLoad(); });
+  renderWager();
+  setInterval(() => { if (wgAdmin() && wg.ok) wgAdminSync(); }, 5 * 60 * 1000);
+}
+
+// Actualiza "Ganarias X PTAS" sin volver a dibujar la tarjeta (para no perder el foco del input)
+function wgUpdateWin(card) {
+  const mk = wg.markets.find(m => m.match_id === card.dataset.id), s = wg.sel[card.dataset.id] || {};
+  const el = card.querySelector('.wg-win');
+  if (!mk || !el) return;
+  const win = s.pick && s.stake ? Math.floor(s.stake * Number(s.pick === 'a' ? mk.odds_a : mk.odds_b)) : 0;
+  el.textContent = win ? t('wg.win', { n: wgFmt(win) }) : t('wg.pickFirst');
 }
 
 // Tarjetas de la bienvenida del Home: llevan directo a cada pestaña

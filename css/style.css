@@ -1939,3 +1939,36 @@ body[data-tab="simulations"] main { max-width: min(1880px, 100%); }
 .live-ttclaimed a { color: var(--text); text-decoration: none; border-bottom: 1px solid #25f4ee; }
 .live-ttclaimed a:hover { border-bottom-color: #fff; }
 .live-ttclaimed span { opacity: .85; margin-left: .4rem; }
+/* ===== Merchant's Wager (PTAS, apuestas y tienda) ===== */
+.tab-btn[hidden] { display: none; }
+.wg-title { display: flex; align-items: center; gap: .9rem; }
+.wg-chest { width: 84px; height: auto; mix-blend-mode: screen; flex: none; }
+.wg-bar { gap: .8rem 1.4rem; }
+.wg-wallet { display: flex; align-items: baseline; gap: .5rem; }
+.wg-bal { font-family: var(--font-grunge); font-size: 2.4rem; color: var(--gold); line-height: 1; }
+.wg-cur { font-family: var(--font-title); letter-spacing: .12em; color: var(--text-muted); text-transform: uppercase; font-size: 1rem; }
+.wg-daily { background: var(--accent); border-color: var(--accent); }
+.wg-daily:hover:not(:disabled) { background: var(--accent-bright); border-color: var(--accent-bright); }
+.wg-daily:disabled, .wg-go:disabled, .wg-buy:disabled { opacity: .5; cursor: default; }
+.wg-badges { letter-spacing: .1em; }
+.wg-odds { font-family: var(--font-grunge); font-size: 1.35rem; color: var(--gold); }
+.wg-bet { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; width: 100%; }
+.wg-stake { width: 6.5rem; padding: .4rem .5rem; font-family: var(--font-grunge); font-size: 1.25rem; color: var(--text); background: var(--surface-alt); border: 1px solid var(--border); border-radius: 2px; }
+.wg-preset { font-family: var(--font-grunge); font-size: 1.1rem; color: var(--text-dim); background: transparent; border: 1px solid var(--border); border-radius: 2px; padding: .3rem .6rem; cursor: pointer; }
+.wg-preset:hover { border-color: var(--accent-bright); color: #fff; }
+.wg-win { color: var(--gold); font-family: var(--font-grunge); font-size: 1.2rem; }
+.wg-go { align-self: flex-start; background: var(--accent); border-color: var(--accent); }
+.wg-go:hover:not(:disabled) { background: var(--accent-bright); border-color: var(--accent-bright); }
+.wg-foot { flex-direction: column; align-items: flex-start; gap: .5rem; }
+.wg-st-won { color: #8fd18f; } .wg-st-lost { color: var(--accent-bright); } .wg-st-void, .wg-st-open { color: var(--text-dim); }
+.wg-shop { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 1rem; }
+.wg-item { display: flex; flex-direction: column; gap: .7rem; padding: 1rem; background: var(--surface); border: 1px solid var(--frame); }
+.wg-item-icon { font-size: 2.6rem; line-height: 1; }
+.wg-item-body h4 { margin: 0 0 .15rem; font-family: var(--font-grunge); font-size: 1.5rem; font-weight: normal; color: var(--text); text-transform: none; letter-spacing: normal; }
+.wg-item-kind { font-family: var(--font-title); font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); }
+.wg-item-body p { margin: .4rem 0 0; font-family: var(--font-grunge); font-size: 1.15rem; color: var(--text-dim); }
+.wg-item-act { margin-top: auto; }
+.wg-owned { font-family: var(--font-grunge); font-size: 1.2rem; color: #8fd18f; }
+.wg-admin { display: flex; flex-direction: column; gap: .8rem; }
+.wg-adminrow { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem 1.2rem; }
+.wg-h { margin: 1rem 0 0; font-family: var(--font-title); letter-spacing: .08em; text-transform: uppercase; font-size: .95rem; color: var(--text-muted); }
