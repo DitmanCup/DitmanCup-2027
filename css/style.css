@@ -2032,10 +2032,18 @@ body[data-tab="wager"] {
 
 .wg-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
 .wg-head .wg-title { margin-bottom: .6rem; }
-.wg-sound { display: inline-flex; align-items: center; justify-content: center; width: 2.4rem; height: 2.4rem; flex: none; color: var(--text-dim); background: rgba(9, 8, 6, .85); border: 1px solid var(--border); border-radius: 2px; cursor: pointer; }
-.wg-sound:hover { color: #fff; border-color: var(--gold); }
-.wg-sound svg { width: 1.3rem; height: 1.3rem; }
-.wg-sound[aria-pressed="true"] .wg-sound-off, .wg-sound[aria-pressed="false"] .wg-sound-on { display: none; }
+.wg-sound { display: inline-flex; align-items: center; gap: .6rem; flex: none; padding: .35rem .7rem .35rem .4rem; background: rgba(9, 8, 6, .85); border: 1px solid var(--border); border-radius: 2px; }
+.wg-sound:hover, .wg-sound:focus-within { border-color: var(--gold); }
+.wg-sound-btn { display: inline-flex; align-items: center; justify-content: center; width: 2rem; height: 2rem; padding: 0; color: var(--text-dim); background: transparent; border: 0; cursor: pointer; }
+.wg-sound-btn:hover { color: #fff; }
+.wg-sound-btn svg { width: 1.3rem; height: 1.3rem; }
+.wg-sound[data-level="off"] .wg-sound-on, .wg-sound:not([data-level="off"]) .wg-sound-off { display: none; }
+.wg-vol { --fill: 45%; -webkit-appearance: none; appearance: none; width: 7rem; height: 4px; border-radius: 2px; cursor: pointer; background: linear-gradient(to right, var(--gold) var(--fill), var(--border) var(--fill)); }
+.wg-vol::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 14px; height: 14px; border-radius: 50%; background: var(--text); border: 1px solid var(--gold); }
+.wg-vol::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: var(--text); border: 1px solid var(--gold); }
+.wg-vol::-moz-range-track { height: 4px; background: var(--border); }
+.wg-vol::-moz-range-progress { height: 4px; background: var(--gold); }
+@media (max-width: 560px) { .wg-vol { width: 5rem; } }
 
 /* Video de fondo de Merchant's Wager (la foto queda de respaldo / mientras carga) */
 .wg-bg { display: none; position: fixed; inset: 0; z-index: -1; background: #0A0908; }

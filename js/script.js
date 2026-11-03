@@ -515,6 +515,10 @@ const I18N = {
     'wg.daily': 'Cobrar {n} PTAS de hoy',
     'wg.dailyDone': 'Ya cobraste hoy',
     'wg.sound': 'Sonido y música',
+    'wg.item.discord-role.name': 'Rol de Discord',
+    'wg.item.discord-role.desc': 'Rol exclusivo en el servidor de Discord.',
+    'wg.item.twitch-vip.name': 'VIP en Twitch',
+    'wg.item.twitch-vip.desc': 'VIP en el canal de Twitch.',
     'wg.dailySoon': 'Bono diario: desde que empiece el torneo',
     'wg.sub.bets': 'Apuestas',
     'wg.sub.mine': 'Mis apuestas',
@@ -901,6 +905,10 @@ const I18N = {
     'wg.daily': 'Claim today\'s {n} PTAS',
     'wg.dailyDone': 'Already claimed today',
     'wg.sound': 'Sound and music',
+    'wg.item.discord-role.name': 'Discord role',
+    'wg.item.discord-role.desc': 'Exclusive role in the Discord server.',
+    'wg.item.twitch-vip.name': 'Twitch VIP',
+    'wg.item.twitch-vip.desc': 'VIP status on the Twitch channel.',
     'wg.dailySoon': 'Daily bonus: starts with the tournament',
     'wg.sub.bets': 'Bets',
     'wg.sub.mine': 'My bets',
@@ -1845,6 +1853,7 @@ function applyLang(lang) {
   renderClips();
   renderLive();
   renderPredictions();
+  renderWager();
   renderSimulator();
   if (typeof simSwapRefresh === 'function') simSwapRefresh();
 }
@@ -4514,6 +4523,13 @@ function wgIcon(it) {
   return esc(it.icon || '🎁');
 }
 
+// Nombre y descripcion de un articulo en el idioma de la persona (la base los guarda en espanol; los articulos nuevos sin traduccion usan el texto de la base)
+function wgItemText(it, field) {
+  const k = 'wg.item.' + it.id + '.' + field;
+  const v = t(k);
+  return v !== k ? v : (field === 'name' ? it.name : it.description);
+}
+
 function wgBadgeHtml(userId) {
   const b = wg.badges[userId];
   return b && b.length ? ` <span class="wg-badges">${b.map(esc).join('')}</span>` : '';
@@ -4677,7 +4693,7 @@ function renderWager() {
         ? `<span class="wg-owned">${esc(it.kind === 'badge' ? t('wg.shop.owned') : own.fulfilled ? t('wg.shop.delivered') : t('wg.shop.pending'))}</span>`
         : `<button type="button" class="pred-btn wg-buy" data-wg="buy" data-id="${esc(it.id)}"${!user || !afford || wg.busy || !cfg.active ? ' disabled' : ''}>${esc(t('wg.shop.buy', { n: wgFmt(it.price) }))}</button>`;
       return `<article class="wg-item"><div class="wg-item-icon wg-ic-${esc(it.kind)}" aria-hidden="true">${wgIcon(it)}</div>
-        <div class="wg-item-body"><h4>${esc(it.name)}</h4><span class="wg-item-kind">${esc(t('wg.shop.kind.' + it.kind))}</span><p>${esc(it.description)}</p></div>
+        <div class="wg-item-body"><h4>${esc(wgItemText(it, 'name'))}</h4><span class="wg-item-kind">${esc(t('wg.shop.kind.' + it.kind))}</span><p>${esc(wgItemText(it, 'desc'))}</p></div>
         <div class="wg-item-act">${act}</div></article>`;
     }).join('')}</div>`;
   } else if (wg.sub === 'board') {
@@ -4696,7 +4712,7 @@ function renderWager() {
       <span class="pred-user">${esc(t('wg.admin.markets', { n: wg.markets.length }))}</span></div>
       <h4 class="wg-h">${esc(t('wg.admin.pending'))}</h4>` + (wg.pending.length
       ? wg.pending.map(p => { const it = wg.shop.find(i => i.id === p.item_id) || { name: p.item_id, kind: '' };
-          return `<div class="wg-adminrow"><span class="pred-user">${esc(wg.names[p.user_id] || p.user_id)} — ${esc(it.name)}</span>
+          return `<div class="wg-adminrow"><span class="pred-user">${esc(wg.names[p.user_id] || p.user_id)} — ${esc(wgItemText(it, 'name'))}</span>
             <button type="button" class="pred-btn pred-btn-alt" data-wg="fulfill" data-id="${p.id}">${esc(t('wg.admin.done'))}</button></div>`; }).join('')
       : `<p class="loading-msg">${esc(t('wg.admin.none'))}</p>`) + `</div>`;
   }
@@ -4725,7 +4741,7 @@ function initWager() {
     else if (a === 'fulfill') wgRpc('wager_admin_fulfill', { p_id: Number(b.dataset.id) });
     else if (a === 'buy') {
       const it = wg.shop.find(i => i.id === b.dataset.id);
-      if (it && confirm(t('wg.shop.confirm', { name: it.name, n: wgFmt(it.price) }))) wgRpc('wager_buy', { p_item: it.id });
+      if (it && confirm(t('wg.shop.confirm', { name: wgItemText(it, 'name'), n: wgFmt(it.price) }))) wgRpc('wager_buy', { p_item: it.id });
     } else if (a === 'pick' && card) {
       const id = card.dataset.id, s = wg.sel[id] = wg.sel[id] || {};
       s.pick = b.dataset.side;
@@ -4757,28 +4773,33 @@ function initWager() {
   setInterval(() => { if (wgAdmin() && wg.ok) wgAdminSync(); }, 5 * 60 * 1000);
 }
 
-// ---- Sonido de Merchant's Wager: saludo del Mercader al entrar + musica ambiente de fondo (con boton para silenciar) ----
-const WG_MUTE_LS = 'dc-wg-mute';
-const WG_MUSIC_VOL = 0.22;
+// ---- Sonido de Merchant's Wager: saludo del Mercader al entrar + musica ambiente de fondo, con control de volumen ----
+// El volumen general (0 a 1) lo elige la persona con la barra; la musica y el saludo salen a una fraccion fija de ese valor.
+const WG_VOL_LS = 'dc-wg-vol', WG_VOL_LAST_LS = 'dc-wg-vol-last';
+const WG_VOL_DEFAULT = 0.45;
 const WG_WELCOME_SS = 'dc-wg-welcomed';
-const WG_WELCOME_VOL = 0.25;
 const wgSnd = { welcome: null, music: null, on: false, fade: 0, welcomed: false };
-const wgMuted = () => safeGet(WG_MUTE_LS) === '1';
+function wgVol() {
+  const v = parseFloat(safeGet(WG_VOL_LS));
+  return isNaN(v) ? WG_VOL_DEFAULT : Math.min(1, Math.max(0, v));
+}
+const wgMusicVol = () => wgVol() * 0.5;     // al 100 % la musica sale a 0.5
+const wgWelcomeVol = () => wgVol() * 0.6;
+const wgMuted = () => wgVol() === 0;
 
 function wgSndInit() {
   if (wgSnd.music) return;
   try { wgSnd.welcomed = sessionStorage.getItem(WG_WELCOME_SS) === '1'; } catch (e) {}
   wgSnd.welcome = new Audio('assets/audio/merchant-welcome.mp3');
-  wgSnd.welcome.volume = WG_WELCOME_VOL;
   wgSnd.music = new Audio('assets/audio/merchant-ambient.mp3?v=2');
   wgSnd.music.loop = true;
-  wgSnd.music.volume = WG_MUSIC_VOL;
 }
 function wgSndPlay(withWelcome) {
   if (wgMuted()) return;
   wgSndInit();
   clearInterval(wgSnd.fade);
-  wgSnd.music.volume = WG_MUSIC_VOL;
+  wgSnd.music.volume = wgMusicVol();
+  wgSnd.welcome.volume = wgWelcomeVol();
   wgSnd.music.play().catch(() => {});
   // El saludo suena una sola vez por visita (no al volver a entrar a la pestaña ni al recargar)
   if (withWelcome && !wgSnd.welcomed) {
@@ -4792,10 +4813,10 @@ function wgSndStop(now) {
   if (!wgSnd.music) return;
   clearInterval(wgSnd.fade);
   wgSnd.welcome.pause();
-  if (now) { wgSnd.music.pause(); wgSnd.music.volume = WG_MUSIC_VOL; return; }
+  if (now) { wgSnd.music.pause(); return; }
   wgSnd.fade = setInterval(() => {   // se apaga de a poco al salir de la pestaña
     const v = wgSnd.music.volume - 0.03;
-    if (v <= 0.01) { clearInterval(wgSnd.fade); wgSnd.music.pause(); wgSnd.music.volume = WG_MUSIC_VOL; }
+    if (v <= 0.01) { clearInterval(wgSnd.fade); wgSnd.music.pause(); }
     else wgSnd.music.volume = v;
   }, 60);
 }
@@ -4818,14 +4839,33 @@ function wgAudioTab(tab) {
   if (here) wgSndPlay(true); else wgSndStop(false);
 }
 function initWagerSound() {
-  const btn = document.getElementById('wg-sound');
-  if (!btn) return;
-  const paint = () => btn.setAttribute('aria-pressed', String(!wgMuted()));
+  const box = document.getElementById('wg-sound'), btn = document.getElementById('wg-sound-btn'), range = document.getElementById('wg-vol');
+  if (!box || !btn || !range) return;
+  const paint = () => {
+    const v = wgVol();
+    range.value = Math.round(v * 100);
+    range.style.setProperty('--fill', Math.round(v * 100) + '%');
+    box.dataset.level = v === 0 ? 'off' : 'on';
+  };
   paint();
-  btn.addEventListener('click', () => {
-    safeSet(WG_MUTE_LS, wgMuted() ? '0' : '1');
+  const apply = () => {   // aplica el volumen nuevo al instante (y arranca o corta el sonido segun corresponda)
     paint();
-    if (wgMuted()) wgSndStop(true); else if (wgSnd.on) wgSndPlay(false);
+    if (wgMuted()) wgSndStop(true);
+    else if (wgSnd.on) {
+      if (wgSnd.music && !wgSnd.music.paused) { wgSnd.music.volume = wgMusicVol(); wgSnd.welcome.volume = wgWelcomeVol(); }
+      else wgSndPlay(false);
+    }
+  };
+  range.addEventListener('input', () => {
+    const v = Number(range.value) / 100;
+    safeSet(WG_VOL_LS, String(v));
+    if (v > 0) safeSet(WG_VOL_LAST_LS, String(v));
+    apply();
+  });
+  btn.addEventListener('click', () => {   // el parlante sigue sirviendo para silenciar y volver al volumen anterior
+    if (wgMuted()) { const last = parseFloat(safeGet(WG_VOL_LAST_LS)); safeSet(WG_VOL_LS, String(isNaN(last) || last <= 0 ? WG_VOL_DEFAULT : last)); }
+    else { safeSet(WG_VOL_LAST_LS, String(wgVol())); safeSet(WG_VOL_LS, '0'); }
+    apply();
   });
   document.addEventListener('visibilitychange', () => {   // en segundo plano no suena
     if (!wgSnd.music) return;
