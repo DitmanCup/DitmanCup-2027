@@ -266,6 +266,7 @@ const KICK_LIVE_CHANNELS = ['chacoide'];
 // asi que no se detecta si estan en vivo: la tarjeta lleva directo a @usuario/live.
 const TIKTOK_LIVE_CHANNELS = [
   'layhan301',   // HannNrY
+  'jokeruy_',    // JokerUY (para probar el panel de marcarse en vivo)
 ];
 
 // Runners de Twitch que tambien streamean en TikTok: { 'canal de twitch en minusculas': 'usuario de tiktok' }.
