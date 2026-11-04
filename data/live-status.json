@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-04T17:32:03.167Z",
+  "updatedAt": "2026-11-04T17:42:11.668Z",
   "youtube": {
     "seppp": {
       "live": false,
@@ -7,7 +7,11 @@
     },
     "Bang Gori": {
       "live": false,
-      "why": "canon:undefined|len=1275k|isLiveNow=0|isLive=1|vd=1|vdLive=0"
+      "why": "canon:undefined|len=1345k|isLiveNow=0|isLive=1|vd=1|vdLive=0",
+      "vd": "\"videoDetails\":{\"playerOverlayVideoDetailsRenderer\":{\"title\":{\"simpleText\":\"Abis Ngapain Tuh | Resident Evil 4 Speedrun Indonesia\"},\"subtitle\":{\"runs\":[{\"text\":\"Bang Gori\"},{\"text\":\"   \"},{\"text\":\"97\"},{\"text\":\" watching",
+      "isLiveCtx": [
+        "\"Abis Ngapain Tuh | Resident Evil 4 Speedrun Indonesia\"}]},\"viewCount\":{\"videoViewCountRenderer\":{\"viewCount\":{\"runs\":[{\"text\":\"97\"},{\"text\":\" watching now\"}]},\"isLive\":true,\"extraShortViewCount\":{\"simpleText\":"
+      ]
     },
     "nyr9468": {
       "live": false,
@@ -43,7 +47,11 @@
     },
     "Orchlon": {
       "live": false,
-      "why": "canon:undefined|len=1247k|isLiveNow=0|isLive=1|vd=1|vdLive=0"
+      "why": "canon:undefined|len=1249k|isLiveNow=0|isLive=1|vd=1|vdLive=0",
+      "vd": "\"videoDetails\":{\"playerOverlayVideoDetailsRenderer\":{\"title\":{\"simpleText\":\"[Live] Resident Evil 4 (OG) Professional Speedruns\"},\"subtitle\":{\"runs\":[{\"text\":\"Orchlon\"},{\"text\":\"   \"},{\"text\":\"93\"},{\"text\":\" watching now\"",
+      "isLiveCtx": [
+        "t\":\"[Live] Resident Evil 4 (OG) Professional Speedruns\"}]},\"viewCount\":{\"videoViewCountRenderer\":{\"viewCount\":{\"runs\":[{\"text\":\"93\"},{\"text\":\" watching now\"}]},\"isLive\":true,\"extraShortViewCount\":{\"simpleText\":"
+      ]
     },
     "JokerUY": {
       "live": false,
