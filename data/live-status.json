@@ -1,11 +1,15 @@
 {
-  "updatedAt": "2026-11-04T12:40:55.205Z",
+  "updatedAt": "2026-11-04T16:46:11.702Z",
   "youtube": {
     "seppp": {
       "live": false
     },
     "Bang Gori": {
-      "live": false
+      "live": true,
+      "videoId": "K4dZpBp1e_8",
+      "title": "Abis Ngapain Tuh | Resident Evil 4 Speedrun Indonesia",
+      "viewers": 162,
+      "embed": true
     },
     "nyr9468": {
       "live": false
@@ -32,7 +36,11 @@
       "live": false
     },
     "Orchlon": {
-      "live": false
+      "live": true,
+      "videoId": "-J9p8aOZKYw",
+      "title": "[Live] Resident Evil 4 (OG) Professional Speedruns",
+      "viewers": 58,
+      "embed": true
     },
     "JokerUY": {
       "live": false
@@ -45,7 +53,7 @@
     "chacoide": {
       "name": "chacoide",
       "live": false,
-      "followers": 7768
+      "followers": 7782
     }
   }
 }

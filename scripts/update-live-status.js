@@ -45,10 +45,13 @@ async function checkYouTube(c) {
     if (!/<link rel="canonical"/.test(html)) throw new Error('pagina sin canonical (consentimiento o bloqueo)');
     return { live: false };
   }
-  // En vivo de verdad: reproducible (no "empieza en unos momentos") y marcado como en directo ahora
-  const playable = /"playabilityStatus":\{"status":"OK"/.test(html);
+  // En vivo de verdad: marcado como en directo ahora (un directo que "empieza en unos momentos" trae isLiveNow:false).
+  // No se exige playabilityStatus OK: desde los servidores de GitHub YouTube a veces pide "confirmar que no sos un bot"
+  // (LOGIN_REQUIRED) aunque el canal este en vivo, y eso hacia que se perdieran directos reales.
+  const status = (html.match(/"playabilityStatus":\{"status":"([A-Z_]+)"/) || [])[1] || '';
   const liveNow = /"isLiveNow":true/.test(html);
-  if (!playable || !liveNow) return { live: false };
+  if (status && status !== 'OK' && status !== 'LIVE_STREAM_OFFLINE') console.log(`YouTube ${c.name || url}: playabilityStatus=${status} isLiveNow=${liveNow}`);
+  if (!liveNow) return { live: false };
   const viewers = Number(((html.match(/"runs":\[\{"text":"([\d,.]+)"\},\{"text":" watching now"/) || [])[1] || '0').replace(/[^\d]/g, ''));
   const title = (html.match(/<meta name="title" content="([^"]*)"/) || [])[1] || '';
   return {

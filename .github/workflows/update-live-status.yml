@@ -31,6 +31,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           end=$(( $(date +%s) + 340 * 60 ))
           while [ "$(date +%s)" -lt "$end" ]; do
+            git pull -q --rebase origin main || true   # toma cambios del script sin esperar a la proxima tanda
             node scripts/update-live-status.js || true
             if [ -n "$(git status --porcelain data/live-status.json)" ]; then
               git add data/live-status.json
