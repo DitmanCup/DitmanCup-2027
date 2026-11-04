@@ -51,7 +51,16 @@ async function checkYouTube(c) {
   const vd = vdAt >= 0 ? html.slice(vdAt, vdAt + 2500) : '';
   const vdId = (vd.match(/"videoId":"([\w-]{11})"/) || [])[1];
   const vdLive = !!vdId && /"isLive":true/.test(vd);
-  if (!videoId && !isChannelPage && vdLive) videoId = vdId;
+  // Otra señal de la misma variante: el bloque de espectadores marca isLive:true junto a "watching now"
+  const vvLive = /"videoViewCountRenderer":\{"viewCount":\{"runs":\[[^\]]*\]\},"isLive":true/.test(html);
+  const variant = !videoId && !isChannelPage;   // canonical sin link al video ni a la pagina del canal ("undefined")
+  const waiting = /"playabilityStatus":\{"status":"LIVE_STREAM_OFFLINE"/.test(html);   // directo programado que todavia no empezo
+  if (variant && !waiting && (vdLive || vvLive)) {
+    const pi = html.indexOf('"videoPrimaryInfoRenderer":{');
+    videoId = (vdLive ? vdId : '')
+      || (html.match(/"currentVideoEndpoint":\{.{0,1500}?"watchEndpoint":\{"videoId":"([\w-]{11})"/s) || [])[1]
+      || (pi >= 0 ? (html.slice(pi, pi + 8000).match(/"videoId":"([\w-]{11})"/) || [])[1] : '');
+  }
 
   if (!videoId) {
     const why = 'canon:' + canon.replace('https://www.youtube.com', '').slice(0, 40);
@@ -70,7 +79,7 @@ async function checkYouTube(c) {
   // En vivo de verdad: YouTube la marca en directo ahora (un directo que "empieza en unos momentos" no lo esta).
   // No se exige playabilityStatus OK: a veces pide "confirmar que no sos un bot" (LOGIN_REQUIRED) aunque el canal este en vivo.
   const status = (html.match(/"playabilityStatus":\{"status":"([A-Z_]+)"/) || [])[1] || '';
-  const liveNow = /"isLiveNow":true/.test(html) || (vdLive && vdId === videoId);
+  const liveNow = /"isLiveNow":true/.test(html) || (vdLive && vdId === videoId) || (variant && !waiting && vvLive);
   if (status && status !== 'OK' && status !== 'LIVE_STREAM_OFFLINE') console.log('YouTube ' + (c.name || url) + ': playabilityStatus=' + status + ' isLiveNow=' + liveNow);
   // "why" queda en live-status.json solo para diagnosticar (la pagina lo ignora)
   if (!liveNow) return { live: false, why: 'watch|' + status + '|lbd=' + (/liveBroadcastDetails/.test(html) ? 1 : 0) };
@@ -78,7 +87,11 @@ async function checkYouTube(c) {
   const viewers = Number(((html.match(/"runs":\[\{"text":"([\d,.]+)"\},\{"text":" watching now"/) || vd.match(/"viewCount":"(\d+)"/) || [])[1] || '0').replace(/[^\d]/g, ''));
   let title = (html.match(/<meta name="title" content="([^"]*)"/) || [])[1] || '';
   if (title) title = title.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;/g, "'");
-  else { try { title = JSON.parse('"' + ((vd.match(/"title":"((?:[^"\\]|\\.)*)"/) || [])[1] || '') + '"'); } catch (e) { title = ''; } }
+  else {
+    const raw = (vd.match(/"title":"((?:[^"\\]|\\.)*)"/) || [])[1]
+      || (html.match(/"playerOverlayVideoDetailsRenderer":\{"title":\{"simpleText":"((?:[^"\\]|\\.)*)"/) || [])[1] || '';
+    try { title = JSON.parse('"' + raw + '"'); } catch (e) { title = ''; }
+  }
   return {
     live: true,
     videoId,
