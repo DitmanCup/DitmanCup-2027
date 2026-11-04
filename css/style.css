@@ -2050,3 +2050,14 @@ body[data-tab="wager"] {
 .wg-bgvideo { width: 100%; height: 100%; object-fit: cover; display: block; }
 .wg-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(10, 9, 8, 0.4), rgba(10, 9, 8, 0.86)); }
 body[data-tab="wager"] .wg-bg { display: block; }
+
+/* Con 5 idiomas, en celular los botones tienen que entrar junto al menu (este bloque va al final para ganarle a los ajustes de fuentes grandes) */
+@media (max-width: 560px) {
+  .lang-btn { padding: .45rem .5rem; }
+  .lang-btn .fi { font-size: 1.2rem; }
+}
+
+/* En portugues las fechas llevan "de" en minuscula ("qua., 4 de nov."): no se capitaliza cada palabra, solo la primera letra */
+html[lang="pt"] .pred-when, html[lang="pt"] .sched-day-date { text-transform: none; }
+html[lang="pt"] .sched-day-date { display: inline-block; }
+html[lang="pt"] .pred-when::first-letter, html[lang="pt"] .sched-day-date::first-letter { text-transform: uppercase; }
