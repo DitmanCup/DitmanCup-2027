@@ -40,7 +40,13 @@ async function checkYouTube(c) {
   if (!res.ok) throw new Error('HTTP ' + res.status);
   const html = await res.text();
   const canon = (html.match(/<link rel="canonical" href="([^"]+)"/) || [])[1] || '';
-  const videoId = (canon.match(/[?&]v=([\w-]{11})/) || [])[1];
+  let videoId = (canon.match(/[?&]v=([\w-]{11})/) || [])[1];
+  // Cuando el canal esta en vivo, a los servidores de GitHub YouTube les sirve una variante de la pagina con el canonical
+  // en "undefined" (sin link al video), y por eso se perdian los directos. Si el canonical no es la pagina del canal,
+  // el id del video se saca de los datos de la propia pagina (y solo si YouTube la marca en directo ahora).
+  if (!videoId && /<link rel="canonical"/.test(html) && !/\/(channel\/|@)/.test(canon) && /"isLiveNow":true/.test(html)) {
+    videoId = (html.match(/"videoDetails":\{"videoId":"([\w-]{11})"/) || html.match(/"videoId":"([\w-]{11})"/) || [])[1];
+  }
   if (!videoId) {
     if (!/<link rel="canonical"/.test(html)) throw new Error('pagina sin canonical (consentimiento o bloqueo)');
     return { live: false, why: 'canon:' + canon.replace('https://www.youtube.com', '').slice(0, 40) };
