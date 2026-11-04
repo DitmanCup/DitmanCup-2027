@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-03T23:43:30.227Z",
+  "updatedAt": "2026-11-04T00:23:57.803Z",
   "youtube": {
     "seppp": {
       "live": false
@@ -35,7 +35,11 @@
       "live": false
     },
     "JokerUY": {
-      "live": false
+      "live": true,
+      "videoId": "U-JcYX6IcYM",
+      "title": "RE4OG NEW GLITCH SPEEDRUN NG+",
+      "viewers": 9,
+      "embed": true
     },
     "ryllmen": {
       "live": false
