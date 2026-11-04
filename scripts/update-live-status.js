@@ -39,40 +39,44 @@ async function checkYouTube(c) {
   const res = await fetch(url, { headers: YT_HEADERS, redirect: 'follow', signal: AbortSignal.timeout(20000) });
   if (!res.ok) throw new Error('HTTP ' + res.status);
   const html = await res.text();
+  if (!/<link rel="canonical"/.test(html)) throw new Error('pagina sin canonical (consentimiento o bloqueo)');
   const canon = (html.match(/<link rel="canonical" href="([^"]+)"/) || [])[1] || '';
+  const isChannelPage = /\/(channel\/|@)/.test(canon);
   let videoId = (canon.match(/[?&]v=([\w-]{11})/) || [])[1];
-  // Cuando el canal esta en vivo, a los servidores de GitHub YouTube les sirve una variante de la pagina con el canonical
-  // en "undefined" (sin link al video), y por eso se perdian los directos. Si el canonical no es la pagina del canal,
-  // el id del video se saca de los datos de la propia pagina (y solo si YouTube la marca en directo ahora).
-  if (!videoId && /<link rel="canonical"/.test(html) && !/\/(channel\/|@)/.test(canon) && /"isLiveNow":true/.test(html)) {
-    videoId = (html.match(/"videoDetails":\{"videoId":"([\w-]{11})"/) || html.match(/"videoId":"([\w-]{11})"/) || [])[1];
-  }
+
+  // Datos del video que trae la propia pagina (videoDetails). A los servidores de GitHub, cuando el canal esta en vivo,
+  // YouTube les sirve una variante con el canonical en "undefined" y sin la marca isLiveNow, pero con el id del video e
+  // isLive:true aca adentro. Sin esto los directos reales se perdian.
+  const vdAt = html.indexOf('"videoDetails":{');
+  const vd = vdAt >= 0 ? html.slice(vdAt, vdAt + 2500) : '';
+  const vdId = (vd.match(/"videoId":"([\w-]{11})"/) || [])[1];
+  const vdLive = !!vdId && /"isLive":true/.test(vd);
+  if (!videoId && !isChannelPage && vdLive) videoId = vdId;
+
   if (!videoId) {
-    if (!/<link rel="canonical"/.test(html)) throw new Error('pagina sin canonical (consentimiento o bloqueo)');
     const why = 'canon:' + canon.replace('https://www.youtube.com', '').slice(0, 40);
-    // Solo para la variante rara (canonical "undefined"): que trae la pagina, para poder arreglar la deteccion
-    if (!/\/(channel\/|@)/.test(canon)) {
-      const has = re => (re.test(html) ? 1 : 0);
-      const og = (html.match(/<meta property="og:url" content="([^"]*)"/) || [])[1] || '';
-      const ttl = (html.match(/<title>([^<]*)<\/title>/) || [])[1] || '';
-      return { live: false, why: `${why}|len=${Math.round(html.length / 1000)}k|isLiveNow=${has(/"isLiveNow":true/)}|isLive=${has(/"isLive":true/)}|lbd=${has(/liveBroadcastDetails/)}|vd=${has(/"videoDetails"/)}|ytid=${has(/"videoId":"[\w-]{11}"/)}|og=${og.replace('https://www.youtube.com', '').slice(0, 40)}|title=${ttl.slice(0, 50)}` };
-    }
-    return { live: false, why };
+    if (isChannelPage) return { live: false, why };
+    // Variante rara que no se reconoce: se anota que trae la pagina para poder ajustar la deteccion
+    const has = re => (re.test(html) ? 1 : 0);
+    return { live: false, why: why + '|len=' + Math.round(html.length / 1000) + 'k|isLiveNow=' + has(/"isLiveNow":true/) + '|isLive=' + has(/"isLive":true/) + '|vd=' + (vd ? 1 : 0) + '|vdLive=' + (vdLive ? 1 : 0) };
   }
-  // En vivo de verdad: marcado como en directo ahora (un directo que "empieza en unos momentos" trae isLiveNow:false).
-  // No se exige playabilityStatus OK: desde los servidores de GitHub YouTube a veces pide "confirmar que no sos un bot"
-  // (LOGIN_REQUIRED) aunque el canal este en vivo, y eso hacia que se perdieran directos reales.
+
+  // En vivo de verdad: YouTube la marca en directo ahora (un directo que "empieza en unos momentos" no lo esta).
+  // No se exige playabilityStatus OK: a veces pide "confirmar que no sos un bot" (LOGIN_REQUIRED) aunque el canal este en vivo.
   const status = (html.match(/"playabilityStatus":\{"status":"([A-Z_]+)"/) || [])[1] || '';
-  const liveNow = /"isLiveNow":true/.test(html);
-  if (status && status !== 'OK' && status !== 'LIVE_STREAM_OFFLINE') console.log(`YouTube ${c.name || url}: playabilityStatus=${status} isLiveNow=${liveNow}`);
-  // "why" queda en live-status.json solo para diagnosticar (la pagina lo ignora): que le llego a GitHub de YouTube
-  if (!liveNow) return { live: false, why: `watch|${status}|lbd=${/liveBroadcastDetails/.test(html) ? 1 : 0}` };
-  const viewers = Number(((html.match(/"runs":\[\{"text":"([\d,.]+)"\},\{"text":" watching now"/) || [])[1] || '0').replace(/[^\d]/g, ''));
-  const title = (html.match(/<meta name="title" content="([^"]*)"/) || [])[1] || '';
+  const liveNow = /"isLiveNow":true/.test(html) || (vdLive && vdId === videoId);
+  if (status && status !== 'OK' && status !== 'LIVE_STREAM_OFFLINE') console.log('YouTube ' + (c.name || url) + ': playabilityStatus=' + status + ' isLiveNow=' + liveNow);
+  // "why" queda en live-status.json solo para diagnosticar (la pagina lo ignora)
+  if (!liveNow) return { live: false, why: 'watch|' + status + '|lbd=' + (/liveBroadcastDetails/.test(html) ? 1 : 0) };
+
+  const viewers = Number(((html.match(/"runs":\[\{"text":"([\d,.]+)"\},\{"text":" watching now"/) || vd.match(/"viewCount":"(\d+)"/) || [])[1] || '0').replace(/[^\d]/g, ''));
+  let title = (html.match(/<meta name="title" content="([^"]*)"/) || [])[1] || '';
+  if (title) title = title.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;/g, "'");
+  else { try { title = JSON.parse('"' + ((vd.match(/"title":"((?:[^"\\]|\\.)*)"/) || [])[1] || '') + '"'); } catch (e) { title = ''; } }
   return {
     live: true,
     videoId,
-    title: title.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;/g, "'"),
+    title,
     viewers,
     embed: !/"playableInEmbed":false/.test(html),
   };
