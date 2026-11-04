@@ -58,7 +58,13 @@ async function checkYouTube(c) {
     if (isChannelPage) return { live: false, why };
     // Variante rara que no se reconoce: se anota que trae la pagina para poder ajustar la deteccion
     const has = re => (re.test(html) ? 1 : 0);
-    return { live: false, why: why + '|len=' + Math.round(html.length / 1000) + 'k|isLiveNow=' + has(/"isLiveNow":true/) + '|isLive=' + has(/"isLive":true/) + '|vd=' + (vd ? 1 : 0) + '|vdLive=' + (vdLive ? 1 : 0) };
+    const around = (needle, n) => {   // fragmentos de la pagina alrededor de cada aparicion de "needle"
+      const out = []; let i = -1;
+      while (out.length < n && (i = html.indexOf(needle, i + 1)) >= 0) out.push(html.slice(Math.max(0, i - 160), i + 50).replace(/\s+/g, ' '));
+      return out;
+    };
+    return { live: false, why: why + '|len=' + Math.round(html.length / 1000) + 'k|isLiveNow=' + has(/"isLiveNow":true/) + '|isLive=' + has(/"isLive":true/) + '|vd=' + (vd ? 1 : 0) + '|vdLive=' + (vdLive ? 1 : 0),
+      vd: vd.slice(0, 220), isLiveCtx: around('"isLive":true', 3) };
   }
 
   // En vivo de verdad: YouTube la marca en directo ahora (un directo que "empieza en unos momentos" no lo esta).
