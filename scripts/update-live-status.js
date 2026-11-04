@@ -65,15 +65,9 @@ async function checkYouTube(c) {
   if (!videoId) {
     const why = 'canon:' + canon.replace('https://www.youtube.com', '').slice(0, 40);
     if (isChannelPage) return { live: false, why };
-    // Variante rara que no se reconoce: se anota que trae la pagina para poder ajustar la deteccion
+    // Variante que no se reconoce: se anota un resumen corto de lo que trae la pagina (solo para diagnosticar)
     const has = re => (re.test(html) ? 1 : 0);
-    const around = (needle, n) => {   // fragmentos de la pagina alrededor de cada aparicion de "needle"
-      const out = []; let i = -1;
-      while (out.length < n && (i = html.indexOf(needle, i + 1)) >= 0) out.push(html.slice(Math.max(0, i - 160), i + 50).replace(/\s+/g, ' '));
-      return out;
-    };
-    return { live: false, why: why + '|len=' + Math.round(html.length / 1000) + 'k|isLiveNow=' + has(/"isLiveNow":true/) + '|isLive=' + has(/"isLive":true/) + '|vd=' + (vd ? 1 : 0) + '|vdLive=' + (vdLive ? 1 : 0),
-      vd: vd.slice(0, 220), isLiveCtx: around('"isLive":true', 3) };
+    return { live: false, why: why + '|len=' + Math.round(html.length / 1000) + 'k|isLiveNow=' + has(/"isLiveNow":true/) + '|isLive=' + has(/"isLive":true/) + '|vd=' + (vd ? 1 : 0) + '|vdLive=' + (vdLive ? 1 : 0) };
   }
 
   // En vivo de verdad: YouTube la marca en directo ahora (un directo que "empieza en unos momentos" no lo esta).
@@ -88,8 +82,10 @@ async function checkYouTube(c) {
   let title = (html.match(/<meta name="title" content="([^"]*)"/) || [])[1] || '';
   if (title) title = title.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;/g, "'");
   else {
-    const raw = (vd.match(/"title":"((?:[^"\\]|\\.)*)"/) || [])[1]
-      || (html.match(/"playerOverlayVideoDetailsRenderer":\{"title":\{"simpleText":"((?:[^"\\]|\\.)*)"/) || [])[1] || '';
+    // Primero el titulo del bloque de superposicion del reproductor (el que trae la variante de GitHub); el "title" suelto
+    // de videoDetails puede ser otra cosa (a un directo le salio "33")
+    const raw = (html.match(/"playerOverlayVideoDetailsRenderer":\{"title":\{"simpleText":"((?:[^"\\]|\\.)*)"/) || [])[1]
+      || (vd.match(/"videoId":"[\w-]{11}","title":"((?:[^"\\]|\\.)*)"/) || [])[1] || '';
     try { title = JSON.parse('"' + raw + '"'); } catch (e) { title = ''; }
   }
   return {
