@@ -49,7 +49,15 @@ async function checkYouTube(c) {
   }
   if (!videoId) {
     if (!/<link rel="canonical"/.test(html)) throw new Error('pagina sin canonical (consentimiento o bloqueo)');
-    return { live: false, why: 'canon:' + canon.replace('https://www.youtube.com', '').slice(0, 40) };
+    const why = 'canon:' + canon.replace('https://www.youtube.com', '').slice(0, 40);
+    // Solo para la variante rara (canonical "undefined"): que trae la pagina, para poder arreglar la deteccion
+    if (!/\/(channel\/|@)/.test(canon)) {
+      const has = re => (re.test(html) ? 1 : 0);
+      const og = (html.match(/<meta property="og:url" content="([^"]*)"/) || [])[1] || '';
+      const ttl = (html.match(/<title>([^<]*)<\/title>/) || [])[1] || '';
+      return { live: false, why: `${why}|len=${Math.round(html.length / 1000)}k|isLiveNow=${has(/"isLiveNow":true/)}|isLive=${has(/"isLive":true/)}|lbd=${has(/liveBroadcastDetails/)}|vd=${has(/"videoDetails"/)}|ytid=${has(/"videoId":"[\w-]{11}"/)}|og=${og.replace('https://www.youtube.com', '').slice(0, 40)}|title=${ttl.slice(0, 50)}` };
+    }
+    return { live: false, why };
   }
   // En vivo de verdad: marcado como en directo ahora (un directo que "empieza en unos momentos" trae isLiveNow:false).
   // No se exige playabilityStatus OK: desde los servidores de GitHub YouTube a veces pide "confirmar que no sos un bot"
