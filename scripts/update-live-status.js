@@ -43,7 +43,7 @@ async function checkYouTube(c) {
   const videoId = (canon.match(/[?&]v=([\w-]{11})/) || [])[1];
   if (!videoId) {
     if (!/<link rel="canonical"/.test(html)) throw new Error('pagina sin canonical (consentimiento o bloqueo)');
-    return { live: false };
+    return { live: false, why: 'canon:' + canon.replace('https://www.youtube.com', '').slice(0, 40) };
   }
   // En vivo de verdad: marcado como en directo ahora (un directo que "empieza en unos momentos" trae isLiveNow:false).
   // No se exige playabilityStatus OK: desde los servidores de GitHub YouTube a veces pide "confirmar que no sos un bot"
@@ -51,7 +51,8 @@ async function checkYouTube(c) {
   const status = (html.match(/"playabilityStatus":\{"status":"([A-Z_]+)"/) || [])[1] || '';
   const liveNow = /"isLiveNow":true/.test(html);
   if (status && status !== 'OK' && status !== 'LIVE_STREAM_OFFLINE') console.log(`YouTube ${c.name || url}: playabilityStatus=${status} isLiveNow=${liveNow}`);
-  if (!liveNow) return { live: false };
+  // "why" queda en live-status.json solo para diagnosticar (la pagina lo ignora): que le llego a GitHub de YouTube
+  if (!liveNow) return { live: false, why: `watch|${status}|lbd=${/liveBroadcastDetails/.test(html) ? 1 : 0}` };
   const viewers = Number(((html.match(/"runs":\[\{"text":"([\d,.]+)"\},\{"text":" watching now"/) || [])[1] || '0').replace(/[^\d]/g, ''));
   const title = (html.match(/<meta name="title" content="([^"]*)"/) || [])[1] || '';
   return {
