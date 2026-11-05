@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-05T01:47:49.892Z",
+  "updatedAt": "2026-11-05T06:40:48.466Z",
   "youtube": {
     "seppp": {
       "live": false,
@@ -50,8 +50,11 @@
       "why": "canon:/channel/UCyPMjU0Qyegpo5CuFSx0KLA"
     },
     "ryllmen": {
-      "live": false,
-      "why": "canon:/channel/UCk4GbLR2XbYU-DzC4q8gtdA"
+      "live": true,
+      "videoId": "n6GXN5dqnwg",
+      "title": "Speedrun Resident evil 4 og",
+      "viewers": 0,
+      "embed": true
     }
   },
   "kick": {
