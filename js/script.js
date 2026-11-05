@@ -3251,6 +3251,28 @@ async function liveStatusData() {
   }
 }
 
+// Kick le da 403 a los servidores de GitHub (el bot no lo ve), pero deja que lo consulte el navegador del visitante
+// (CORS abierto): se pregunta aca, igual que Twitch. Si falla, queda lo que diga el archivo del bot.
+async function kickLiveStatusBrowser(slugs) {
+  const out = {};
+  await Promise.all((slugs || []).filter(Boolean).map(async slug => {
+    const ctl = new AbortController();
+    const timer = setTimeout(() => ctl.abort(), 8000);
+    try {
+      const res = await fetch(`https://kick.com/api/v2/channels/${encodeURIComponent(slug)}`, { signal: ctl.signal });
+      if (!res.ok) return;
+      const j = await res.json();
+      const name = (j.user && j.user.username) || slug, followers = j.followers_count || 0, ls = j.livestream;
+      out[slug.toLowerCase()] = ls
+        ? { name, live: true, viewers: ls.viewer_count || 0, game: (ls.categories && ls.categories[0] && ls.categories[0].name) || '',
+            title: ls.session_title || '', thumb: (ls.thumbnail && (ls.thumbnail.url || ls.thumbnail.src)) || '', followers }
+        : { name, live: false, followers };
+    } catch (e) { /* sin respuesta: se usa el archivo del bot */ }
+    finally { clearTimeout(timer); }
+  }));
+  return out;
+}
+
 // ---- Vivos de TikTok: no se pueden detectar solos, asi que cada streamer se marca en la tabla
 // tiktok_live de Supabase (supabase/tiktok-live.sql) con su login de Discord. Vence solo.
 // Cada cuenta elige un TikTok una sola vez (tiktok_claims, supabase/tiktok-claims.sql) y queda fijo:
@@ -3438,11 +3460,13 @@ async function renderLive() {
   host.innerHTML = `<p class="loading-msg">${esc(t('live.checking'))}</p>`;
   const parent = location.hostname;
 
-  const [status, extra] = await Promise.all([
+  const [status, extra, kickNow] = await Promise.all([
     twitchLiveStatus(tw).catch(e => { console.error('Twitch live check falló:', e); return {}; }),
     liveStatusData(),
+    kickLiveStatusBrowser(KICK_LIVE_CHANNELS),
     ttLoadLive(),
   ]);
+  extra.kick = Object.assign({}, extra.kick, kickNow);   // lo que respondio Kick directo pisa lo del bot
   renderTtBox();
   const ytStatus = extra.youtube;
 

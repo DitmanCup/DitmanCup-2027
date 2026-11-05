@@ -1,7 +1,7 @@
 // Mira quien esta en vivo en YouTube (YOUTUBE_LIVE_CHANNELS) y en Kick
 // (KICK_LIVE_CHANNELS), ambas listas en js/script.js, y guarda el resultado en
 // data/live-status.json, que lee la pestaña Live.
-// Ni YouTube ni Kick se pueden consultar desde el navegador (CORS) y el link de cada
+// YouTube no se puede consultar desde el navegador (CORS) y el link de cada
 // vivo de YouTube cambia, por eso esto lo corre GitHub Actions
 // (.github/workflows/update-live-status.yml). Twitch si se consulta directo desde la pagina.
 const fs = require('fs');
