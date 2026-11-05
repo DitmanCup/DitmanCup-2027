@@ -1,13 +1,16 @@
 {
-  "updatedAt": "2026-11-05T06:40:48.466Z",
+  "updatedAt": "2026-11-05T08:21:46.024Z",
   "youtube": {
     "seppp": {
       "live": false,
       "why": "canon:/channel/UCpSD7At_gum8TJJ7c77lsyQ"
     },
     "Bang Gori": {
-      "live": false,
-      "why": "canon:/channel/UCkIzLx7wi9TeDaGZKVD-jUQ"
+      "live": true,
+      "videoId": "0eNL-jBUhPE",
+      "title": "[3] Coba Gagal Coba Repeat | Phantom Blade Zero Indonesia",
+      "viewers": 6,
+      "embed": true
     },
     "nyr9468": {
       "live": false,
