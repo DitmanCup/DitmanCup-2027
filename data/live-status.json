@@ -1,13 +1,16 @@
 {
-  "updatedAt": "2026-11-05T11:13:37.443Z",
+  "updatedAt": "2026-11-05T12:54:28.638Z",
   "youtube": {
     "seppp": {
       "live": false,
       "why": "canon:/channel/UCpSD7At_gum8TJJ7c77lsyQ"
     },
     "Bang Gori": {
-      "live": false,
-      "why": "canon:/channel/UCkIzLx7wi9TeDaGZKVD-jUQ"
+      "live": true,
+      "videoId": "fn4fuPQvyYw",
+      "title": "Sabar, Besok Weekend Mulai | Resident Evil 4 Speedrun Indonesia",
+      "viewers": 56,
+      "embed": true
     },
     "nyr9468": {
       "live": false,
@@ -18,8 +21,11 @@
       "why": "canon:/channel/UCeGvq5Sww3ads0Q39UE9_6A"
     },
     "NETJU": {
-      "live": false,
-      "why": "canon:/channel/UCbiPXsZalhVwhfHB2-Nl9Ig"
+      "live": true,
+      "videoId": "DjfdTee9PU0",
+      "title": "Final Loser Kall Vs Champ- Turnamen IRC",
+      "viewers": 0,
+      "embed": true
     },
     "aqbilghilman": {
       "live": false,
