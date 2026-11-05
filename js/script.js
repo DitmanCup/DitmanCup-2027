@@ -49,6 +49,9 @@ const RUNNER_FLAGS = {
   derekt21288: 'GB-SCT',
   majorrichy: 'US',
   caciottafresca: 'IT',
+  joydurnyup: 'SG',
+  ryllmen: 'ID',
+  sachire: 'ID',
 
   seppp: 'ID',
   champt: 'ID',
