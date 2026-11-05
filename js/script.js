@@ -48,6 +48,7 @@ const RUNNER_FLAGS = {
   frit: 'US',
   derekt21288: 'GB-SCT',
   majorrichy: 'US',
+  caciottafresca: 'IT',
 
   seppp: 'ID',
   champt: 'ID',
@@ -620,11 +621,11 @@ const I18N = {
     'sim.swapIn': 'por',
     'sim.swapCustom': 'Otro (escribir nombre y PB)…',
     'sim.swapName': 'Nombre',
-    'sim.swapPb': 'PB (H:MM:SS)',
+    'sim.swapPb': 'PB (H:MM:SS.cc)',
     'sim.swapApply': 'Cambiar',
     'sim.swapRestore': 'Volver al plantel original',
     'sim.swapBadName': 'Escribi un nombre (maximo 24 caracteres).',
-    'sim.swapBadPb': 'El PB tiene que ser H:MM:SS, entre 1:00:00 y 2:30:00 (ej. 1:25:30).',
+    'sim.swapBadPb': 'El PB tiene que ser H:MM:SS o H:MM:SS.cc, entre 1:00:00 y 2:30:00 (ej. 1:25:30.45).',
     'sim.swapDup': 'Ese nombre ya esta en el simulador.',
     'sim.swapDone': '{name} entra al simulador en lugar de {out}. Se reordeno por PB y se reinicio.',
     'sim.swapRestored': 'Plantel original restaurado.',
@@ -1012,11 +1013,11 @@ const I18N = {
     'sim.swapIn': 'with',
     'sim.swapCustom': 'Other (type a name and PB)…',
     'sim.swapName': 'Name',
-    'sim.swapPb': 'PB (H:MM:SS)',
+    'sim.swapPb': 'PB (H:MM:SS.cc)',
     'sim.swapApply': 'Swap',
     'sim.swapRestore': 'Restore original roster',
     'sim.swapBadName': 'Type a name (24 characters max).',
-    'sim.swapBadPb': 'The PB must be H:MM:SS, between 1:00:00 and 2:30:00 (e.g. 1:25:30).',
+    'sim.swapBadPb': 'The PB must be H:MM:SS or H:MM:SS.cc, between 1:00:00 and 2:30:00 (e.g. 1:25:30.45).',
     'sim.swapDup': 'That name is already in the simulator.',
     'sim.swapDone': '{name} joins the simulator in place of {out}. Re-sorted by PB and restarted.',
     'sim.swapRestored': 'Original roster restored.',
@@ -1332,11 +1333,11 @@ const I18N = {
     'sim.swapIn': 'dengan',
     'sim.swapCustom': 'Lainnya (ketik nama dan PB)…',
     'sim.swapName': 'Nama',
-    'sim.swapPb': 'PB (H:MM:SS)',
+    'sim.swapPb': 'PB (H:MM:SS.cc)',
     'sim.swapApply': 'Tukar',
     'sim.swapRestore': 'Kembalikan daftar asli',
     'sim.swapBadName': 'Ketik sebuah nama (maksimal 24 karakter).',
-    'sim.swapBadPb': 'PB harus berformat H:MM:SS, antara 1:00:00 dan 2:30:00 (contoh: 1:25:30).',
+    'sim.swapBadPb': 'PB harus berformat H:MM:SS atau H:MM:SS.cc, antara 1:00:00 dan 2:30:00 (contoh: 1:25:30.45).',
     'sim.swapDup': 'Nama itu sudah ada di simulator.',
     'sim.swapDone': '{name} masuk ke simulator menggantikan {out}. Diurutkan ulang berdasarkan PB dan dimulai dari awal.',
     'sim.swapRestored': 'Daftar asli dikembalikan.',
@@ -1725,11 +1726,11 @@ const I18N = {
     'sim.swapIn': '交代で入る人',
     'sim.swapCustom': 'その他（名前とPBを入力）…',
     'sim.swapName': '名前',
-    'sim.swapPb': 'PB (H:MM:SS)',
+    'sim.swapPb': 'PB (H:MM:SS.cc)',
     'sim.swapApply': '入れ替える',
     'sim.swapRestore': '元のロースターに戻す',
     'sim.swapBadName': '名前を入力してください（24文字まで）。',
-    'sim.swapBadPb': 'PBはH:MM:SS形式で、1:00:00〜2:30:00の範囲で入力してください（例：1:25:30）。',
+    'sim.swapBadPb': 'PBはH:MM:SSまたはH:MM:SS.cc形式で、1:00:00〜2:30:00の範囲で入力してください（例：1:25:30.45）。',
     'sim.swapDup': 'その名前はすでにシミュレーターに入っています。',
     'sim.swapDone': '{name}が{out}に代わってシミュレーターに参加しました。PB順に並べ直して、最初からやり直します。',
     'sim.swapRestored': '元のロースターに戻しました。',
@@ -2175,11 +2176,11 @@ const I18N = {
     'sim.swapIn': 'por',
     'sim.swapCustom': 'Outro (digitar nome e PB)…',
     'sim.swapName': 'Nome',
-    'sim.swapPb': 'PB (H:MM:SS)',
+    'sim.swapPb': 'PB (H:MM:SS.cc)',
     'sim.swapApply': 'Trocar',
     'sim.swapRestore': 'Voltar ao elenco original',
     'sim.swapBadName': 'Digite um nome (máximo de 24 caracteres).',
-    'sim.swapBadPb': 'O PB precisa estar no formato H:MM:SS, entre 1:00:00 e 2:30:00 (ex.: 1:25:30).',
+    'sim.swapBadPb': 'O PB precisa estar no formato H:MM:SS ou H:MM:SS.cc, entre 1:00:00 e 2:30:00 (ex.: 1:25:30.45).',
     'sim.swapDup': 'Esse nome já está no simulador.',
     'sim.swapDone': '{name} entra no simulador no lugar de {out}. A ordem foi refeita por PB e o simulador reiniciou.',
     'sim.swapRestored': 'Elenco original restaurado.',
@@ -3873,58 +3874,62 @@ const SIM_SEED_ORDER = [1, 8, 4, 5, 2, 7, 3, 6]; // sembrado clásico de 8 cabez
 
 const SIM_RUNNER_NAMES = [
   'JokerUY', 'Sawken', 'Missing', 'seppp', 'Frit', '4rcadan', 'OtakuXD', 'Pochoide',
-  'DerekT21288', 'ChampT', 'TheNevs', 'Zudinn', 'MikeWavRR', 'MateoUsh27', 'Youcri', 'luis_sera',
-  'VAL', 'Muh', 'Pixiesaki', 'novi_fan', 'MattGael', 'manboo', 'Lu1u', 'Matiuss',
+  'ChampT', 'MateoUsh27', 'Zudinn', 'eidenfir', 'MikeWavRR', 'Youcri', 'luis_sera', 'VAL',
+  'Muh', 'Pixiesaki', 'novi_fan', 'MattGael', 'caciottafresca', 'Lu1u', 'JoydurnYup', 'Matiuss',
   'abdou_mz', 'Gui19', 'Razie', 'aqbilghilman', 'doradori_dolph', 'Nobu_22', 'HannNrY', 'MajorRichy',
 ];
-// PBs de speedrun.com/re4steam (New Game, Professional, Single Segment, 60 FPS;
-// tiempo sin loads, en segundos redondeados hacia abajo), mismo orden que SIM_RUNNER_NAMES
-// (de menor a mayor: los primeros 8 son el Top 8 directo). Actualizado el 30/10/2026.
+// PBs de speedrun.com/re4steam (New Game, Professional, Single Segment, 60 FPS; tiempo sin loads),
+// con centesimas (el tercer decimal de speedrun.com es siempre 0, asi que se usan 2), mismo orden que
+// SIM_RUNNER_NAMES (de menor a mayor: los primeros 8 son el Top 8 directo). Actualizado el 05/11/2026.
 // Equivalencias: ChampT = MRChampT01, VAL = _VAL_, Muh = MUHnster, aqbilghilman = aqbilghilman_.
-// luis_sera: 1:24:10 (PB indicado por el organizador). DerekT21288 entra por pedido (runner OG); sale InfamousLol8 (el mas lento).
+// A pedido del organizador: luis_sera 1:24:10 y caciottafresca 1:24:47 (italiano, no esta en speedrun.com) son PBs indicados a mano.
+// DerekT21288, TheNevs y manboo no juegan el torneo (quedan de reserva); entran eidenfir, JoydurnYup y caciottafresca.
 const SIM_RUNNER_PBS = [
-  '1:21:04', '1:21:27', '1:21:48', '1:21:48', '1:21:57', '1:22:01', '1:22:14', '1:22:30',
-  '1:22:54', '1:23:26', '1:23:35', '1:23:37', '1:23:42', '1:23:43', '1:23:46', '1:24:10',
-  '1:24:19', '1:24:20', '1:24:27', '1:24:40', '1:24:41', '1:24:48', '1:24:52', '1:24:58',
-  '1:24:59', '1:25:19', '1:25:26', '1:25:26', '1:25:33', '1:25:35', '1:25:45', '1:26:10',
+  '1:21:04.81', '1:21:27.13', '1:21:48.13', '1:21:48.90', '1:21:57.01', '1:22:01.13',
+  '1:22:14.68', '1:22:30.78', '1:23:26.23', '1:23:28.60', '1:23:37.03', '1:23:39.63',
+  '1:23:42.41', '1:23:46.08', '1:24:10.00', '1:24:19.00', '1:24:20.56', '1:24:27.06',
+  '1:24:40.15', '1:24:41.50', '1:24:47.00', '1:24:52.66', '1:24:54.01', '1:24:58.48',
+  '1:24:59.21', '1:25:19.43', '1:25:26.18', '1:25:26.56', '1:25:33.83', '1:25:35.85',
+  '1:25:45.16', '1:26:10.70',
 ];
 
 // Reservas: runners de speedrun.com con PB menor a 1:30:00 y run de los ultimos 12 meses
 // que NO estan en el simulador. Se pueden meter desde el panel "Try yourself" de la pestana
 // Simulations (cambian a un runner del simulador). Formato: [puesto en la leaderboard, nombre, PB, fecha del run]
 const SIM_SUBSTITUTES = [
-  [13, 'eidenfir', '1:23:39', '2026-07-26'],
-  [27, 'JoydurnYup', '1:24:54', '2026-05-29'],
-  [40, 'Sachire', '1:26:07', '2025-12-21'],
-  [41, 'Fedo_Kuhaku', '1:26:09', '2026-09-27'],
-  [44, 'erOotea', '1:26:18', '2026-08-12'],
-  [45, 'NETJU', '1:26:21', '2026-08-25'],
-  [47, '_slifer_', '1:26:23', '2026-02-28'],
-  [46, 'InfamousLol8', '1:26:23', '2026-01-10'],
-  [51, 'Egg_Cangying', '1:26:35', '2026-08-01'],
-  [52, 'ShulaRune', '1:26:35', '2026-08-16'],
-  [54, 'Vechman', '1:26:38', '2026-10-08'],
-  [55, 'alvinnn', '1:26:42', '2026-10-04'],
-  [56, 'Chanwi', '1:26:43', '2026-09-23'],
-  [59, 'Ryllmen', '1:26:47', '2026-08-20'],
-  [61, 'Prastry', '1:26:53', '2026-06-11'],
-  [62, 'Bang_Gori', '1:26:54', '2026-09-01'],
-  [64, 'libee', '1:26:57', '2026-09-25'],
-  [65, 'GLAISON_GAMES_MOBILE', '1:27:01', '2026-05-16'],
-  [66, 'IanPriaMisterius', '1:27:07', '2026-04-21'],
-  [68, 'Clementinee', '1:27:22', '2026-03-24'],
-  [70, 'Dims_jesse', '1:27:27', '2026-07-12'],
-  [71, 'Ornot_ms', '1:27:31', '2026-05-01'],
-  [72, 'fiveskill', '1:27:36', '2026-06-20'],
-  [76, 'FrancoBv17', '1:27:59', '2026-08-17'],
-  [78, 'gabrielsinmarr', '1:28:07', '2026-10-23'],
-  [79, 'NanonSBz', '1:28:09', '2026-10-16'],
-  [83, 'KaykyBeck', '1:28:30', '2026-08-05'],
-  [87, 'Neoxz', '1:28:43', '2026-05-10'],
-  [90, 'oldust_', '1:29:01', '2026-08-13'],
-  [95, 'bigbloo77', '1:29:14', '2026-06-05'],
-  [101, 'Dhannn', '1:29:36', '2026-07-21'],
-  [105, 'redshines', '1:29:57', '2026-07-09'],
+  [9, 'DerekT21288', '1:22:54.53', '2025-08-15'],
+  [12, 'TheNevs', '1:23:35.11', '2026-01-19'],
+  [25, 'manboo', '1:24:48.70', '2026-07-28'],
+  [40, 'Ryllmen', '1:25:52.03', '2026-10-30'],
+  [41, 'Sachire', '1:26:07.78', '2025-12-21'],
+  [41, 'Fedo_Kuhaku', '1:26:09.00', '2026-09-27'],
+  [45, 'erOotea', '1:26:18.68', '2026-08-12'],
+  [46, 'NETJU', '1:26:21.91', '2026-08-25'],
+  [47, 'InfamousLol8', '1:26:23.26', '2026-01-10'],
+  [48, '_slifer_', '1:26:23.55', '2026-02-28'],
+  [52, 'Egg_Cangying', '1:26:35.13', '2026-08-01'],
+  [53, 'ShulaRune', '1:26:35.40', '2026-08-16'],
+  [55, 'Vechman', '1:26:38.80', '2026-10-08'],
+  [56, 'alvinnn', '1:26:42.23', '2026-10-04'],
+  [57, 'Chanwi', '1:26:43.51', '2026-09-23'],
+  [61, 'Prastry', '1:26:53.10', '2026-06-11'],
+  [62, 'Bang_Gori', '1:26:54.16', '2026-09-01'],
+  [64, 'libee', '1:26:57.76', '2026-09-25'],
+  [65, 'GLAISON_GAMES_MOBILE', '1:27:01.13', '2026-05-16'],
+  [66, 'IanPriaMisterius', '1:27:07.80', '2026-04-21'],
+  [68, 'Clementinee', '1:27:22.40', '2026-03-24'],
+  [70, 'Dims_jesse', '1:27:27.46', '2026-07-12'],
+  [71, 'Ornot_ms', '1:27:31.88', '2026-05-01'],
+  [72, 'fiveskill', '1:27:36.38', '2026-06-20'],
+  [76, 'FrancoBv17', '1:27:59.30', '2026-08-17'],
+  [78, 'gabrielsinmarr', '1:28:07.65', '2026-10-23'],
+  [79, 'NanonSBz', '1:28:09.08', '2026-10-16'],
+  [83, 'KaykyBeck', '1:28:30.05', '2026-08-05'],
+  [87, 'Neoxz', '1:28:43.63', '2026-05-10'],
+  [90, 'oldust_', '1:29:01.86', '2026-08-13'],
+  [95, 'bigbloo77', '1:29:14.81', '2026-06-05'],
+  [101, 'Dhannn', '1:29:36.88', '2026-07-21'],
+  [105, 'redshines', '1:29:57.01', '2026-07-09'],
 ];
 
 function simParseTime(str) {
@@ -4478,6 +4483,52 @@ function simRenderRanking(qualifiedIds) {
     </table></div>`;
 }
 
+// Lista desplegable propia en lugar del <select> nativo: la lista abierta del nativo la dibuja el sistema con su
+// fuente (y no la de la pagina). El <select> queda oculto y sigue guardando el valor (value / change).
+// Devuelve la funcion que hay que llamar cuando se vuelven a cargar sus opciones.
+function ddEnhance(sel) {
+  const wrap = document.createElement('div');
+  wrap.className = 'dd';
+  wrap.innerHTML = '<button type="button" class="dd-btn" aria-haspopup="listbox" aria-expanded="false"></button><ul class="dd-list" role="listbox" hidden></ul>';
+  sel.classList.add('dd-native');
+  sel.after(wrap);
+  const btn = wrap.querySelector('.dd-btn'), list = wrap.querySelector('.dd-list');
+  let active = -1;
+  const close = () => { list.hidden = true; btn.setAttribute('aria-expanded', 'false'); };
+  const mark = i => {
+    active = i;
+    [...list.children].forEach((li, k) => li.classList.toggle('is-active', k === i));
+    const li = list.children[i];
+    if (li) li.scrollIntoView({ block: 'nearest' });
+  };
+  const open = () => { list.hidden = false; btn.setAttribute('aria-expanded', 'true'); mark(sel.selectedIndex); };
+  function refresh() {
+    list.innerHTML = [...sel.options].map((o, i) => `<li role="option" data-i="${i}" aria-selected="${i === sel.selectedIndex}">${esc(o.textContent)}</li>`).join('');
+    const cur = sel.options[sel.selectedIndex];
+    btn.textContent = cur ? cur.textContent : '';
+  }
+  const pick = i => {
+    if (!sel.options[i]) return;
+    sel.selectedIndex = i;
+    sel.dispatchEvent(new Event('change', { bubbles: true }));
+    refresh(); close(); btn.focus();
+  };
+  btn.addEventListener('click', () => { list.hidden ? open() : close(); });
+  list.addEventListener('click', e => { const li = e.target.closest('li'); if (li) pick(Number(li.dataset.i)); });
+  list.addEventListener('mousemove', e => { const li = e.target.closest('li'); if (li) mark(Number(li.dataset.i)); });
+  wrap.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { close(); return; }
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (list.hidden) { open(); return; }
+      mark(Math.min(sel.options.length - 1, Math.max(0, active + (e.key === 'ArrowDown' ? 1 : -1))));
+    } else if ((e.key === 'Enter' || e.key === ' ') && !list.hidden) { e.preventDefault(); pick(active); }
+  });
+  document.addEventListener('click', e => { if (!wrap.contains(e.target)) close(); });
+  refresh();
+  return refresh;
+}
+
 // Panel "Try yourself": cambia a un runner del simulador por una reserva (o un nombre/PB a mano)
 let simSwapRefresh = null;
 function initSimSwap() {
@@ -4488,6 +4539,7 @@ function initSimSwap() {
   const msg = document.getElementById('sim-swap-msg');
   const say = (key, vars) => { msg.hidden = !key; if (key) msg.textContent = t(key, vars); };
 
+  let refreshOut = null, refreshIn = null;
   const fill = () => {
     outSel.innerHTML = simRoster.map((r, i) => `<option value="${i}">${esc(r.name)} · ${esc(r.pb)}</option>`).join('');
     const used = new Set(simRoster.map(r => r.name.toLowerCase()));
@@ -4495,9 +4547,12 @@ function initSimSwap() {
       .map(r => `<option value="${esc(r[1])}|${esc(r[2])}">${esc(r[1])} · ${esc(r[2])}</option>`).join('')
       + `<option value="__custom">${esc(t('sim.swapCustom'))}</option>`;
     customBox.hidden = inSel.value !== '__custom';
+    if (refreshOut) { refreshOut(); refreshIn(); }
   };
   if (!simRoster) simRoster = simRosterDefault();
   fill();
+  refreshOut = ddEnhance(outSel);
+  refreshIn = ddEnhance(inSel);
   inSel.addEventListener('change', () => { customBox.hidden = inSel.value !== '__custom'; });
 
   document.getElementById('sim-swap-apply').addEventListener('click', () => {
@@ -4506,8 +4561,9 @@ function initSimSwap() {
       name = document.getElementById('sim-swap-name').value.trim();
       pb = document.getElementById('sim-swap-pb').value.trim();
       if (!name || name.length > 24) return say('sim.swapBadName');
-      if (!/^[1-2]:[0-5]\d:[0-5]\d$/.test(pb) || simParseTime(pb) < 3600 || simParseTime(pb) > 9000) return say('sim.swapBadPb');
+      if (!/^[1-2]:[0-5]\d:[0-5]\d(\.\d{1,2})?$/.test(pb) || simParseTime(pb) < 3600 || simParseTime(pb) > 9000) return say('sim.swapBadPb');
       if (simRoster.some(r => r.name.toLowerCase() === name.toLowerCase())) return say('sim.swapDup');
+      pb = simFormatRaceTime(simParseTime(pb));   // siempre con 2 decimales, como el resto de los PBs
     } else {
       [name, pb] = inSel.value.split('|');
     }

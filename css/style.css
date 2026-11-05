@@ -2137,3 +2137,17 @@ html[lang="pt"] .wg-hud-c,
 html[lang="pt"] .user-avatar,
 html[lang="pt"] .user-menu-btn,
 html[lang="pt"] .user-login { text-transform: uppercase; }
+
+/* Lista desplegable propia del panel "Try yourself" (misma fuente que el resto de la pagina) */
+.sim-swap select.dd-native { display: none; }
+.dd { position: relative; display: inline-block; }
+.dd-btn { position: relative; min-width: 12rem; max-width: 16rem; padding: .35rem 1.8rem .35rem .5rem; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  background: var(--surface); color: var(--text); border: 1px solid var(--border); border-radius: 2px; font-family: var(--font-grunge); font-size: 1.05rem; cursor: pointer; }
+.dd-btn::after { content: '\25BE'; position: absolute; right: .55rem; top: 50%; transform: translateY(-50%); color: var(--gold); }
+.dd-btn:hover, .dd-btn[aria-expanded="true"] { border-color: var(--gold); }
+.dd-list { position: absolute; z-index: 25; top: calc(100% + 2px); left: 0; min-width: 100%; max-height: 18rem; overflow-y: auto; margin: 0; padding: .2rem 0; list-style: none;
+  background: var(--surface); border: 1px solid var(--frame); box-shadow: 0 10px 26px rgba(0, 0, 0, .6); }
+.dd-list[hidden] { display: none; }
+.dd-list li { padding: .35rem .8rem; white-space: nowrap; color: var(--text); font-family: var(--font-grunge); font-size: 1.05rem; cursor: pointer; }
+.dd-list li.is-active { background: rgba(181, 39, 28, .35); color: #fff; }
+.dd-list li[aria-selected="true"] { color: var(--gold); }
