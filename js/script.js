@@ -3874,23 +3874,23 @@ const SIM_SEED_ORDER = [1, 8, 4, 5, 2, 7, 3, 6]; // sembrado clásico de 8 cabez
 
 const SIM_RUNNER_NAMES = [
   'JokerUY', 'Sawken', 'Missing', 'seppp', 'Frit', '4rcadan', 'OtakuXD', 'Pochoide',
-  'ChampT', 'MateoUsh27', 'Zudinn', 'MikeWavRR', 'Yuushi', 'Youcri', 'luis_sera', 'VAL',
-  'Muh', 'shimarisu', 'esfrenchie09', 'Pixiesaki', 'novi_fan', 'MattGael', 'caciottafresca', 'Lu1u',
-  'JoydurnYup', 'Matiuss', 'abdou_mz', 'Phaero', 'Gui19', 'Razie', 'aqbilghilman', 'doradori_dolph',
+  'ChampT', 'MateoUsh27', 'Zudinn', 'MikeWavRR', 'Youcri', 'luis_sera', 'VAL', 'Muh',
+  'Pixiesaki', 'novi_fan', 'MattGael', 'caciottafresca', 'Lu1u', 'JoydurnYup', 'Matiuss', 'abdou_mz',
+  'Gui19', 'Razie', 'aqbilghilman', 'doradori_dolph', 'Nobu_22', 'HannNrY', 'Morse66', 'orangekun',
 ];
 // PBs de speedrun.com/re4steam (New Game, Professional, Single Segment, 60 FPS; tiempo sin loads),
 // con centesimas (el tercer decimal de speedrun.com es siempre 0, asi que se usan 2), mismo orden que
 // SIM_RUNNER_NAMES (de menor a mayor: los primeros 8 son el Top 8 directo). Actualizado el 05/11/2026.
-// El plantel son los 32 mejores PBs de speedrun.com, sin los que avisaron que no juegan: DerekT21288, TheNevs, manboo, eidenfir (quedan de reserva).
+// El plantel son los 32 mejores PBs de speedrun.com, sin los que avisaron que no juegan: DerekT21288, TheNevs, manboo, eidenfir, Yuushi, shimarisu, esfrenchie09, Phaero (quedan de reserva).
 // Equivalencias: ChampT = MRChampT01, VAL = _VAL_, Muh = MUHnster, aqbilghilman = aqbilghilman_.
 // PBs indicados a mano por el organizador: luis_sera 1:24:10, caciottafresca 1:24:47 (caciottafresca es italiano y no esta en speedrun.com).
 const SIM_RUNNER_PBS = [
   '1:21:04.81', '1:21:27.13', '1:21:48.13', '1:21:48.90', '1:21:57.01', '1:22:01.13',
   '1:22:14.68', '1:22:30.78', '1:23:26.23', '1:23:28.60', '1:23:37.03', '1:23:42.41',
-  '1:23:45.00', '1:23:46.08', '1:24:10.00', '1:24:19.00', '1:24:20.56', '1:24:24.00',
-  '1:24:25.00', '1:24:27.06', '1:24:40.15', '1:24:41.50', '1:24:47.00', '1:24:52.66',
-  '1:24:54.01', '1:24:58.48', '1:24:59.21', '1:25:19.00', '1:25:19.43', '1:25:26.18',
-  '1:25:26.56', '1:25:33.83',
+  '1:23:46.08', '1:24:10.00', '1:24:19.00', '1:24:20.56', '1:24:27.06', '1:24:40.15',
+  '1:24:41.50', '1:24:47.00', '1:24:52.66', '1:24:54.01', '1:24:58.48', '1:24:59.21',
+  '1:25:19.43', '1:25:26.18', '1:25:26.56', '1:25:33.83', '1:25:35.85', '1:25:45.16',
+  '1:25:48.00', '1:25:49.00',
 ];
 
 // Reservas: runners de speedrun.com con PB menor a 1:30:00 y run de los ultimos 12 meses
@@ -3900,9 +3900,11 @@ const SIM_SUBSTITUTES = [
   [9, 'DerekT21288', '1:22:54.53', '2025-08-15'],
   [12, 'TheNevs', '1:23:35.11', '2026-01-19'],
   [14, 'eidenfir', '1:23:39.63', '2026-07-26'],
+  [16, 'Yuushi', '1:23:45.00', '2022-09-26'],
+  [20, 'shimarisu', '1:24:24.00', '2021-08-22'],
+  [21, 'esfrenchie09', '1:24:25.00', '2022-04-27'],
   [25, 'manboo', '1:24:48.70', '2026-07-28'],
-  [36, 'Nobu_22', '1:25:35.85', '2026-09-15'],
-  [37, 'HannNrY', '1:25:45.16', '2026-09-01'],
+  [31, 'Phaero', '1:25:19.00', '2022-11-29'],
   [40, 'Ryllmen', '1:25:52.03', '2026-10-30'],
   [41, 'Sachire', '1:26:07.78', '2025-12-21'],
   [42, 'FedoRas', '1:26:09.13', '2026-09-27'],
