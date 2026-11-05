@@ -3497,7 +3497,9 @@ async function renderLive() {
   const ytIcon = '<svg class="ic" aria-hidden="true"><use href="#ic-youtube"/></svg>';
   const kickIcon = '<svg class="ic" aria-hidden="true"><use href="#ic-kick"/></svg>';
   const ttIcon = '<svg class="ic" aria-hidden="true"><use href="#ic-tiktok"/></svg>';
-  const ttUrl = u => `https://www.tiktok.com/@${encodeURIComponent(u)}/live`;
+  // Al perfil y no a /@usuario/live: TikTok le da 403 (acceso denegado) a esa direccion directa en algunas conexiones; el perfil abre siempre
+  // y, si estan en vivo, se ve el aro rojo de LIVE y se entra con un clic.
+  const ttUrl = u => `https://www.tiktok.com/@${encodeURIComponent(u)}`;
 
   // Reproductor de cada vivo; autoplay=1 solo se usa en el primero
   const playerSrc = r => r.kind === 'yt'
