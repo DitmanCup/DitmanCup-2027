@@ -379,6 +379,8 @@ const I18N = {
     'bracket.winners': 'Cuadro de ganadores',
     'bracket.losers': 'Cuadro de perdedores',
     'bracket.grandFinal': 'Gran Final',
+    'bracket.grandFinalReset': 'Gran Final (revancha)',
+    'sim.resetNote': 'Revancha: el campeon del cuadro de perdedores gano la Gran Final y el de ganadores todavia no perdio dos veces. Se juega otra Gran Final.',
     'bracket.round.winnersFinal': 'Final de ganadores',
     'bracket.lr': 'Ronda de perdedores {n}',
     'bracket.losersSemi': 'Semifinal de perdedores',
@@ -643,7 +645,7 @@ const I18N = {
     'sim.logTitleFinal': 'Resultados de la ronda {n} (final)',
     'sim.bracketTitle': 'Octavos de Final',
     'sim.wbTitle': 'Doble eliminacion — jugala',
-    'sim.wbNote': 'Octavos y Cuartos: si la diferencia del primer race es de 2:00 o mas, es el unico race (BO1); si no, es BO3. Semis y Finales son siempre BO3 y la Gran Final es BO5. Si perdes una vez bajas al cuadro de perdedores; si perdes de nuevo, quedas eliminado.',
+    'sim.wbNote': 'Octavos y Cuartos: si la diferencia del primer race es de 2:00 o mas, es el unico race (BO1); si no, es BO3. Semis y Finales son siempre BO3 y la Gran Final es BO5. Si perdes una vez bajas al cuadro de perdedores; si perdes de nuevo, quedas eliminado. Si el campeon del cuadro de perdedores gana la Gran Final, se juega una revancha (reset), tambien BO5.',
     'sim.btnWbNext': 'Jugar {round}',
     'sim.wbDone': 'Torneo terminado',
     'sim.btnWbEverything': 'Jugar todo hasta la Gran Final',
@@ -769,6 +771,8 @@ const I18N = {
     'bracket.winners': 'Winners Bracket',
     'bracket.losers': 'Losers Bracket',
     'bracket.grandFinal': 'Grand Final',
+    'bracket.grandFinalReset': 'Grand Final (reset)',
+    'sim.resetNote': 'Reset: the Losers Bracket champion won the Grand Final, and the Winners Bracket champion has not lost twice yet. A second Grand Final is played.',
     'bracket.round.winnersFinal': 'Winners Final',
     'bracket.lr': 'Losers Round {n}',
     'bracket.losersSemi': 'Losers Semifinal',
@@ -1033,7 +1037,7 @@ const I18N = {
     'sim.logTitleFinal': 'Round {n} results (final)',
     'sim.bracketTitle': 'Round of 16',
     'sim.wbTitle': 'Double elimination — play it',
-    'sim.wbNote': 'Round of 16 and Quarterfinals: if the first race is decided by 2:00 or more, that is the only race (BO1); otherwise it becomes a BO3. Semifinals and Finals are always BO3, and the Grand Final is BO5. Lose once and you drop to the Losers Bracket; lose again and you are out.',
+    'sim.wbNote': 'Round of 16 and Quarterfinals: if the first race is decided by 2:00 or more, that is the only race (BO1); otherwise it becomes a BO3. Semifinals and Finals are always BO3, and the Grand Final is BO5. Lose once and you drop to the Losers Bracket; lose again and you are out. If the Losers Bracket champion wins the Grand Final, a second Grand Final (reset) is played, also BO5.',
     'sim.btnWbNext': 'Play {round}',
     'sim.wbDone': 'Tournament finished',
     'sim.btnWbEverything': 'Play everything to the Grand Final',
@@ -1157,6 +1161,8 @@ const I18N = {
     'bracket.winners': 'Bagan Pemenang',
     'bracket.losers': 'Bagan Pecundang',
     'bracket.grandFinal': 'Grand Final',
+    'bracket.grandFinalReset': 'Grand Final (reset)',
+    'sim.resetNote': 'Reset: juara Bagan Pecundang memenangkan Grand Final, dan juara Bagan Pemenang belum kalah dua kali. Grand Final kedua dimainkan.',
     'bracket.round.winnersFinal': 'Final Pemenang',
     'bracket.lr': 'Ronde Pecundang {n}',
     'bracket.losersSemi': 'Semifinal Pecundang',
@@ -1351,7 +1357,7 @@ const I18N = {
     'sim.logTitleFinal': 'Hasil Ronde {n} (final)',
     'sim.bracketTitle': 'Babak 16 Besar',
     'sim.wbTitle': 'Double elimination — mainkan',
-    'sim.wbNote': 'Babak 16 Besar dan Perempat final: jika race pertama dimenangkan dengan selisih 2:00 atau lebih, itu menjadi satu-satunya race (BO1); jika tidak, menjadi BO3. Semifinal dan Final selalu BO3, dan Grand Final BO5. Kalah sekali, kamu turun ke Bagan Pecundang; kalah lagi, kamu tersingkir.',
+    'sim.wbNote': 'Babak 16 Besar dan Perempat final: jika race pertama dimenangkan dengan selisih 2:00 atau lebih, itu menjadi satu-satunya race (BO1); jika tidak, menjadi BO3. Semifinal dan Final selalu BO3, dan Grand Final BO5. Kalah sekali, kamu turun ke Bagan Pecundang; kalah lagi, kamu tersingkir. Jika juara Bagan Pecundang memenangkan Grand Final, Grand Final kedua (reset) dimainkan, juga BO5.',
     'sim.btnWbNext': 'Mainkan {round}',
     'sim.wbDone': 'Turnamen selesai',
     'sim.btnWbEverything': 'Mainkan semuanya sampai Grand Final',
@@ -1548,6 +1554,8 @@ const I18N = {
     'bracket.winners': '勝者ブラケット',
     'bracket.losers': '敗者ブラケット',
     'bracket.grandFinal': 'グランドファイナル',
+    'bracket.grandFinalReset': 'グランドファイナル（リセット）',
+    'sim.resetNote': 'リセット：敗者ブラケットの優勝者がグランドファイナルに勝ったため、勝者ブラケットの優勝者はまだ2回負けていません。もう一度グランドファイナルを行います。',
     'bracket.round.winnersFinal': '勝者決勝',
     'bracket.lr': '敗者ラウンド{n}',
     'bracket.losersSemi': '敗者準決勝',
@@ -1742,7 +1750,7 @@ const I18N = {
     'sim.logTitleFinal': 'ラウンド{n} 結果（最終）',
     'sim.bracketTitle': 'ベスト16',
     'sim.wbTitle': 'Double elimination — プレイしてみよう',
-    'sim.wbNote': 'ベスト16と準々決勝：最初のレースの差が2:00以上なら、それが唯一のレース（BO1）。そうでなければBO3になります。準決勝と決勝は常にBO3、グランドファイナルはBO5です。1回負けると敗者ブラケットへ、もう1回負けると敗退です。',
+    'sim.wbNote': 'ベスト16と準々決勝：最初のレースの差が2:00以上なら、それが唯一のレース（BO1）。そうでなければBO3になります。準決勝と決勝は常にBO3、グランドファイナルはBO5です。1回負けると敗者ブラケットへ、もう1回負けると敗退です。グランドファイナルで敗者ブラケットの優勝者が勝った場合は、もう一度グランドファイナル（リセット）をBO5で行います。',
     'sim.btnWbNext': '{round}をプレイ',
     'sim.wbDone': '大会終了',
     'sim.btnWbEverything': 'グランドファイナルまですべてプレイ',
@@ -1934,6 +1942,8 @@ const I18N = {
     'bracket.winners': 'Chave dos vencedores',
     'bracket.losers': 'Chave dos perdedores',
     'bracket.grandFinal': 'Grande final',
+    'bracket.grandFinalReset': 'Grande final (reset)',
+    'sim.resetNote': 'Reset: o campeão da chave dos perdedores venceu a grande final e o campeão da chave dos vencedores ainda não perdeu duas vezes. Será disputada outra grande final.',
     'bracket.round.winnersFinal': 'Final dos vencedores',
     'bracket.lr': 'Rodada dos perdedores {n}',
     'bracket.losersSemi': 'Semifinal dos perdedores',
@@ -2190,7 +2200,7 @@ const I18N = {
     'sim.logTitleFinal': 'Resultados da rodada {n} (final)',
     'sim.bracketTitle': 'Oitavas de final',
     'sim.wbTitle': 'Dupla eliminação — jogue você mesmo',
-    'sim.wbNote': 'Oitavas e quartas: se a diferença da primeira corrida for de 2:00 ou mais, é a única corrida (BO1); se não, é BO3. Semifinais e finais são sempre BO3 e a grande final é BO5. Se você perder uma vez, cai para a chave dos perdedores; se perder de novo, está eliminado.',
+    'sim.wbNote': 'Oitavas e quartas: se a diferença da primeira corrida for de 2:00 ou mais, é a única corrida (BO1); se não, é BO3. Semifinais e finais são sempre BO3 e a grande final é BO5. Se você perder uma vez, cai para a chave dos perdedores; se perder de novo, está eliminado. Se o campeão da chave dos perdedores vencer a grande final, é disputada uma segunda grande final (reset), também em BO5.',
     'sim.btnWbNext': 'Jogar {round}',
     'sim.wbDone': 'Torneio encerrado',
     'sim.btnWbEverything': 'Jogar tudo até a grande final',
@@ -4176,17 +4186,20 @@ function simRenderBracket() {
 // ======= BRACKET JUGABLE: doble eliminacion completa =======
 // Despues del sorteo de Octavos se juega todo el cuadro con series BO1/BO3/BO5
 // segun la ronda (ver SIM_WB_FORMAT): cuadro de ganadores, cuadro de perdedores y
-// Gran Final (una sola partida, sin "reset"). Se usa el mismo modelo que el
-// Bracket real (buildDoubleElim) y las rondas se juegan en este orden:
+// Gran Final. Se usa el mismo modelo que el Bracket real (buildDoubleElim) y las
+// rondas se juegan en este orden:
 // R16, LR1, Cuartos, LR2, LR3, Semis, LR4, LR5, Final de ganadores, LR6, Gran Final.
+// Reset: el campeon del cuadro de ganadores llega sin derrotas, asi que si pierde la
+// Gran Final se juega una revancha (otra serie BO5) entre los mismos dos.
 let simWB = null;
-const SIM_WB_STEPS = 11;
+const SIM_WB_STEPS = 11;        // pasos fijos; la revancha de la Gran Final es un paso 12 que solo existe si hace falta
+const SIM_WB_GF_STEP = 10;
 
 function simInitWB() {
   const model = buildDoubleElim(16);
   const r16 = simBracketSeeds.map((s, idx) => ({ a: s.runner, b: simBracketAssignments[idx], seedA: s.seedNum }));
   const { wb, lb, gf } = model;
-  simWB = { model, r16, res: {}, step: 0, steps: [wb[0], lb[0], wb[1], lb[1], lb[2], wb[2], lb[3], lb[4], wb[3], lb[5], [gf]] };
+  simWB = { model, r16, res: {}, step: 0, reset: null, steps: [wb[0], lb[0], wb[1], lb[1], lb[2], wb[2], lb[3], lb[4], wb[3], lb[5], [gf]] };
 }
 
 function simWBResolve(ref) {
@@ -4200,7 +4213,7 @@ function simWBPlayers(m) {
 // Formato de cada paso del cuadro (igual que el reglamento): Octavos y Cuartos
 // (ganadores y perdedores) son BO1 si el primer race se decide por 2:00 o mas,
 // si no pasan a BO3; Semis y Finales siempre BO3; la Gran Final es BO5.
-const SIM_WB_FORMAT = ['cond', 'cond', 'cond', 'cond', 'cond', 3, 3, 3, 3, 3, 5];
+const SIM_WB_FORMAT = ['cond', 'cond', 'cond', 'cond', 'cond', 3, 3, 3, 3, 3, 5, 5];   // el ultimo es la revancha de la Gran Final
 const SIM_BO1_GAP = 120; // segundos
 
 function simPlaySeries(a, b, mode) {
@@ -4220,12 +4233,21 @@ function simPlaySeries(a, b, mode) {
 }
 
 function simWBPlayStep() {
-  if (!simWB || simWB.step >= SIM_WB_STEPS) return;
+  if (!simWB || simWB.step >= simWB.steps.length) return;
   const mode = SIM_WB_FORMAT[simWB.step];
   simWB.steps[simWB.step].forEach(m => {
     const [a, b] = simWBPlayers(m);
     simWB.res[m.n] = simPlaySeries(a, b, mode);
   });
+  // Si el campeon del cuadro de perdedores gana la Gran Final, el de ganadores todavia no perdio dos veces: revancha
+  if (simWB.step === SIM_WB_GF_STEP) {
+    const { gf } = simWB.model;
+    const [fromWinners, fromLosers] = simWBPlayers(gf);
+    if (simWB.res[gf.n].winner === fromLosers && fromLosers !== fromWinners) {
+      simWB.reset = { id: 'mgf2', n: gf.n + 1, kind: 'g', round: 1, idx: 0, refs: gf.refs };   // mismos dos jugadores, mismo orden
+      simWB.steps.push([simWB.reset]);
+    }
+  }
   simWB.step++;
 }
 
@@ -4241,8 +4263,8 @@ function simRenderWB() {
   const lr = n => t('bracket.lr', { n });
   const wbTitles = [roundName(16), roundName(8), roundName(4), t('bracket.round.winnersFinal')];
   const lbTitle = r => r === 5 ? t('bracket.losersFinal') : r === 4 ? t('bracket.losersSemi') : lr(r + 1);
-  const stepTitles = [wbTitles[0], lr(1), wbTitles[1], lr(2), lr(3), wbTitles[2], lr(4), t('bracket.losersSemi'), wbTitles[3], t('bracket.losersFinal'), t('bracket.grandFinal')];
-  const done = simWB.step >= SIM_WB_STEPS;
+  const stepTitles = [wbTitles[0], lr(1), wbTitles[1], lr(2), lr(3), wbTitles[2], lr(4), t('bracket.losersSemi'), wbTitles[3], t('bracket.losersFinal'), t('bracket.grandFinal'), t('bracket.grandFinalReset')];
+  const done = simWB.step >= simWB.steps.length;
 
   const slot = (m, i) => {
     const p = simWBPlayers(m)[i];
@@ -4265,8 +4287,11 @@ function simRenderWB() {
   const lbHtml = model.lb.map((ms, r) => round(lbTitle(r), ms)).join('');
   const gfRes = res[model.gf.n];
   const wbFinalRes = res[model.wb[3][0].n];
-  const champ = gfRes ? gfRes.winner : null;
-  const wbChamp = !champ && wbFinalRes ? wbFinalRes.winner : null;
+  // Con revancha, el campeon sale de la revancha; sin ella, de la Gran Final
+  const finalRes = simWB.reset ? res[simWB.reset.n] : gfRes;
+  const champ = finalRes ? finalRes.winner : null;
+  const resetPending = !!simWB.reset && !champ;
+  const wbChamp = !champ && !resetPending && wbFinalRes ? wbFinalRes.winner : null;
 
   host.innerHTML = `
     <h3 class="sim-wb-title">${esc(t('sim.wbTitle'))}</h3>
@@ -4283,15 +4308,16 @@ function simRenderWB() {
         <section class="bracket-section is-winners"><h3 class="bracket-heading">${esc(t('bracket.winners'))}</h3><div class="bracket-rounds">${wbHtml}</div></section>
         <section class="bracket-section is-losers"><h3 class="bracket-heading">${esc(t('bracket.losers'))}</h3><div class="bracket-rounds">${lbHtml}</div></section>
       </div>
-      <div class="bracket-gf">${round(t('bracket.grandFinal'), [model.gf])}</div>
+      <div class="bracket-gf">${round(t('bracket.grandFinal'), simWB.reset ? [model.gf, simWB.reset] : [model.gf])}</div>
     </div></div>
     ${champ ? `<p class="sim-wb-champ"><span>${esc(t('sim.champion'))}</span><strong>${nameWithFlag(champ.name)}</strong></p>`
+      : resetPending ? `<p class="sim-wb-champ"><span>${esc(t('sim.resetNote'))}</span></p>`
       : wbChamp ? `<p class="sim-wb-champ"><span>${esc(t('sim.wbChamp'))}</span><strong>${nameWithFlag(wbChamp.name)}</strong></p>` : ''}`;
 
   const on = (id, fn) => { const el = document.getElementById(id); if (el) el.addEventListener('click', fn); };
   on('sim-btn-wb-next', () => { simWBPlayStep(); simRenderWB(); });
   on('sim-btn-wb-wf', () => { while (simWB.step < 9) simWBPlayStep(); simRenderWB(); });
-  on('sim-btn-wb-all', () => { while (simWB.step < SIM_WB_STEPS) simWBPlayStep(); simRenderWB(); });
+  on('sim-btn-wb-all', () => { while (simWB.step < simWB.steps.length) simWBPlayStep(); simRenderWB(); });
   on('sim-btn-wb-reset', () => { simInitWB(); simRenderWB(); });
   drawSimWBLines();
   requestAnimationFrame(drawSimWBLines);

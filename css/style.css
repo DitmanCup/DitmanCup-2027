@@ -2061,3 +2061,79 @@ body[data-tab="wager"] .wg-bg { display: block; }
 html[lang="pt"] .pred-when, html[lang="pt"] .sched-day-date { text-transform: none; }
 html[lang="pt"] .sched-day-date { display: inline-block; }
 html[lang="pt"] .pred-when::first-letter, html[lang="pt"] .sched-day-date::first-letter { text-transform: uppercase; }
+
+/* Portugues: las fuentes del juego (RE4 Remake / Biohazard) dibujan todo en mayusculas, y las letras con tilde
+   (ç, ã, õ, í...) salian en minuscula de otra fuente y se veian raras. Esos textos pasan a mayusculas de verdad (Ç, Ã, Õ, Í)
+   y esas letras se toman de una fuente comun del sistema, que si tiene mayusculas con tilde. */
+@font-face {
+  font-family: 'Accent Safe';
+  src: local('Segoe UI'), local('Helvetica Neue'), local('Roboto'), local('Arial');
+  unicode-range: U+00A1, U+00BF, U+00C0-00D6, U+00D8-00F6, U+00F8-00FF, U+0152-0153;
+  size-adjust: 86%;   /* para que la letra con tilde tenga el mismo tamaño que las de las fuentes del juego */
+}
+html[lang="pt"] {
+  --font-display: 'Accent Safe', 'Biohazard Game Font', 'Virgula Vulgaris', 'RE4 Remake', 'Times New Roman', serif;
+  --font-title: 'Accent Safe', 'RE4 Remake', 'Virgula Vulgaris', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Accent Safe', 'RE4 Remake', 'Virgula Vulgaris', 'Segoe UI', system-ui, sans-serif;
+}
+html[lang="pt"] h1,
+html[lang="pt"] h2,
+html[lang="pt"] h3,
+html[lang="pt"] .brand-name,
+html[lang="pt"] .lang-btn,
+html[lang="pt"] .tab-btn,
+html[lang="pt"] .hero-links a,
+html[lang="pt"] .cd-num,
+html[lang="pt"] .cd-sep,
+html[lang="pt"] .fact-number,
+html[lang="pt"] .intro-text p,
+html[lang="pt"] .block-badge,
+html[lang="pt"] .round-title,
+html[lang="pt"] .standings-wrapper th,
+html[lang="pt"] .standings-wrapper td.num,
+html[lang="pt"] .donate-btn,
+html[lang="pt"] .org-tier,
+html[lang="pt"] .team-name,
+html[lang="pt"] .social-links a,
+html[lang="pt"] .edition-year,
+html[lang="pt"] .podium-name,
+html[lang="pt"] .podium-name .tbd,
+html[lang="pt"] .prize-label,
+html[lang="pt"] .prize-amount,
+html[lang="pt"] .edition-vod,
+html[lang="pt"] .edition-data-btn,
+html[lang="pt"] .clips-section-title,
+html[lang="pt"] .live-meta a,
+html[lang="pt"] .live-badge,
+html[lang="pt"] .live-name,
+html[lang="pt"] #test-banner,
+html[lang="pt"] .sim-rule-label,
+html[lang="pt"] .sched-day-n,
+html[lang="pt"] .donors-title,
+html[lang="pt"] .donors-table th,
+html[lang="pt"] .donors-thanks strong,
+html[lang="pt"] .donors-thanks span,
+html[lang="pt"] .donors-donate,
+html[lang="pt"] .donors-src,
+html[lang="pt"] .donors-table td.donor-amt,
+html[lang="pt"] .intro-card strong,
+html[lang="pt"] .dl-amt,
+html[lang="pt"] .trailer-title,
+html[lang="pt"] .trailer-yt,
+html[lang="pt"] .live-meta a.live-watch,
+html[lang="pt"] .live-tt,
+html[lang="pt"] .pred-btn,
+html[lang="pt"] .pred-sub,
+html[lang="pt"] .pred-round > summary,
+html[lang="pt"] .pred-side,
+html[lang="pt"] .pred-pts,
+html[lang="pt"] .pred-board th,
+html[lang="pt"] .pred-player,
+html[lang="pt"] .live-card.is-tiktok .live-play-tt,
+html[lang="pt"] .wg-cur,
+html[lang="pt"] .wg-item-kind,
+html[lang="pt"] .wg-h,
+html[lang="pt"] .wg-hud-c,
+html[lang="pt"] .user-avatar,
+html[lang="pt"] .user-menu-btn,
+html[lang="pt"] .user-login { text-transform: uppercase; }
