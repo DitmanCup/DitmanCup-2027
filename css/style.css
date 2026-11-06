@@ -2151,3 +2151,10 @@ html[lang="pt"] .user-login { text-transform: uppercase; }
 .dd-list li { padding: .35rem .8rem; white-space: nowrap; color: var(--text); font-family: var(--font-grunge); font-size: 1.05rem; cursor: pointer; }
 .dd-list li.is-active { background: rgba(181, 39, 28, .35); color: #fff; }
 .dd-list li[aria-selected="true"] { color: var(--gold); }
+
+/* Japones: ajustes de presentacion pedidos por un runner japones */
+.sim-legend-wl { display: none !important; }
+html[lang="ja"] .sim-legend-wl { display: inline-flex !important; }
+/* "出場者 32人": la etiqueta antes del numero y "人" despues */
+html[lang="ja"] .hero-facts .fact:first-child { flex-direction: column-reverse; }
+html[lang="ja"] #fact-runners::after { content: '人'; font-size: .5em; margin-left: .15em; }
