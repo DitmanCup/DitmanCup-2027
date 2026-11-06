@@ -1,13 +1,16 @@
 {
-  "updatedAt": "2026-11-06T06:55:03.809Z",
+  "updatedAt": "2026-11-06T07:05:09.795Z",
   "youtube": {
     "seppp": {
       "live": false,
       "why": "canon:/channel/UCpSD7At_gum8TJJ7c77lsyQ"
     },
     "Bang Gori": {
-      "live": false,
-      "why": "canon:/channel/UCkIzLx7wi9TeDaGZKVD-jUQ"
+      "live": true,
+      "videoId": "L3Q9t7fenng",
+      "title": "[4] Pengembara Neraka | Phantom Blade Zero Indonesia",
+      "viewers": 26,
+      "embed": true
     },
     "nyr9468": {
       "live": false,
