@@ -1,13 +1,16 @@
 {
-  "updatedAt": "2026-11-08T07:54:34.426Z",
+  "updatedAt": "2026-11-08T12:57:05.682Z",
   "youtube": {
     "seppp": {
       "live": false,
       "why": "canon:/channel/UCpSD7At_gum8TJJ7c77lsyQ"
     },
     "Bang Gori": {
-      "live": false,
-      "why": "canon:/channel/UCkIzLx7wi9TeDaGZKVD-jUQ"
+      "live": true,
+      "videoId": "AXJTfCbqhF4",
+      "title": "11 Hari Lagi Menuju... | Resident Evil 4 Speedrun Indonesia",
+      "viewers": 33,
+      "embed": true
     },
     "nyr9468": {
       "live": false,
