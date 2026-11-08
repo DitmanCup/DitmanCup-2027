@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-08T13:17:17.433Z",
+  "updatedAt": "2026-11-08T13:47:34.711Z",
   "youtube": {
     "seppp": {
       "live": false,
@@ -9,7 +9,7 @@
       "live": true,
       "videoId": "AXJTfCbqhF4",
       "title": "11 Hari Lagi Menuju... | Resident Evil 4 Speedrun Indonesia",
-      "viewers": 115,
+      "viewers": 191,
       "embed": true
     },
     "nyr9468": {
@@ -48,8 +48,11 @@
       "why": "canon:/channel/UCpP3xUeEFum9_uoNPpz8Xog"
     },
     "Orchlon": {
-      "live": false,
-      "why": "canon:/channel/UCu3T_ir3EX_CTcX2I2Ny9Hg"
+      "live": true,
+      "videoId": "O4vjdxwIojE",
+      "title": "[Live] Resident Evil 4 (OG) Professional Speedruns",
+      "viewers": 23,
+      "embed": true
     },
     "JokerUY": {
       "live": false,
