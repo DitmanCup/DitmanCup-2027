@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-08T12:57:05.682Z",
+  "updatedAt": "2026-11-08T13:17:17.433Z",
   "youtube": {
     "seppp": {
       "live": false,
@@ -9,7 +9,7 @@
       "live": true,
       "videoId": "AXJTfCbqhF4",
       "title": "11 Hari Lagi Menuju... | Resident Evil 4 Speedrun Indonesia",
-      "viewers": 33,
+      "viewers": 115,
       "embed": true
     },
     "nyr9468": {
@@ -17,8 +17,11 @@
       "why": "canon:/channel/UCW49iDI43U0vs-aIu7ovtBQ"
     },
     "Fedo_Ras": {
-      "live": false,
-      "why": "canon:/channel/UCeGvq5Sww3ads0Q39UE9_6A"
+      "live": true,
+      "videoId": "Oas3JSRe3JI",
+      "title": "FINAL : TURNAMENT Resident Evil 4 IRC",
+      "viewers": 2,
+      "embed": true
     },
     "NETJU": {
       "live": false,
