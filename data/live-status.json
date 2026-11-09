@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-09T09:09:43.977Z",
+  "updatedAt": "2026-11-09T09:19:49.986Z",
   "youtube": {
     "seppp": {
       "live": false,
@@ -9,7 +9,7 @@
       "live": true,
       "videoId": "v11DVKisS3s",
       "title": "[5] Soul vs Ip Man | Phantom Blade Zero Indonesia",
-      "viewers": 59,
+      "viewers": 50,
       "embed": true
     },
     "nyr9468": {
@@ -54,7 +54,7 @@
     },
     "ryllmen": {
       "live": false,
-      "why": "canon:undefined|len=1233k|isLiveNow=0|isLive=0|vd=1|vdLive=0"
+      "why": "watch|LIVE_STREAM_OFFLINE|lbd=1"
     }
   },
   "kick": {
