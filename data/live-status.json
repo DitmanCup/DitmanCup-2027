@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-11-09T17:04:50.329Z",
+  "updatedAt": "2026-11-09T18:05:27.518Z",
   "youtube": {
     "seppp": {
       "live": true,
       "videoId": "oispoIKK1lU",
       "title": "Speedrun RE4 OG | NG Pro PB Attempt",
-      "viewers": 26,
+      "viewers": 44,
       "embed": true
     },
     "Bang Gori": {
@@ -45,8 +45,11 @@
       "why": "canon:/channel/UCpP3xUeEFum9_uoNPpz8Xog"
     },
     "Orchlon": {
-      "live": false,
-      "why": "canon:/channel/UCu3T_ir3EX_CTcX2I2Ny9Hg"
+      "live": true,
+      "videoId": "lgZs1iV-rEE",
+      "title": "[Live] Resident Evil 4 (OG) Professional Speedruns",
+      "viewers": 26,
+      "embed": true
     },
     "JokerUY": {
       "live": false,
