@@ -1,13 +1,16 @@
 {
-  "updatedAt": "2026-11-09T10:50:34.489Z",
+  "updatedAt": "2026-11-09T12:31:40.822Z",
   "youtube": {
     "seppp": {
       "live": false,
       "why": "canon:/channel/UCpSD7At_gum8TJJ7c77lsyQ"
     },
     "Bang Gori": {
-      "live": false,
-      "why": "canon:/channel/UCkIzLx7wi9TeDaGZKVD-jUQ"
+      "live": true,
+      "videoId": "p3mGt7Q6678",
+      "title": "10 Hari Menuju... | Resident Evil 4 Speedrun Indonesia",
+      "viewers": 0,
+      "embed": true
     },
     "nyr9468": {
       "live": false,
