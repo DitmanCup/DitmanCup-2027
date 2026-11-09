@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-09T05:38:07.981Z",
+  "updatedAt": "2026-11-09T07:28:54.029Z",
   "youtube": {
     "seppp": {
       "live": false,
@@ -50,8 +50,11 @@
       "why": "canon:/channel/UCyPMjU0Qyegpo5CuFSx0KLA"
     },
     "ryllmen": {
-      "live": false,
-      "why": "canon:/channel/UCk4GbLR2XbYU-DzC4q8gtdA"
+      "live": true,
+      "videoId": "TMiuE5v6GQY",
+      "title": "main santai resident evil 4",
+      "viewers": 0,
+      "embed": true
     }
   },
   "kick": {
