@@ -1,18 +1,18 @@
 {
-  "updatedAt": "2026-11-10T16:10:08.547Z",
+  "updatedAt": "2026-11-10T16:40:29.991Z",
   "youtube": {
     "seppp": {
       "live": true,
       "videoId": "FIY7CXk-axM",
       "title": "Speedrun RE4 OG | NG Pro PB Attempt",
-      "viewers": 0,
+      "viewers": 32,
       "embed": true
     },
     "Bang Gori": {
       "live": true,
       "videoId": "bTeZqXMkEcQ",
       "title": "Ada Yang Resign Tuh | Resident Evil 4 Speedrun Indonesia",
-      "viewers": 246,
+      "viewers": 193,
       "embed": true
     },
     "nyr9468": {
@@ -48,8 +48,11 @@
       "why": "canon:/channel/UCpP3xUeEFum9_uoNPpz8Xog"
     },
     "Orchlon": {
-      "live": false,
-      "why": "canon:/channel/UCu3T_ir3EX_CTcX2I2Ny9Hg"
+      "live": true,
+      "videoId": "pKvV1QErxd4",
+      "title": "[Live] Resident Evil 4 (OG) Professional Speedruns",
+      "viewers": 23,
+      "embed": true
     },
     "JokerUY": {
       "live": false,
