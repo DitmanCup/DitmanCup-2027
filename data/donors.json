@@ -1,15 +1,15 @@
 {
   "currency": "USD",
-  "total": 2798.0,
-  "donorCount": 36,
+  "total": 2818.0,
+  "donorCount": 37,
   "sources": [
     {
       "id": 222380,
       "title": "Ditman Cup 2027",
       "startAt": "2027-01-17T18:15:00Z",
       "status": "ready",
-      "raised": 230.0,
-      "donorCount": 4,
+      "raised": 250.0,
+      "donorCount": 5,
       "donors": [
         {
           "name": "JokerUY",
@@ -30,6 +30,17 @@
             {
               "date": "2026-11-03T21:52:36Z",
               "amount": 100.0
+            }
+          ]
+        },
+        {
+          "name": "Milly_Leon",
+          "total": 20.0,
+          "count": 1,
+          "donations": [
+            {
+              "date": "2026-11-10T19:26:05Z",
+              "amount": 20.0
             }
           ]
         },
@@ -673,6 +684,11 @@
       "count": 1
     },
     {
+      "name": "Milly_Leon",
+      "total": 20.0,
+      "count": 1
+    },
+    {
       "name": "RichyWichy",
       "total": 20.0,
       "count": 1
@@ -728,5 +744,5 @@
       "count": 1
     }
   ],
-  "updatedAt": "2026-11-03T22:03:58Z"
+  "updatedAt": "2026-11-10T19:32:40Z"
 }
