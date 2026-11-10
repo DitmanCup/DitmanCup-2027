@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-10T04:12:07.175Z",
+  "updatedAt": "2026-11-10T04:52:51.763Z",
   "youtube": {
     "seppp": {
       "live": false,
@@ -46,11 +46,8 @@
       "why": "canon:/channel/UCu3T_ir3EX_CTcX2I2Ny9Hg"
     },
     "JokerUY": {
-      "live": true,
-      "videoId": "fW8taFrRpTw",
-      "title": "NEW GLITCH SPEEDRUN NO MERCHANT RE4OG",
-      "viewers": 14,
-      "embed": true
+      "live": false,
+      "why": "canon:/channel/UCyPMjU0Qyegpo5CuFSx0KLA"
     },
     "ryllmen": {
       "live": false,
