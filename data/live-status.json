@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-10T19:46:15.674Z",
+  "updatedAt": "2026-11-10T21:47:56.705Z",
   "youtube": {
     "seppp": {
       "live": false,
@@ -42,11 +42,8 @@
       "why": "canon:/channel/UCpP3xUeEFum9_uoNPpz8Xog"
     },
     "Orchlon": {
-      "live": true,
-      "videoId": "pKvV1QErxd4",
-      "title": "[Live] Resident Evil 4 (OG) Professional Speedruns",
-      "viewers": 126,
-      "embed": true
+      "live": false,
+      "why": "canon:/channel/UCu3T_ir3EX_CTcX2I2Ny9Hg"
     },
     "JokerUY": {
       "live": false,
