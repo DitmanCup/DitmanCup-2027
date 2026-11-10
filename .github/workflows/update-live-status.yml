@@ -1,7 +1,9 @@
-name: Actualizar vivos (YouTube y Kick)
+name: Actualizar vivos (YouTube y Kick) y donaciones
 
 # GitHub casi no respeta los cron frecuentes en repos poco activos (corre cada ~8 h en vez de cada 5 min),
 # asi que cada corrida se queda ~5 h 40 min chequeando cada 10 min y al terminar se vuelve a lanzar sola.
+# En cada vuelta tambien se revisan las donaciones de Matcherino (scripts/update-donors.ps1): si hay una nueva se commitea
+# y se avisa en Discord (update-donors.yml queda de respaldo, pero GitHub casi no corre su cron de 30 min).
 # El cron de cada hora queda de respaldo por si la cadena se corta.
 on:
   schedule:
@@ -25,7 +27,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Ver quien esta en vivo en YouTube y Kick (cada 10 min)
+      - name: Ver quien esta en vivo en YouTube y Kick, y las donaciones (cada 10 min)
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -38,6 +42,19 @@ jobs:
               git commit -m "Actualizar vivos de YouTube y Kick"
               if ! { git pull --rebase origin main && git push; }; then
                 # otro bot empujo a la vez: se descarta este intento y la proxima vuelta lo rehace
+                git rebase --abort 2>/dev/null || true
+                git fetch origin main && git reset --hard origin/main
+              fi
+            fi
+            # Donaciones de Matcherino (el cron de update-donors.yml casi no corre): si cambian, se commitean y se avisa en Discord
+            cp data/donors.json "$RUNNER_TEMP/donors-old.json"
+            pwsh -NoProfile -File ./scripts/update-donors.ps1 || true
+            if [ -n "$(git status --porcelain data/donors.json)" ]; then
+              git add data/donors.json
+              git commit -m "Actualizar donadores de Matcherino"
+              if { git pull --rebase origin main && git push; }; then
+                node scripts/notify-discord-donation.js "$RUNNER_TEMP/donors-old.json" data/donors.json || true
+              else
                 git rebase --abort 2>/dev/null || true
                 git fetch origin main && git reset --hard origin/main
               fi
