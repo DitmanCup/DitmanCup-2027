@@ -1,13 +1,16 @@
 {
-  "updatedAt": "2026-11-10T04:52:51.763Z",
+  "updatedAt": "2026-11-10T08:04:41.081Z",
   "youtube": {
     "seppp": {
       "live": false,
       "why": "canon:/channel/UCpSD7At_gum8TJJ7c77lsyQ"
     },
     "Bang Gori": {
-      "live": false,
-      "why": "canon:/channel/UCkIzLx7wi9TeDaGZKVD-jUQ"
+      "live": true,
+      "videoId": "CWbTeK5mnIw",
+      "title": "[6] Harus Tamat Sebelum GTA 6 | Phantom Blade Zero Indonesia",
+      "viewers": 19,
+      "embed": true
     },
     "nyr9468": {
       "live": false,
