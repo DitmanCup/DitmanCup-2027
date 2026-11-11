@@ -1,13 +1,16 @@
 {
-  "updatedAt": "2026-11-11T10:37:30.744Z",
+  "updatedAt": "2026-11-11T12:49:15.604Z",
   "youtube": {
     "seppp": {
       "live": false,
       "why": "canon:/channel/UCpSD7At_gum8TJJ7c77lsyQ"
     },
     "Bang Gori": {
-      "live": false,
-      "why": "canon:/channel/UCkIzLx7wi9TeDaGZKVD-jUQ"
+      "live": true,
+      "videoId": "sX_uMsrVm30",
+      "title": "Gori, Calon Terkuat RI 2 | Resident Evil 4 Speedrun Indonesia",
+      "viewers": 68,
+      "embed": true
     },
     "nyr9468": {
       "live": false,
