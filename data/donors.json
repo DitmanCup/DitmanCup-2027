@@ -1,15 +1,15 @@
 {
   "currency": "USD",
-  "total": 2818.0,
-  "donorCount": 37,
+  "total": 2888.0,
+  "donorCount": 38,
   "sources": [
     {
       "id": 222380,
       "title": "Ditman Cup 2027",
       "startAt": "2027-01-17T18:15:00Z",
       "status": "ready",
-      "raised": 250.0,
-      "donorCount": 5,
+      "raised": 320.0,
+      "donorCount": 6,
       "donors": [
         {
           "name": "JokerUY",
@@ -30,6 +30,17 @@
             {
               "date": "2026-11-03T21:52:36Z",
               "amount": 100.0
+            }
+          ]
+        },
+        {
+          "name": "FaWas_13",
+          "total": 70.0,
+          "count": 1,
+          "donations": [
+            {
+              "date": "2026-11-11T02:52:51Z",
+              "amount": 70.0
             }
           ]
         },
@@ -614,6 +625,11 @@
       "count": 1
     },
     {
+      "name": "FaWas_13",
+      "total": 70.0,
+      "count": 1
+    },
+    {
       "name": "DrumsetWereWolf",
       "total": 60.0,
       "count": 1
@@ -744,5 +760,5 @@
       "count": 1
     }
   ],
-  "updatedAt": "2026-11-10T19:32:40Z"
+  "updatedAt": "2026-11-11T02:55:13Z"
 }
