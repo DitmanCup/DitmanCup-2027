@@ -1,15 +1,18 @@
 {
-  "updatedAt": "2026-11-11T12:49:15.604Z",
+  "updatedAt": "2026-11-11T15:31:21.940Z",
   "youtube": {
     "seppp": {
-      "live": false,
-      "why": "canon:/channel/UCpSD7At_gum8TJJ7c77lsyQ"
+      "live": true,
+      "videoId": "OE7ii-8q-DQ",
+      "title": "Speedrun RE4 OG | NG Pro PB Attempt",
+      "viewers": 7,
+      "embed": true
     },
     "Bang Gori": {
       "live": true,
       "videoId": "sX_uMsrVm30",
       "title": "Gori, Calon Terkuat RI 2 | Resident Evil 4 Speedrun Indonesia",
-      "viewers": 68,
+      "viewers": 246,
       "embed": true
     },
     "nyr9468": {
