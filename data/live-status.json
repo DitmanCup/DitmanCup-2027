@@ -1,13 +1,16 @@
 {
-  "updatedAt": "2026-11-12T10:16:35.892Z",
+  "updatedAt": "2026-11-12T12:28:36.978Z",
   "youtube": {
     "seppp": {
       "live": false,
       "why": "canon:/channel/UCpSD7At_gum8TJJ7c77lsyQ"
     },
     "Bang Gori": {
-      "live": false,
-      "why": "canon:/channel/UCkIzLx7wi9TeDaGZKVD-jUQ"
+      "live": true,
+      "videoId": "ztXf8-OvyYQ",
+      "title": "Hitung Mundur GTA 6 | Grand Theft Auto San Andreas Indonesia",
+      "viewers": 13,
+      "embed": true
     },
     "nyr9468": {
       "live": false,
