@@ -1,19 +1,16 @@
 {
-  "updatedAt": "2026-11-12T16:21:48.170Z",
+  "updatedAt": "2026-11-12T17:33:15.454Z",
   "youtube": {
     "seppp": {
       "live": true,
       "videoId": "1ruqpB_tzS8",
       "title": "Speedrun RE4 OG | NG Pro PB Attempt",
-      "viewers": 14,
+      "viewers": 37,
       "embed": true
     },
     "Bang Gori": {
-      "live": true,
-      "videoId": "UZrHLDxECDs",
-      "title": "Hitung Mundur GTA 6 | Resident Evil 4 Speedrun Indonesia",
-      "viewers": 346,
-      "embed": true
+      "live": false,
+      "why": "canon:/channel/UCkIzLx7wi9TeDaGZKVD-jUQ"
     },
     "nyr9468": {
       "live": false,
@@ -51,7 +48,7 @@
       "live": true,
       "videoId": "Fy8AhEf4qOw",
       "title": "[Live] Resident Evil 4 (OG) Professional Speedruns",
-      "viewers": 62,
+      "viewers": 108,
       "embed": true
     },
     "JokerUY": {
