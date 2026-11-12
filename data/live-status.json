@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-12T13:39:31.855Z",
+  "updatedAt": "2026-11-12T15:41:07.034Z",
   "youtube": {
     "seppp": {
       "live": false,
@@ -9,7 +9,7 @@
       "live": true,
       "videoId": "UZrHLDxECDs",
       "title": "Hitung Mundur GTA 6 | Resident Evil 4 Speedrun Indonesia",
-      "viewers": 75,
+      "viewers": 312,
       "embed": true
     },
     "nyr9468": {
@@ -45,8 +45,11 @@
       "why": "canon:/channel/UCpP3xUeEFum9_uoNPpz8Xog"
     },
     "Orchlon": {
-      "live": false,
-      "why": "canon:/channel/UCu3T_ir3EX_CTcX2I2Ny9Hg"
+      "live": true,
+      "videoId": "Fy8AhEf4qOw",
+      "title": "[Live] Resident Evil 4 (OG) Professional Speedruns",
+      "viewers": 16,
+      "embed": true
     },
     "JokerUY": {
       "live": false,
