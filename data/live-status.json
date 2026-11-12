@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-12T19:14:44.924Z",
+  "updatedAt": "2026-11-12T21:36:28.767Z",
   "youtube": {
     "seppp": {
       "live": false,
@@ -46,8 +46,11 @@
       "why": "canon:/channel/UCu3T_ir3EX_CTcX2I2Ny9Hg"
     },
     "JokerUY": {
-      "live": false,
-      "why": "canon:/channel/UCyPMjU0Qyegpo5CuFSx0KLA"
+      "live": true,
+      "videoId": "9OPHQwB-Zz4",
+      "title": "NEW GLITCH SPEEDRUN NG NORMAL",
+      "viewers": 0,
+      "embed": true
     },
     "ryllmen": {
       "live": false,
