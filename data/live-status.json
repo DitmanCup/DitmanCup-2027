@@ -1,12 +1,9 @@
 {
-  "updatedAt": "2026-11-12T18:34:12.804Z",
+  "updatedAt": "2026-11-12T19:14:44.924Z",
   "youtube": {
     "seppp": {
-      "live": true,
-      "videoId": "1ruqpB_tzS8",
-      "title": "Speedrun RE4 OG | NG Pro PB Attempt",
-      "viewers": 45,
-      "embed": true
+      "live": false,
+      "why": "canon:/channel/UCpSD7At_gum8TJJ7c77lsyQ"
     },
     "Bang Gori": {
       "live": false,
