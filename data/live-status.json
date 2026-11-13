@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-13T15:00:07.812Z",
+  "updatedAt": "2026-11-13T16:31:49.201Z",
   "youtube": {
     "seppp": {
       "live": false,
@@ -9,7 +9,7 @@
       "live": true,
       "videoId": "zIvemqxWN9w",
       "title": "Last Weekend Sebelum GTA 6 | Resident Evil 4 Speedrun Indonesia",
-      "viewers": 292,
+      "viewers": 306,
       "embed": true
     },
     "nyr9468": {
@@ -53,8 +53,11 @@
       "why": "canon:/channel/UCyPMjU0Qyegpo5CuFSx0KLA"
     },
     "ryllmen": {
-      "live": false,
-      "why": "watch|LIVE_STREAM_OFFLINE|lbd=1"
+      "live": true,
+      "videoId": "xuaUx9r6l28",
+      "title": "Speedrun Resident evil 4 og",
+      "viewers": 0,
+      "embed": true
     }
   },
   "kick": {
