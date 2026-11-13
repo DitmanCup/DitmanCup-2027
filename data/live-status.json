@@ -1,13 +1,16 @@
 {
-  "updatedAt": "2026-11-13T05:02:35.886Z",
+  "updatedAt": "2026-11-13T08:04:36.272Z",
   "youtube": {
     "seppp": {
       "live": false,
       "why": "canon:/channel/UCpSD7At_gum8TJJ7c77lsyQ"
     },
     "Bang Gori": {
-      "live": false,
-      "why": "canon:/channel/UCkIzLx7wi9TeDaGZKVD-jUQ"
+      "live": true,
+      "videoId": "UBXV6eCWTV8",
+      "title": "[9] Just Git Gud | Phantom Blade Zero Indonesia",
+      "viewers": 15,
+      "embed": true
     },
     "nyr9468": {
       "live": false,
