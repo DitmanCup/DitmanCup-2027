@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-11-13T17:43:17.363Z",
+  "updatedAt": "2026-11-13T18:03:37.764Z",
   "youtube": {
     "seppp": {
       "live": true,
       "videoId": "5cHoxDU_cx0",
       "title": "Speedrun RE4 OG | NG Pro PB Attempt",
-      "viewers": 29,
+      "viewers": 32,
       "embed": true
     },
     "Bang Gori": {
@@ -25,11 +25,8 @@
       "why": "canon:/channel/UCbiPXsZalhVwhfHB2-Nl9Ig"
     },
     "aqbilghilman": {
-      "live": true,
-      "videoId": "8KuorFo7oxg",
-      "title": "test",
-      "viewers": 0,
-      "embed": true
+      "live": false,
+      "why": "canon:/channel/UCcVZmiHYsc3zVP5kdi7zQlw"
     },
     "Mrchampppt": {
       "live": false,
