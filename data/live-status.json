@@ -1,18 +1,18 @@
 {
-  "updatedAt": "2026-11-13T16:52:17.163Z",
+  "updatedAt": "2026-11-13T17:02:36.647Z",
   "youtube": {
     "seppp": {
       "live": true,
       "videoId": "5cHoxDU_cx0",
       "title": "Speedrun RE4 OG | NG Pro PB Attempt",
-      "viewers": 4,
+      "viewers": 19,
       "embed": true
     },
     "Bang Gori": {
       "live": true,
       "videoId": "zIvemqxWN9w",
       "title": "Last Weekend Sebelum GTA 6 | Resident Evil 4 Speedrun Indonesia",
-      "viewers": 204,
+      "viewers": 183,
       "embed": true
     },
     "nyr9468": {
@@ -56,11 +56,8 @@
       "why": "canon:/channel/UCyPMjU0Qyegpo5CuFSx0KLA"
     },
     "ryllmen": {
-      "live": true,
-      "videoId": "1h2-j47jqqA",
-      "title": "Speedrun Resident evil 4 og",
-      "viewers": 0,
-      "embed": true
+      "live": false,
+      "why": "watch|LIVE_STREAM_OFFLINE|lbd=1"
     }
   },
   "kick": {
