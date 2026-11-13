@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-13T13:08:29.412Z",
+  "updatedAt": "2026-11-13T13:18:39.681Z",
   "youtube": {
     "seppp": {
       "live": false,
@@ -9,7 +9,7 @@
       "live": true,
       "videoId": "zIvemqxWN9w",
       "title": "Last Weekend Sebelum GTA 6 | Resident Evil 4 Speedrun Indonesia",
-      "viewers": 192,
+      "viewers": 220,
       "embed": true
     },
     "nyr9468": {
@@ -17,8 +17,11 @@
       "why": "canon:/channel/UCW49iDI43U0vs-aIu7ovtBQ"
     },
     "Fedo_Ras": {
-      "live": false,
-      "why": "watch|LIVE_STREAM_OFFLINE|lbd=1"
+      "live": true,
+      "videoId": "L3vpepd7Of0",
+      "title": "Lari Bang Lari! Speedrun Santai Resident Evil 4 UHD",
+      "viewers": 0,
+      "embed": true
     },
     "NETJU": {
       "live": false,
