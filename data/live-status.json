@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-14T08:45:54.387Z",
+  "updatedAt": "2026-11-14T11:38:11.528Z",
   "youtube": {
     "seppp": {
       "live": false,
@@ -14,8 +14,11 @@
       "why": "canon:/channel/UCW49iDI43U0vs-aIu7ovtBQ"
     },
     "Fedo_Ras": {
-      "live": false,
-      "why": "canon:/channel/UCeGvq5Sww3ads0Q39UE9_6A"
+      "live": true,
+      "videoId": "ky73S2w2gKU",
+      "title": "Lari Bang Lari! Speedrun Santai Resident Evil 4 UHD",
+      "viewers": 0,
+      "embed": true
     },
     "NETJU": {
       "live": false,
