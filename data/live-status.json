@@ -1,13 +1,16 @@
 {
-  "updatedAt": "2026-11-15T11:57:18.757Z",
+  "updatedAt": "2026-11-15T12:17:35.316Z",
   "youtube": {
     "seppp": {
       "live": false,
       "why": "canon:/channel/UCpSD7At_gum8TJJ7c77lsyQ"
     },
     "Bang Gori": {
-      "live": false,
-      "why": "canon:/channel/UCkIzLx7wi9TeDaGZKVD-jUQ"
+      "live": true,
+      "videoId": "uvO0WhzNH5k",
+      "title": "19 Nov 7pm Subathon GTA 6 | Resident Evil 4 Speedrun Indonesia",
+      "viewers": 56,
+      "embed": true
     },
     "nyr9468": {
       "live": false,
