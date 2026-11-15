@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-15T14:19:08.727Z",
+  "updatedAt": "2026-11-15T14:29:33.659Z",
   "youtube": {
     "seppp": {
       "live": false,
@@ -9,7 +9,7 @@
       "live": true,
       "videoId": "uvO0WhzNH5k",
       "title": "19 Nov 7pm Subathon GTA 6 | Resident Evil 4 Speedrun Indonesia",
-      "viewers": 301,
+      "viewers": 304,
       "embed": true
     },
     "nyr9468": {
@@ -17,8 +17,11 @@
       "why": "canon:/channel/UCW49iDI43U0vs-aIu7ovtBQ"
     },
     "Fedo_Ras": {
-      "live": false,
-      "why": "watch|LIVE_STREAM_OFFLINE|lbd=1"
+      "live": true,
+      "videoId": "1mf6EK083Tg",
+      "title": "TURNAMENT Resident Evil 4 CIKI CUP WII",
+      "viewers": 3,
+      "embed": true
     },
     "NETJU": {
       "live": false,
