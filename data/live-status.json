@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-11-15T16:51:31.622Z",
+  "updatedAt": "2026-11-15T17:22:00.434Z",
   "youtube": {
     "seppp": {
       "live": true,
       "videoId": "uqrgi11iww8",
       "title": "Speedrun RE4 OG | NG Pro PB Attempt",
-      "viewers": 4,
+      "viewers": 23,
       "embed": true
     },
     "Bang Gori": {
@@ -17,11 +17,8 @@
       "why": "canon:/channel/UCW49iDI43U0vs-aIu7ovtBQ"
     },
     "Fedo_Ras": {
-      "live": true,
-      "videoId": "1mf6EK083Tg",
-      "title": "TURNAMENT Resident Evil 4 CIKI CUP WII",
-      "viewers": 2,
-      "embed": true
+      "live": false,
+      "why": "canon:/channel/UCeGvq5Sww3ads0Q39UE9_6A"
     },
     "NETJU": {
       "live": false,
