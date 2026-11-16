@@ -1,16 +1,16 @@
 {
-  "updatedAt": "2026-11-16T13:17:29.999Z",
+  "updatedAt": "2026-11-16T17:20:41.327Z",
   "youtube": {
     "seppp": {
-      "live": false,
-      "why": "canon:/channel/UCpSD7At_gum8TJJ7c77lsyQ"
+      "live": true,
+      "videoId": "U4sk6DL-Z9I",
+      "title": "Speedrun RE4 OG | NG Pro PB Attempt",
+      "viewers": 8,
+      "embed": true
     },
     "Bang Gori": {
-      "live": true,
-      "videoId": "ZT-tJUEeIH4",
-      "title": "19 Nov 7pm Subathon GTA 6 | Resident Evil 4 Speedrun Indonesia",
-      "viewers": 275,
-      "embed": true
+      "live": false,
+      "why": "canon:/channel/UCkIzLx7wi9TeDaGZKVD-jUQ"
     },
     "nyr9468": {
       "live": false,
