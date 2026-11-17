@@ -1,15 +1,18 @@
 {
-  "updatedAt": "2026-11-17T12:47:27.008Z",
+  "updatedAt": "2026-11-17T15:19:19.200Z",
   "youtube": {
     "seppp": {
-      "live": false,
-      "why": "canon:/channel/UCpSD7At_gum8TJJ7c77lsyQ"
+      "live": true,
+      "videoId": "_5UeRoKdLNI",
+      "title": "Speedrun RE4 OG | NG Pro PB Attempt",
+      "viewers": 2,
+      "embed": true
     },
     "Bang Gori": {
       "live": true,
       "videoId": "IhhZnDeQMi8",
       "title": "LUSA KITA MULAI | Resident Evil 4 Speedrun Indonesia",
-      "viewers": 38,
+      "viewers": 316,
       "embed": true
     },
     "nyr9468": {
