@@ -1,24 +1,24 @@
 {
-  "updatedAt": "2026-11-17T10:15:19.178Z",
+  "updatedAt": "2026-11-17T12:47:27.008Z",
   "youtube": {
     "seppp": {
       "live": false,
       "why": "canon:/channel/UCpSD7At_gum8TJJ7c77lsyQ"
     },
     "Bang Gori": {
-      "live": false,
-      "why": "canon:/channel/UCkIzLx7wi9TeDaGZKVD-jUQ"
+      "live": true,
+      "videoId": "IhhZnDeQMi8",
+      "title": "LUSA KITA MULAI | Resident Evil 4 Speedrun Indonesia",
+      "viewers": 38,
+      "embed": true
     },
     "nyr9468": {
       "live": false,
       "why": "canon:/channel/UCW49iDI43U0vs-aIu7ovtBQ"
     },
     "Fedo_Ras": {
-      "live": true,
-      "videoId": "QR9NOPG1awQ",
-      "title": "Lari Bang Lari! Speedrun Santai Resident Evil 4 UHD",
-      "viewers": 0,
-      "embed": true
+      "live": false,
+      "why": "canon:/channel/UCeGvq5Sww3ads0Q39UE9_6A"
     },
     "NETJU": {
       "live": false,
