@@ -1,12 +1,9 @@
 {
-  "updatedAt": "2026-11-18T18:54:19.442Z",
+  "updatedAt": "2026-11-18T19:34:50.503Z",
   "youtube": {
     "seppp": {
-      "live": true,
-      "videoId": "a2DgNztT-wA",
-      "title": "Speedrun RE4 OG | NG Pro PB Attempt",
-      "viewers": 45,
-      "embed": true
+      "live": false,
+      "why": "canon:/channel/UCpSD7At_gum8TJJ7c77lsyQ"
     },
     "Bang Gori": {
       "live": false,
@@ -51,7 +48,7 @@
       "live": true,
       "videoId": "XRpxJKlhq9w",
       "title": "[Live] Grand Theft Auto VI | PS5 Pro",
-      "viewers": 96,
+      "viewers": 84,
       "embed": true
     },
     "JokerUY": {
