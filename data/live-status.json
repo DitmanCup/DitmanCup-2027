@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-18T10:46:32.231Z",
+  "updatedAt": "2026-11-18T11:57:49.914Z",
   "youtube": {
     "seppp": {
       "live": false,
@@ -14,11 +14,8 @@
       "why": "canon:/channel/UCW49iDI43U0vs-aIu7ovtBQ"
     },
     "Fedo_Ras": {
-      "live": true,
-      "videoId": "u5a-gq7d6Mk",
-      "title": "Lari Bang Lari! Speedrun Santai Resident Evil 4 UHD",
-      "viewers": 0,
-      "embed": true
+      "live": false,
+      "why": "canon:/channel/UCeGvq5Sww3ads0Q39UE9_6A"
     },
     "NETJU": {
       "live": false,
@@ -48,7 +45,7 @@
       "live": true,
       "videoId": "XRpxJKlhq9w",
       "title": "[Live] Grand Theft Auto VI | PS5 Pro",
-      "viewers": 66,
+      "viewers": 125,
       "embed": true
     },
     "JokerUY": {
