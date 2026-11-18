@@ -1,15 +1,18 @@
 {
-  "updatedAt": "2026-11-18T12:18:07.387Z",
+  "updatedAt": "2026-11-18T15:51:03.669Z",
   "youtube": {
     "seppp": {
-      "live": false,
-      "why": "canon:/channel/UCpSD7At_gum8TJJ7c77lsyQ"
+      "live": true,
+      "videoId": "a2DgNztT-wA",
+      "title": "Speedrun RE4 OG | NG Pro PB Attempt",
+      "viewers": 2,
+      "embed": true
     },
     "Bang Gori": {
       "live": true,
       "videoId": "zXszfP_0xKk",
       "title": "Last Day Before GTA 6 | Resident Evil 4 Speedrun Indonesia",
-      "viewers": 40,
+      "viewers": 237,
       "embed": true
     },
     "nyr9468": {
@@ -48,7 +51,7 @@
       "live": true,
       "videoId": "XRpxJKlhq9w",
       "title": "[Live] Grand Theft Auto VI | PS5 Pro",
-      "viewers": 102,
+      "viewers": 84,
       "embed": true
     },
     "JokerUY": {
