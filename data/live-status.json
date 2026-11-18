@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-11-18T17:02:07.942Z",
+  "updatedAt": "2026-11-18T18:54:19.442Z",
   "youtube": {
     "seppp": {
       "live": true,
       "videoId": "a2DgNztT-wA",
       "title": "Speedrun RE4 OG | NG Pro PB Attempt",
-      "viewers": 46,
+      "viewers": 45,
       "embed": true
     },
     "Bang Gori": {
@@ -17,8 +17,11 @@
       "why": "canon:/channel/UCW49iDI43U0vs-aIu7ovtBQ"
     },
     "Fedo_Ras": {
-      "live": false,
-      "why": "canon:/channel/UCeGvq5Sww3ads0Q39UE9_6A"
+      "live": true,
+      "videoId": "BVXoRXBJKcc",
+      "title": "Lari Bang Lari! Speedrun Santai Resident Evil 4 UHD",
+      "viewers": 0,
+      "embed": true
     },
     "NETJU": {
       "live": false,
@@ -48,7 +51,7 @@
       "live": true,
       "videoId": "XRpxJKlhq9w",
       "title": "[Live] Grand Theft Auto VI | PS5 Pro",
-      "viewers": 102,
+      "viewers": 96,
       "embed": true
     },
     "JokerUY": {
