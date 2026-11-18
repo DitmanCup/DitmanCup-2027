@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-18T10:05:54.664Z",
+  "updatedAt": "2026-11-18T10:26:13.054Z",
   "youtube": {
     "seppp": {
       "live": false,
@@ -42,8 +42,11 @@
       "why": "canon:/channel/UCpP3xUeEFum9_uoNPpz8Xog"
     },
     "Orchlon": {
-      "live": false,
-      "why": "canon:/channel/UCu3T_ir3EX_CTcX2I2Ny9Hg"
+      "live": true,
+      "videoId": "XRpxJKlhq9w",
+      "title": "[Live] Grand Theft Auto VI | PS5 Pro",
+      "viewers": 0,
+      "embed": true
     },
     "JokerUY": {
       "live": false,
