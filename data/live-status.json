@@ -1,13 +1,16 @@
 {
-  "updatedAt": "2026-11-18T08:14:19.017Z",
+  "updatedAt": "2026-11-18T08:34:37.126Z",
   "youtube": {
     "seppp": {
       "live": false,
       "why": "canon:/channel/UCpSD7At_gum8TJJ7c77lsyQ"
     },
     "Bang Gori": {
-      "live": false,
-      "why": "canon:/channel/UCkIzLx7wi9TeDaGZKVD-jUQ"
+      "live": true,
+      "videoId": "da1rVlFAFm0",
+      "title": "Testing Buat Besok, Pertama Main PS Sejak 2008",
+      "viewers": 57,
+      "embed": true
     },
     "nyr9468": {
       "live": false,
