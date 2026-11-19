@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-19T05:13:45.394Z",
+  "updatedAt": "2026-11-19T06:14:32.135Z",
   "youtube": {
     "seppp": {
       "live": false,
@@ -46,11 +46,8 @@
       "why": "canon:/channel/UCu3T_ir3EX_CTcX2I2Ny9Hg"
     },
     "JokerUY": {
-      "live": true,
-      "videoId": "PrRqiK-p-EE",
-      "title": "NEW GLITCH SPEEDRUN NG AMATEUR| CHAT EN TWITCH",
-      "viewers": 19,
-      "embed": true
+      "live": false,
+      "why": "canon:/channel/UCyPMjU0Qyegpo5CuFSx0KLA"
     },
     "ryllmen": {
       "live": false,
