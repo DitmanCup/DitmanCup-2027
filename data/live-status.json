@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-19T13:09:38.029Z",
+  "updatedAt": "2026-11-19T14:40:50.733Z",
   "youtube": {
     "seppp": {
       "live": false,
@@ -9,7 +9,7 @@
       "live": true,
       "videoId": "STxwmpRxjts",
       "title": "[1] Selamat Cuti, Begadang dan Resign Buat Semua | Grand Theft Auto 6 Indonesia",
-      "viewers": 213,
+      "viewers": 270,
       "embed": true
     },
     "nyr9468": {
@@ -20,7 +20,7 @@
       "live": true,
       "videoId": "QC4L5nfN50c",
       "title": "Lari Bang Lari! Speedrun Santai Resident Evil 4 UHD",
-      "viewers": 0,
+      "viewers": 2,
       "embed": true
     },
     "NETJU": {
@@ -48,11 +48,8 @@
       "why": "canon:/channel/UCpP3xUeEFum9_uoNPpz8Xog"
     },
     "Orchlon": {
-      "live": true,
-      "videoId": "c-rZYosfQUg",
-      "title": "[Live] Grand Theft Auto VI | PS5 Pro",
-      "viewers": 16,
-      "embed": true
+      "live": false,
+      "why": "canon:/channel/UCu3T_ir3EX_CTcX2I2Ny9Hg"
     },
     "JokerUY": {
       "live": false,
