@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Prize pool (OBS)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Special+Elite&display=block">
+<link rel="stylesheet" href="obs.css">
+<style>
+.body { height: 150px; display: flex; align-items: center; justify-content: center; }
+.amt { font-family: var(--f-amount); font-weight: 700; font-size: 104px; line-height: 1; letter-spacing: 2px; }
+</style></head>
+<body>
+<div class="card"><div class="card-in">
+  <div class="hd">Prize pool</div>
+  <div class="body"><span class="amt gold" id="amt"></span></div>
+</div></div>
+<script src="obs.js"></script>
+<script>
+(function () {
+  var el = document.getElementById('amt'), last = null;
+  OBS.start(function (ed) {
+    var v = ed.raised != null ? ed.raised : 0;
+    if (v === last) return; last = v;
+    el.textContent = OBS.money(v);
+    el.classList.remove('fade'); void el.offsetWidth; el.classList.add('fade');
+  });
+})();
+</script>
+</body></html>

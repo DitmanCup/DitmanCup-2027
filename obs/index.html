@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Overlays para OBS - Ditman Cup</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
+<style>
+body { margin: 0; padding: 2rem 1rem; background: #0A0908; color: #E7E2D6; font: 16px/1.55 system-ui, sans-serif; }
+main { max-width: 760px; margin: 0 auto; }
+h1 { margin: 0 0 .3rem; font-size: 1.5rem; } h2 { margin: 2rem 0 .4rem; font-size: 1.1rem; color: #E1462C; }
+p { margin: .3rem 0 .8rem; color: #B3AB9C; }
+code, .url { font-family: Consolas, monospace; font-size: .85rem; background: #16130F; border: 1px solid #3B342A; padding: .15rem .4rem; word-break: break-all; }
+.row { display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; margin: .4rem 0 1rem; }
+button { background: #7E221B; color: #fff; border: 0; padding: .4rem .8rem; cursor: pointer; font: inherit; }
+table { border-collapse: collapse; margin: .5rem 0; } td, th { border: 1px solid #3B342A; padding: .3rem .7rem; text-align: left; font-size: .9rem; }
+</style></head>
+<body><main>
+<h1>Overlays para OBS</h1>
+<p>Esta pagina solo explica como usarlos. Cada overlay tiene fondo transparente y se actualiza solo, sin recargar, leyendo <code>data/donors.json</code>.</p>
+
+<h2>Como agregarlos en OBS</h2>
+<p>Fuentes &gt; <b>+</b> &gt; <b>Navegador</b> (Browser Source). Pega la URL, pon el ancho y alto de la tabla y listo. No pegues CSS ni marques "Apagar la fuente cuando no esta visible" si no quieres que se pare.</p>
+
+<table><tr><th>Overlay</th><th>Ancho x alto</th><th>URL</th></tr>
+<tr><td>Top donors</td><td>572 x 532</td><td><span class="url" data-path="top-donors.html"></span></td></tr>
+<tr><td>Prize pool</td><td>572 x 242</td><td><span class="url" data-path="prize-pool.html"></span></td></tr></table>
+<div class="row"><button id="copy1">Copiar URL de Top donors</button><button id="copy2">Copiar URL de Prize pool</button></div>
+
+<h2>Opciones en la URL (todas opcionales)</h2>
+<table>
+<tr><td><code>?refresh=30</code></td><td>Cada cuantos segundos se actualiza (minimo 10, por defecto 60)</td></tr>
+<tr><td><code>?count=3</code></td><td>Cuantos donadores muestra el Top (1 a 10, por defecto 5)</td></tr>
+<tr><td><code>?edition=2026</code></td><td>Otra edicion (2027 por defecto). <code>all</code> suma todas</td></tr>
+<tr><td><code>?panel=none</code></td><td>Sin fondo azul (completamente transparente). <code>solid</code> = fondo solido</td></tr>
+</table>
+<p>Se pueden combinar: <code>top-donors.html?count=3&amp;refresh=30</code></p>
+
+<h2>Cuando cambian los datos</h2>
+<p>Los datos de Matcherino se actualizan en GitHub cada ~10 minutos y la pagina los lee sola. Si haces un cambio en el codigo y no lo ves en OBS, clic derecho sobre la fuente &gt; Actualizar cache de la pagina actual.</p>
+</main>
+<script>
+(function () {
+  var base = location.href.replace(/index\.html.*$/, '').replace(/[?#].*$/, '');
+  document.querySelectorAll('.url').forEach(function (e) { e.textContent = base + e.getAttribute('data-path'); });
+  function copy(id, p) { document.getElementById(id).onclick = function () { navigator.clipboard.writeText(base + p).then(function () { document.getElementById(id).textContent = 'Copiado'; }); }; }
+  copy('copy1', 'top-donors.html'); copy('copy2', 'prize-pool.html');
+})();
+</script>
+</body></html>
