@@ -1,0 +1,30 @@
+/* Groups (1920 x 1080). Posiciones tomadas del diseno. Tipografias: serif del sitio para titulos, RE4 Remake para nombres y puntos. */
+.gt, .gl, .gg { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; pointer-events: none; }
+.gt > div, .gl > span { position: absolute; white-space: nowrap; }
+.t-title { left: 104px; top: 22px; font-family: var(--f-amount); font-weight: 700; font-size: 42px; line-height: 50px; letter-spacing: 3px; text-transform: uppercase; color: #F3EEDD; }
+.t-round { left: 510px; top: 28px; width: 400px; text-align: center; font-family: var(--f-amount); font-weight: 700; font-size: 25px; line-height: 34px; letter-spacing: 2.5px; text-transform: uppercase; color: #2B2418; }
+.t-live { left: 1313px; top: 32px; font-family: 'Inter', 'Segoe UI', Arial, sans-serif; font-weight: 800; font-size: 20px; line-height: 28px; letter-spacing: 3px; color: #fff; }
+.gl > span { top: 96px; font-family: var(--f-amount); font-weight: 700; font-size: 19px; line-height: 24px; letter-spacing: .3px; color: #D5CFBD; }
+
+.grp { position: absolute; top: 0; width: 436px; height: 1080px; }
+.grp .gh { position: absolute; left: 11px; top: 148px; font-family: var(--f-amount); font-weight: 700; font-size: 46px; line-height: 58px; text-transform: uppercase; letter-spacing: .5px; }
+.grp .gr { position: absolute; left: 11px; top: 205px; font-family: var(--f-amount); font-weight: 700; font-size: 17px; line-height: 22px; letter-spacing: 2px; text-transform: uppercase; color: #CFC9B6; white-space: nowrap; }
+.c-gold .gh { color: #E8B033; } .c-blue .gh { color: #8FA2F0; } .c-red .gh { color: #E24A33; }
+
+.grow { position: absolute; left: 0; width: 436px; height: 102px; }
+.grow > * { position: absolute; white-space: nowrap; }
+.grk { left: 16px; width: 40px; top: 28px; height: 40px; line-height: 40px; text-align: center; font-family: var(--f-name); font-size: 40px; color: #86868F; }
+.grow.q .grk { color: #E0A21B; }
+.gtr { left: 56px; width: 24px; top: 36px; height: 24px; line-height: 24px; text-align: center; font-size: 15px; }
+.gtr.up { color: #3FBF66; } .gtr.down { color: #E34F3D; } .gtr.same { color: #7F89A8; font-size: 18px; }
+.gfl { left: 83px; top: 19px; width: 30px; height: 30px; }
+.gfl .fi { display: block; width: 30px; height: 30px; border-radius: 50%; background-size: cover; background-position: center; box-shadow: 0 0 0 2px rgba(240, 200, 90, .9), 0 2px 4px rgba(0, 0, 0, .5); }
+.gnm { left: 120px; top: 15px; height: 38px; line-height: 38px; font-family: var(--f-name); font-size: 34px; letter-spacing: -.5px; text-transform: uppercase; color: #F5EFD9; text-shadow: 0 2px 3px rgba(0, 0, 0, .6); max-width: 220px; overflow: hidden; }
+.gav { left: 83px; top: 56px; height: 24px; line-height: 24px; font-family: var(--f-amount); font-weight: 700; font-size: 19px; letter-spacing: 2px; color: #C9C3B4; }
+.gpt { left: 306px; width: 76px; top: 24px; height: 46px; line-height: 46px; text-align: right; font-family: var(--f-name); font-size: 46px; color: #F3EEDD; text-shadow: 0 2px 3px rgba(0, 0, 0, .55); }
+.gpt.gold, .grow.q .gpt { background: linear-gradient(#FFE08A, #D9A21B); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: none; filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .5)); }
+.gbd { left: 383px; top: 34px; width: 34px; height: 28px; border-radius: 3px; text-align: center; font-family: 'Inter', 'Segoe UI', Arial, sans-serif; font-weight: 800; font-size: 17px; line-height: 28px; }
+.gbd.w { background: linear-gradient(#F2C23A, #D9A21B); color: #1E1500; }
+.gbd.l { background: #2E0F0D; color: #D9604A; box-shadow: inset 0 0 0 1px #8A3328; }
+.gbd i { position: absolute; right: -6px; top: -7px; width: 14px; height: 14px; border-radius: 50%; background: #E8B923; color: #2A1D00; font-style: normal; font-size: 12px; line-height: 14px; font-weight: 800; }
+body.no-title .gt, body.no-legend .gl, body.no-heads .gh, body.no-heads .gr, body.no-rows .grow { display: none; }

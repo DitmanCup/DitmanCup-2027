@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Groups (OBS)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
+<!-- Pantalla de grupos de 1920 x 1080, transparente y SOLO TEXTO: titulo, cinta de ronda, leyenda, los 3 grupos (nombre, regla y 8 filas cada uno).
+     En OBS: fuente de navegador de 1920 x 1080 en X 0, Y 0 y encima de tu arte. Datos en data/groups.json.
+     Opciones: ?title=0 (oculta titulo, cinta y LIVE)  ?legend=0 (oculta la leyenda)  ?heads=0 (oculta nombre y regla de cada grupo)  ?rows=0 (oculta las filas)  ?bg=ffffff (fondo de prueba) -->
+<link rel="stylesheet" href="obs.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/7.2.3/css/flag-icons.min.css">
+<link rel="stylesheet" href="groups.css">
+</head>
+<body class="scene">
+<div class="gt" id="gt">
+  <div class="t-title">Ditman Cup 2027</div>
+  <div class="t-round" id="round"></div>
+  <div class="t-live">LIVE</div>
+</div>
+<div class="gl">
+  <span style="left:73px">Qualification zone (overall Top 8)</span>
+  <span style="left:410px">Moved up a group</span>
+  <span style="left:618px">Moved down a group</span>
+  <span style="left:915px">Last result</span>
+  <span style="left:1076px">Close loss (&lt; 30 s), bonus</span>
+</div>
+<div class="gg" id="gg"></div>
+<script src="obs.js"></script>
+<script src="groups.js"></script>
+</body></html>

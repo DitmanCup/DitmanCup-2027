@@ -1,0 +1,342 @@
+{
+ "_ayuda": "Overlay groups (3 grupos de 8). Ahora tiene los datos de EJEMPLO del diseno. round = texto de la cinta (por ejemplo Group stage - Round 2 of 4). Cada grupo: name, rule (la linea chica bajo el nombre), color (gold | blue | red), ptsGold (true = puntos en dorado para todas las filas) y rows. Cada fila: rank (puesto dentro del grupo), trend (up | down | same), country (codigo ISO de 2 letras), name, avg (Avg best 2 como texto), pts, result {r: W o L, mark: true si lleva el punto dorado} y qualified (true si esta en la zona de clasificacion, pone el puesto en dorado). Se actualiza solo en pantalla cada ~60 segundos despues de guardar el cambio en GitHub.",
+ "round": "Group stage · Round 2 of 4",
+ "groups": [
+  {
+   "name": "Group 1",
+   "rule": "Win 2 pts · Close loss +1",
+   "color": "gold",
+   "ptsGold": true,
+   "rows": [
+    {
+     "rank": 1,
+     "trend": "same",
+     "country": "uy",
+     "name": "Missing",
+     "avg": "1:23:58.74",
+     "pts": 4,
+     "result": {
+      "r": "W",
+      "mark": false
+     },
+     "qualified": true
+    },
+    {
+     "rank": 2,
+     "trend": "same",
+     "country": "cl",
+     "name": "seppp",
+     "avg": "1:24:04.40",
+     "pts": 4,
+     "result": {
+      "r": "W",
+      "mark": false
+     },
+     "qualified": true
+    },
+    {
+     "rank": 3,
+     "trend": "same",
+     "country": "mx",
+     "name": "Krauser_Kid",
+     "avg": "1:24:58.15",
+     "pts": 4,
+     "result": {
+      "r": "W",
+      "mark": false
+     },
+     "qualified": true
+    },
+    {
+     "rank": 4,
+     "trend": "same",
+     "country": "ar",
+     "name": "Merchant_Reg",
+     "avg": "1:25:10.35",
+     "pts": 3,
+     "result": {
+      "r": "W",
+      "mark": false
+     },
+     "qualified": true
+    },
+    {
+     "rank": 5,
+     "trend": "up",
+     "country": "pe",
+     "name": "Salazar99",
+     "avg": "1:24:41.92",
+     "pts": 2,
+     "result": {
+      "r": "W",
+      "mark": false
+     },
+     "qualified": true
+    },
+    {
+     "rank": 6,
+     "trend": "up",
+     "country": "es",
+     "name": "Mendez_Speed",
+     "avg": "1:26:27.16",
+     "pts": 2,
+     "result": {
+      "r": "W",
+      "mark": false
+     },
+     "qualified": true
+    },
+    {
+     "rank": 7,
+     "trend": "up",
+     "country": "es",
+     "name": "PuebloRun",
+     "avg": "1:26:02.30",
+     "pts": 1,
+     "result": {
+      "r": "W",
+      "mark": false
+     },
+     "qualified": false
+    },
+    {
+     "rank": 8,
+     "trend": "up",
+     "country": "br",
+     "name": "Frit",
+     "avg": "1:26:12.94",
+     "pts": 1,
+     "result": {
+      "r": "W",
+      "mark": false
+     },
+     "qualified": false
+    }
+   ]
+  },
+  {
+   "name": "Group 2",
+   "rule": "Win 1 pt · Close loss +0.5",
+   "color": "blue",
+   "ptsGold": false,
+   "rows": [
+    {
+     "rank": 1,
+     "trend": "down",
+     "country": "ar",
+     "name": "Sawken",
+     "avg": "1:24:10.11",
+     "pts": 3,
+     "result": {
+      "r": "L",
+      "mark": true
+     },
+     "qualified": true
+    },
+    {
+     "rank": 2,
+     "trend": "up",
+     "country": "it",
+     "name": "MikeHeli",
+     "avg": "1:27:00.00",
+     "pts": 1.5,
+     "result": {
+      "r": "W",
+      "mark": false
+     },
+     "qualified": true
+    },
+    {
+     "rank": 3,
+     "trend": "down",
+     "country": "mx",
+     "name": "Ganado_Rush",
+     "avg": "1:25:33.84",
+     "pts": 1,
+     "result": {
+      "r": "L",
+      "mark": false
+     },
+     "qualified": false
+    },
+    {
+     "rank": 4,
+     "trend": "down",
+     "country": "us",
+     "name": "LeonFan88",
+     "avg": "1:25:53.29",
+     "pts": 1,
+     "result": {
+      "r": "L",
+      "mark": false
+     },
+     "qualified": false
+    },
+    {
+     "rank": 5,
+     "trend": "down",
+     "country": "co",
+     "name": "BlueMedallion",
+     "avg": "1:26:22.21",
+     "pts": 1,
+     "result": {
+      "r": "L",
+      "mark": false
+     },
+     "qualified": false
+    },
+    {
+     "rank": 6,
+     "trend": "up",
+     "country": "nl",
+     "name": "ElGigante",
+     "avg": "1:26:33.51",
+     "pts": 1,
+     "result": {
+      "r": "W",
+      "mark": false
+     },
+     "qualified": false
+    },
+    {
+     "rank": 7,
+     "trend": "up",
+     "country": "cl",
+     "name": "Verdugo",
+     "avg": "1:26:45.68",
+     "pts": 1,
+     "result": {
+      "r": "W",
+      "mark": false
+     },
+     "qualified": false
+    },
+    {
+     "rank": 8,
+     "trend": "up",
+     "country": "pl",
+     "name": "Bitores",
+     "avg": "1:27:13.84",
+     "pts": 1,
+     "result": {
+      "r": "W",
+      "mark": false
+     },
+     "qualified": false
+    }
+   ]
+  },
+  {
+   "name": "Group 3",
+   "rule": "Win 1 pt · Close loss +0.5",
+   "color": "red",
+   "ptsGold": false,
+   "rows": [
+    {
+     "rank": 1,
+     "trend": "down",
+     "country": "us",
+     "name": "AshleyCarry",
+     "avg": "1:27:08.14",
+     "pts": 1.5,
+     "result": {
+      "r": "L",
+      "mark": true
+     },
+     "qualified": true
+    },
+    {
+     "rank": 2,
+     "trend": "down",
+     "country": "uy",
+     "name": "JokerUY",
+     "avg": "1:25:16.63",
+     "pts": 1,
+     "result": {
+      "r": "L",
+      "mark": false
+     },
+     "qualified": false
+    },
+    {
+     "rank": 3,
+     "trend": "same",
+     "country": "br",
+     "name": "Novistador",
+     "avg": "1:26:29.18",
+     "pts": 1,
+     "result": {
+      "r": "L",
+      "mark": true
+     },
+     "qualified": false
+    },
+    {
+     "rank": 4,
+     "trend": "down",
+     "country": "fr",
+     "name": "IslandSkip",
+     "avg": "1:26:32.14",
+     "pts": 1,
+     "result": {
+      "r": "L",
+      "mark": false
+     },
+     "qualified": false
+    },
+    {
+     "rank": 5,
+     "trend": "down",
+     "country": "se",
+     "name": "CastleClip",
+     "avg": "1:28:04.75",
+     "pts": 1,
+     "result": {
+      "r": "L",
+      "mark": false
+     },
+     "qualified": false
+    },
+    {
+     "rank": 6,
+     "trend": "same",
+     "country": "de",
+     "name": "Regenerador",
+     "avg": "1:27:01.11",
+     "pts": 0.5,
+     "result": {
+      "r": "L",
+      "mark": false
+     },
+     "qualified": false
+    },
+    {
+     "rank": 7,
+     "trend": "same",
+     "country": "fi",
+     "name": "Luis_Sera",
+     "avg": "1:27:41.02",
+     "pts": 0.5,
+     "result": {
+      "r": "L",
+      "mark": true
+     },
+     "qualified": false
+    },
+    {
+     "rank": 8,
+     "trend": "same",
+     "country": "co",
+     "name": "PlagaRun",
+     "avg": "1:27:49.99",
+     "pts": 0,
+     "result": {
+      "r": "L",
+      "mark": false
+     },
+     "qualified": false
+    }
+   ]
+  }
+ ]
+}
