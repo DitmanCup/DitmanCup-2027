@@ -3,7 +3,7 @@
 @font-face { font-family: 'RE4 Remake'; src: url('../assets/fonts/RE4Remake.ttf') format('truetype'); unicode-range: U+0021-005D,U+005F-007E,U+00A3-00A9,U+00AB-00B1,U+00B4,U+00B6-00B8,U+00BB,U+00D7,U+00F7,U+0131,U+2013-2014,U+2018-201A,U+201C-201E,U+2020-2022,U+2026,U+2039-203A,U+2044,U+20AC,U+0020; font-weight: 400; font-display: block; }
 @font-face { font-family: 'Virgula Vulgaris'; src: url('../assets/fonts/VirgulaVulgaris-Bold.ttf') format('truetype'); font-weight: 700; font-display: block; }
 :root {
-  --glass: rgba(40, 56, 236, .22);
+  --glass: rgba(10, 26, 204, .2);   /* azul exacto del diseno: #0A1ACC al 20% de opacidad */
   --iron-hi: #55503A; --iron-mid: #2C291E; --iron-dark: #1B1912;
   --f-title: 'Special Elite', 'Courier New', Courier, monospace;
   --f-name: 'RE4 Remake', Impact, 'Arial Narrow', sans-serif;
