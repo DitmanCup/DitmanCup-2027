@@ -1,0 +1,8 @@
+{
+  "_ayuda": "Lista 'Up next' del overlay startingstream. Cada elemento tiene 'time' (hora, en dorado), 'home' y 'away' (los dos runners), y 'stage' (fase o ronda, en gris debajo). Se muestran hasta 3. Para dejar una fila vacia, quitala de la lista. Se actualiza solo en pantalla cada ~60 segundos despues de guardar el cambio en GitHub. Ahora tiene los textos de ejemplo del diseno (XX:XX / Runner).",
+  "items": [
+    { "time": "XX:XX UTC-3", "home": "Runner", "away": "Runner", "stage": "Group stage" },
+    { "time": "XX:XX UTC-3", "home": "Runner", "away": "Runner", "stage": "Group stage" },
+    { "time": "XX:XX UTC-3", "home": "Runner", "away": "Runner", "stage": "Group stage" }
+  ]
+}

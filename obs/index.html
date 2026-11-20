@@ -23,6 +23,10 @@ table { border-collapse: collapse; margin: .5rem 0; } td, th { border: 1px solid
 <p>Fuente de navegador de <b>1920 x 1080</b> en X 0, Y 0, encima de tus cajas. Trae <b>solo texto</b> (sin cajas ni fondo) en su lugar: lista de donadores a la izquierda, Next streams a la derecha y el monto del prize pool. Si la agregas dos veces, recorta cada copia con Alt + arrastrar. Se puede ocultar una parte con <code>?donors=0</code>, <code>?streams=0</code> o <code>?prize=0</code>.</p>
 <p><b>Next streams:</b> el texto sale del archivo <code>data/next-streams.json</code>. Para cambiarlo, edita ese archivo en GitHub (lapiz de editar) y guarda; el overlay se actualiza solo en ~1 minuto. Cada elemento tiene <code>when</code> (dia y hora, en dorado) y <code>title</code> (nombre, en blanco); se muestran hasta 5.</p>
 
+<h2>Pantalla de inicio (starting soon)</h2>
+<p><b><span class="url" data-path="startingstream.html"></span></b></p>
+<p>Igual que la anterior: fuente de navegador de <b>1920 x 1080</b> en X 0, Y 0, solo texto, transparente. Trae el <b>Up next</b> (hora, runner vs runner y fase) y el <b>Prize pool</b>. Se puede ocultar una parte con <code>?upnext=0</code> o <code>?prize=0</code>. El texto del Up next sale de <code>data/up-next.json</code> (hasta 3 filas); se edita en GitHub igual que <code>next-streams.json</code>.</p>
+
 <h2>Paginas sueltas</h2>
 <table><tr><th>Overlay</th><th>Ancho x alto</th><th>URL</th></tr>
 <tr><td>Top donors (caja completa)</td><td>572 x 531</td><td><span class="url" data-path="top-donors.html"></span></td></tr>

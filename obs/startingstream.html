@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Starting stream (OBS)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
+<!-- Pantalla "starting soon" de 1920 x 1080, transparente y SOLO TEXTO: Up next (hora, runner vs runner, fase) y Prize pool.
+     En OBS: fuente de navegador de 1920 x 1080 en X 0, Y 0 y encima de tus cajas.
+     Opciones: ?upnext=0 ?prize=0 (ocultan una parte)  ?lines=1 (lineas entre filas)  ?bg=ffffff (fondo de prueba) -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Special+Elite&display=block">
+<link rel="stylesheet" href="obs.css">
+</head>
+<body class="scene start">
+<div class="upnext" id="upnext"></div>
+<div class="ptitle">Prize<br>pool</div>
+<div class="prize"><span class="amt gold" id="amt"></span></div>
+<script src="obs.js"></script>
+<script src="prize-pool.js"></script>
+<script src="up-next.js"></script>
+</body></html>
