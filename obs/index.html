@@ -18,6 +18,12 @@ table { border-collapse: collapse; margin: .5rem 0; } td, th { border: 1px solid
 <h2>Como agregarlos en OBS</h2>
 <p>Fuentes &gt; <b>+</b> &gt; <b>Navegador</b> (Browser Source). Pega la URL, pon el ancho y alto de la tabla y listo. No pegues CSS ni marques "Apagar la fuente cuando no esta visible" si no quieres que se pare.</p>
 
+<h2>La recomendada: todo en una sola pagina</h2>
+<p><b><span class="url" data-path="endingstream.html"></span></b></p>
+<p>Fuente de navegador de <b>1920 x 1080</b> en X 0, Y 0, encima de tus cajas. Trae <b>solo texto</b> (sin cajas ni fondo) en su lugar: lista de donadores a la izquierda, Next streams a la derecha y el monto del prize pool. Si la agregas dos veces, recorta cada copia con Alt + arrastrar. Se puede ocultar una parte con <code>?donors=0</code>, <code>?streams=0</code> o <code>?prize=0</code>.</p>
+<p><b>Next streams:</b> el texto sale del archivo <code>data/next-streams.json</code>. Para cambiarlo, edita ese archivo en GitHub (lapiz de editar) y guarda; el overlay se actualiza solo en ~1 minuto. Cada elemento tiene <code>when</code> (dia y hora, en dorado) y <code>title</code> (nombre, en blanco); se muestran hasta 5.</p>
+
+<h2>Paginas sueltas</h2>
 <table><tr><th>Overlay</th><th>Ancho x alto</th><th>URL</th></tr>
 <tr><td>Top donors (caja completa)</td><td>572 x 531</td><td><span class="url" data-path="top-donors.html"></span></td></tr>
 <tr><td>Prize pool (caja completa)</td><td>572 x 140</td><td><span class="url" data-path="prize-pool.html"></span></td></tr>
@@ -31,6 +37,7 @@ table { border-collapse: collapse; margin: .5rem 0; } td, th { border: 1px solid
 <tr><td><code>?refresh=30</code></td><td>Cada cuantos segundos se actualiza (minimo 10, por defecto 60)</td></tr>
 <tr><td><code>?count=3</code></td><td>Cuantos donadores muestra el Top (1 a 10, por defecto 5)</td></tr>
 <tr><td><code>?edition=2026</code></td><td>Otra edicion (2027 por defecto). <code>all</code> suma todas</td></tr>
+<tr><td><code>?lines=1</code></td><td>Dibuja lineas separadoras entre filas (en endingstream y en la lista de donadores)</td></tr>
 <tr><td><code>?bg=ffffff</code></td><td>Fondo de prueba para ver el overlay en un navegador normal (en OBS no hace falta)</td></tr>
 <tr><td><code>?panel=none</code></td><td>Sin fondo azul (completamente transparente). <code>solid</code> = fondo solido</td></tr>
 </table>

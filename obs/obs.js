@@ -4,6 +4,8 @@
   var REFRESH = Math.max(10, parseInt(q.get('refresh'), 10) || 60) * 1000;
   // ?bg=ffffff pinta un fondo de prueba (para ver el overlay en un navegador normal; en OBS no se usa)
   var bg = q.get('bg'); if (bg && /^[0-9a-fA-F]{3,8}$/.test(bg)) document.documentElement.style.setProperty('background', '#' + bg, 'important');
+  ['donors', 'streams', 'prize'].forEach(function (k) { if (q.get(k) === '0') document.body.classList.add('no-' + k); });
+  if (q.get('lines') === '1') document.body.classList.add('lines');
   var panel = q.get('panel');
   if (panel === 'none' || panel === 'solid') document.body.classList.add('panel-' + panel);
 
@@ -25,7 +27,16 @@
       .then(pickEdition);
   }
 
+  // Consulta periodica de cualquier JSON del repo (misma frecuencia que los donadores)
+  function pollJson(path, render) {
+    function tick() {
+      fetch(path + '?_=' + Date.now(), { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : Promise.reject(); }).then(render).catch(function () {});
+    }
+    tick(); setInterval(tick, REFRESH);
+  }
+
   window.OBS = {
+    pollJson: pollJson,
     money: money,
     count: Math.min(10, Math.max(1, parseInt(q.get('count'), 10) || 5)),
     // render(edicion) se llama al cargar y despues cada REFRESH segundos; si falla una consulta se mantiene lo que ya se ve

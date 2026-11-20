@@ -1,0 +1,8 @@
+{
+  "_ayuda": "Lista de 'Next streams' del overlay endingstream. Cada elemento tiene 'when' (dia y hora, se muestra en dorado) y 'title' (nombre del stream, se muestra en blanco). Se pueden agregar o quitar elementos; el overlay muestra hasta 5. Se actualiza solo en pantalla cada ~60 segundos despues de guardar el cambio en GitHub.",
+  "items": [
+    { "when": "Saturday – 20:00 UTC-3", "title": "Round of 16 – Day 2" },
+    { "when": "Sunday – 19:00 UTC-3", "title": "Quarterfinals" },
+    { "when": "Next weekend", "title": "Semis + Grand Finals" }
+  ]
+}
