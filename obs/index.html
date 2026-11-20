@@ -19,15 +19,19 @@ table { border-collapse: collapse; margin: .5rem 0; } td, th { border: 1px solid
 <p>Fuentes &gt; <b>+</b> &gt; <b>Navegador</b> (Browser Source). Pega la URL, pon el ancho y alto de la tabla y listo. No pegues CSS ni marques "Apagar la fuente cuando no esta visible" si no quieres que se pare.</p>
 
 <table><tr><th>Overlay</th><th>Ancho x alto</th><th>URL</th></tr>
-<tr><td>Top donors</td><td>572 x 532</td><td><span class="url" data-path="top-donors.html"></span></td></tr>
-<tr><td>Prize pool</td><td>572 x 242</td><td><span class="url" data-path="prize-pool.html"></span></td></tr></table>
-<div class="row"><button id="copy1">Copiar URL de Top donors</button><button id="copy2">Copiar URL de Prize pool</button></div>
+<tr><td>Top donors (caja completa)</td><td>572 x 531</td><td><span class="url" data-path="top-donors.html"></span></td></tr>
+<tr><td>Prize pool (caja completa)</td><td>572 x 140</td><td><span class="url" data-path="prize-pool.html"></span></td></tr>
+<tr><td>Top donors, solo la lista (sin caja)</td><td>549 x 400</td><td><span class="url" data-path="top-donors-list.html"></span></td></tr>
+<tr><td>Prize pool, solo el monto (sin caja)</td><td>260 x 120</td><td><span class="url" data-path="prize-amount.html"></span></td></tr></table>
+<p><b>Para poner el texto dentro de tus propias cajas</b> (escena de 1920 x 1080): la lista va en la posicion <code>X 128, Y 451</code> y el monto en <code>X 412, Y 920</code>. Las filas miden 80 px, como en tu diseno. Tu caja (PNG) va debajo y estas fuentes encima.</p>
+
 
 <h2>Opciones en la URL (todas opcionales)</h2>
 <table>
 <tr><td><code>?refresh=30</code></td><td>Cada cuantos segundos se actualiza (minimo 10, por defecto 60)</td></tr>
 <tr><td><code>?count=3</code></td><td>Cuantos donadores muestra el Top (1 a 10, por defecto 5)</td></tr>
 <tr><td><code>?edition=2026</code></td><td>Otra edicion (2027 por defecto). <code>all</code> suma todas</td></tr>
+<tr><td><code>?bg=ffffff</code></td><td>Fondo de prueba para ver el overlay en un navegador normal (en OBS no hace falta)</td></tr>
 <tr><td><code>?panel=none</code></td><td>Sin fondo azul (completamente transparente). <code>solid</code> = fondo solido</td></tr>
 </table>
 <p>Se pueden combinar: <code>top-donors.html?count=3&amp;refresh=30</code></p>
@@ -39,8 +43,6 @@ table { border-collapse: collapse; margin: .5rem 0; } td, th { border: 1px solid
 (function () {
   var base = location.href.replace(/index\.html.*$/, '').replace(/[?#].*$/, '');
   document.querySelectorAll('.url').forEach(function (e) { e.textContent = base + e.getAttribute('data-path'); });
-  function copy(id, p) { document.getElementById(id).onclick = function () { navigator.clipboard.writeText(base + p).then(function () { document.getElementById(id).textContent = 'Copiado'; }); }; }
-  copy('copy1', 'top-donors.html'); copy('copy2', 'prize-pool.html');
 })();
 </script>
 </body></html>

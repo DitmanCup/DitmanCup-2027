@@ -4,24 +4,15 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Special+Elite&display=block">
 <link rel="stylesheet" href="obs.css">
 <style>
-.body { height: 150px; display: flex; align-items: center; justify-content: center; }
-.amt { font-family: var(--f-amount); font-weight: 700; font-size: 104px; line-height: 1; letter-spacing: 2px; }
+/* Caja compacta como en el diseno (572 x 140): titulo a la izquierda en dos lineas y monto a la derecha */
+.pp { height: 118px; display: flex; align-items: center; justify-content: space-between; padding: 0 12px 0 8px; }
+.pt { font-family: var(--f-title); font-size: 46px; line-height: 1.02; letter-spacing: 2px; text-transform: uppercase; color: rgba(255, 255, 255, .96); -webkit-text-stroke: 1.2px #2b2b2b; paint-order: stroke fill; text-shadow: 0 2px 10px rgba(20, 24, 90, .5); }
+.amt { font-family: var(--f-amount); font-weight: 700; font-size: 92px; line-height: 1; letter-spacing: 1px; }
 </style></head>
 <body>
 <div class="card"><div class="card-in">
-  <div class="hd">Prize pool</div>
-  <div class="body"><span class="amt gold" id="amt"></span></div>
+  <div class="pp"><div class="pt">Prize<br>pool</div><span class="amt gold" id="amt"></span></div>
 </div></div>
 <script src="obs.js"></script>
-<script>
-(function () {
-  var el = document.getElementById('amt'), last = null;
-  OBS.start(function (ed) {
-    var v = ed.raised != null ? ed.raised : 0;
-    if (v === last) return; last = v;
-    el.textContent = OBS.money(v);
-    el.classList.remove('fade'); void el.offsetWidth; el.classList.add('fade');
-  });
-})();
-</script>
+<script src="prize-pool.js"></script>
 </body></html>

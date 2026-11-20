@@ -2,6 +2,8 @@
 (function () {
   var q = new URLSearchParams(location.search);
   var REFRESH = Math.max(10, parseInt(q.get('refresh'), 10) || 60) * 1000;
+  // ?bg=ffffff pinta un fondo de prueba (para ver el overlay en un navegador normal; en OBS no se usa)
+  var bg = q.get('bg'); if (bg && /^[0-9a-fA-F]{3,8}$/.test(bg)) document.documentElement.style.setProperty('background', '#' + bg, 'important');
   var panel = q.get('panel');
   if (panel === 'none' || panel === 'solid') document.body.classList.add('panel-' + panel);
 

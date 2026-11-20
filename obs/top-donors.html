@@ -3,41 +3,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Special+Elite&display=block">
 <link rel="stylesheet" href="obs.css">
-<style>
-.list { list-style: none; margin: 0; padding: 16px 12px 18px; height: 440px; }
-.r { display: grid; grid-template-columns: 62px 1fr auto; align-items: center; height: 80px; padding: 0 4px 0 6px; position: relative; }
-.r + .r::before { content: ""; position: absolute; left: 0; right: 10px; top: 0; height: 2px; background: linear-gradient(90deg, transparent, rgba(60, 60, 90, .75) 14%, rgba(60, 60, 90, .75) 86%, transparent); }
-.rk { font-family: var(--f-name); font-size: 34px; letter-spacing: 1px; }
-.nm { font-family: var(--f-name); font-size: 38px; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: clip; padding-right: 10px; background-clip: text; -webkit-background-clip: text; color: transparent; filter: drop-shadow(0 0 10px rgba(30, 40, 150, .55)); }
-.am { font-family: var(--f-amount); font-weight: 700; font-size: 40px; padding-right: 4px; }
-.n1 { background-image: linear-gradient(#E9E900, #8E9200); }
-.n2 { background-image: linear-gradient(#DADADA, #8A8A8A); }
-.n3 { background-image: linear-gradient(#EE8F6C, #A53D24); }
-.nx { background-image: linear-gradient(#FFFFFF, #CFCFDB); }
-</style></head>
+</head>
 <body>
 <div class="card"><div class="card-in">
   <div class="hd">Top donors</div>
-  <ol class="list" id="list"></ol>
+  <ol class="list framed" id="list"></ol>
 </div></div>
 <script src="obs.js"></script>
-<script>
-(function () {
-  var list = document.getElementById('list'), last = '';
-  function cls(i) { return i === 0 ? 'n1' : i === 1 ? 'n2' : i === 2 ? 'n3' : 'nx'; }
-  OBS.start(function (ed) {
-    var donors = (ed.donors || []).slice().sort(function (a, b) { return b.total - a.total; }).slice(0, OBS.count);
-    var sig = JSON.stringify(donors.map(function (d) { return [d.name, d.total]; }));
-    if (sig === last) return;   // sin cambios: no se repinta
-    last = sig; list.textContent = '';
-    donors.forEach(function (d, i) {
-      var li = document.createElement('li'); li.className = 'r fade'; li.style.animationDelay = (i * 60) + 'ms';
-      var rk = document.createElement('span'); rk.className = 'rk silver'; rk.textContent = String(i + 1).padStart(2, '0');
-      var nm = document.createElement('span'); nm.className = 'nm ' + cls(i); nm.textContent = d.name;
-      var am = document.createElement('span'); am.className = 'am gold'; am.textContent = OBS.money(d.total);
-      li.appendChild(rk); li.appendChild(nm); li.appendChild(am); list.appendChild(li);
-    });
-  });
-})();
-</script>
+<script src="top-donors.js"></script>
 </body></html>
