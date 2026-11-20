@@ -1,15 +1,18 @@
 {
-  "updatedAt": "2026-11-20T14:20:06.750Z",
+  "updatedAt": "2026-11-20T17:33:01.793Z",
   "youtube": {
     "seppp": {
-      "live": false,
-      "why": "canon:/channel/UCpSD7At_gum8TJJ7c77lsyQ"
+      "live": true,
+      "videoId": "V8DzvA80UxQ",
+      "title": "Speedrun RE4 OG | NG Pro PB Attempt",
+      "viewers": 4,
+      "embed": true
     },
     "Bang Gori": {
       "live": true,
       "videoId": "_KqcZbobfxw",
       "title": "[2] Happy Weekend | Grand Theft Auto 6 Indonesia",
-      "viewers": 112,
+      "viewers": 137,
       "embed": true
     },
     "nyr9468": {
@@ -48,7 +51,7 @@
       "live": true,
       "videoId": "5ZCsUGkKRH4",
       "title": "[Live] Grand Theft Auto VI | PS5 Pro",
-      "viewers": 10,
+      "viewers": 22,
       "embed": true
     },
     "JokerUY": {
