@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Caja vacia (OBS)</title><meta name="robots" content="noindex">
+<!-- Dibuja UNA caja vacia con el diseno de las pantallas de OBS. Se usa para exportar los PNG transparentes (make-boxes.js).
+     Parametros: ?w=572&h=531&title=Top%20donors&icon=1  (sin title = caja sin encabezado) -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Special+Elite&display=block">
+<style>
+html, body { margin: 0; padding: 0; background: transparent; overflow: hidden; }
+* { box-sizing: border-box; }
+.b { position: relative; border: 11px solid #303226; background: rgba(10, 26, 204, .2); }
+.hd { height: 80px; display: flex; align-items: center; padding: 0 6px; border-bottom: 10px solid #15150C;
+  font-family: 'Special Elite', 'Courier New', Courier, monospace; font-size: 42px; letter-spacing: 2px; text-transform: uppercase;
+  color: transparent; background: linear-gradient(#FFFFFF, #BDBDC6) 0 0 / 100% 70px no-repeat; -webkit-background-clip: text; background-clip: text;
+  -webkit-text-stroke: 1.2px #2b2b2b; text-shadow: none; }
+.hd span { display: inline-block; filter: drop-shadow(0 2px 6px rgba(20, 24, 90, .45)); }
+.ic { position: absolute; right: 14px; top: 20px; width: 32px; height: 32px; }
+</style></head>
+<body>
+<div class="b" id="b"><div class="hd" id="hd"><span id="t"></span></div>
+<svg class="ic" id="ic" viewBox="0 0 24 24" style="display:none"><path d="M3 2.5h18v10.5l-5 5h-4l-3 3v-3H3z" fill="none" stroke="#0c0c0c" stroke-width="2.4" stroke-linejoin="miter"/><path d="M9.2 7v4M14.2 7v4" stroke="#0c0c0c" stroke-width="2.4" fill="none"/></svg></div>
+<script>
+var q = new URLSearchParams(location.search), b = document.getElementById('b');
+b.style.width = (parseInt(q.get('w'), 10) || 572) + 'px'; b.style.height = (parseInt(q.get('h'), 10) || 531) + 'px';
+var title = q.get('title');
+if (title) document.getElementById('t').textContent = title; else document.getElementById('hd').style.display = 'none';
+if (q.get('icon') === '1') document.getElementById('ic').style.display = 'block';
+</script>
+</body></html>

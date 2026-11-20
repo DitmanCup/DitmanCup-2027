@@ -1,0 +1,472 @@
+{
+ "_ayuda": "Tabla del overlay leaderboard. Ahora tiene los datos de EJEMPLO del diseno (los nombres y tiempos no son reales). Cada fila: rank, trend (up | down | same), country (codigo ISO de 2 letras, p. ej. uy), name, group (G1, G2 o G3), pts, pb, best, avg (tiempos como texto) y results (lista de {r:W o L, mark:true si lleva el punto dorado}). qualifyAfter marca despues de que fila va la linea de clasificacion; qualifyText es el texto. Se muestran hasta 24 filas. Se actualiza solo en pantalla cada ~60 segundos despues de guardar el cambio en GitHub.",
+ "qualifyAfter": 8,
+ "qualifyText": "Qualify for Round of 16",
+ "rows": [
+  {
+   "rank": 1,
+   "trend": "same",
+   "country": "uy",
+   "name": "Missing",
+   "group": "G1",
+   "pts": 4,
+   "pb": "1:23:17.08",
+   "best": "1:23:55.72",
+   "avg": "1:23:58.74",
+   "results": [
+    {
+     "r": "W"
+    },
+    {
+     "r": "W"
+    }
+   ]
+  },
+  {
+   "rank": 2,
+   "trend": "up",
+   "country": "cl",
+   "name": "seppp",
+   "group": "G1",
+   "pts": 4,
+   "pb": "1:23:27.43",
+   "best": "1:23:46.36",
+   "avg": "1:24:04.40",
+   "results": [
+    {
+     "r": "W"
+    },
+    {
+     "r": "W"
+    }
+   ]
+  },
+  {
+   "rank": 3,
+   "trend": "same",
+   "country": "mx",
+   "name": "Krauser_Kid",
+   "group": "G1",
+   "pts": 4,
+   "pb": "1:23:47.93",
+   "best": "1:24:22.21",
+   "avg": "1:24:58.15",
+   "results": [
+    {
+     "r": "W"
+    },
+    {
+     "r": "W"
+    }
+   ]
+  },
+  {
+   "rank": 4,
+   "trend": "down",
+   "country": "ar",
+   "name": "Sawken",
+   "group": "G2",
+   "pts": 3,
+   "pb": "1:23:11.28",
+   "best": "1:24:03.53",
+   "avg": "1:24:10.11",
+   "results": [
+    {
+     "r": "L",
+     "mark": true
+    },
+    {
+     "r": "W"
+    }
+   ]
+  },
+  {
+   "rank": 5,
+   "trend": "up",
+   "country": "ar",
+   "name": "Merchant_Reg",
+   "group": "G1",
+   "pts": 3,
+   "pb": "1:24:29.12",
+   "best": "1:24:56.30",
+   "avg": "1:25:10.35",
+   "results": [
+    {
+     "r": "W"
+    },
+    {
+     "r": "W"
+    }
+   ]
+  },
+  {
+   "rank": 6,
+   "trend": "down",
+   "country": "pe",
+   "name": "Salazar99",
+   "group": "G1",
+   "pts": 2,
+   "pb": "1:24:00.58",
+   "best": "1:24:30.80",
+   "avg": "1:24:41.92",
+   "results": [
+    {
+     "r": "W"
+    },
+    {
+     "r": "L",
+     "mark": true
+    }
+   ]
+  },
+  {
+   "rank": 7,
+   "trend": "up",
+   "country": "es",
+   "name": "Mendez_Speed",
+   "group": "G1",
+   "pts": 2,
+   "pb": "1:25:35.55",
+   "best": "1:25:54.95",
+   "avg": "1:26:27.16",
+   "results": [
+    {
+     "r": "W"
+    },
+    {
+     "r": "W"
+    }
+   ]
+  },
+  {
+   "rank": 8,
+   "trend": "up",
+   "country": "it",
+   "name": "MikeHeli",
+   "group": "G2",
+   "pts": 1.5,
+   "pb": "1:25:29.64",
+   "best": "1:26:07.99",
+   "avg": "1:27:00.00",
+   "results": [
+    {
+     "r": "W"
+    },
+    {
+     "r": "L",
+     "mark": true
+    }
+   ]
+  },
+  {
+   "rank": 9,
+   "trend": "up",
+   "country": "us",
+   "name": "AshleyCarry",
+   "group": "G3",
+   "pts": 1.5,
+   "pb": "1:25:21.62",
+   "best": "1:26:56.16",
+   "avg": "1:27:08.14",
+   "results": [
+    {
+     "r": "L",
+     "mark": true
+    },
+    {
+     "r": "W"
+    }
+   ]
+  },
+  {
+   "rank": 10,
+   "trend": "down",
+   "country": "uy",
+   "name": "JokerUY",
+   "group": "G3",
+   "pts": 1,
+   "pb": "1:23:00.65",
+   "best": "1:24:50.78",
+   "avg": "1:25:16.63",
+   "results": [
+    {
+     "r": "L"
+    },
+    {
+     "r": "L",
+     "mark": true
+    }
+   ]
+  },
+  {
+   "rank": 11,
+   "trend": "down",
+   "country": "mx",
+   "name": "Ganado_Rush",
+   "group": "G2",
+   "pts": 1,
+   "pb": "1:24:33.96",
+   "best": "1:25:22.69",
+   "avg": "1:25:33.84",
+   "results": [
+    {
+     "r": "L"
+    },
+    {
+     "r": "W"
+    }
+   ]
+  },
+  {
+   "rank": 12,
+   "trend": "down",
+   "country": "us",
+   "name": "LeonFan88",
+   "group": "G2",
+   "pts": 1,
+   "pb": "1:24:11.57",
+   "best": "1:25:31.48",
+   "avg": "1:25:53.29",
+   "results": [
+    {
+     "r": "L"
+    },
+    {
+     "r": "W"
+    }
+   ]
+  },
+  {
+   "rank": 13,
+   "trend": "up",
+   "country": "es",
+   "name": "PuebloRun",
+   "group": "G1",
+   "pts": 1,
+   "pb": "1:23:52.10",
+   "best": "1:25:57.23",
+   "avg": "1:26:02.30",
+   "results": [
+    {
+     "r": "W"
+    },
+    {
+     "r": "L"
+    }
+   ]
+  },
+  {
+   "rank": 14,
+   "trend": "up",
+   "country": "br",
+   "name": "Frit",
+   "group": "G1",
+   "pts": 1,
+   "pb": "1:23:36.44",
+   "best": "1:26:03.79",
+   "avg": "1:26:12.94",
+   "results": [
+    {
+     "r": "W"
+    },
+    {
+     "r": "L"
+    }
+   ]
+  },
+  {
+   "rank": 15,
+   "trend": "down",
+   "country": "co",
+   "name": "BlueMedallion",
+   "group": "G2",
+   "pts": 1,
+   "pb": "1:24:18.16",
+   "best": "1:26:12.24",
+   "avg": "1:26:22.21",
+   "results": [
+    {
+     "r": "L"
+    },
+    {
+     "r": "W"
+    }
+   ]
+  },
+  {
+   "rank": 16,
+   "trend": "down",
+   "country": "br",
+   "name": "Novistador",
+   "group": "G3",
+   "pts": 1,
+   "pb": "1:25:00.53",
+   "best": "1:25:33.52",
+   "avg": "1:26:29.18",
+   "results": [
+    {
+     "r": "L",
+     "mark": true
+    },
+    {
+     "r": "L",
+     "mark": true
+    }
+   ]
+  },
+  {
+   "rank": 17,
+   "trend": "down",
+   "country": "fr",
+   "name": "IslandSkip",
+   "group": "G3",
+   "pts": 1,
+   "pb": "1:25:42.87",
+   "best": "1:26:00.02",
+   "avg": "1:26:32.14",
+   "results": [
+    {
+     "r": "L"
+    },
+    {
+     "r": "W"
+    }
+   ]
+  },
+  {
+   "rank": 18,
+   "trend": "up",
+   "country": "nl",
+   "name": "ElGigante",
+   "group": "G2",
+   "pts": 1,
+   "pb": "1:24:52.31",
+   "best": "1:26:19.36",
+   "avg": "1:26:33.51",
+   "results": [
+    {
+     "r": "W"
+    },
+    {
+     "r": "L"
+    }
+   ]
+  },
+  {
+   "rank": 19,
+   "trend": "up",
+   "country": "cl",
+   "name": "Verdugo",
+   "group": "G2",
+   "pts": 1,
+   "pb": "1:24:45.96",
+   "best": "1:26:17.05",
+   "avg": "1:26:45.68",
+   "results": [
+    {
+     "r": "W"
+    },
+    {
+     "r": "L"
+    }
+   ]
+  },
+  {
+   "rank": 20,
+   "trend": "up",
+   "country": "pl",
+   "name": "Bitores",
+   "group": "G2",
+   "pts": 1,
+   "pb": "1:26:16.82",
+   "best": "1:27:03.64",
+   "avg": "1:27:13.84",
+   "results": [
+    {
+     "r": "W"
+    },
+    {
+     "r": "L"
+    }
+   ]
+  },
+  {
+   "rank": 21,
+   "trend": "down",
+   "country": "se",
+   "name": "CastleClip",
+   "group": "G3",
+   "pts": 1,
+   "pb": "1:25:54.40",
+   "best": "1:27:27.13",
+   "avg": "1:28:04.75",
+   "results": [
+    {
+     "r": "L"
+    },
+    {
+     "r": "W"
+    }
+   ]
+  },
+  {
+   "rank": 22,
+   "trend": "down",
+   "country": "de",
+   "name": "Regenerador",
+   "group": "G3",
+   "pts": 0.5,
+   "pb": "1:25:12.01",
+   "best": "1:26:53.92",
+   "avg": "1:27:01.11",
+   "results": [
+    {
+     "r": "L"
+    },
+    {
+     "r": "L",
+     "mark": true
+    }
+   ]
+  },
+  {
+   "rank": 23,
+   "trend": "up",
+   "country": "fi",
+   "name": "Luis_Sera",
+   "group": "G3",
+   "pts": 0.5,
+   "pb": "1:26:09.08",
+   "best": "1:27:19.59",
+   "avg": "1:27:41.02",
+   "results": [
+    {
+     "r": "L",
+     "mark": true
+    },
+    {
+     "r": "L"
+    }
+   ]
+  },
+  {
+   "rank": 24,
+   "trend": "down",
+   "country": "co",
+   "name": "PlagaRun",
+   "group": "G3",
+   "pts": 0,
+   "pb": "1:26:00.53",
+   "best": "1:27:47.08",
+   "avg": "1:27:49.99",
+   "results": [
+    {
+     "r": "L"
+    },
+    {
+     "r": "L"
+    }
+   ]
+  }
+ ]
+}

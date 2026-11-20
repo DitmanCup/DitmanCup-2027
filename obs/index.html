@@ -27,6 +27,22 @@ table { border-collapse: collapse; margin: .5rem 0; } td, th { border: 1px solid
 <p><b><span class="url" data-path="startingstream.html"></span></b></p>
 <p>Igual que la anterior: fuente de navegador de <b>1920 x 1080</b> en X 0, Y 0, solo texto, transparente. Trae el <b>Up next</b> (hora, runner vs runner y fase) y el <b>Prize pool</b>. Se puede ocultar una parte con <code>?upnext=0</code> o <code>?prize=0</code>. El texto del Up next sale de <code>data/up-next.json</code> (hasta 3 filas); se edita en GitHub igual que <code>next-streams.json</code>.</p>
 
+<h2>Leaderboard (fase de grupos)</h2>
+<p><b><span class="url" data-path="leaderboard.html"></span></b></p>
+<p>Fuente de navegador de <b>1920 x 1080</b> en X 0, Y 0, solo texto y transparente: puesto, tendencia, bandera, nombre, grupo, puntos, tiempos y resultados (W/L). Los datos salen de <code>data/leaderboard.json</code> (hoy tiene los datos de ejemplo del diseno; se edita en GitHub igual que los demas). Opciones: <code>?header=1</code> agrega los titulos de las columnas y <code>?lines=1</code> dibuja las lineas de la clasificacion.</p>
+
+<h2>Cajas vacias (PNG transparentes)</h2>
+<p>Estan en la carpeta <code>obs/boxes/</code> del repo. Se ponen en OBS como imagen, <b>debajo</b> de las paginas de texto. Posicion en la escena de 1920 x 1080:</p>
+<table><tr><th>Archivo</th><th>Tamano</th><th>Posicion (X, Y)</th></tr>
+<tr><td>01-top-donors.png</td><td>572 x 531</td><td>117, 360</td></tr>
+<tr><td>02-live-chat-ending.png</td><td>471 x 690</td><td>717, 360</td></tr>
+<tr><td>03-next-streams.png</td><td>571 x 691</td><td>1218, 360</td></tr>
+<tr><td>04-prize-pool-ending.png</td><td>572 x 140</td><td>117, 910</td></tr>
+<tr><td>05-up-next.png</td><td>623 x 422</td><td>792, 178</td></tr>
+<tr><td>06-prize-pool-starting.png</td><td>626 x 167</td><td>789, 620</td></tr>
+<tr><td>07-live-chat-starting.png</td><td>433 x 985</td><td>1451, 46</td></tr>
+<tr><td>08-live-chat-leaderboard.png</td><td>534 x 1074</td><td>1377, 3 (el chat va dentro: 512 x 972 en 1388, 94)</td></tr></table>
+
 <h2>Paginas sueltas</h2>
 <table><tr><th>Overlay</th><th>Ancho x alto</th><th>URL</th></tr>
 <tr><td>Top donors (caja completa)</td><td>572 x 531</td><td><span class="url" data-path="top-donors.html"></span></td></tr>

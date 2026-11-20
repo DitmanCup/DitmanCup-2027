@@ -1,0 +1,29 @@
+/* Leaderboard (1920 x 1080). Posiciones tomadas del diseno (2000 x 1125 escalado a 1920 x 1080). */
+.lb { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; font-family: 'Inter', 'Segoe UI', Arial, sans-serif; font-size: 25px; color: #fff; }
+.lb .lr { position: absolute; left: 0; width: 1360px; height: 37px; }
+.lb .lr > * { position: absolute; top: 0; height: 37px; line-height: 37px; white-space: nowrap; }
+.c-rank { left: 36px; width: 42px; text-align: center; font-weight: 600; font-variant-numeric: tabular-nums; }
+.c-tr { left: 88px; width: 22px; text-align: center; font-size: 15px; }
+.c-flag { left: 122px; top: 4px !important; width: 30px; height: 30px !important; line-height: 0 !important; }
+.c-flag .fi { width: 30px; height: 30px; border-radius: 50%; background-size: cover; background-position: center; box-shadow: 0 0 0 1.5px rgba(255, 255, 255, .85), 0 2px 4px rgba(0, 0, 0, .5); }
+.c-name { left: 176px; width: 320px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; }
+.c-grp { left: 504px; width: 52px; top: 5px !important; height: 27px !important; line-height: 23px !important; text-align: center; font-size: 17px; font-weight: 700; letter-spacing: .5px; border: 2px solid currentColor; border-radius: 3px; background: rgba(0, 0, 0, .35); }
+.g1 { color: #E0B33A; } .g2 { color: #5C86EA; } .g3 { color: #DE4D3E; }
+.c-pts { left: 553px; width: 100px; text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; }
+.c-pb { left: 662px; width: 150px; text-align: right; font-weight: 500; font-variant-numeric: tabular-nums; }
+.c-best { left: 822px; width: 150px; text-align: right; font-weight: 500; font-variant-numeric: tabular-nums; }
+.c-avg { left: 982px; width: 150px; text-align: right; font-weight: 500; font-variant-numeric: tabular-nums; }
+.c-res { left: 1148px; width: 90px; }
+.bd { position: absolute; top: 4px; width: 33px; height: 29px; border-radius: 4px; text-align: center; font-size: 19px; font-weight: 700; line-height: 29px; }
+.bd.w { background: #E8B923; color: #2A1D00; box-shadow: inset 0 0 0 1px rgba(255, 240, 170, .6); }
+.bd.l { background: #3F1814; color: #C4553F; box-shadow: inset 0 0 0 1px #7A2F26; }
+.bd i { position: absolute; right: -5px; top: -6px; width: 12px; height: 12px; border-radius: 50%; background: #E8B923; color: #2A1D00; font-style: normal; font-size: 11px; line-height: 12px; font-weight: 700; }
+.top8 .c-rank, .top8 .c-pts { color: #F0B323; }
+.up { color: #3FBF66; } .down { color: #E34F3D; } .same { color: #7F89A8; }
+/* Linea de clasificacion */
+.lb .q { position: absolute; left: 0; width: 1360px; height: 24px; text-align: center; font-size: 17px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #F0B323; line-height: 24px; }
+body.lines .lb .q::before, body.lines .lb .q::after { content: ""; position: absolute; top: 11px; height: 2px; background: linear-gradient(90deg, transparent, #C99A2A); }
+body.lines .lb .q::before { left: 30px; width: 440px; }
+body.lines .lb .q::after { right: 20px; width: 440px; transform: scaleX(-1); }
+/* Titulos de columnas (?header=1) */
+.lb .hdr { position: absolute; top: 103px; height: 24px; font-size: 15px; font-weight: 600; letter-spacing: 3px; color: #8F9BC4; line-height: 24px; white-space: nowrap; text-transform: uppercase; }
