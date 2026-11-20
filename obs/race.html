@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Race (OBS)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
+<!-- Pantalla de carrera de 1920 x 1080: muestra el POV de cada runner y, recortados de su stream, el timer, las kills y el dinero de su LiveSplit.
+     En OBS: fuente de navegador de 1920 x 1080 en X 0, Y 0, DEBAJO de tu arte (cajas y textos).
+     Config en data/race.json (canal y recortes de cada runner). Opciones: ?pov=0 ?timer=0 ?kills=0 ?money=0 (ocultan una parte)  ?bg=ffffff (fondo de prueba) -->
+<link rel="stylesheet" href="obs.css">
+<style>
+body.scene { background: transparent; }
+.slot { position: absolute; overflow: hidden; }
+.slot iframe, .slot img { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; border: 0; transform-origin: 0 0; background: transparent; }
+body.no-pov .s-pov, body.no-timer .s-timer, body.no-kills .s-kills, body.no-money .s-money { display: none; }
+</style>
+</head>
+<body class="scene">
+<div id="race"></div>
+<script src="obs.js"></script>
+<script src="race.js"></script>
+</body></html>

@@ -1,0 +1,65 @@
+{
+  "_ayuda": "Configuracion del overlay race. Cada runner tiene 'channel' (canal de Twitch) y 'crops': que parte de su stream se muestra en cada hueco. Los recortes son fracciones del cuadro completo (0 a 1): x e y = esquina superior izquierda, w y h = ancho y alto. 'pov' es la pantalla del juego; 'timer', 'kills' y 'money' son los numeros de su LiveSplit. Como cada runner tiene su LiveSplit en un lugar distinto, hay que definirlos una vez por runner con race-calibrate.html. 'audio': true deja con sonido el POV de ese runner (por defecto todo va en silencio).",
+  "runners": [
+    {
+      "channel": "luis_sera",
+      "audio": false,
+      "crops": {
+        "pov": {
+          "x": 0,
+          "y": 0,
+          "w": 1,
+          "h": 1
+        },
+        "timer": {
+          "x": 0.085,
+          "y": 0.252,
+          "w": 0.128,
+          "h": 0.056
+        },
+        "kills": {
+          "x": 0.146,
+          "y": 0.525,
+          "w": 0.068,
+          "h": 0.028
+        },
+        "money": {
+          "x": 0.128,
+          "y": 0.497,
+          "w": 0.085,
+          "h": 0.028
+        }
+      }
+    },
+    {
+      "channel": "gabrielsinmarr",
+      "audio": false,
+      "crops": {
+        "pov": {
+          "x": 0,
+          "y": 0,
+          "w": 1,
+          "h": 1
+        },
+        "timer": {
+          "x": 0.868,
+          "y": 0.33,
+          "w": 0.13,
+          "h": 0.058
+        },
+        "kills": {
+          "x": 0.94,
+          "y": 0.43,
+          "w": 0.058,
+          "h": 0.028
+        },
+        "money": {
+          "x": 0.93,
+          "y": 0.455,
+          "w": 0.067,
+          "h": 0.028
+        }
+      }
+    }
+  ]
+}

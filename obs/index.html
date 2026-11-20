@@ -31,6 +31,12 @@ table { border-collapse: collapse; margin: .5rem 0; } td, th { border: 1px solid
 <p><b><span class="url" data-path="leaderboard.html"></span></b></p>
 <p>Fuente de navegador de <b>1920 x 1080</b> en X 0, Y 0, solo texto y transparente: puesto, tendencia, bandera, nombre, grupo, puntos, tiempos y resultados (W/L). Los datos salen de <code>data/leaderboard.json</code> (hoy tiene los datos de ejemplo del diseno; se edita en GitHub igual que los demas). Opciones: <code>?header=1</code> agrega los titulos de las columnas y <code>?lines=1</code> dibuja las lineas de la clasificacion.</p>
 
+<h2>Race (carrera en vivo)</h2>
+<p><b><span class="url" data-path="race.html"></span></b></p>
+<p>Fuente de navegador de <b>1920 x 1080</b> en X 0, Y 0, <b>debajo</b> de tu arte. Muestra el POV de cada runner y, recortados de su stream, el <b>timer</b>, las <b>kills</b> y el <b>dinero</b> de su LiveSplit. Los canales y los recortes salen de <code>data/race.json</code> (hoy: luis_sera a la izquierda y gabrielsinmarr a la derecha). Para cambiar de runners, cambia el <code>channel</code> y recalibra.</p>
+<p><b>Calibrar los recortes:</b> <span class="url" data-path="race-calibrate.html"></span>. Escribes el canal, ajustas los numeros hasta que cada rectangulo rodee el timer, las kills o el dinero, y copias el JSON a <code>data/race.json</code>. Se hace una vez por runner, porque cada uno tiene su LiveSplit en un lugar distinto. Opciones de la pantalla: <code>?pov=0</code>, <code>?timer=0</code>, <code>?kills=0</code>, <code>?money=0</code>.</p>
+<p><b>Ojo:</b> carga 8 reproductores de Twitch (4 por runner), tiene el retraso normal de Twitch (10 a 30 s, distinto en cada runner) y puede mostrar publicidad. Si quieres lo mas liviano y sin retraso, lo ideal es que cada runner mande solo su captura de juego (VDO.Ninja).</p>
+
 <h2>Groups (3 grupos)</h2>
 <p><b><span class="url" data-path="groups.html"></span></b></p>
 <p>Fuente de navegador de <b>1920 x 1080</b> en X 0, Y 0, solo texto y transparente: el titulo, la cinta de ronda, la leyenda, y los 3 grupos (nombre, regla y 8 filas con puesto, tendencia, bandera, nombre, Avg best 2, puntos y ultimo resultado). Los datos salen de <code>data/groups.json</code> (hoy con los datos de ejemplo del diseno). Se puede ocultar una parte con <code>?title=0</code>, <code>?legend=0</code>, <code>?heads=0</code> o <code>?rows=0</code>.</p>
