@@ -36,7 +36,9 @@ html, body { margin: 0; padding: 0; background: transparent !important; overflow
 .rk { font-family: var(--f-name); font-size: 43px; line-height: 1; }
 .nm { font-family: var(--f-name); font-size: 43px; line-height: 1; letter-spacing: 3.5px; text-transform: uppercase; white-space: nowrap; overflow: hidden; padding-right: 10px; background-clip: text; -webkit-background-clip: text; color: transparent; filter: drop-shadow(0 0 4px rgba(30, 35, 105, .9)) drop-shadow(0 0 12px rgba(30, 40, 150, .7)); }
 .am { font-family: var(--f-amount); font-weight: 700; font-size: 36px; line-height: 1; }
-.n1 { background-image: linear-gradient(#E9E900, #8E9200); }
+/* Solo lista (sin caja): sin halos, solo una sombra fina para que se lea sobre cualquier fondo */
+.list.bare .rk, .list.bare .nm, .list.bare .am { filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .6)); }
+.n1 { background-image: linear-gradient(#FFE08A, #E3AA1C 55%, #B27A08); }   /* dorado */
 .n2 { background-image: linear-gradient(#DADADA, #8A8A8A); }
 .n3 { background-image: linear-gradient(#EE8F6C, #A53D24); }
 .nx { background-image: linear-gradient(#FFFFFF, #CFCFDB); }
