@@ -64,8 +64,10 @@ body.lines .it + .it::before { content: ""; position: absolute; left: -11px; rig
 
 /* Pantalla de inicio (startingstream.html): posiciones tomadas del diseno */
 .start .upnext { position: absolute; left: 813px; top: 276px; width: 600px; }
-.start .ptitle { left: 806px; top: 656px; }
-.start .prize { left: 1132px; top: 645px; }
+/* Prize pool de la pantalla de inicio: titulo y monto grandes, ocupando toda la caja como en el diseno */
+.start .ptitle { left: 806px; top: 640px; font-size: 64px; line-height: 1; letter-spacing: 2px; }
+.start .prize { left: 1052px; top: 630px; width: 340px; height: 147px; }
+.start .amt { font-size: 128px; }
 .mrow { position: relative; height: 99px; }
 .mrow .tm { position: absolute; left: 0; top: 30px; font-family: var(--f-name); font-size: 40px; line-height: 44px; letter-spacing: 2.8px; text-transform: uppercase; white-space: nowrap; }
 .mrow .mt { position: absolute; left: 213px; top: 24px; }
