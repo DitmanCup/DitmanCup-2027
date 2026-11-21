@@ -3904,69 +3904,80 @@ function simLossBonus(group, margin) {
 const SIM_SEED_ORDER = [1, 8, 4, 5, 2, 7, 3, 6]; // sembrado clásico de 8 cabezas de serie
 
 const SIM_RUNNER_NAMES = [
-  'JokerUY', 'Sawken', 'Missing', 'seppp', 'Frit', '4rcadan', 'OtakuXD', 'Pochoide',
-  'ChampT', 'MateoUsh27', 'Zudinn', 'MikeWavRR', 'Youcri', 'luis_sera', 'VAL', 'Muh',
-  'Pixiesaki', 'novi_fan', 'MattGael', 'caciottafresca', 'Lu1u', 'JoydurnYup', 'Matiuss', 'abdou_mz',
-  'Gui19', 'Razie', 'aqbilghilman', 'doradori_dolph', 'Nobu_22', 'HannNrY', 'Ryllmen', 'Sachire',
+  'JokerUY', 'Sawken', 'Missing', 'seppp', 'OtakuXD', 'MattGael', 'ChampT', 'MateoUsh27',
+  'VAL', 'Zudinn', 'luis_sera', 'caciottafresca', 'Lu1u', 'JoydurnYup', 'Pixiesaki', 'novi_fan',
+  'Matiuss', 'abdou_mz', 'doradori_dolph', 'Razie', 'Gui19', 'Nobu_22', 'MajorRichy', 'droprecks',
+  'HannNrY', 'Ryllmen', 'InfamousLoL8', 'alvinnn', 'cesar', 'ferchu', 'NETJU', 'FedoRas',
 ];
-// PBs de speedrun.com/re4steam (New Game, Professional, Single Segment, 60 FPS; tiempo sin loads),
-// con centesimas (el tercer decimal de speedrun.com es siempre 0, asi que se usan 2), mismo orden que
-// SIM_RUNNER_NAMES (de menor a mayor: los primeros 8 son el Top 8 directo). Actualizado el 05/11/2026.
-// El plantel son los 32 mejores PBs de speedrun.com, sin los que avisaron que no juegan: DerekT21288, TheNevs, manboo, eidenfir, Yuushi, shimarisu, esfrenchie09, Phaero, Morse66, orangekun (quedan de reserva).
-// Equivalencias: ChampT = MRChampT01, VAL = _VAL_, Muh = MUHnster, aqbilghilman = aqbilghilman_.
-// PBs indicados a mano por el organizador: luis_sera 1:24:10, caciottafresca 1:24:47 (caciottafresca es italiano y no esta en speedrun.com).
+// PBs del plantel (New Game, Professional, Single Segment, 60 FPS), mismo orden que SIM_RUNNER_NAMES (de menor a mayor: los primeros 8 son el Top 8 directo).
+// Lista indicada por el organizador el 21/11/2026 (en segundos). Si el PB ya estaba cargado con el mismo segundo se conservan sus centesimas
+// (speedrun.com); los demas quedan con ".00" hasta tener las centesimas reales.
+// Los nombres siguen el nombre de speedrun.com cuando existe (ChampT = MRChampT01, VAL = _VAL_, MajorRichy = richy, InfamousLoL8 = infa).
 const SIM_RUNNER_PBS = [
-  '1:21:04.81', '1:21:27.13', '1:21:48.13', '1:21:48.90', '1:21:57.01', '1:22:01.13',
-  '1:22:14.68', '1:22:30.78', '1:23:26.23', '1:23:28.60', '1:23:37.03', '1:23:42.41',
-  '1:23:46.08', '1:24:10.00', '1:24:19.00', '1:24:20.56', '1:24:27.06', '1:24:40.15',
-  '1:24:41.50', '1:24:47.00', '1:24:52.66', '1:24:54.01', '1:24:58.48', '1:24:59.21',
-  '1:25:19.43', '1:25:26.18', '1:25:26.56', '1:25:33.83', '1:25:35.85', '1:25:45.16',
-  '1:25:52.03', '1:26:07.78',
+  '1:21:04.81', '1:21:24.00', '1:21:48.13', '1:21:48.90', '1:22:14.68', '1:23:13.08',
+  '1:23:26.23', '1:23:28.60', '1:23:34.56', '1:23:37.03', '1:23:55.00', '1:24:00.00',
+  '1:24:24.00', '1:24:26.00', '1:24:27.06', '1:24:40.15', '1:24:58.48', '1:24:59.21',
+  '1:25:02.00', '1:25:08.45', '1:25:19.43', '1:25:35.85', '1:25:42.00', '1:25:42.00',
+  '1:25:45.16', '1:25:52.03', '1:25:55.00', '1:25:55.63', '1:25:56.00', '1:25:58.00',
+  '1:25:59.00', '1:26:09.13',
 ];
 
-// Reservas: runners de speedrun.com con PB menor a 1:30:00 y run de los ultimos 12 meses
-// que NO estan en el simulador. Se pueden meter desde el panel "Try yourself" de la pestana
-// Simulations (cambian a un runner del simulador). Formato: [puesto en la leaderboard, nombre, PB, fecha del run]
+// Reservas indicadas por el organizador (el 21/11/2026), de menor a mayor PB. Se pueden meter desde el panel "Try yourself" de la pestana
+// Simulations (cambian a un runner del simulador). Formato: [puesto en la leaderboard de speedrun.com (null si no se conoce), nombre, PB, fecha del run (null si no se conoce)]
 const SIM_SUBSTITUTES = [
-  [9, 'DerekT21288', '1:22:54.53', '2025-08-15'],
-  [12, 'TheNevs', '1:23:35.11', '2026-01-19'],
-  [14, 'eidenfir', '1:23:39.63', '2026-07-26'],
-  [16, 'Yuushi', '1:23:45.00', '2022-09-26'],
-  [20, 'shimarisu', '1:24:24.00', '2021-08-22'],
-  [21, 'esfrenchie09', '1:24:25.00', '2022-04-27'],
-  [25, 'manboo', '1:24:48.70', '2026-07-28'],
-  [31, 'Phaero', '1:25:19.00', '2022-11-29'],
-  [38, 'Morse66', '1:25:48.00', '2020-03-10'],
-  [39, 'orangekun', '1:25:49.00', '2021-01-09'],
-  [42, 'FedoRas', '1:26:09.13', '2026-09-27'],
-  [43, 'MajorRichy', '1:26:10.70', '2025-12-15'],
+  [null, 'arca', '1:21:33.00', null],
+  [null, 'frit', '1:21:57.01', null],
+  [null, 'pocho', '1:22:02.00', null],
+  [null, 'derek', '1:22:26.00', null],
+  [null, 'nevs', '1:23:07.00', null],
+  [null, 'youcri', '1:23:18.00', null],
+  [null, 'albert', '1:23:29.00', null],
+  [null, 'aiden', '1:23:39.63', null],
+  [null, 'wavvrs', '1:23:42.41', null],
+  [null, 'muh', '1:23:52.00', null],
+  [null, 'mine', '1:24:13.00', null],
+  [null, 'manboo', '1:24:48.70', null],
+  [null, 'aqbil', '1:24:58.00', null],
+  [null, 'orchlon', '1:25:29.00', null],
+  [null, 'sachire', '1:25:39.00', null],
+  [null, 'slifer', '1:25:55.00', null],
+  [null, 'nyr9', '1:26:03.00', null],
   [45, 'erOotea', '1:26:18.68', '2026-08-12'],
-  [46, 'NETJU', '1:26:21.91', '2026-08-25'],
-  [47, 'InfamousLoL8', '1:26:23.26', '2026-01-10'],
-  [48, '_slifer_', '1:26:23.55', '2026-02-28'],
+  [null, 'spartan', '1:26:21.00', null],
+  [61, 'Prastry', '1:26:25.00', '2026-06-11'],
+  [65, 'GLAISON_GAMES_MOBILE', '1:26:33.00', '2026-05-16'],
+  [55, 'Vechman', '1:26:34.30', '2026-10-08'],
   [52, 'Egg_Cangying', '1:26:35.13', '2026-08-01'],
   [53, 'ShulaRune', '1:26:35.40', '2026-08-16'],
-  [55, 'Vechman', '1:26:38.80', '2026-10-08'],
-  [56, 'alvinnn', '1:26:42.23', '2026-10-04'],
+  [66, 'IanPriaMisterius', '1:26:39.00', '2026-04-21'],
+  [null, 'chacoide', '1:26:39.00', null],
+  [null, 'francoide', '1:26:40.63', null],
   [57, 'Chanwi', '1:26:43.51', '2026-09-23'],
-  [61, 'Prastry', '1:26:53.10', '2026-06-11'],
+  [null, 'savitrue', '1:26:45.00', null],
+  [68, 'Clementinee', '1:26:54.00', '2026-03-24'],
   [62, 'Bang_Gori', '1:26:54.16', '2026-09-01'],
+  [null, 'Vitor 279 TH', '1:26:57.00', null],
   [64, 'libee', '1:26:57.76', '2026-09-25'],
-  [65, 'GLAISON_GAMES_MOBILE', '1:27:01.13', '2026-05-16'],
-  [66, 'IanPriaMisterius', '1:27:07.80', '2026-04-21'],
-  [68, 'Clementinee', '1:27:22.40', '2026-03-24'],
+  [79, 'NanonSBz', '1:27:00.60', '2026-10-16'],
+  [71, 'Ornot_ms', '1:27:03.00', '2026-05-01'],
+  [105, 'redshines', '1:27:04.13', '2026-07-09'],
+  [null, 'MrMuba', '1:27:06.00', null],
+  [72, 'fiveskill', '1:27:08.00', '2026-06-20'],
   [70, 'Dims_jesse', '1:27:27.46', '2026-07-12'],
-  [71, 'Ornot_ms', '1:27:31.88', '2026-05-01'],
-  [72, 'fiveskill', '1:27:36.38', '2026-06-20'],
-  [76, 'FrancoBv17', '1:27:59.30', '2026-08-17'],
+  [null, 'Bochhi', '1:27:57.63', null],
   [78, 'gabrielsinmarr', '1:28:07.65', '2026-10-23'],
-  [79, 'NanonSBz', '1:28:09.08', '2026-10-16'],
+  [87, 'Neoxz', '1:28:15.00', '2026-05-10'],
   [83, 'KaykyBeck', '1:28:30.05', '2026-08-05'],
-  [87, 'Neoxz', '1:28:43.63', '2026-05-10'],
+  [95, 'bigbloo77', '1:28:31.00', '2026-06-05'],
+  [null, 'kimikun', '1:28:33.00', null],
+  [null, 'last zombie', '1:28:39.00', null],
   [90, 'oldust_', '1:29:01.86', '2026-08-13'],
-  [95, 'bigbloo77', '1:29:14.81', '2026-06-05'],
+  [null, 'ucenoura', '1:29:11.00', null],
+  [null, 'Neuroticc_', '1:29:14.86', null],
+  [null, 'BluEve002', '1:29:21.00', null],
+  [null, 'ezequiel_kazama', '1:29:22.75', null],
   [101, 'Dhannn', '1:29:36.88', '2026-07-21'],
-  [105, 'redshines', '1:29:57.01', '2026-07-09'],
+  [null, 'rrangellz', '1:29:53.00', null],
 ];
 
 function simParseTime(str) {
