@@ -1,13 +1,16 @@
 {
-  "updatedAt": "2026-11-21T08:25:08.793Z",
+  "updatedAt": "2026-11-21T12:07:35.945Z",
   "youtube": {
     "seppp": {
       "live": false,
       "why": "canon:/channel/UCpSD7At_gum8TJJ7c77lsyQ"
     },
     "Bang Gori": {
-      "live": false,
-      "why": "canon:/channel/UCkIzLx7wi9TeDaGZKVD-jUQ"
+      "live": true,
+      "videoId": "9ulCpPSEbOY",
+      "title": "Istirahat GTA 6, Kembali ke Habitat | Resident Evil 4 Speedrun Indonesia",
+      "viewers": 61,
+      "embed": true
     },
     "nyr9468": {
       "live": false,
