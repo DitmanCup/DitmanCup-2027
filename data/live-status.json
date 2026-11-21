@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-21T19:43:24.452Z",
+  "updatedAt": "2026-11-21T23:26:30.508Z",
   "youtube": {
     "seppp": {
       "live": false,
@@ -45,12 +45,15 @@
       "live": true,
       "videoId": "nBdVDP37Te8",
       "title": "[Live] Grand Theft Auto VI | PS5 Pro",
-      "viewers": 23,
+      "viewers": 30,
       "embed": true
     },
     "JokerUY": {
-      "live": false,
-      "why": "canon:/channel/UCyPMjU0Qyegpo5CuFSx0KLA"
+      "live": true,
+      "videoId": "O--uMorHUiI",
+      "title": "NEW GLITCH SPEEDRUN NG+ AMATEUR| CHAT EN TWITCH",
+      "viewers": 5,
+      "embed": true
     },
     "ryllmen": {
       "live": false,
