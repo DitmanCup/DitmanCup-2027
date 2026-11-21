@@ -1,15 +1,18 @@
 {
-  "updatedAt": "2026-11-21T14:19:27.537Z",
+  "updatedAt": "2026-11-21T16:20:55.244Z",
   "youtube": {
     "seppp": {
-      "live": false,
-      "why": "canon:/channel/UCpSD7At_gum8TJJ7c77lsyQ"
+      "live": true,
+      "videoId": "kGoY2Bte1Wo",
+      "title": "Speedrun RE4 OG | NG Pro PB Attempt",
+      "viewers": 2,
+      "embed": true
     },
     "Bang Gori": {
       "live": true,
-      "videoId": "9ulCpPSEbOY",
-      "title": "Istirahat GTA 6, Kembali ke Habitat | Resident Evil 4 Speedrun Indonesia",
-      "viewers": 182,
+      "videoId": "5z5_AkyocF0",
+      "title": "Mr. Gori Siap Mendengar | Resident Evil 4 Speedrun Indonesia",
+      "viewers": 40,
       "embed": true
     },
     "nyr9468": {
@@ -48,7 +51,7 @@
       "live": true,
       "videoId": "nBdVDP37Te8",
       "title": "[Live] Grand Theft Auto VI | PS5 Pro",
-      "viewers": 12,
+      "viewers": 25,
       "embed": true
     },
     "JokerUY": {
