@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-21T03:41:51.393Z",
+  "updatedAt": "2026-11-21T04:22:20.351Z",
   "youtube": {
     "seppp": {
       "live": false,
@@ -22,8 +22,11 @@
       "why": "canon:/channel/UCbiPXsZalhVwhfHB2-Nl9Ig"
     },
     "aqbilghilman": {
-      "live": false,
-      "why": "canon:/channel/UCcVZmiHYsc3zVP5kdi7zQlw"
+      "live": true,
+      "videoId": "J7Dx80gJzV0",
+      "title": "Resident Evil 4 OG Speedrun",
+      "viewers": 0,
+      "embed": true
     },
     "Mrchampppt": {
       "live": false,
@@ -49,7 +52,7 @@
       "live": true,
       "videoId": "OZze0D9_1QA",
       "title": "NEW GLITCH SPEEDRUN NG AMATEUR| CHAT EN TWITCH",
-      "viewers": 15,
+      "viewers": 12,
       "embed": true
     },
     "ryllmen": {
