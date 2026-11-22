@@ -3904,29 +3904,28 @@ function simLossBonus(group, margin) {
 const SIM_SEED_ORDER = [1, 8, 4, 5, 2, 7, 3, 6]; // sembrado clásico de 8 cabezas de serie
 
 const SIM_RUNNER_NAMES = [
-  'JokerUY', 'Sawken', 'Missing', 'seppp', 'Pochoide', 'OtakuXD', 'MattGael', 'ChampT',
-  'MateoUsh27', 'VAL', 'Zudinn', 'luis_sera', 'caciottafresca', 'Lu1u', 'JoydurnYup', 'Pixiesaki',
-  'novi_fan', 'Matiuss', 'abdou_mz', 'doradori_dolph', 'Razie', 'Gui19', 'Nobu_22', 'MajorRichy',
-  'droprecks', 'HannNrY', 'Ryllmen', 'InfamousLoL8', 'alvinnn', 'cesar', 'ferchu', 'NETJU',
+  'JokerUY', 'Sawken', 'Missing', 'seppp', 'Frit', 'Pochoide', 'OtakuXD', 'MattGael',
+  'ChampT', 'MateoUsh27', 'VAL', 'Zudinn', 'luis_sera', 'caciottafresca', 'Lu1u', 'JoydurnYup',
+  'Pixiesaki', 'novi_fan', 'Matiuss', 'abdou_mz', 'doradori_dolph', 'Razie', 'Gui19', 'Nobu_22',
+  'MajorRichy', 'droprecks', 'HannNrY', 'Ryllmen', 'InfamousLoL8', 'alvinnn', 'cesar', 'ferchu',
 ];
 // PBs del plantel (New Game, Professional, Single Segment, 60 FPS), mismo orden que SIM_RUNNER_NAMES (de menor a mayor: los primeros 8 son el Top 8 directo).
 // Lista indicada por el organizador el 21/11/2026 (en segundos). Si el PB ya estaba cargado con el mismo segundo se conservan sus centesimas
 // (speedrun.com); los demas quedan con ".00" hasta tener las centesimas reales.
 // Los nombres siguen el nombre de speedrun.com cuando existe (Pochoide = SRC 1:22:30.78 menos 28 s del glitch que aun no hizo, y lo juega el torneo; ChampT = MRChampT01, VAL = _VAL_, MajorRichy = richy, InfamousLoL8 = infa).
 const SIM_RUNNER_PBS = [
-  '1:21:04.81', '1:21:24.00', '1:21:48.13', '1:21:48.90', '1:22:02.78', '1:22:14.68',
-  '1:23:13.08', '1:23:26.23', '1:23:28.60', '1:23:34.56', '1:23:37.03', '1:23:55.00',
-  '1:24:00.00', '1:24:24.00', '1:24:26.00', '1:24:27.06', '1:24:40.15', '1:24:58.48',
-  '1:24:59.21', '1:25:02.00', '1:25:08.45', '1:25:19.43', '1:25:35.85', '1:25:42.00',
-  '1:25:42.00', '1:25:45.16', '1:25:52.03', '1:25:55.00', '1:25:55.63', '1:25:56.00',
-  '1:25:58.00', '1:25:59.00',
+  '1:21:04.81', '1:21:24.00', '1:21:48.13', '1:21:48.90', '1:21:57.01', '1:22:02.78',
+  '1:22:14.68', '1:23:13.08', '1:23:26.23', '1:23:28.60', '1:23:34.56', '1:23:37.03',
+  '1:23:55.00', '1:24:00.00', '1:24:24.00', '1:24:26.00', '1:24:27.06', '1:24:40.15',
+  '1:24:58.48', '1:24:59.21', '1:25:02.00', '1:25:08.45', '1:25:19.43', '1:25:35.85',
+  '1:25:42.00', '1:25:42.00', '1:25:45.16', '1:25:52.03', '1:25:55.00', '1:25:55.63',
+  '1:25:56.00', '1:25:58.00',
 ];
 
 // Reservas indicadas por el organizador (el 21/11/2026), de menor a mayor PB. Se pueden meter desde el panel "Try yourself" de la pestana
 // Simulations (cambian a un runner del simulador). Formato: [puesto en la leaderboard de speedrun.com (null si no se conoce), nombre, PB, fecha del run (null si no se conoce)]
 const SIM_SUBSTITUTES = [
   [null, 'arca', '1:21:33.00', null],
-  [null, 'frit', '1:21:57.01', null],
   [null, 'derek', '1:22:26.00', null],
   [null, 'nevs', '1:23:07.00', null],
   [null, 'youcri', '1:23:18.00', null],
@@ -3940,6 +3939,7 @@ const SIM_SUBSTITUTES = [
   [null, 'orchlon', '1:25:29.00', null],
   [null, 'sachire', '1:25:39.00', null],
   [null, 'slifer', '1:25:55.00', null],
+  [48, 'NETJU', '1:25:59.00', null],
   [null, 'nyr9', '1:26:03.00', null],
   [44, 'FedoRas', '1:26:09.13', null],
   [45, 'erOotea', '1:26:18.68', '2026-08-12'],
