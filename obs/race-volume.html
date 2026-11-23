@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Volumen de los runners (race)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
+<style>
+body { margin: 0; padding: 10px 12px; background: #0A0908; color: #E7E2D6; font: 14px/1.4 system-ui, sans-serif; }
+.row { display: flex; align-items: center; gap: 10px; margin: 6px 0; }
+.nm { width: 150px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+input[type=range] { flex: 1; min-width: 120px; accent-color: #E1462C; }
+.val { width: 40px; text-align: right; font-variant-numeric: tabular-nums; }
+button { background: #7E221B; color: #fff; border: 0; padding: .35rem .7rem; cursor: pointer; font: inherit; border-radius: 3px; }
+button.alt { background: #2A2620; }
+.btns { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; align-items: center; }
+label.low { color: #B3AB9C; font-size: 12px; display: flex; gap: 6px; align-items: center; }
+label.low input { width: 54px; background: #16130F; color: #E7E2D6; border: 1px solid #3B342A; padding: 2px 4px; }
+.hint { color: #7E766A; font-size: 12px; margin-top: 8px; }
+body.embed .hint { display: none; }
+</style></head>
+<body>
+<div id="rows"></div>
+<div class="btns">
+  <button id="winA">Gana A</button><button id="winB">Gana B</button>
+  <button class="alt" id="both">Los dos 50</button><button class="alt" id="mute">Silencio</button>
+  <label class="low">El que pierde: <input type="number" id="low" min="0" max="100" value="10">%</label>
+</div>
+<div class="hint">Cambia el volumen del POV de cada runner en la pagina <b>race.html</b> sin recargar. Funciona si esta pagina y race.html corren en el mismo navegador (por ejemplo, las dos en OBS: esta como dock, o en la propia fuente con <code>race.html?controls=1</code> y clic derecho &gt; Interactuar).</div>
+<script>
+var KEY = 'ditman.race.vol', bc = null, names = ['Runner A', 'Runner B'], vols = [0, 0];
+if (/[?&]embed=1/.test(location.search)) document.body.classList.add('embed');
+try { bc = new BroadcastChannel('ditman-race'); } catch (e) {}
+try { var s = JSON.parse(localStorage.getItem(KEY) || 'null'); if (s && s.v) vols = s.v.map(Number); } catch (e) {}
+var rows = document.getElementById('rows'), sliders = [], labels = [];
+[0, 1].forEach(function (i) {
+  var r = document.createElement('div'); r.className = 'row';
+  r.innerHTML = '<span class="nm" id="nm' + i + '">' + names[i] + '</span><input type="range" min="0" max="100" step="1"><span class="val"></span><button class="alt">Mute</button>';
+  var inp = r.querySelector('input'), val = r.querySelector('.val'), mute = r.querySelector('button');
+  sliders.push(inp); labels.push(val);
+  inp.oninput = function () { vols[i] = Number(inp.value); send(); };
+  mute.onclick = function () { vols[i] = 0; send(); };
+  rows.appendChild(r);
+});
+function draw() { vols.forEach(function (v, i) { sliders[i].value = v; labels[i].textContent = v + '%'; }); }
+function send() {
+  draw();
+  try { localStorage.setItem(KEY, JSON.stringify({ v: vols, t: Date.now() })); } catch (e) {}
+  if (bc) bc.postMessage({ v: vols });
+}
+function low() { var n = Number(document.getElementById('low').value); return isNaN(n) ? 10 : Math.max(0, Math.min(100, n)); }
+document.getElementById('winA').onclick = function () { vols = [100, low()]; send(); };
+document.getElementById('winB').onclick = function () { vols = [low(), 100]; send(); };
+document.getElementById('both').onclick = function () { vols = [50, 50]; send(); };
+document.getElementById('mute').onclick = function () { vols = [0, 0]; send(); };
+fetch('../data/race.json?_=' + Date.now(), { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (j) {
+  (j.runners || []).slice(0, 2).forEach(function (r, i) {
+    document.getElementById('nm' + i).textContent = (i ? 'B: ' : 'A: ') + r.channel;
+    document.getElementById('winA').textContent = 'Gana ' + (j.runners[0] ? j.runners[0].channel : 'A');
+    if (j.runners[1]) document.getElementById('winB').textContent = 'Gana ' + j.runners[1].channel;
+  });
+}).catch(function () {});
+draw();
+</script>
+</body></html>
