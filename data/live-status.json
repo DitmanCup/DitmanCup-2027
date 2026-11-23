@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-23T18:09:08.488Z",
+  "updatedAt": "2026-11-23T18:29:25.435Z",
   "youtube": {
     "seppp": {
       "live": false,
@@ -45,7 +45,7 @@
       "live": true,
       "videoId": "HezS8MId0KE",
       "title": "[Live] Resident Evil 4 (OG) Professional Speedruns",
-      "viewers": 78,
+      "viewers": 67,
       "embed": true
     },
     "JokerUY": {
@@ -53,11 +53,8 @@
       "why": "canon:/channel/UCyPMjU0Qyegpo5CuFSx0KLA"
     },
     "ryllmen": {
-      "live": true,
-      "videoId": "6zg2muBMQxs",
-      "title": "speedrun re4 og",
-      "viewers": 0,
-      "embed": true
+      "live": false,
+      "why": "watch|LIVE_STREAM_OFFLINE|lbd=1"
     }
   },
   "kick": {
