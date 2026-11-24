@@ -1,15 +1,18 @@
 {
-  "updatedAt": "2026-11-24T13:23:43.841Z",
+  "updatedAt": "2026-11-24T15:15:13.951Z",
   "youtube": {
     "seppp": {
-      "live": false,
-      "why": "canon:/channel/UCpSD7At_gum8TJJ7c77lsyQ"
+      "live": true,
+      "videoId": "MvYQzb4TVcA",
+      "title": "IRC | Winner Bracket | Round of 16 | vs Gymnas",
+      "viewers": 10,
+      "embed": true
     },
     "Bang Gori": {
       "live": true,
       "videoId": "hgO_Kp7lweM",
       "title": "Mau Dengar Cerita Kalian | | Resident Evil 4 Speedrun Indonesia",
-      "viewers": 186,
+      "viewers": 230,
       "embed": true
     },
     "nyr9468": {
@@ -20,7 +23,7 @@
       "live": true,
       "videoId": "jbDckQdR8_0",
       "title": "TURNAMENT Resident Evil 4 IRC NG PRO Round 1|| Day 1",
-      "viewers": 0,
+      "viewers": 3,
       "embed": true
     },
     "NETJU": {
