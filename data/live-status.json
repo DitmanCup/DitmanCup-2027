@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-24T18:48:24.872Z",
+  "updatedAt": "2026-11-24T21:10:09.354Z",
   "youtube": {
     "seppp": {
       "live": false,
@@ -45,12 +45,15 @@
       "live": true,
       "videoId": "9QtdXC3kmUs",
       "title": "[Live] Resident Evil 4 (OG) Professional Speedruns",
-      "viewers": 31,
+      "viewers": 90,
       "embed": true
     },
     "JokerUY": {
-      "live": false,
-      "why": "canon:/channel/UCyPMjU0Qyegpo5CuFSx0KLA"
+      "live": true,
+      "videoId": "IrTIEZGEGf4",
+      "title": "NEW GLITCH SPEEDRUN NG+ AMATEUR| CHAT EN TWITCH",
+      "viewers": 6,
+      "embed": true
     },
     "ryllmen": {
       "live": false,
