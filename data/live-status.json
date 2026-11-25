@@ -1,13 +1,16 @@
 {
-  "updatedAt": "2026-11-25T05:16:47.832Z",
+  "updatedAt": "2026-11-25T08:08:32.916Z",
   "youtube": {
     "seppp": {
       "live": false,
       "why": "canon:/channel/UCpSD7At_gum8TJJ7c77lsyQ"
     },
     "Bang Gori": {
-      "live": false,
-      "why": "canon:/channel/UCkIzLx7wi9TeDaGZKVD-jUQ"
+      "live": true,
+      "videoId": "71S2I68Qgco",
+      "title": "[12] One Try Only | Phantom Blade Zero Indonesia",
+      "viewers": 13,
+      "embed": true
     },
     "nyr9468": {
       "live": false,
