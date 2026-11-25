@@ -20,6 +20,11 @@ button { font: inherit; cursor: pointer; border: 0; border-radius: 4px; color: v
 button:focus-visible { outline: 2px solid var(--red); }
 .op { height: 46px; font: 700 1.5rem Consolas, monospace; color: var(--green); }
 .op.minus { color: var(--red); background: #2B1512; }
+.tabs { display: flex; gap: 6px; margin: 0 0 12px; }
+.tabs button { flex: 1; padding: 9px 8px; color: var(--mut); }
+.tabs button[aria-selected="true"] { background: var(--dred); color: #fff; }
+body.diff .op { color: var(--mut); background: transparent; font-size: 1.1rem; cursor: default; }
+body.diff .del, body.diff #add, body.diff .only-sum, body:not(.diff) .only-diff { display: none; }
 .del { height: 46px; color: var(--mut); background: transparent; font-size: 1.2rem; }
 .actions { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0 20px; }
 .actions button { padding: 8px 14px; }
@@ -32,7 +37,12 @@ button:focus-visible { outline: 2px solid var(--red); }
 </style></head>
 <body><main>
 <h1>Calculadora de tiempos</h1>
-<p class="help">Escribe los números de corrido: <b>1 23 45 678</b> = 1:23:45.678, el cursor salta solo. <kbd>-</kbd> resta la fila, <kbd>+</kbd> la suma, <kbd>Enter</kbd> pasa a la siguiente. También puedes pegar <b>1:23:45.678</b> (o varias líneas a la vez).</p>
+<div class="tabs" role="tablist">
+  <button type="button" role="tab" id="tab-diff">Diferencia</button>
+  <button type="button" role="tab" id="tab-sum">Sumar / restar</button>
+</div>
+<p class="help only-diff">Pon los dos tiempos y sale la diferencia (da igual el orden). Escribe los números de corrido: <b>1 23 05 616</b> = 1:23:05.616. Todos los campos son opcionales: para dejar las horas vacías pulsa <kbd>Espacio</kbd> o <kbd>Tab</kbd>.</p>
+<p class="help only-sum">Escribe los números de corrido: <b>1 23 45 678</b> = 1:23:45.678, el cursor salta solo. <kbd>-</kbd> resta la fila, <kbd>+</kbd> la suma, <kbd>Enter</kbd> pasa a la siguiente. También puedes pegar <b>1:23:45.678</b> (o varias líneas a la vez).</p>
 
 <div class="head"><span></span><span>Horas</span><span></span><span>Min</span><span></span><span>Seg</span><span></span><span>Milis</span><span></span></div>
 <div id="rows"></div>
@@ -43,21 +53,23 @@ button:focus-visible { outline: 2px solid var(--red); }
 </div>
 
 <div class="total">
-  <div class="lbl">Resultado</div>
+  <div class="lbl" id="lbl">Diferencia</div>
   <div class="num" id="total" aria-live="polite">0:00:00.000</div>
   <button type="button" id="copy">Copiar</button>
 </div>
 </main>
 <script>
 (function () {
-  var KEY = 'ditman.calc.rows';
+  var KEYS = { sum: 'ditman.calc.rows', diff: 'ditman.calc.diff' }, MODEKEY = 'ditman.calc.mode', diff = true;
   var MAX = [1, 2, 2, 3], PH = ['0', '00', '00', '000'], LBL = ['Horas', 'Minutos', 'Segundos', 'Milisegundos'];
+  var loading = false;
   var host = document.getElementById('rows'), totalEl = document.getElementById('total');
 
   function rows() { return Array.prototype.slice.call(host.children); }
   function inputs(row) { return Array.prototype.slice.call(row.querySelectorAll('input')); }
   function setOp(row, minus) {
     var b = row.querySelector('.op');
+    if (diff) { b.classList.remove('minus'); b.textContent = rows().indexOf(row) + 1; b.setAttribute('aria-label', 'Tiempo ' + b.textContent); update(); return; }
     b.classList.toggle('minus', minus); b.textContent = minus ? '−' : '+';
     b.setAttribute('aria-label', minus ? 'Esta fila resta' : 'Esta fila suma');
     update();
@@ -66,7 +78,7 @@ button:focus-visible { outline: 2px solid var(--red); }
   function addRow(data) {
     var row = document.createElement('div'); row.className = 'row';
     var op = document.createElement('button'); op.type = 'button'; op.className = 'op'; op.tabIndex = -1;
-    op.onclick = function () { setOp(row, !op.classList.contains('minus')); };
+    op.onclick = function () { if (!diff) setOp(row, !op.classList.contains('minus')); };
     row.appendChild(op);
     MAX.forEach(function (max, i) {
       if (i) { var sp = document.createElement('span'); sp.className = 'sep'; sp.textContent = i === 3 ? '.' : ':'; row.appendChild(sp); }
@@ -110,7 +122,7 @@ button:focus-visible { outline: 2px solid var(--red); }
   function next(row, i) {
     var idx = rows().indexOf(row);
     if (i < 3) { focusField(idx, i + 1); return; }
-    if (idx === rows().length - 1) addRow();
+    if (idx === rows().length - 1) { if (diff) return; addRow(); }
     focusField(idx + 1, 0);
   }
   function prev(row, i) {
@@ -129,10 +141,12 @@ button:focus-visible { outline: 2px solid var(--red); }
     if (rest) {
       next(row, i);
       var a = document.activeElement, r = a.parentNode;
+      if (a === inp) return; // no hay mas campos
       a.value = rest; onInput(r, a, inputs(r).indexOf(a));
       return;
     }
-    if (sep) { if (v !== '') { pad(inp, i); next(row, i); } return; }
+    // espacio, punto o dos puntos: pasa al siguiente (en un campo vacio sirve para saltarlo)
+    if (sep) { pad(inp, i); next(row, i); return; }
     // 6-9 no pueden ser la decena de minutos o segundos: se completa solo (7 -> 07)
     if ((i === 1 || i === 2) && v.length === 1 && Number(v) > 5) { pad(inp, i); next(row, i); return; }
     if (v.length === MAX[i]) next(row, i);
@@ -171,12 +185,13 @@ button:focus-visible { outline: 2px solid var(--red); }
     e.preventDefault();
     var idx = rows().indexOf(row);
     list.forEach(function (d, k) {
-      var r = rows()[idx + k] || addRow();
+      var r = rows()[idx + k] || (diff ? null : addRow());
+      if (!r) return;
       inputs(r).forEach(function (x, i) { x.value = d.v[i]; });
       setOp(r, d.m);
     });
     var after = idx + list.length;
-    if (!rows()[after]) addRow();
+    if (!rows()[after] && !diff) addRow();
     focusField(after, 0);
   }
 
@@ -190,11 +205,14 @@ button:focus-visible { outline: 2px solid var(--red); }
     return (neg ? '−' : '') + h + ':' + ('0' + m).slice(-2) + ':' + ('0' + s).slice(-2) + '.' + ('00' + z).slice(-3);
   }
   function update() {
-    var sum = rows().reduce(function (a, r) { return a + (r.querySelector('.op').classList.contains('minus') ? -1 : 1) * rowMs(r); }, 0);
+    var list = rows();
+    var sum = diff ? Math.abs((list[0] ? rowMs(list[0]) : 0) - (list[1] ? rowMs(list[1]) : 0))
+      : list.reduce(function (a, r) { return a + (r.querySelector('.op').classList.contains('minus') ? -1 : 1) * rowMs(r); }, 0);
     totalEl.textContent = format(sum);
     totalEl.classList.toggle('neg', sum < 0);
     try {
-      localStorage.setItem(KEY, JSON.stringify(rows().map(function (r) {
+      if (loading) return;
+      localStorage.setItem(KEYS[diff ? 'diff' : 'sum'], JSON.stringify(rows().map(function (r) {
         return { m: r.querySelector('.op').classList.contains('minus'), v: inputs(r).map(function (x) { return x.value; }) };
       })));
     } catch (e) {}
@@ -202,7 +220,7 @@ button:focus-visible { outline: 2px solid var(--red); }
 
   document.getElementById('add').onclick = function () { inputs(addRow())[0].focus(); };
   document.getElementById('clear').onclick = function () {
-    host.innerHTML = ''; addRow(); addRow(); focusField(0, 0);
+    host.innerHTML = ''; addRow(); addRow(); update(); focusField(0, 0);
   };
   var copy = document.getElementById('copy');
   copy.onclick = function () {
@@ -210,10 +228,26 @@ button:focus-visible { outline: 2px solid var(--red); }
     try { navigator.clipboard.writeText(totalEl.textContent.replace('−', '-')).then(function () { done(true); }, function () { done(false); }); } catch (e) { done(false); }
   };
 
-  var saved = null;
-  try { saved = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) {}
-  if (saved && saved.length) saved.forEach(addRow); else { addRow(); addRow(); }
-  focusField(0, 0);
+  function load(isDiff) {
+    diff = isDiff; loading = true;
+    document.body.classList.toggle('diff', diff);
+    document.getElementById('tab-diff').setAttribute('aria-selected', String(diff));
+    document.getElementById('tab-sum').setAttribute('aria-selected', String(!diff));
+    document.getElementById('lbl').textContent = diff ? 'Diferencia' : 'Resultado';
+    var saved = null;
+    try { saved = JSON.parse(localStorage.getItem(KEYS[diff ? 'diff' : 'sum']) || 'null'); } catch (e) {}
+    host.innerHTML = '';
+    if (saved && saved.length) (diff ? saved.slice(0, 2) : saved).forEach(addRow);
+    while (rows().length < 2) addRow();
+    loading = false; update();
+    try { localStorage.setItem(MODEKEY, diff ? 'diff' : 'sum'); } catch (e) {}
+    focusField(0, 0);
+  }
+  document.getElementById('tab-diff').onclick = function () { load(true); };
+  document.getElementById('tab-sum').onclick = function () { load(false); };
+  var mode = null;
+  try { mode = localStorage.getItem(MODEKEY); } catch (e) {}
+  load(mode !== 'sum');
 })();
 </script>
 </body></html>
