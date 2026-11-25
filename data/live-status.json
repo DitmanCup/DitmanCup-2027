@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-25T15:14:16.873Z",
+  "updatedAt": "2026-11-25T15:34:35.167Z",
   "youtube": {
     "seppp": {
       "live": false,
@@ -14,11 +14,8 @@
       "why": "canon:/channel/UCW49iDI43U0vs-aIu7ovtBQ"
     },
     "Fedo_Ras": {
-      "live": true,
-      "videoId": "7ZZ_G8p-hhM",
-      "title": "TURNAMENT Resident Evil 4 IRC NG PRO Round 1 || Day 2",
-      "viewers": 2,
-      "embed": true
+      "live": false,
+      "why": "canon:/channel/UCeGvq5Sww3ads0Q39UE9_6A"
     },
     "NETJU": {
       "live": false,
@@ -48,7 +45,7 @@
       "live": true,
       "videoId": "DFMhnirOok4",
       "title": "[Live] Resident Evil 4 (OG) Professional Speedruns",
-      "viewers": 9,
+      "viewers": 37,
       "embed": true
     },
     "JokerUY": {
