@@ -7,6 +7,10 @@
 body { margin: 0; padding: 24px 16px 48px; background: var(--bg); color: var(--ink); font: 16px/1.5 system-ui, sans-serif; }
 main { max-width: 560px; margin: 0 auto; }
 h1 { margin: 0 0 4px; font-size: 1.4rem; }
+.top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+.lang { display: flex; gap: 2px; }
+.lang button { padding: 4px 10px; font-size: .8rem; font-weight: 700; color: var(--mut); }
+.lang button[aria-pressed="true"] { background: var(--dred); color: #fff; }
 p.help { margin: 0 0 18px; color: var(--mut); font-size: .88rem; }
 kbd { font: .8rem Consolas, monospace; border: 1px solid var(--line); background: var(--panel); padding: 0 4px; border-radius: 3px; }
 .row, .head { display: grid; grid-template-columns: 44px 1fr 8px 1.3fr 8px 1.3fr 8px 1.8fr 32px; align-items: center; gap: 4px; }
@@ -36,32 +40,40 @@ body.diff .del, body.diff #add, body.diff .only-sum, body:not(.diff) .only-diff 
 @media (max-width: 420px) { .row, .head { grid-template-columns: 38px 1fr 6px 1.3fr 6px 1.3fr 6px 1.7fr 24px; gap: 2px; } .row input { font-size: 1.1rem; } .total .num { font-size: 2.1rem; } }
 </style></head>
 <body><main>
-<h1>Calculadora de tiempos</h1>
-<div class="tabs" role="tablist">
-  <button type="button" role="tab" id="tab-diff">Diferencia</button>
-  <button type="button" role="tab" id="tab-sum">Sumar / restar</button>
+<div class="top">
+  <h1 data-i18n="h1">Calculadora de tiempos</h1>
+  <div class="lang"><button type="button" id="lang-es" lang="es">ES</button><button type="button" id="lang-en" lang="en">EN</button></div>
 </div>
-<p class="help only-diff">Pon los dos tiempos y sale la diferencia (da igual el orden). Escribe los números de corrido: <b>1 23 05 616</b> = 1:23:05.616. Todos los campos son opcionales: para dejar las horas vacías pulsa <kbd>Espacio</kbd> o <kbd>Tab</kbd>.</p>
-<p class="help only-sum">Escribe los números de corrido: <b>1 23 45 678</b> = 1:23:45.678, el cursor salta solo. <kbd>-</kbd> resta la fila, <kbd>+</kbd> la suma, <kbd>Enter</kbd> pasa a la siguiente. También puedes pegar <b>1:23:45.678</b> (o varias líneas a la vez).</p>
+<div class="tabs" role="tablist">
+  <button type="button" role="tab" id="tab-diff" data-i18n="tabDiff">Diferencia</button>
+  <button type="button" role="tab" id="tab-sum" data-i18n="tabSum">Sumar / restar</button>
+</div>
+<p class="help only-diff" data-i18n="helpDiff">Pon los dos tiempos y sale la diferencia (da igual el orden). Escribe los números de corrido: <b>1 23 05 616</b> = 1:23:05.616. Todos los campos son opcionales: para dejar las horas vacías pulsa <kbd>Espacio</kbd> o <kbd>Tab</kbd>.</p>
+<p class="help only-sum" data-i18n="helpSum">Escribe los números de corrido: <b>1 23 45 678</b> = 1:23:45.678, el cursor salta solo. <kbd>-</kbd> resta la fila, <kbd>+</kbd> la suma, <kbd>Enter</kbd> pasa a la siguiente. También puedes pegar <b>1:23:45.678</b> (o varias líneas a la vez).</p>
 
-<div class="head"><span></span><span>Horas</span><span></span><span>Min</span><span></span><span>Seg</span><span></span><span>Milis</span><span></span></div>
+<div class="head"><span></span><span data-i18n="hH">Horas</span><span></span><span data-i18n="hM">Min</span><span></span><span data-i18n="hS">Seg</span><span></span><span data-i18n="hMs">Milis</span><span></span></div>
 <div id="rows"></div>
 
 <div class="actions">
-  <button type="button" id="add">+ Agregar fila</button>
-  <button type="button" id="clear">Borrar todo</button>
+  <button type="button" id="add" data-i18n="add">+ Agregar fila</button>
+  <button type="button" id="clear" data-i18n="clear">Borrar todo</button>
 </div>
 
 <div class="total">
   <div class="lbl" id="lbl">Diferencia</div>
   <div class="num" id="total" aria-live="polite">0.000</div>
-  <button type="button" id="copy">Copiar</button>
+  <button type="button" id="copy" data-i18n="copy">Copiar</button>
 </div>
 </main>
 <script>
 (function () {
   var KEYS = { sum: 'ditman.calc.rows', diff: 'ditman.calc.diff' }, MODEKEY = 'ditman.calc.mode', diff = true;
-  var MAX = [1, 2, 2, 3], PH = ['0', '00', '00', '000'], LBL = ['Horas', 'Minutos', 'Segundos', 'Milisegundos'];
+  var MAX = [1, 2, 2, 3], PH = ['0', '00', '00', '000'];
+  // Idioma: ?lang=en|es manda; si no, lo ultimo elegido; si no, el del navegador
+  var LANGKEY = 'ditman.calc.lang', T = {
+    es: {"h1":"Calculadora de tiempos","tabDiff":"Diferencia","tabSum":"Sumar / restar","helpDiff":"Pon los dos tiempos y sale la diferencia (da igual el orden). Escribe los números de corrido: <b>1 23 05 616</b> = 1:23:05.616. Todos los campos son opcionales: para dejar las horas vacías pulsa <kbd>Espacio</kbd> o <kbd>Tab</kbd>.","helpSum":"Escribe los números de corrido: <b>1 23 45 678</b> = 1:23:45.678, el cursor salta solo. <kbd>-</kbd> resta la fila, <kbd>+</kbd> la suma, <kbd>Enter</kbd> pasa a la siguiente. También puedes pegar <b>1:23:45.678</b> (o varias líneas a la vez).","hH":"Horas","hM":"Min","hS":"Seg","hMs":"Milis","add":"+ Agregar fila","clear":"Borrar todo","copy":"Copiar","title":"Calculadora de tiempos - Ditman Cup","fields":["Horas","Minutos","Segundos","Milisegundos"],"time":"Tiempo","subRow":"Esta fila resta","addRow":"Esta fila suma","del":"Quitar fila","diffLbl":"Diferencia","sumLbl":"Resultado","copied":"Copiado","copyFail":"No se pudo copiar"},
+    en: {"h1":"Time calculator","tabDiff":"Difference","tabSum":"Add / subtract","helpDiff":"Enter two times and get the difference (order does not matter). Just type the digits: <b>1 23 05 616</b> = 1:23:05.616. Every field is optional: to leave hours empty press <kbd>Space</kbd> or <kbd>Tab</kbd>.","helpSum":"Just type the digits: <b>1 23 45 678</b> = 1:23:45.678, the cursor jumps on its own. <kbd>-</kbd> subtracts the row, <kbd>+</kbd> adds it, <kbd>Enter</kbd> goes to the next one. You can also paste <b>1:23:45.678</b> (or several lines at once).","hH":"Hours","hM":"Min","hS":"Sec","hMs":"Millis","add":"+ Add row","clear":"Clear all","copy":"Copy","title":"Time calculator - Ditman Cup","fields":["Hours","Minutes","Seconds","Milliseconds"],"time":"Time","subRow":"This row subtracts","addRow":"This row adds","del":"Remove row","diffLbl":"Difference","sumLbl":"Result","copied":"Copied","copyFail":"Could not copy"}
+  }, L = T.es;
   var loading = false;
   var host = document.getElementById('rows'), totalEl = document.getElementById('total');
 
@@ -69,9 +81,9 @@ body.diff .del, body.diff #add, body.diff .only-sum, body:not(.diff) .only-diff 
   function inputs(row) { return Array.prototype.slice.call(row.querySelectorAll('input')); }
   function setOp(row, minus) {
     var b = row.querySelector('.op');
-    if (diff) { b.classList.remove('minus'); b.textContent = rows().indexOf(row) + 1; b.setAttribute('aria-label', 'Tiempo ' + b.textContent); update(); return; }
+    if (diff) { b.classList.remove('minus'); b.textContent = rows().indexOf(row) + 1; b.setAttribute('aria-label', L.time + ' ' + b.textContent); update(); return; }
     b.classList.toggle('minus', minus); b.textContent = minus ? '−' : '+';
-    b.setAttribute('aria-label', minus ? 'Esta fila resta' : 'Esta fila suma');
+    b.setAttribute('aria-label', minus ? L.subRow : L.addRow);
     update();
   }
 
@@ -84,7 +96,7 @@ body.diff .del, body.diff #add, body.diff .only-sum, body:not(.diff) .only-diff 
       if (i) { var sp = document.createElement('span'); sp.className = 'sep'; sp.textContent = i === 3 ? '.' : ':'; row.appendChild(sp); }
       var inp = document.createElement('input');
       inp.type = 'text'; inp.inputMode = 'numeric'; inp.autocomplete = 'off'; inp.placeholder = PH[i];
-      inp.setAttribute('aria-label', LBL[i]);
+      inp.setAttribute('aria-label', L.fields[i]);
       if (data && data.v) inp.value = data.v[i] || '';
       // seleccionar al instante (sin esperar) para no pisar lo que se escribe rapido; mouseup no debe deshacer la seleccion
       inp.addEventListener('focus', function () { inp.select(); });
@@ -96,7 +108,7 @@ body.diff .del, body.diff #add, body.diff .only-sum, body:not(.diff) .only-diff 
       row.appendChild(inp);
     });
     var del = document.createElement('button'); del.type = 'button'; del.className = 'del'; del.textContent = '×'; del.tabIndex = -1;
-    del.setAttribute('aria-label', 'Quitar fila');
+    del.setAttribute('aria-label', L.del);
     del.onclick = function () {
       if (rows().length > 1) row.remove(); else inputs(row).forEach(function (x) { x.value = ''; });
       update();
@@ -227,7 +239,7 @@ body.diff .del, body.diff #add, body.diff .only-sum, body:not(.diff) .only-diff 
   };
   var copy = document.getElementById('copy');
   copy.onclick = function () {
-    var done = function (ok) { copy.textContent = ok ? 'Copiado' : 'No se pudo copiar'; setTimeout(function () { copy.textContent = 'Copiar'; }, 1500); };
+    var done = function (ok) { copy.textContent = ok ? L.copied : L.copyFail; setTimeout(function () { copy.textContent = L.copy; }, 1500); };
     try { navigator.clipboard.writeText(totalEl.textContent.replace('−', '-')).then(function () { done(true); }, function () { done(false); }); } catch (e) { done(false); }
   };
 
@@ -236,7 +248,7 @@ body.diff .del, body.diff #add, body.diff .only-sum, body:not(.diff) .only-diff 
     document.body.classList.toggle('diff', diff);
     document.getElementById('tab-diff').setAttribute('aria-selected', String(diff));
     document.getElementById('tab-sum').setAttribute('aria-selected', String(!diff));
-    document.getElementById('lbl').textContent = diff ? 'Diferencia' : 'Resultado';
+    document.getElementById('lbl').textContent = diff ? L.diffLbl : L.sumLbl;
     var saved = null;
     try { saved = JSON.parse(localStorage.getItem(KEYS[diff ? 'diff' : 'sum']) || 'null'); } catch (e) {}
     host.innerHTML = '';
@@ -248,7 +260,27 @@ body.diff .del, body.diff #add, body.diff .only-sum, body:not(.diff) .only-diff 
   }
   document.getElementById('tab-diff').onclick = function () { load(true); };
   document.getElementById('tab-sum').onclick = function () { load(false); };
-  var mode = null;
+  function setLang(lang, remember) {
+    L = T[lang];
+    document.documentElement.lang = lang;
+    document.title = L.title;
+    Array.prototype.forEach.call(document.querySelectorAll('[data-i18n]'), function (el) { el.innerHTML = L[el.getAttribute('data-i18n')]; });
+    document.getElementById('lang-es').setAttribute('aria-pressed', String(lang === 'es'));
+    document.getElementById('lang-en').setAttribute('aria-pressed', String(lang === 'en'));
+    if (remember) { try { localStorage.setItem(LANGKEY, lang); } catch (e) {} }
+  }
+  function switchLang(lang) {
+    setLang(lang, true);
+    try { var u = new URL(location.href); if (u.searchParams.has('lang')) { u.searchParams.set('lang', lang); history.replaceState(null, '', u); } } catch (e) {}
+    load(diff);
+  }
+  document.getElementById('lang-es').onclick = function () { switchLang('es'); };
+  document.getElementById('lang-en').onclick = function () { switchLang('en'); };
+
+  var lang = new URLSearchParams(location.search).get('lang'), mode = null;
+  if (!T[lang]) { try { lang = localStorage.getItem(LANGKEY); } catch (e) {} }
+  if (!T[lang]) lang = /^es/i.test(navigator.language || '') ? 'es' : 'en';
+  setLang(lang, false);
   try { mode = localStorage.getItem(MODEKEY); } catch (e) {}
   load(mode !== 'sum');
 })();
