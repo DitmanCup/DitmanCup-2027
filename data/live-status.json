@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-26T16:34:41.223Z",
+  "updatedAt": "2026-11-26T17:05:12.919Z",
   "youtube": {
     "seppp": {
       "live": false,
@@ -9,7 +9,7 @@
       "live": true,
       "videoId": "gOLSEGXj-y4",
       "title": "Reality Check With Gori | Resident Evil 4 Speedrun Indonesia",
-      "viewers": 178,
+      "viewers": 207,
       "embed": true
     },
     "nyr9468": {
@@ -20,7 +20,7 @@
       "live": true,
       "videoId": "oTXFjQQRvN4",
       "title": "TURNAMENT Resident Evil 4 IRC NG PRO Round 1 || Day 3",
-      "viewers": 7,
+      "viewers": 6,
       "embed": true
     },
     "NETJU": {
@@ -28,11 +28,8 @@
       "why": "canon:/channel/UCbiPXsZalhVwhfHB2-Nl9Ig"
     },
     "aqbilghilman": {
-      "live": true,
-      "videoId": "BM0Z1PkIAyQ",
-      "title": "Resident Evil 4 OG Speedrun",
-      "viewers": 0,
-      "embed": true
+      "live": false,
+      "why": "watch|LIVE_STREAM_OFFLINE|lbd=1"
     },
     "Mrchampppt": {
       "live": false,
@@ -54,7 +51,7 @@
       "live": true,
       "videoId": "pDaMVU7OUzs",
       "title": "[Live] Resident Evil 4 (OG) Professional Speedruns",
-      "viewers": 33,
+      "viewers": 65,
       "embed": true
     },
     "JokerUY": {
