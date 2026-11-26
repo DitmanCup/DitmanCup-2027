@@ -54,7 +54,7 @@ body.diff .del, body.diff #add, body.diff .only-sum, body:not(.diff) .only-diff 
 
 <div class="total">
   <div class="lbl" id="lbl">Diferencia</div>
-  <div class="num" id="total" aria-live="polite">0:00:00.000</div>
+  <div class="num" id="total" aria-live="polite">0.000</div>
   <button type="button" id="copy">Copiar</button>
 </div>
 </main>
@@ -202,7 +202,10 @@ body.diff .del, body.diff #add, body.diff .only-sum, body:not(.diff) .only-diff 
   function format(ms) {
     var neg = ms < 0; ms = Math.abs(ms);
     var h = Math.floor(ms / 3600000), m = Math.floor(ms % 3600000 / 60000), s = Math.floor(ms % 60000 / 1000), z = ms % 1000;
-    return (neg ? '−' : '') + h + ':' + ('0' + m).slice(-2) + ':' + ('0' + s).slice(-2) + '.' + ('00' + z).slice(-3);
+    // formato adaptable: solo las partes que hacen falta (10.133, 24:12.383, 1:23:05.616)
+    var two = function (x) { return ('0' + x).slice(-2); };
+    var body = h ? h + ':' + two(m) + ':' + two(s) : m ? m + ':' + two(s) : String(s);
+    return (neg ? '−' : '') + body + '.' + ('00' + z).slice(-3);
   }
   function update() {
     var list = rows();
