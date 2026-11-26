@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-26T09:18:51.065Z",
+  "updatedAt": "2026-11-26T13:11:23.464Z",
   "youtube": {
     "seppp": {
       "live": false,
@@ -14,8 +14,11 @@
       "why": "canon:/channel/UCW49iDI43U0vs-aIu7ovtBQ"
     },
     "Fedo_Ras": {
-      "live": false,
-      "why": "canon:/channel/UCeGvq5Sww3ads0Q39UE9_6A"
+      "live": true,
+      "videoId": "oTXFjQQRvN4",
+      "title": "TURNAMENT Resident Evil 4 IRC NG PRO Round 1 || Day 3",
+      "viewers": 0,
+      "embed": true
     },
     "NETJU": {
       "live": false,
