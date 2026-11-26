@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-26T14:22:17.854Z",
+  "updatedAt": "2026-11-26T14:32:27.853Z",
   "youtube": {
     "seppp": {
       "live": false,
@@ -9,7 +9,7 @@
       "live": true,
       "videoId": "gOLSEGXj-y4",
       "title": "Reality Check With Gori | Resident Evil 4 Speedrun Indonesia",
-      "viewers": 197,
+      "viewers": 208,
       "embed": true
     },
     "nyr9468": {
@@ -28,8 +28,11 @@
       "why": "canon:/channel/UCbiPXsZalhVwhfHB2-Nl9Ig"
     },
     "aqbilghilman": {
-      "live": false,
-      "why": "watch|LIVE_STREAM_OFFLINE|lbd=1"
+      "live": true,
+      "videoId": "BM0Z1PkIAyQ",
+      "title": "Resident Evil 4 OG Speedrun",
+      "viewers": 0,
+      "embed": true
     },
     "Mrchampppt": {
       "live": false,
