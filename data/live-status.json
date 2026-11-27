@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-27T20:05:32.486Z",
+  "updatedAt": "2026-11-27T22:27:22.903Z",
   "youtube": {
     "seppp": {
       "live": false,
@@ -42,17 +42,14 @@
       "why": "canon:/channel/UCpP3xUeEFum9_uoNPpz8Xog"
     },
     "Orchlon": {
-      "live": true,
-      "videoId": "MroB1bGj8l8",
-      "title": "[Live] Resident Evil 4 (OG) Professional Speedruns",
-      "viewers": 90,
-      "embed": true
+      "live": false,
+      "why": "canon:/channel/UCu3T_ir3EX_CTcX2I2Ny9Hg"
     },
     "JokerUY": {
       "live": true,
       "videoId": "uXXY5AxaZEg",
       "title": "NEW GLITCH RE4OG NG PRO SPEEDRUNS",
-      "viewers": 5,
+      "viewers": 19,
       "embed": true
     },
     "ryllmen": {
